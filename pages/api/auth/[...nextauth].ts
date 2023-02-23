@@ -1,5 +1,6 @@
 import NextAuth from "next-auth"
 import AzureADProvider from "next-auth/providers/azure-ad"
+
 export const authOptions = {
     providers: [
         AzureADProvider({
@@ -13,7 +14,7 @@ export const authOptions = {
     secret: process.env.SECRET,
     callbacks: {
         //  @ts-ignore
-        async signIn({ user, account, profile, email, credentials }) {
+        async signIn({user, account, profile, email, credentials}) {
             console.log("account", account)
 
             //  Request access to backend

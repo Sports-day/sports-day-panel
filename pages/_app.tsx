@@ -4,14 +4,14 @@ import {SessionProvider} from "next-auth/react"
 import {Session} from "next-auth";
 
 export default function MyApp({
-                                Component,
-                                pageProps,
+                                  Component,
+                                  pageProps,
                               }: AppProps<{
-  session: Session;
+    session: Session;
 }>) {
-  return (
-      <SessionProvider session={pageProps.session}>
-        <Component {...pageProps} />
-      </SessionProvider>
-  )
+    return (
+        <SessionProvider session={pageProps.session}>
+            <Component {...pageProps} />
+        </SessionProvider>
+    )
 }
