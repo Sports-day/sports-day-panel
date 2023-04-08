@@ -1,0 +1,111 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 6rem;
+    min-height: 100vh;
+}
+
+.catch{
+    display: inherit;
+    flex-direction: column;
+    justify-content: inherit;
+    margin-bottom: 3rem;
+    width: 100%;
+    height: 100%;
+}
+
+.catch h1{
+    position: relative;
+    letter-spacing: 0.2em;
+    line-height: 0.8;
+    font-size: 2.8rem;
+    font-weight: bold;
+    text-align: left;
+}
+
+.authLogo{
+    display: flex;
+    flex-direction: column;
+    letter-spacing: 0.2em;
+    line-height: 0;
+    margin-top: 1rem;
+    height: 2.8rem;
+}
+
+.authButton{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.authButton a{
+    position: relative;
+    padding: 1.5rem 3rem;
+    width: fit-content;
+    font-size: 1rem;
+    text-decoration: none;
+    text-align: center;
+    color: #FFF;
+    background-color: #000;
+    filter:drop-shadow(0 0 0px rgba(0, 0, 0, 0));
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.msLogo{
+    position: relative;
+    top: 0.1em;
+    margin-right: 1em;
+    height: 1rem;
+}
+
+@media (max-width: 700px) {
+    .main{
+        padding: 2rem;
+    }
+
+    .content {
+        padding: 4rem;
+    }
+
+    .catch h1{
+        font-size: 2.2rem;
+    }
+
+    .authLogo {
+        height: 2.2rem;
+    }
+
+    .authButton a{
+        width: 100%;
+        padding: 1.5rem 0;
+    }
+}
+
+/* Tablet and Smaller Desktop */
+@media (min-width: 701px) and (max-width: 1120px) {
+
+}
+
+@media (prefers-color-scheme: dark) {
+    .authLogo {
+        filter: invert(1);
+    }
+
+    .authButton a{
+        color: #000;
+        background-color: #FFF;
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(360deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+}
