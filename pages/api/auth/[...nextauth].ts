@@ -14,13 +14,42 @@ export const authOptions = {
     secret: process.env.SECRET,
     callbacks: {
         //  @ts-ignore
-        async signIn({user, account, profile, email, credentials}) {
-            console.log("account", account)
-
+        async signIn({account}) {
             //  Request access to backend
+            const baseRequest: RequestInit = {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': "Bearer " + account.id_token
+                },
+            }
 
-            return true
+            const response = await fetch(process.env.NEXT_PUBLIC_API_URL + "/authorization", baseRequest)
+
+            return response.status == 200
         },
+        //  @ts-ignore
+        async session({session, token}) {
+
+            if (token) {
+                // session.user.id = token.id
+                session.user.email = token.email
+                session.user.name = token.name
+                session.accessToken = token.accessToken
+            }
+
+            return session
+        },
+        //  @ts-ignore
+        async jwt({token, profile, account}) {
+            if (account && profile) {
+                // token.id = "NO_ID"
+                token.name = profile.name
+                token.email = profile.email
+                token.accessToken = account.id_token
+            }
+            return token
+        }
     },
 }
 
