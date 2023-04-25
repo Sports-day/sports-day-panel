@@ -2,7 +2,7 @@ import axios from "axios";
 import {getServerSession, Session} from "next-auth";
 import {getSession, useSession} from "next-auth/react";
 
-const baseURL = process.env.NEXT_PUBLIC_API_URL;
+const baseURL = process.env.NEXT_PUBLIC_API_URL + "/v1";
 
 const headers = {
     "Content-Type": "application/json",
