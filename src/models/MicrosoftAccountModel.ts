@@ -24,7 +24,7 @@ export const microsoftAccountFactory = (repo?: MicrosoftAccountRepository) => {
         delete: async (id: Pick<MicrosoftAccount, "id">): Promise<void> => {
             return await repository.deleteMicrosoftAccount(id)
         },
-        setRole: async (id: Pick<MicrosoftAccount, "id">, role: string): Promise<void> => {
+        setRole: async (id: Pick<MicrosoftAccount, "id">, role: string): Promise<MicrosoftAccount> => {
             return await repository.setMicrosoftAccountRole(id, role)
         },
         linkUser: async (id: Pick<MicrosoftAccount, "id">, userId: number): Promise<void> => {
