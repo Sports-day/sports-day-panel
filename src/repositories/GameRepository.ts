@@ -14,7 +14,7 @@ const getGame = async (id: Pick<Game, "id">): Promise<Game> => {
 }
 
 const deleteGame = async (id: Pick<Game, "id">): Promise<void> => {
-    const {data} = await ApiClient.delete(`/games/${id}`)
+    await ApiClient.delete(`/games/${id}`)
 }
 
 const createGame = async (omittedGame: Omit<Game, "id" | "createdAt" | "updatedAt">): Promise<Game> => {
@@ -33,7 +33,7 @@ const getGameMatches = async (id: Pick<Game, "id">): Promise<Match[]> => {
 }
 
 const deleteGameMatches = async (id: Pick<Game, "id">): Promise<void> => {
-    const {data} = await ApiClient.delete(`/games/${id}/matches`)
+    await ApiClient.delete(`/games/${id}/matches`)
 }
 
 const getGameEntries = async (id: Pick<Game, "id">): Promise<Team[]> => {
@@ -52,7 +52,7 @@ const addGameEntries = async (id: Pick<Game, "id">, teamIds: Pick<Team, "id">[])
 }
 
 const removeGameEntry = async (id: Pick<Game, "id">, teamId: Pick<Team, "id">): Promise<void> => {
-    const {data} = await ApiClient.delete(`/games/${id}/entries/${teamId}`)
+    await ApiClient.delete(`/games/${id}/entries/${teamId}`)
 }
 
 const makeTournamentTree = async (id: Pick<Game, "id">, parentMatchId: Pick<Match, "id"> | null): Promise<Match> => {
@@ -66,7 +66,7 @@ const makeTournamentTree = async (id: Pick<Game, "id">, parentMatchId: Pick<Matc
 }
 
 const updateTournamentTree = async (id: Pick<Game, "id">): Promise<void> => {
-    const {data} = await ApiClient.post(`/games/${id}/tournament/update-tree`)
+    await ApiClient.post(`/games/${id}/tournament/update-tree`)
 }
 
 const getTournamentResult = async (id: Pick<Game, "id">): Promise<TournamentResult> => {

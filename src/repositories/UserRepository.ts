@@ -14,7 +14,7 @@ const getUser = async (id: Pick<User, "id">): Promise<User> => {
 }
 
 const deleteUser = async (id: Pick<User, "id">): Promise<void> => {
-    const {data} = await ApiClient.delete(`/users/${id}`)
+    await ApiClient.delete(`/users/${id}`)
 }
 
 const createUser = async (omittedUser: Omit<User, "id" | "createdAt" | "updatedAt">): Promise<User> => {

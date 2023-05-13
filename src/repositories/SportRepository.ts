@@ -12,7 +12,7 @@ const getSport = async (id: Pick<Sport, "id">): Promise<Sport> => {
 }
 
 const deleteSport = async (id: Pick<Sport, "id">): Promise<void> => {
-    const {data} = await ApiClient.delete(`/sports/${id}`)
+    await ApiClient.delete(`/sports/${id}`)
 }
 
 const createSport = async (omittedSport: Omit<Sport, "id" | "gameIds" | "createdAt" | "updatedAt">): Promise<Sport> => {

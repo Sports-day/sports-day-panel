@@ -12,7 +12,7 @@ const getAllowedDomain = async (id: Pick<AllowedDomain, "id">): Promise<AllowedD
 }
 
 const deleteAllowedDomain = async (id: Pick<AllowedDomain, "id">): Promise<void> => {
-    const {data} = await ApiClient.delete(`/allowed-domains/${id}`)
+    await ApiClient.delete(`/allowed-domains/${id}`)
 }
 
 const createAllowedDomain = async (omittedAllowedDomain: Omit<AllowedDomain, "id">): Promise<AllowedDomain> => {

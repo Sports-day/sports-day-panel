@@ -14,7 +14,7 @@ const getClass = async (id: Pick<Class, "id">): Promise<Class> => {
 
 
 const deleteClass = async (id: Pick<Class, "id">): Promise<void> => {
-    const {data} = await ApiClient.delete(`/classes/${id}`)
+    await ApiClient.delete(`/classes/${id}`)
 }
 
 const createClass = async (omittedClass: Omit<Class, "id" | "createdAt" | "updatedAt">): Promise<Class> => {

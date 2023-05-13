@@ -12,7 +12,7 @@ const getImage = async (id: Pick<Image, "id">): Promise<Image> => {
 }
 
 const deleteImage = async (id: Pick<Image, "id">): Promise<void> => {
-    const {data} = await ApiClient.delete(`/images/${id}`)
+    await ApiClient.delete(`/images/${id}`)
 }
 
 const createImage = async (omittedImage: Omit<Image, "id" | "createdAt" | "createdBy">): Promise<Image> => {

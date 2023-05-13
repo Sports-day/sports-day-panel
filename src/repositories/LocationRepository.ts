@@ -12,7 +12,7 @@ const getLocation = async (id: Pick<Location, "id">): Promise<Location> => {
 }
 
 const deleteLocation = async (id: Pick<Location, "id">): Promise<void> => {
-    const {data} = await ApiClient.delete(`/locations/${id}`)
+    await ApiClient.delete(`/locations/${id}`)
 }
 
 const createLocation = async (omittedLocation: Omit<Location, "id">): Promise<Location> => {

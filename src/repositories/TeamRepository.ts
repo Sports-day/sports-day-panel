@@ -13,7 +13,7 @@ const getTeam = async (id: Pick<Team, "id">): Promise<Team> => {
 }
 
 const deleteTeam = async (id: Pick<Team, "id">): Promise<void> => {
-    const {data} = await ApiClient.delete(`/teams/${id}`)
+    await ApiClient.delete(`/teams/${id}`)
 }
 
 const createTeam = async (omittedTeam: Omit<Team, "id" | "userIds" | "createdAt" | "updatedAt">): Promise<Team> => {

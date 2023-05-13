@@ -12,7 +12,7 @@ const getGroup = async (id: Pick<Group, "id">): Promise<Group> => {
 }
 
 const deleteGroup = async (id: Pick<Group, "id">): Promise<void> => {
-    const {data} = await ApiClient.delete(`/groups/${id}`)
+    await ApiClient.delete(`/groups/${id}`)
 }
 
 const createGroup = async (omittedGroup: Omit<Group, "id" | "createdAt" | "updatedAt">): Promise<Group> => {

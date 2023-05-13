@@ -12,7 +12,7 @@ const getMatch = async (id: Pick<Match, "id">): Promise<Match> => {
 }
 
 const deleteMatch = async (id: Pick<Match, "id">): Promise<void> => {
-    const {data} = await ApiClient.delete(`/matches/${id}`)
+    await ApiClient.delete(`/matches/${id}`)
 }
 
 const updateMatch = async (id: Pick<Match, "id">, omittedMatch: Omit<Match, "id" | "createdAt" | "updatedAt">): Promise<Match> => {
