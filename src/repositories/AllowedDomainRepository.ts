@@ -6,12 +6,12 @@ const getAllowedDomains = async (): Promise<AllowedDomain[]> => {
     return data.data
 }
 
-const getAllowedDomain = async (id: Pick<AllowedDomain, "id">): Promise<AllowedDomain> => {
+const getAllowedDomain = async (id: number): Promise<AllowedDomain> => {
     const {data} = await ApiClient.get(`/allowed-domains/${id}`)
     return data.data
 }
 
-const deleteAllowedDomain = async (id: Pick<AllowedDomain, "id">): Promise<void> => {
+const deleteAllowedDomain = async (id: number): Promise<void> => {
     await ApiClient.delete(`/allowed-domains/${id}`)
 }
 
@@ -20,17 +20,17 @@ const createAllowedDomain = async (omittedAllowedDomain: Omit<AllowedDomain, "id
     return data.data
 }
 
-const updateAllowedDomain = async (id: Pick<AllowedDomain, "id">, omittedAllowedDomain: Omit<AllowedDomain, "id">): Promise<AllowedDomain> => {
+const updateAllowedDomain = async (id: number, omittedAllowedDomain: Omit<AllowedDomain, "id">): Promise<AllowedDomain> => {
     const {data} = await ApiClient.put(`/allowed-domains/${id}`, omittedAllowedDomain)
     return data.data
 }
 
 export type AllowedDomainRepository = {
     getAllowedDomains: () => Promise<AllowedDomain[]>,
-    getAllowedDomain: (id: Pick<AllowedDomain, "id">) => Promise<AllowedDomain>,
-    deleteAllowedDomain: (id: Pick<AllowedDomain, "id">) => Promise<void>,
+    getAllowedDomain: (id: number) => Promise<AllowedDomain>,
+    deleteAllowedDomain: (id: number) => Promise<void>,
     createAllowedDomain: (omittedAllowedDomain: Omit<AllowedDomain, "id">) => Promise<AllowedDomain>,
-    updateAllowedDomain: (id: Pick<AllowedDomain, "id">, omittedAllowedDomain: Omit<AllowedDomain, "id">) => Promise<AllowedDomain>,
+    updateAllowedDomain: (id: number, omittedAllowedDomain: Omit<AllowedDomain, "id">) => Promise<AllowedDomain>,
 }
 
 export const allowedDomainRepository: AllowedDomainRepository = {

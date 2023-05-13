@@ -7,13 +7,13 @@ const getClasses = async (): Promise<Class[]> => {
     return data.data
 }
 
-const getClass = async (id: Pick<Class, "id">): Promise<Class> => {
+const getClass = async (id: number): Promise<Class> => {
     const {data} = await ApiClient.get(`/classes/${id}`)
     return data.data
 }
 
 
-const deleteClass = async (id: Pick<Class, "id">): Promise<void> => {
+const deleteClass = async (id: number): Promise<void> => {
     await ApiClient.delete(`/classes/${id}`)
 }
 
@@ -22,23 +22,23 @@ const createClass = async (omittedClass: Omit<Class, "id" | "createdAt" | "updat
     return data.data
 }
 
-const updateClass = async (id: Pick<Class, "id">, omittedClass: Omit<Class, "id" | "createdAt" | "updatedAt">): Promise<Class> => {
+const updateClass = async (id: number, omittedClass: Omit<Class, "id" | "createdAt" | "updatedAt">): Promise<Class> => {
     const {data} = await ApiClient.put(`/classes/${id}`, omittedClass)
     return data.data
 }
 
-const getClassUsers = async (id: Pick<Class, "id">): Promise<User[]> => {
+const getClassUsers = async (id: number): Promise<User[]> => {
     const {data} = await ApiClient.get(`/classes/${id}/users`)
     return data.data
 }
 
 export type ClassRepository = {
     getClasses: () => Promise<Class[]>,
-    getClass: (id: Pick<Class, "id">) => Promise<Class>,
-    deleteClass: (id: Pick<Class, "id">) => Promise<void>,
+    getClass: (id: number) => Promise<Class>,
+    deleteClass: (id: number) => Promise<void>,
     createClass: (omittedClass: Omit<Class, "id" | "createdAt" | "updatedAt">) => Promise<Class>,
-    updateClass: (id: Pick<Class, "id">, omittedClass: Omit<Class, "id" | "createdAt" | "updatedAt">) => Promise<Class>,
-    getClassUsers: (id: Pick<Class, "id">) => Promise<User[]>,
+    updateClass: (id: number, omittedClass: Omit<Class, "id" | "createdAt" | "updatedAt">) => Promise<Class>,
+    getClassUsers: (id: number) => Promise<User[]>,
 }
 
 export const classRepository: ClassRepository = {

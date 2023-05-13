@@ -15,10 +15,10 @@ export const imageFactory = (repo?: ImageRepository) => {
         index: async (): Promise<Image[]> => {
             return await repository.getImages()
         },
-        show: async (id: Pick<Image, "id">): Promise<Image> => {
+        show: async (id: number): Promise<Image> => {
             return await repository.getImage(id)
         },
-        delete: async (id: Pick<Image, "id">): Promise<void> => {
+        delete: async (id: number): Promise<void> => {
             return await repository.deleteImage(id)
         },
         create: async (omittedImage: Omit<Image, "id" | "createdAt" | "createdBy">): Promise<Image> => {

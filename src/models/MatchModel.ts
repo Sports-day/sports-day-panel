@@ -29,13 +29,13 @@ export const matchFactory = (repo?: MatchRepository) => {
         index: async (): Promise<Match[]> => {
             return await repository.getMatches()
         },
-        show: async (id: Pick<Match, "id">): Promise<Match> => {
+        show: async (id: number): Promise<Match> => {
             return await repository.getMatch(id)
         },
-        delete: async (id: Pick<Match, "id">): Promise<void> => {
+        delete: async (id: number): Promise<void> => {
             return await repository.deleteMatch(id)
         },
-        update: async (id: Pick<Match, "id">, omittedMatch: Omit<Match, "id" | "createdAt" | "updatedAt">): Promise<Match> => {
+        update: async (id: number, omittedMatch: Omit<Match, "id" | "createdAt" | "updatedAt">): Promise<Match> => {
             return await repository.updateMatch(id, omittedMatch)
         }
     }

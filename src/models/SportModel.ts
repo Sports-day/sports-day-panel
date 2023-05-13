@@ -17,16 +17,16 @@ export const sportFactory = (repo?: SportRepository) => {
         index: async (): Promise<Sport[]> => {
             return await repository.getSports()
         },
-        show: async (id: Pick<Sport, "id">): Promise<Sport> => {
+        show: async (id: number): Promise<Sport> => {
             return await repository.getSport(id)
         },
-        delete: async (id: Pick<Sport, "id">): Promise<void> => {
+        delete: async (id: number): Promise<void> => {
             return await repository.deleteSport(id)
         },
         create: async (omittedSport: Omit<Sport, "id" | "gameIds" | "createdAt" | "updatedAt">): Promise<Sport> => {
             return await repository.createSport(omittedSport)
         },
-        update: async (id: Pick<Sport, "id">, omittedSport: Omit<Sport, "id" | "gameIds" | "createdAt" | "updatedAt">): Promise<Sport> => {
+        update: async (id: number, omittedSport: Omit<Sport, "id" | "gameIds" | "createdAt" | "updatedAt">): Promise<Sport> => {
             return await repository.updateSport(id, omittedSport)
         }
     }

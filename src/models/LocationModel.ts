@@ -13,16 +13,16 @@ export const locationFactory = (repo?: LocationRepository) => {
         index: async (): Promise<Location[]> => {
             return await repository.getLocations()
         },
-        show: async (id: Pick<Location, "id">): Promise<Location> => {
+        show: async (id: number): Promise<Location> => {
             return await repository.getLocation(id)
         },
-        delete: async (id: Pick<Location, "id">): Promise<void> => {
+        delete: async (id: number): Promise<void> => {
             return await repository.deleteLocation(id)
         },
         create: async (omittedLocation: Omit<Location, "id">): Promise<Location> => {
             return await repository.createLocation(omittedLocation)
         },
-        update: async (id: Pick<Location, "id">, omittedLocation: Omit<Location, "id">): Promise<Location> => {
+        update: async (id: number, omittedLocation: Omit<Location, "id">): Promise<Location> => {
             return await repository.updateLocation(id, omittedLocation)
         }
     }

@@ -8,12 +8,12 @@ const getUsers = async (): Promise<User[]> => {
     return data.data
 }
 
-const getUser = async (id: Pick<User, "id">): Promise<User> => {
+const getUser = async (id: number): Promise<User> => {
     const {data} = await ApiClient.get(`/users/${id}`)
     return data.data
 }
 
-const deleteUser = async (id: Pick<User, "id">): Promise<void> => {
+const deleteUser = async (id: number): Promise<void> => {
     await ApiClient.delete(`/users/${id}`)
 }
 
@@ -22,29 +22,29 @@ const createUser = async (omittedUser: Omit<User, "id" | "createdAt" | "updatedA
     return data.data
 }
 
-const updateUser = async (id: Pick<User, "id">, omittedUser: Omit<User, "id" | "createdAt" | "updatedAt">): Promise<User> => {
+const updateUser = async (id: number, omittedUser: Omit<User, "id" | "createdAt" | "updatedAt">): Promise<User> => {
     const {data} = await ApiClient.put(`/users/${id}`, omittedUser)
     return data.data
 }
 
-const getLinkedMicrosoftAccounts = async (id: Pick<User, "id">): Promise<MicrosoftAccount[]> => {
+const getLinkedMicrosoftAccounts = async (id: number): Promise<MicrosoftAccount[]> => {
     const {data} = await ApiClient.get(`/users/${id}/microsoft-accounts`)
     return data.data
 }
 
-const getTeams = async (id: Pick<User, "id">): Promise<Team[]> => {
+const getTeams = async (id: number): Promise<Team[]> => {
     const {data} = await ApiClient.get(`/users/${id}/teams`)
     return data.data
 }
 
 export type UserRepository = {
     getUsers: () => Promise<User[]>,
-    getUser: (id: Pick<User, "id">) => Promise<User>,
-    deleteUser: (id: Pick<User, "id">) => Promise<void>,
+    getUser: (id: number) => Promise<User>,
+    deleteUser: (id: number) => Promise<void>,
     createUser: (omittedUser: Omit<User, "id" | "createdAt" | "updatedAt">) => Promise<User>,
-    updateUser: (id: Pick<User, "id">, omittedUser: Omit<User, "id" | "createdAt" | "updatedAt">) => Promise<User>,
-    getLinkedMicrosoftAccounts: (id: Pick<User, "id">) => Promise<MicrosoftAccount[]>,
-    getTeams: (id: Pick<User, "id">) => Promise<Team[]>,
+    updateUser: (id: number, omittedUser: Omit<User, "id" | "createdAt" | "updatedAt">) => Promise<User>,
+    getLinkedMicrosoftAccounts: (id: number) => Promise<MicrosoftAccount[]>,
+    getTeams: (id: number) => Promise<Team[]>,
 }
 
 export const userRepository: UserRepository = {

@@ -21,22 +21,22 @@ export const userFactory = (repo?: UserRepository) => {
         index: async (): Promise<User[]> => {
             return await repository.getUsers()
         },
-        show: async (id: Pick<User, "id">): Promise<User> => {
+        show: async (id: number): Promise<User> => {
             return await repository.getUser(id)
         },
-        delete: async (id: Pick<User, "id">): Promise<void> => {
+        delete: async (id: number): Promise<void> => {
             return await repository.deleteUser(id)
         },
         create: async (omittedUser: Omit<User, "id" | "createdAt" | "updatedAt">): Promise<User> => {
             return await repository.createUser(omittedUser)
         },
-        update: async (id: Pick<User, "id">, omittedUser: Omit<User, "id" | "createdAt" | "updatedAt">): Promise<User> => {
+        update: async (id: number, omittedUser: Omit<User, "id" | "createdAt" | "updatedAt">): Promise<User> => {
             return await repository.updateUser(id, omittedUser)
         },
-        getLinkedMicrosoftAccounts: async (id: Pick<User, "id">): Promise<MicrosoftAccount[]> => {
+        getLinkedMicrosoftAccounts: async (id: number): Promise<MicrosoftAccount[]> => {
             return await repository.getLinkedMicrosoftAccounts(id)
         },
-        getTeams: async (id: Pick<User, "id">): Promise<Team[]> => {
+        getTeams: async (id: number): Promise<Team[]> => {
             return await repository.getTeams(id)
         }
     }

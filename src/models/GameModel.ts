@@ -54,46 +54,46 @@ export const gameFactory = (repo?: GameRepository) => {
         index: async (): Promise<Game[]> => {
             return await repository.getGames()
         },
-        show: async (id: Pick<Game, "id">): Promise<Game> => {
+        show: async (id: number): Promise<Game> => {
             return await repository.getGame(id)
         },
-        delete: async (id: Pick<Game, "id">): Promise<void> => {
+        delete: async (id: number): Promise<void> => {
             return await repository.deleteGame(id)
         },
         create: async (omittedGame: Omit<Game, "id" | "createdAt" | "updatedAt">): Promise<Game> => {
             return await repository.createGame(omittedGame)
         },
-        update: async (id: Pick<Game, "id">, omittedGame: Omit<Game, "id" | "createdAt" | "updatedAt">): Promise<Game> => {
+        update: async (id: number, omittedGame: Omit<Game, "id" | "createdAt" | "updatedAt">): Promise<Game> => {
             return await repository.updateGame(id, omittedGame)
         },
-        getGameMatches: async (id: Pick<Game, "id">): Promise<Match[]> => {
+        getGameMatches: async (id: number): Promise<Match[]> => {
             return await repository.getGameMatches(id)
         },
-        deleteGameMatches: async (id: Pick<Game, "id">): Promise<void> => {
+        deleteGameMatches: async (id: number): Promise<void> => {
             return await repository.deleteGameMatches(id)
         },
-        getGameEntries: async (id: Pick<Game, "id">): Promise<Team[]> => {
+        getGameEntries: async (id: number): Promise<Team[]> => {
             return await repository.getGameEntries(id)
         },
-        addGameEntries: async (id: Pick<Game, "id">, teamIds: Pick<Team, "id">[]): Promise<Team[]> => {
+        addGameEntries: async (id: number, teamIds: number[]): Promise<Team[]> => {
             return await repository.addGameEntries(id, teamIds)
         },
-        removeGameEntry: async (id: Pick<Game, "id">, teamId: Pick<Team, "id">): Promise<void> => {
+        removeGameEntry: async (id: number, teamId: number): Promise<void> => {
             return await repository.removeGameEntry(id, teamId)
         },
-        makeTournamentTree: async (id: Pick<Game, "id">, parentMatchId: Pick<Match, "id"> | null): Promise<Match> => {
+        makeTournamentTree: async (id: number, parentMatchId: number | null): Promise<Match> => {
             return await repository.makeTournamentTree(id, parentMatchId)
         },
-        updateTournamentTree: async (id: Pick<Game, "id">): Promise<void> => {
+        updateTournamentTree: async (id: number): Promise<void> => {
             return await repository.updateTournamentTree(id)
         },
-        getTournamentResult: async (id: Pick<Game, "id">): Promise<TournamentResult> => {
+        getTournamentResult: async (id: number): Promise<TournamentResult> => {
             return await repository.getTournamentResult(id)
         },
-        makeLeagueMatches: async (id: Pick<Game, "id">): Promise<Match[]> => {
+        makeLeagueMatches: async (id: number): Promise<Match[]> => {
             return await repository.makeLeagueMatches(id)
         },
-        getLeagueResult: async (id: Pick<Game, "id">): Promise<LeagueResult> => {
+        getLeagueResult: async (id: number): Promise<LeagueResult> => {
             return await repository.getLeagueResult(id)
         },
     }

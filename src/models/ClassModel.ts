@@ -17,19 +17,19 @@ export const classFactory = (repo?: ClassRepository) => {
         index: async (): Promise<Class[]> => {
             return await repository.getClasses()
         },
-        show: async (id: Pick<Class, "id">): Promise<Class> => {
+        show: async (id: number): Promise<Class> => {
             return await repository.getClass(id)
         },
-        delete: async (id: Pick<Class, "id">): Promise<void> => {
+        delete: async (id: number): Promise<void> => {
             return await repository.deleteClass(id)
         },
         create: async (omittedClass: Omit<Class, "id" | "createdAt" | "updatedAt">): Promise<Class> => {
             return await repository.createClass(omittedClass)
         },
-        update: async (id: Pick<Class, "id">, omittedClass: Omit<Class, "id" | "createdAt" | "updatedAt">): Promise<Class> => {
+        update: async (id: number, omittedClass: Omit<Class, "id" | "createdAt" | "updatedAt">): Promise<Class> => {
             return await repository.updateClass(id, omittedClass)
         },
-        getUsers: async (id: Pick<Class, "id">): Promise<User[]> => {
+        getUsers: async (id: number): Promise<User[]> => {
             return await repository.getClassUsers(id)
         }
     }

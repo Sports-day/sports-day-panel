@@ -15,16 +15,16 @@ export const groupFactory = (repo?: GroupRepository) => {
         index: async (): Promise<Group[]> => {
             return await repository.getGroups()
         },
-        show: async (id: Pick<Group, "id">): Promise<Group> => {
+        show: async (id: number): Promise<Group> => {
             return await repository.getGroup(id)
         },
-        delete: async (id: Pick<Group, "id">): Promise<void> => {
+        delete: async (id: number): Promise<void> => {
             return await repository.deleteGroup(id)
         },
         create: async (omittedGroup: Omit<Group, "id" | "createdAt" | "updatedAt">): Promise<Group> => {
             return await repository.createGroup(omittedGroup)
         },
-        update: async (id: Pick<Group, "id">, omittedGroup: Omit<Group, "id" | "createdAt" | "updatedAt">): Promise<Group> => {
+        update: async (id: number, omittedGroup: Omit<Group, "id" | "createdAt" | "updatedAt">): Promise<Group> => {
             return await repository.updateGroup(id, omittedGroup)
         }
     }

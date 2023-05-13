@@ -6,12 +6,12 @@ const getSports = async (): Promise<Sport[]> => {
     return data.data
 }
 
-const getSport = async (id: Pick<Sport, "id">): Promise<Sport> => {
+const getSport = async (id: number): Promise<Sport> => {
     const {data} = await ApiClient.get(`/sports/${id}`)
     return data.data
 }
 
-const deleteSport = async (id: Pick<Sport, "id">): Promise<void> => {
+const deleteSport = async (id: number): Promise<void> => {
     await ApiClient.delete(`/sports/${id}`)
 }
 
@@ -20,7 +20,7 @@ const createSport = async (omittedSport: Omit<Sport, "id" | "gameIds" | "created
     return data.data
 }
 
-const updateSport = async (id: Pick<Sport, "id">, omittedSport: Omit<Sport, "id" | "gameIds" | "createdAt" | "updatedAt">): Promise<Sport> => {
+const updateSport = async (id: number, omittedSport: Omit<Sport, "id" | "gameIds" | "createdAt" | "updatedAt">): Promise<Sport> => {
     const {data} = await ApiClient.put(`/sports/${id}`, omittedSport)
     return data.data
 }
@@ -28,10 +28,10 @@ const updateSport = async (id: Pick<Sport, "id">, omittedSport: Omit<Sport, "id"
 
 export type SportRepository = {
     getSports: () => Promise<Sport[]>,
-    getSport: (id: Pick<Sport, "id">) => Promise<Sport>,
-    deleteSport: (id: Pick<Sport, "id">) => Promise<void>,
+    getSport: (id: number) => Promise<Sport>,
+    deleteSport: (id: number) => Promise<void>,
     createSport: (omittedSport: Omit<Sport, "id" | "gameIds" | "createdAt" | "updatedAt">) => Promise<Sport>,
-    updateSport: (id: Pick<Sport, "id">, omittedSport: Omit<Sport, "id" | "gameIds" | "createdAt" | "updatedAt">) => Promise<Sport>,
+    updateSport: (id: number, omittedSport: Omit<Sport, "id" | "gameIds" | "createdAt" | "updatedAt">) => Promise<Sport>,
 }
 
 export const sportRepository: SportRepository = {
