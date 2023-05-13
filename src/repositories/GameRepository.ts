@@ -74,8 +74,13 @@ const getTournamentResult = async (id: number): Promise<TournamentResult> => {
     return data.data
 }
 
-const makeLeagueMatches = async (id: number): Promise<Match[]> => {
-    const {data} = await ApiClient.post(`/games/${id}/league`)
+const makeLeagueMatches = async (id: number, locationId: number | null): Promise<Match[]> => {
+    const {data} = await ApiClient.post(
+        `/games/${id}/league`,
+        {
+            locationId: locationId
+        }
+    )
     return data.data
 }
 
@@ -98,7 +103,7 @@ export type GameRepository = {
     makeTournamentTree: (id: number, parentMatchId: number | null) => Promise<Match>,
     updateTournamentTree: (id: number) => Promise<void>,
     getTournamentResult: (id: number) => Promise<TournamentResult>,
-    makeLeagueMatches: (id: number) => Promise<Match[]>,
+    makeLeagueMatches: (id: number, locationId: number | null) => Promise<Match[]>,
     getLeagueResult: (id: number) => Promise<LeagueResult>,
 }
 

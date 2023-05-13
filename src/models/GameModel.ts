@@ -90,8 +90,8 @@ export const gameFactory = (repo?: GameRepository) => {
         getTournamentResult: async (id: number): Promise<TournamentResult> => {
             return await repository.getTournamentResult(id)
         },
-        makeLeagueMatches: async (id: number): Promise<Match[]> => {
-            return await repository.makeLeagueMatches(id)
+        makeLeagueMatches: async (id: number, locationId: number | null = null): Promise<Match[]> => {
+            return await repository.makeLeagueMatches(id, locationId)
         },
         getLeagueResult: async (id: number): Promise<LeagueResult> => {
             return await repository.getLeagueResult(id)
