@@ -6,34 +6,35 @@ const getMicrosoftAccounts = async (): Promise<MicrosoftAccount[]> => {
     return data.data
 }
 
-const getMicrosoftAccount = async (id: Pick<MicrosoftAccount, "id">): Promise<MicrosoftAccount> => {
+const getMicrosoftAccount = async (id: number | "me"): Promise<MicrosoftAccount> => {
     const {data} = await ApiClient.get(`/microsoft-accounts/${id}`)
     return data.data
 }
 
-const deleteMicrosoftAccount = async (id: Pick<MicrosoftAccount, "id">): Promise<void> => {
-    const {data} = await ApiClient.delete(`/microsoft-accounts/${id}`)
+const deleteMicrosoftAccount = async (id: number | "me"): Promise<void> => {
+    await ApiClient.delete(`/microsoft-accounts/${id}`)
 }
 
-const setMicrosoftAccountRole = async (id: Pick<MicrosoftAccount, "id">, role: string): Promise<void> => {
+const setMicrosoftAccountRole = async (id: number | "me", role: string): Promise<MicrosoftAccount> => {
     const {data} = await ApiClient.put(`/microsoft-accounts/${id}/role`, {role})
+    return data.data
 }
 
-const linkMicrosoftAccount = async (id: Pick<MicrosoftAccount, "id">, userId: number): Promise<void> => {
-    const {data} = await ApiClient.put(`/microsoft-accounts/${id}/link-user`, {userId})
+const linkMicrosoftAccount = async (id: number | "me", userId: number): Promise<void> => {
+    await ApiClient.put(`/microsoft-accounts/${id}/link-user`, {userId})
 }
 
-const unlinkMicrosoftAccount = async (id: Pick<MicrosoftAccount, "id">): Promise<void> => {
-    const {data} = await ApiClient.delete(`/microsoft-accounts/${id}/link-user`)
+const unlinkMicrosoftAccount = async (id: number | "me"): Promise<void> => {
+    await ApiClient.delete(`/microsoft-accounts/${id}/link-user`)
 }
 
 export type MicrosoftAccountRepository = {
     getMicrosoftAccounts: () => Promise<MicrosoftAccount[]>,
-    getMicrosoftAccount: (id: Pick<MicrosoftAccount, "id">) => Promise<MicrosoftAccount>,
-    deleteMicrosoftAccount: (id: Pick<MicrosoftAccount, "id">) => Promise<void>,
-    setMicrosoftAccountRole: (id: Pick<MicrosoftAccount, "id">, role: string) => Promise<void>,
-    linkMicrosoftAccount: (id: Pick<MicrosoftAccount, "id">, userId: number) => Promise<void>,
-    unlinkMicrosoftAccount: (id: Pick<MicrosoftAccount, "id">) => Promise<void>,
+    getMicrosoftAccount: (id: number | "me") => Promise<MicrosoftAccount>,
+    deleteMicrosoftAccount: (id: number | "me") => Promise<void>,
+    setMicrosoftAccountRole: (id: number | "me", role: string) => Promise<MicrosoftAccount>,
+    linkMicrosoftAccount: (id: number | "me", userId: number) => Promise<void>,
+    unlinkMicrosoftAccount: (id: number | "me") => Promise<void>,
 }
 
 export const microsoftAccountRepository: MicrosoftAccountRepository = {

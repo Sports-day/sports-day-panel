@@ -18,19 +18,19 @@ export const microsoftAccountFactory = (repo?: MicrosoftAccountRepository) => {
         index: async (): Promise<MicrosoftAccount[]> => {
             return await repository.getMicrosoftAccounts()
         },
-        show: async (id: Pick<MicrosoftAccount, "id">): Promise<MicrosoftAccount> => {
+        show: async (id: number | "me"): Promise<MicrosoftAccount> => {
             return await repository.getMicrosoftAccount(id)
         },
-        delete: async (id: Pick<MicrosoftAccount, "id">): Promise<void> => {
+        delete: async (id: number | "me"): Promise<void> => {
             return await repository.deleteMicrosoftAccount(id)
         },
-        setRole: async (id: Pick<MicrosoftAccount, "id">, role: string): Promise<void> => {
+        setRole: async (id: number | "me", role: string): Promise<MicrosoftAccount> => {
             return await repository.setMicrosoftAccountRole(id, role)
         },
-        linkUser: async (id: Pick<MicrosoftAccount, "id">, userId: number): Promise<void> => {
+        linkUser: async (id: number | "me", userId: number): Promise<void> => {
             return await repository.linkMicrosoftAccount(id, userId)
         },
-        unlinkUser: async (id: Pick<MicrosoftAccount, "id">): Promise<void> => {
+        unlinkUser: async (id: number | "me"): Promise<void> => {
             return await repository.unlinkMicrosoftAccount(id)
         }
     }
