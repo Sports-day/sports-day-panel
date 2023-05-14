@@ -5,6 +5,7 @@ export type Sport = {
     name: string,
     description: string,
     iconId: number | null,
+    weight: number,
     gameIds: number[],
     createdAt: string,
     updatedAt: string

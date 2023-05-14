@@ -6,6 +6,7 @@ export type Team = {
     name: string,
     classId: number,
     userIds: number[],
+    enteredGameIds: number[],
     createdAt: string,
     updatedAt: string
 }
@@ -23,10 +24,10 @@ export const teamFactory = (repo?: TeamRepository) => {
         delete: async (id: number): Promise<void> => {
             return await repository.deleteTeam(id)
         },
-        create: async (omittedTeam: Omit<Team, "id" | "userIds" | "createdAt" | "updatedAt">): Promise<Team> => {
+        create: async (omittedTeam: Omit<Team, "id" | "userIds" | "enteredGameIds" | "createdAt" | "updatedAt">): Promise<Team> => {
             return await repository.createTeam(omittedTeam)
         },
-        update: async (id: number, omittedTeam: Omit<Team, "id" | "userIds" | "createdAt" | "updatedAt">): Promise<Team> => {
+        update: async (id: number, omittedTeam: Omit<Team, "id" | "userIds" | "enteredGameIds" | "createdAt" | "updatedAt">): Promise<Team> => {
             return await repository.updateTeam(id, omittedTeam)
         },
         getTeamUsers: async (id: number): Promise<User[]> => {

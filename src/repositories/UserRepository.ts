@@ -17,12 +17,12 @@ const deleteUser = async (id: number): Promise<void> => {
     await ApiClient.delete(`/users/${id}`)
 }
 
-const createUser = async (omittedUser: Omit<User, "id" | "createdAt" | "updatedAt">): Promise<User> => {
+const createUser = async (omittedUser: Omit<User, "id" | "teamIds" | "createdAt" | "updatedAt">): Promise<User> => {
     const {data} = await ApiClient.post(`/users`, omittedUser)
     return data.data
 }
 
-const updateUser = async (id: number, omittedUser: Omit<User, "id" | "createdAt" | "updatedAt">): Promise<User> => {
+const updateUser = async (id: number, omittedUser: Omit<User, "id" | "teamIds" | "createdAt" | "updatedAt">): Promise<User> => {
     const {data} = await ApiClient.put(`/users/${id}`, omittedUser)
     return data.data
 }
@@ -41,8 +41,8 @@ export type UserRepository = {
     getUsers: () => Promise<User[]>,
     getUser: (id: number) => Promise<User>,
     deleteUser: (id: number) => Promise<void>,
-    createUser: (omittedUser: Omit<User, "id" | "createdAt" | "updatedAt">) => Promise<User>,
-    updateUser: (id: number, omittedUser: Omit<User, "id" | "createdAt" | "updatedAt">) => Promise<User>,
+    createUser: (omittedUser: Omit<User, "id" | "teamIds" | "createdAt" | "updatedAt">) => Promise<User>,
+    updateUser: (id: number, omittedUser: Omit<User, "id" | "teamIds" | "createdAt" | "updatedAt">) => Promise<User>,
     getLinkedMicrosoftAccounts: (id: number) => Promise<MicrosoftAccount[]>,
     getTeams: (id: number) => Promise<Team[]>,
 }

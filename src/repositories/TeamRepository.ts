@@ -16,12 +16,12 @@ const deleteTeam = async (id: number): Promise<void> => {
     await ApiClient.delete(`/teams/${id}`)
 }
 
-const createTeam = async (omittedTeam: Omit<Team, "id" | "userIds" | "createdAt" | "updatedAt">): Promise<Team> => {
+const createTeam = async (omittedTeam: Omit<Team, "id" | "userIds" | "enteredGameIds" | "createdAt" | "updatedAt">): Promise<Team> => {
     const {data} = await ApiClient.post(`/teams`, omittedTeam)
     return data.data
 }
 
-const updateTeam = async (id: number, omittedTeam: Omit<Team, "id" | "userIds" | "createdAt" | "updatedAt">): Promise<Team> => {
+const updateTeam = async (id: number, omittedTeam: Omit<Team, "id" | "userIds" | "enteredGameIds" | "createdAt" | "updatedAt">): Promise<Team> => {
     const {data} = await ApiClient.put(`/teams/${id}`, omittedTeam)
     return data.data
 }
@@ -50,8 +50,8 @@ export type TeamRepository = {
     getTeams: () => Promise<Team[]>,
     getTeam: (id: number) => Promise<Team>,
     deleteTeam: (id: number) => Promise<void>,
-    createTeam: (omittedTeam: Omit<Team, "id" | "userIds" | "createdAt" | "updatedAt">) => Promise<Team>,
-    updateTeam: (id: number, omittedTeam: Omit<Team, "id" | "userIds" | "createdAt" | "updatedAt">) => Promise<Team>,
+    createTeam: (omittedTeam: Omit<Team, "id" | "userIds" | "enteredGameIds" | "createdAt" | "updatedAt">) => Promise<Team>,
+    updateTeam: (id: number, omittedTeam: Omit<Team, "id" | "userIds" | "enteredGameIds" | "createdAt" | "updatedAt">) => Promise<Team>,
     getTeamUsers: (id: number) => Promise<User[]>,
     addTeamUsers: (id: number, userIds: number[]) => Promise<Team>,
     removeTeamUser: (id: number, userId: number) => Promise<Team>,
