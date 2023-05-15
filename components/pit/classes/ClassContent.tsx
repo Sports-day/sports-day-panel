@@ -1,14 +1,15 @@
 import {Button, TableCell, TableRow} from "@mui/material";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {ConfirmDialog} from "../ConfirmDialog";
 import {Class, classFactory} from "../../../src/models/ClassModel";
-import {useFetchGroup} from "../../../src/features/groups/hook";
 import {ClassForm} from "./ClassForm";
+import {GroupsContext} from "../context";
 
 export function ClassContent(props: { class: Class, refresh: VoidFunction }) {
     const [isEditOpen, setIsEditOpen] = useState(false)
     const [isDeleteOpen, setIsDeleteOpen] = useState(false)
-    const {group} = useFetchGroup(props.class.groupId)
+    const {data: groups} = useContext(GroupsContext)
+    const group = groups?.find(group => group.id === props.class.groupId)
 
     const deleteClass = async () => {
         await classFactory().delete(props.class.id)
