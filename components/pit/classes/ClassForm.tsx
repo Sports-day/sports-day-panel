@@ -111,14 +111,14 @@ export function ClassForm(props: ClassFormProps) {
                             }}
                         />
                         {/* group */}
-                        <InputLabel id="group-select">Group</InputLabel>
+                        <InputLabel id="group-select">グループ</InputLabel>
                         <Select
                             labelId={"group-select"}
                             id={"group"}
                             label={"グループ"}
                             value={groupState}
                             sx={{
-                                width: "200px"
+                                width: "300px"
                             }}
                             onChange={handleGroupChange}
                             required
