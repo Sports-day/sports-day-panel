@@ -1,12 +1,12 @@
 import {useState} from "react";
 import {Class, classFactory} from "../../../models/ClassModel";
-import {useAsync} from "react-use";
+import {useAsyncRetry} from "react-use";
 
 export const useFetchClasses = () => {
     const [classes, setClasses] = useState<Class[]>([])
     const [isFetching, setIsFetching] = useState(true)
 
-    useAsync(async () => {
+    const state = useAsyncRetry(async () => {
         try {
             const data = await classFactory().index();
             setClasses(data);
@@ -20,5 +20,6 @@ export const useFetchClasses = () => {
     return {
         classes: classes,
         isFetching: isFetching,
+        refresh: state.retry,
     }
 }

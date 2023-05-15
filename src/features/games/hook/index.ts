@@ -1,15 +1,15 @@
 import {useState} from "react";
 import {Game, gameFactory, LeagueResult, TournamentResult} from "../../../models/GameModel";
-import {useAsync} from "react-use";
+import {useAsync, useAsyncRetry} from "react-use";
 import {Match} from "../../../models/MatchModel";
-import {useFetchMyTeams, useFetchTeam} from "../../teams/hook";
+import {useFetchMyTeams} from "../../teams/hook";
 import {teamFactory} from "../../../models/TeamModel";
 
 export const useFetchGames = () => {
     const [games, setGames] = useState<Game[]>([])
     const [isFetching, setIsFetching] = useState(true)
 
-    useAsync(async () => {
+    const state = useAsyncRetry(async () => {
         try {
             const data = await gameFactory().index();
             setGames(data);
@@ -23,6 +23,7 @@ export const useFetchGames = () => {
     return {
         games: games,
         isFetching: isFetching,
+        refresh: state.retry,
     }
 }
 
@@ -30,7 +31,7 @@ export const useFetchGame = (gameId: number) => {
     const [game, setGame] = useState<Game>()
     const [isFetching, setIsFetching] = useState(true)
 
-    useAsync(async () => {
+    const state = useAsyncRetry(async () => {
         try {
             const data = await gameFactory().show(gameId);
             setGame(data);
@@ -55,7 +56,7 @@ export const useFetchGameMatches = (gameId: number) => {
     const [matches, setMatches] = useState<Match[]>([])
     const [isFetching, setIsFetching] = useState(true)
 
-    useAsync(async () => {
+    const state = useAsyncRetry(async () => {
         try {
             const data = await gameFactory().getGameMatches(gameId);
             setMatches(data);
@@ -69,6 +70,7 @@ export const useFetchGameMatches = (gameId: number) => {
     return {
         matches: matches,
         isFetching: isFetching,
+        refresh: state.retry,
     }
 }
 
@@ -82,7 +84,7 @@ export const useFetchGameResult = (gameId: number) => {
 
     const {game, isFetching: isFetchingGame} = useFetchGame(gameId);
 
-    useAsync(async () => {
+    const state = useAsyncRetry(async () => {
         if(!isFetchingGame) {
             try {
                 if (game?.type === "league") {
@@ -104,6 +106,7 @@ export const useFetchGameResult = (gameId: number) => {
     return {
         result: result,
         isFetching: isFetching,
+        refresh: state.retry,
     }
 }
 
@@ -116,7 +119,7 @@ export const useFetchMyGameResults = () => {
 
     const {games, isFetching: isFetchingGames} = useFetchMyTeamGames();
 
-    useAsync(async () => {
+    const state = useAsyncRetry(async () => {
         if(!isFetchingGames) {
             try {
                 for (const game of games) {
@@ -140,6 +143,7 @@ export const useFetchMyGameResults = () => {
     return {
         results: results,
         isFetching: isFetching,
+        refresh: state.retry,
     }
 }
 
@@ -151,7 +155,7 @@ export const useFetchTeamGames = (teamId: number) => {
     const [games, setGames] = useState<Game[]>([])
     const [isFetching, setIsFetching] = useState(true)
 
-    useAsync(async () => {
+    const state = useAsyncRetry(async () => {
         try {
             const team = await teamFactory().show(teamId);
             const data = await gameFactory().index()
@@ -167,6 +171,7 @@ export const useFetchTeamGames = (teamId: number) => {
     return {
         games: games,
         isFetching: isFetching,
+        refresh: state.retry,
     }
 }
 
