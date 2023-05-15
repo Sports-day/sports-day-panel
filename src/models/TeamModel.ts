@@ -4,6 +4,7 @@ import {User} from "./UserModel";
 export type Team = {
     id: number,
     name: string,
+    description: string,
     classId: number,
     userIds: number[],
     enteredGameIds: number[],
