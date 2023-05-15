@@ -1,11 +1,13 @@
-import {Group} from "../../../src/models/GroupModel";
 import {GroupContent} from "./GroupContent";
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
+import {useContext} from "react";
+import {GroupsContext} from "../context";
 
-export function GroupList(props: {groups: Group[], refresh: VoidFunction}) {
-    const groupComponents = props.groups.map(group => {
+export function GroupList() {
+    const {data: groups, refresh} = useContext(GroupsContext)
+    const groupComponents = groups.map(group => {
         return (
-            <GroupContent group={group} key={group.id} refresh={props.refresh}/>
+            <GroupContent group={group} key={group.id} refresh={refresh}/>
         )
     })
 
