@@ -1,5 +1,4 @@
-import styles from "../../styles/Pit.module.scss";
-import {Group} from "../../src/models/GroupModel";
+import {Group} from "../../../src/models/GroupModel";
 import {GroupContent} from "./GroupContent";
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 

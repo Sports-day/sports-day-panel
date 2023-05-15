@@ -1,7 +1,7 @@
 import {NextPage} from "next";
 import {useSession} from "next-auth/react";
 import {PitDashboard} from "../../../components/pit/PitDashboard";
-import {Groups} from "../../../components/pit/Groups";
+import {Groups} from "../../../components/pit/groups/Groups";
 
 const AdminGroupsIndex: NextPage = () => {
     const {data: session} = useSession({

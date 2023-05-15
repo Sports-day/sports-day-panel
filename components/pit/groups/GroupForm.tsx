@@ -1,9 +1,7 @@
-import React, {useEffect, useRef, useState} from "react";
-import styles from "../../styles/Pit.module.scss";
+import React, {useRef} from "react";
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField, TextFieldProps} from "@mui/material";
-import {FormType} from "../../types";
-import {Group, groupFactory} from "../../src/models/GroupModel";
-import {useRouter} from "next/router";
+import {FormType} from "../../../types";
+import {Group, groupFactory} from "../../../src/models/GroupModel";
 
 export type GroupFormProps = {
     isOpen: boolean
@@ -14,7 +12,6 @@ export type GroupFormProps = {
 }
 
 export function GroupForm(props: GroupFormProps) {
-    const router = useRouter()
     //  ref
     const nameRef = useRef<TextFieldProps>(null)
     const descriptionRef = useRef<TextFieldProps>(null)

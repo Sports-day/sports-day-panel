@@ -1,8 +1,8 @@
-import {Group, groupFactory} from "../../src/models/GroupModel";
+import {Group, groupFactory} from "../../../src/models/GroupModel";
 import {Button, TableCell, TableRow} from "@mui/material";
 import {GroupForm} from "./GroupForm";
 import {useState} from "react";
-import {ConfirmDialog} from "./ConfirmDialog";
+import {ConfirmDialog} from "../ConfirmDialog";
 
 export function GroupContent(props: { group: Group, refresh: VoidFunction }) {
     const [isEditOpen, setIsEditOpen] = useState(false)
