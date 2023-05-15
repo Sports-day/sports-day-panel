@@ -47,6 +47,10 @@ export const authOptions = {
             return token
         }
     },
+    pages: {
+        signIn: '/',
+        // error: '/auth/error',
+    }
 }
 
 const fetchMe = async (token: string) => {
