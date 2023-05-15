@@ -23,3 +23,25 @@ export const useFetchClasses = () => {
         refresh: state.retry,
     }
 }
+
+export const useFetchClass = (id: number) => {
+    const [classModel, setClassModel] = useState<Class>()
+    const [isFetching, setIsFetching] = useState(true)
+
+    const state = useAsyncRetry(async () => {
+        try {
+            const data = await classFactory().show(id);
+            setClassModel(data);
+        } catch (e) {
+            console.log(e);
+        } finally {
+            setIsFetching(false);
+        }
+    }, [id])
+
+    return {
+        classModel: classModel,
+        isFetching: isFetching,
+        refresh: state.retry,
+    }
+}
