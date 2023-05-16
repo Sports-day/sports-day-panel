@@ -4,10 +4,10 @@ import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "
 import { Team } from "../../../src/models/TeamModel";
 import {TeamContent} from "./TeamContent";
 
-export function TeamList(props: {teams: Team[]}) {
+export function TeamList(props: {teams: Team[], refresh: VoidFunction }) {
     const teamComponents = props.teams.map(team => {
         return (
-            <TeamContent team={team} key={team.id}/>
+            <TeamContent team={team} refresh={props.refresh} key={team.id}/>
         )
     })
 
@@ -40,6 +40,13 @@ export function TeamList(props: {teams: Team[]}) {
                                 }}
                             >
                                 最終更新日時
+                            </TableCell>
+                            <TableCell
+                                sx={{
+                                    width: "150px"
+                                }}
+                            >
+                                アクション
                             </TableCell>
                         </TableRow>
                     </TableHead>

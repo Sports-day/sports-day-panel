@@ -52,7 +52,7 @@ export function Teams() {
                         </Box>
                         :
                         <>
-                            <TeamList teams={teams}/>
+                            <TeamList teams={teams} refresh={refresh} />
                         </>
                     }
 
