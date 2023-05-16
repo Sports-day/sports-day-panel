@@ -9,15 +9,12 @@ export type PitSidebarContentProps = {
 export const PitSidebarContent = (props: PitSidebarContentProps) => {
     return (
         <>
-
-            <div className={styles.sidebarContent}>
-                <Link
-                    href={props.url}
-                    className={styles.sidebarContentLink}
-                >
-                    {props.name}
-                </Link>
-            </div>
+            <Link
+                href={props.url}
+                className={styles.sidebarContent}
+            >
+                {props.name}
+            </Link>
         </>
     )
 }

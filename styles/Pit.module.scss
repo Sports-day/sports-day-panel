@@ -42,6 +42,7 @@
     overflow-y: scroll;
 
     .sidebarContent {
+      display: block;
       background-color: #CCCCCC;
       color: #000000;
       font-size: 20px;
@@ -55,12 +56,6 @@
       &:first-child {
         margin: 0;
       }
-
-      .sidebarContentLink {
-        width: 100%;
-        height: 100%;
-      }
-
     }
   }
 
