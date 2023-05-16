@@ -21,6 +21,10 @@ export function PitSidebar() {
                 url={"/admin/users"}
             />
             <PitSidebarContent
+                name={"競技"}
+                url={"/admin/sports"}
+            />
+            <PitSidebarContent
                 name={"Microsoftアカウント"}
                 url={"/admin/microsoft-accounts"}
             />
