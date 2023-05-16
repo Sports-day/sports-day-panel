@@ -1,8 +1,7 @@
 import {TableCell, TableRow, Link} from "@mui/material";
-import { useFetchClass } from "../../../src/features/classes/hooks";
 import {Team} from "../../../src/models/TeamModel";
 import {useContext} from "react";
-import {ClassesContext, GroupsContext} from "../context";
+import {ClassesContext} from "../context";
 
 export function TeamContent(props: { team: Team}) {
     const {data: classes} = useContext(ClassesContext)
