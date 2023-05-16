@@ -1,6 +1,6 @@
 import React, {useContext, useState} from "react";
 import {Button, Dialog, DialogActions, DialogContent} from "@mui/material";
-import {UsersListForTeam} from "./UsersList";
+import {UsersListForTeam} from "./UsersListForTeam";
 import { User } from "../../../src/models/UserModel";
 import {Team, teamFactory} from "../../../src/models/TeamModel";
 

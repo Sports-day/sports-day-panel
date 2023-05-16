@@ -13,6 +13,7 @@ import {
 import {User} from "../../../src/models/UserModel";
 import {useContext, useRef, useState} from "react";
 import {ClassesContext, UsersContext} from "../context";
+import {UsersListHead} from "./UsersListHead";
 
 export type UsersListForTeamProps = {
     ignoreUsers: User[]
@@ -79,36 +80,9 @@ export function UsersListForTeam(props: UsersListForTeamProps) {
                 />
 
                 {/*table*/}
-                <TableContainer>
-                    <Table
-                        sx={{
-                            mt: "80px",
-                        }}
-                        aria-label={"users table"}
-                    >
-                        <TableHead>
-                            <TableRow>
-                                <TableCell padding={"checkbox"}>
-                                </TableCell>
-                                <TableCell>
-                                    ID
-                                </TableCell>
-                                <TableCell>
-                                    学籍番号
-                                </TableCell>
-                                <TableCell>
-                                    名前
-                                </TableCell>
-                                <TableCell>
-                                    所属クラス
-                                </TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {userComponents}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
+                <UsersListHead>
+                    {userComponents}
+                </UsersListHead>
             </div>
 
         </>
