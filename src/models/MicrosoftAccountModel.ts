@@ -5,11 +5,13 @@ export type MicrosoftAccount = {
     email: string,
     name: string,
     mailAccountName: string | null,
-    role: string,
+    role: Role,
     userId: number | null,
     firstLogin: string,
     lastLogin: string
 }
+
+export type Role = "ADMIN" | "USER"
 
 export const microsoftAccountFactory = (repo?: MicrosoftAccountRepository) => {
     const repository = repo ?? microsoftAccountRepository
