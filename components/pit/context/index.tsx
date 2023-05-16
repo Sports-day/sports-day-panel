@@ -4,6 +4,9 @@ import {Class} from "../../../src/models/ClassModel";
 import { User } from "../../../src/models/UserModel";
 import {MicrosoftAccount} from "../../../src/models/MicrosoftAccountModel";
 import {Team} from "../../../src/models/TeamModel";
+import {Sport} from "../../../src/models/SportModel";
+import {Game} from "../../../src/models/GameModel";
+import {Match} from "../../../src/models/MatchModel";
 
 export type GenericContextType<T> = {
     data: T
@@ -38,6 +41,24 @@ export const MicrosoftAccountsContext = createContext<MicrosoftAccountsContextTy
 
 export type TeamsContextType = GenericContextType<Team[]>
 export const TeamsContext = createContext<TeamsContextType>({
+    data: [],
+    refresh: () => {}
+})
+
+export type SportsContextType = GenericContextType<Sport[]>
+export const SportsContext = createContext<SportsContextType>({
+    data: [],
+    refresh: () => {}
+})
+
+export type GamesContextType = GenericContextType<Game[]>
+export const GamesContext = createContext<GamesContextType>({
+    data: [],
+    refresh: () => {}
+})
+
+export type MatchesContextType = GenericContextType<Match[]>
+export const MatchesContext = createContext<MatchesContextType>({
     data: [],
     refresh: () => {}
 })
