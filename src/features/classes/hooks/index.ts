@@ -8,6 +8,8 @@ export const useFetchClasses = () => {
 
     const state = useAsyncRetry(async () => {
         try {
+            setIsFetching(true);
+
             const data = await classFactory().index();
             setClasses(data);
         } catch (e) {
@@ -30,6 +32,7 @@ export const useFetchClass = (id: number) => {
 
     const state = useAsyncRetry(async () => {
         try {
+            setIsFetching(true);
             const data = await classFactory().show(id);
             setClassModel(data);
         } catch (e) {

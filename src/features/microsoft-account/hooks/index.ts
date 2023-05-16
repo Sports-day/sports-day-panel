@@ -8,6 +8,8 @@ export const useFetchMicrosoftAccounts = () => {
 
     const state = useAsyncRetry(async () => {
         try {
+            setIsFetching(true);
+
             const data = await microsoftAccountFactory().index();
             setMicrosoftAccounts(data);
         } catch (e) {
@@ -30,6 +32,8 @@ export const useFetchMicrosoftAccount = (microsoftAccountId: number  | "me") => 
 
     const state = useAsyncRetry(async () => {
         try {
+            setIsFetching(true);
+
             const data = await microsoftAccountFactory().show(microsoftAccountId);
             setMicrosoftAccount(data);
         } catch (e) {

@@ -11,6 +11,8 @@ export const useFetchGames = () => {
 
     const state = useAsyncRetry(async () => {
         try {
+            setIsFetching(true);
+
             const data = await gameFactory().index();
             setGames(data);
         } catch (e) {
@@ -33,6 +35,8 @@ export const useFetchGame = (gameId: number) => {
 
     const state = useAsyncRetry(async () => {
         try {
+            setIsFetching(true);
+
             const data = await gameFactory().show(gameId);
             setGame(data);
         } catch (e) {
@@ -58,6 +62,8 @@ export const useFetchGameMatches = (gameId: number) => {
 
     const state = useAsyncRetry(async () => {
         try {
+            setIsFetching(true);
+
             const data = await gameFactory().getGameMatches(gameId);
             setMatches(data);
         } catch (e) {
@@ -87,6 +93,8 @@ export const useFetchGameResult = (gameId: number) => {
     const state = useAsyncRetry(async () => {
         if(!isFetchingGame) {
             try {
+                setIsFetching(true);
+
                 if (game?.type === "league") {
                     const data = await gameFactory().getLeagueResult(gameId);
                     setResult(data);
@@ -122,6 +130,8 @@ export const useFetchMyGameResults = () => {
     const state = useAsyncRetry(async () => {
         if(!isFetchingGames) {
             try {
+                setIsFetching(true);
+
                 for (const game of games) {
                     if (game.type === "league") {
                         const data = await gameFactory().getLeagueResult(game.id);
@@ -157,6 +167,8 @@ export const useFetchTeamGames = (teamId: number) => {
 
     const state = useAsyncRetry(async () => {
         try {
+            setIsFetching(true);
+
             const team = await teamFactory().show(teamId);
             const data = await gameFactory().index()
                 .then(values => values.filter(value => team.enteredGameIds.includes(value.id)));

@@ -11,6 +11,8 @@ export const useFetchMatches = () => {
 
     const state = useAsyncRetry(async () => {
         try {
+            setIsFetching(true);
+
             const data = await matchFactory().index();
             setMatches(data);
         } catch (e) {
@@ -33,6 +35,8 @@ export const useFetchMatch = (matchId: number) => {
 
     const state = useAsyncRetry(async () => {
         try {
+            setIsFetching(true);
+
             const data = await matchFactory().show(matchId);
             setMatch(data);
         } catch (e) {

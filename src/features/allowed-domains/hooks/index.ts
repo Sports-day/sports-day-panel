@@ -8,6 +8,7 @@ export const useFetchAllowedDomains = () => {
 
     const state = useAsyncRetry(async () => {
         try {
+            setIsFetching(true);
             const data = await allowedDomainFactory().index();
             setAllowedDomains(data);
         } catch (e) {

@@ -8,6 +8,8 @@ export const useFetchGroups = () => {
 
     const state = useAsyncRetry(async () => {
         try {
+            setIsFetching(true);
+
             const data = await groupFactory().index();
             setGroups(data);
         } catch (e) {
@@ -30,6 +32,8 @@ export const useFetchGroup = (groupId: number) => {
 
     const state = useAsyncRetry(async () => {
         try {
+            setIsFetching(true);
+
             const data = await groupFactory().show(groupId);
             setGroup(data);
         } catch (e) {

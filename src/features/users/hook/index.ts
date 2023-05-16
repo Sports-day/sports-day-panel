@@ -9,6 +9,8 @@ export const useFetchUsers = () => {
 
     const state = useAsyncRetry(async () => {
         try {
+            setIsFetching(true);
+
             const data = await userFactory().index();
             setUsers(data);
         }
@@ -33,6 +35,8 @@ export const useFetchUser = (userId: number) => {
 
     const state = useAsyncRetry(async () => {
         try {
+            setIsFetching(true);
+
             const data = await userFactory().show(userId);
             setUser(data);
         }
@@ -58,6 +62,7 @@ export const useFetchMyUser = () => {
     useAsync(async () => {
         try {
             const {userId} = await microsoftAccountFactory().show("me");
+            // @ts-ignore
             const data = await userFactory().show(userId);
             setUser(data);
         }

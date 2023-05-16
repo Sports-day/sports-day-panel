@@ -13,6 +13,8 @@ export const useFetchSports = () => {
 
     const state = useAsyncRetry(async () => {
         try {
+            setIsFetching(true);
+
             const data = await sportFactory().index();
             setSports(data);
         } catch (e) {
@@ -39,6 +41,8 @@ export const useFetchSport = (sportId: number) => {
 
     const state = useAsyncRetry(async () => {
         try {
+            setIsFetching(true);
+
             const data = await sportFactory().show(sportId);
             setSport(data);
         } catch (e) {
@@ -65,6 +69,8 @@ export const useFetchSportGames = (sportId: number) => {
 
     const state = useAsyncRetry(async () => {
         try {
+            setIsFetching(true);
+
             const sport = await sportFactory().show(sportId);
 
             const result = await gameFactory().index()
@@ -99,6 +105,8 @@ export const useFetchSportProgress = (sportId: number) => {
     const state = useAsyncRetry(async () => {
         if(!isFetchingGames) {
             try {
+                setIsFetching(true);
+
                 let total = 0
                 let finished = 0
 

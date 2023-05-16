@@ -9,6 +9,7 @@ export const useFetchTeams = () => {
 
     const state = useAsyncRetry(async () => {
         try {
+            setIsFetching(true);
             const data = await teamFactory().index();
             setTeams(data);
         }
@@ -32,6 +33,7 @@ export const useFetchTeam = (teamId: number) => {
 
     const state = useAsyncRetry(async () => {
         try {
+            setIsFetching(true);
             const data = await teamFactory().show(teamId);
             setTeam(data);
         }
