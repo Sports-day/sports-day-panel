@@ -35,6 +35,10 @@ export function TeamCreateForm(props: TeamCreateFormProps) {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
 
+        if (!classes.some(classModel => classModel.id === +classState)) {
+            return
+        }
+
         await teamFactory().create({
             name: nameRef.current?.value as string,
             description: descriptionRef.current?.value as string,
