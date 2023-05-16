@@ -4,9 +4,9 @@ export type MicrosoftAccount = {
     id: number,
     email: string,
     name: string,
-    mailAccountName: string,
+    mailAccountName: string | null,
     role: string,
-    userId: number,
+    userId: number | null,
     firstLogin: string,
     lastLogin: string
 }
