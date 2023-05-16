@@ -1,9 +1,9 @@
 import {Button, TableCell, TableRow} from "@mui/material";
 import {useContext, useState} from "react";
-import {ConfirmDialog} from "../ConfirmDialog";
 import {Class, classFactory} from "../../../src/models/ClassModel";
 import {ClassForm} from "./ClassForm";
 import {GroupsContext} from "../context";
+import {ConfirmInputDialog} from "../ConfirmInputDialog";
 
 export function ClassContent(props: { class: Class, refresh: VoidFunction }) {
     const [isEditOpen, setIsEditOpen] = useState(false)
@@ -59,15 +59,16 @@ export function ClassContent(props: { class: Class, refresh: VoidFunction }) {
                 class={props.class}
             />
             {/*delete*/}
-            <ConfirmDialog
+            <ConfirmInputDialog
                 open={isDeleteOpen}
                 onClose={() => setIsDeleteOpen(false)}
                 onConfirm={() => deleteClass()}
                 confirmText={"削除"}
+                confirmKeyword={props.class.name}
                 confirmColor={"warning"}
             >
                 <p>{props.class.name}を削除しますか？</p>
-            </ConfirmDialog>
+            </ConfirmInputDialog>
         </>
     )
 }

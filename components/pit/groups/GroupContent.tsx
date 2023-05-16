@@ -2,7 +2,7 @@ import {Group, groupFactory} from "../../../src/models/GroupModel";
 import {Button, TableCell, TableRow} from "@mui/material";
 import {GroupForm} from "./GroupForm";
 import {useState} from "react";
-import {ConfirmDialog} from "../ConfirmDialog";
+import {ConfirmInputDialog} from "../ConfirmInputDialog";
 
 export function GroupContent(props: { group: Group, refresh: VoidFunction }) {
     const [isEditOpen, setIsEditOpen] = useState(false)
@@ -55,15 +55,16 @@ export function GroupContent(props: { group: Group, refresh: VoidFunction }) {
                 group={props.group}
             />
             {/*delete*/}
-            <ConfirmDialog
+            <ConfirmInputDialog
                 open={isDeleteOpen}
                 onClose={() => setIsDeleteOpen(false)}
                 onConfirm={() => deleteGroup()}
                 confirmText={"削除"}
+                confirmKeyword={props.group.name}
                 confirmColor={"warning"}
             >
                 <p>{props.group.name}を削除しますか？</p>
-            </ConfirmDialog>
+            </ConfirmInputDialog>
         </>
     )
 }
