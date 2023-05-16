@@ -2,6 +2,7 @@ import {createContext} from "react";
 import {Group} from "../../../src/models/GroupModel";
 import {Class} from "../../../src/models/ClassModel";
 import { User } from "../../../src/models/UserModel";
+import {MicrosoftAccount} from "../../../src/models/MicrosoftAccountModel";
 
 export type GenericContextType<T> = {
     data: T
@@ -23,6 +24,13 @@ export const ClassesContext = createContext<ClassesContextType>({
 
 export type UsersContextType = GenericContextType<User[]>
 export const UsersContext = createContext<UsersContextType>({
+    data: [],
+    refresh: () => {}
+})
+
+
+export type MicrosoftAccountsContextType = GenericContextType<MicrosoftAccount[]>
+export const MicrosoftAccountsContext = createContext<MicrosoftAccountsContextType>({
     data: [],
     refresh: () => {}
 })
