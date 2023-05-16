@@ -1,8 +1,8 @@
-import { User } from "../../../src/models/UserModel"
-import {Button, TableCell, TableRow} from "@mui/material";
+import {User} from "../../../src/models/UserModel"
+import {Button, TableCell, TableRow, Link} from "@mui/material";
 import {useContext, useState} from "react";
 import {ClassesContext} from "../context";
-import { ConfirmDialog } from "../ConfirmDialog";
+import {ConfirmDialog} from "../ConfirmDialog";
 import {teamFactory} from "../../../src/models/TeamModel";
 
 export type TeamUserProps = {
@@ -33,7 +33,13 @@ export const TeamUser = (props: TeamUserProps) => {
             <TableRow
                 sx={{'&:last-child td, &:last-child th': {border: 0}}}
             >
-                <TableCell>{props.user.id}</TableCell>
+                <TableCell>
+                    <Link
+                        href={`/admin/users/${props.user.id}`}
+                    >
+                        {props.user.id}
+                    </Link>
+                </TableCell>
                 <TableCell>{props.user.studentId}</TableCell>
                 <TableCell>
 
