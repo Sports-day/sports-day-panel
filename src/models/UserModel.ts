@@ -13,7 +13,7 @@ export type User = {
     updatedAt: string
 }
 
-export type Gender = "MALE" | "FEMALE"
+export type Gender = "male" | "female"
 
 export const userFactory = (repo?: UserRepository) => {
     const repository = repo ?? userRepository
