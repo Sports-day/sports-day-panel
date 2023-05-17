@@ -83,7 +83,7 @@ export const Navigation = () => {
                         width={"100%"}
                     >
                         <Avatar
-                            alt={session.user?.name}
+                            alt={session?.user?.name ?? "unknown"}
                             sx={{
                                 height: "3.5em",
                                 width: "3.5em",
@@ -93,7 +93,7 @@ export const Navigation = () => {
                         >
                         </Avatar>
                         <Typography sx={{color: "#99a5d6", fontSize: "16px"}}>
-                            {session.user?.name}
+                            {session?.user?.name ?? "unknown"}
                         </Typography>
                     </Stack>
 
