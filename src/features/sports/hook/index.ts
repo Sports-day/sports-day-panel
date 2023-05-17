@@ -1,9 +1,8 @@
 import {useState} from "react";
 import {Sport, sportFactory} from "../../../models/SportModel";
-import {useAsync} from "react-use";
+import {useAsync, useAsyncRetry} from "react-use";
 import {Game, gameFactory} from "../../../models/GameModel";
 import {useFetchMyTeamGames} from "../../games/hook";
-import {sort} from "next/dist/build/webpack/loaders/css-loader/src/utils";
 
 /**
  * Fetches all sports
@@ -12,8 +11,10 @@ export const useFetchSports = () => {
     const [sports, setSports] = useState<Sport[]>([])
     const [isFetching, setIsFetching] = useState(true)
 
-    useAsync(async () => {
+    const state = useAsyncRetry(async () => {
         try {
+            setIsFetching(true);
+
             const data = await sportFactory().index();
             setSports(data);
         } catch (e) {
@@ -26,6 +27,7 @@ export const useFetchSports = () => {
     return {
         sports: sports,
         isFetching: isFetching,
+        refresh: state.retry,
     }
 }
 
@@ -37,8 +39,10 @@ export const useFetchSport = (sportId: number) => {
     const [sport, setSport] = useState<Sport>()
     const [isFetching, setIsFetching] = useState(true)
 
-    useAsync(async () => {
+    const state = useAsyncRetry(async () => {
         try {
+            setIsFetching(true);
+
             const data = await sportFactory().show(sportId);
             setSport(data);
         } catch (e) {
@@ -51,6 +55,7 @@ export const useFetchSport = (sportId: number) => {
     return {
         sport: sport,
         isFetching: isFetching,
+        refresh: state.retry,
     }
 }
 
@@ -62,8 +67,10 @@ export const useFetchSportGames = (sportId: number) => {
     const [games, setGames] = useState<Game[]>([])
     const [isFetching, setIsFetching] = useState(true)
 
-    useAsync(async () => {
+    const state = useAsyncRetry(async () => {
         try {
+            setIsFetching(true);
+
             const sport = await sportFactory().show(sportId);
 
             const result = await gameFactory().index()
@@ -81,6 +88,7 @@ export const useFetchSportGames = (sportId: number) => {
     return {
         games: games,
         isFetching: isFetching,
+        refresh: state.retry,
     }
 }
 
@@ -94,9 +102,11 @@ export const useFetchSportProgress = (sportId: number) => {
 
     const {games, isFetching: isFetchingGames} = useFetchSportGames(sportId)
 
-    useAsync(async () => {
+    const state = useAsyncRetry(async () => {
         if(!isFetchingGames) {
             try {
+                setIsFetching(true);
+
                 let total = 0
                 let finished = 0
 

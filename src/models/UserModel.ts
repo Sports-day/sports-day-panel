@@ -5,7 +5,7 @@ import {Team} from "./TeamModel";
 export type User = {
     id: number,
     name: string,
-    studentId: number,
+    studentId: string,
     gender: Gender,
     classId: number,
     teamIds: number[],
@@ -13,7 +13,7 @@ export type User = {
     updatedAt: string
 }
 
-export type Gender = "MALE" | "FEMALE"
+export type Gender = "male" | "female"
 
 export const userFactory = (repo?: UserRepository) => {
     const repository = repo ?? userRepository

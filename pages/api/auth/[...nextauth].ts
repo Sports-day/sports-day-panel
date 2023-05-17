@@ -16,15 +16,7 @@ export const authOptions = {
         //  @ts-ignore
         async signIn({account}) {
             //  Request access to backend
-            const baseRequest: RequestInit = {
-                method: "GET",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': "Bearer " + account.id_token
-                },
-            }
-
-            const response = await fetch(process.env.NEXT_PUBLIC_API_URL + "/authorization", baseRequest)
+            const response = await fetchMe(account.id_token)
 
             return response.status == 200
         },
@@ -33,6 +25,7 @@ export const authOptions = {
 
             if (token) {
                 // session.user.id = token.id
+                session.user.role = token.role
                 session.user.email = token.email
                 session.user.name = token.name
                 session.accessToken = token.accessToken
@@ -43,7 +36,10 @@ export const authOptions = {
         //  @ts-ignore
         async jwt({token, profile, account}) {
             if (account && profile) {
-                // token.id = "NO_ID"
+                const res = await fetchMe(account.id_token)
+                const data = await res.json()
+
+                token.role = data.data.role
                 token.name = profile.name
                 token.email = profile.email
                 token.accessToken = account.id_token
@@ -51,6 +47,22 @@ export const authOptions = {
             return token
         }
     },
+    pages: {
+        signIn: '/',
+        // error: '/auth/error',
+    }
+}
+
+const fetchMe = async (token: string) => {
+    const baseRequest: RequestInit = {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': "Bearer " + token
+        },
+    }
+
+    return await fetch(process.env.NEXT_PUBLIC_API_URL + "/authorization", baseRequest)
 }
 
 // @ts-ignore

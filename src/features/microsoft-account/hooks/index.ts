@@ -1,14 +1,15 @@
 import {MicrosoftAccount, microsoftAccountFactory} from "../../../models/MicrosoftAccountModel";
 import {useState} from "react";
-import {useAsync} from "react-use";
-import {useSession} from "next-auth/react";
+import {useAsyncRetry} from "react-use";
 
 export const useFetchMicrosoftAccounts = () => {
     const [microsoftAccounts, setMicrosoftAccounts] = useState<MicrosoftAccount[]>([])
     const [isFetching, setIsFetching] = useState(true)
 
-    useAsync(async () => {
+    const state = useAsyncRetry(async () => {
         try {
+            setIsFetching(true);
+
             const data = await microsoftAccountFactory().index();
             setMicrosoftAccounts(data);
         } catch (e) {
@@ -21,6 +22,7 @@ export const useFetchMicrosoftAccounts = () => {
     return {
         microsoftAccounts: microsoftAccounts,
         isFetching: isFetching,
+        refresh: state.retry,
     }
 }
 
@@ -28,8 +30,10 @@ export const useFetchMicrosoftAccount = (microsoftAccountId: number  | "me") => 
     const [microsoftAccount, setMicrosoftAccount] = useState<MicrosoftAccount>()
     const [isFetching, setIsFetching] = useState(true)
 
-    useAsync(async () => {
+    const state = useAsyncRetry(async () => {
         try {
+            setIsFetching(true);
+
             const data = await microsoftAccountFactory().show(microsoftAccountId);
             setMicrosoftAccount(data);
         } catch (e) {
@@ -42,5 +46,6 @@ export const useFetchMicrosoftAccount = (microsoftAccountId: number  | "me") => 
     return {
         microsoftAccount: microsoftAccount,
         isFetching: isFetching,
+        refresh: state.retry,
     }
 }
