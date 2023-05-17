@@ -73,6 +73,20 @@
   .content {
     position: relative;
   }
+
+  .sportProfile {
+    display: flex;
+    flex-direction: row;
+
+    .sportIcon {
+      width: fit-content;
+    }
+
+    .sportInfo {
+      margin-left: 60px;
+      width: 100%;
+    }
+  }
 }
 
 .confirmInputDialog {

@@ -21,12 +21,6 @@ export function Sports() {
                     refresh: refreshSports
                 }}
             >
-                {/*<GamesContext.Provider*/}
-                {/*    value={{*/}
-                {/*        data: games,*/}
-                {/*        refresh: refreshGames*/}
-                {/*    }}*/}
-                {/*>*/}
                     <div className={styles.content}>
                         <h1>競技</h1>
 
@@ -66,7 +60,6 @@ export function Sports() {
                             </>
                         }
                     </div>
-                {/*</GamesContext.Provider>*/}
             </SportsContext.Provider>
         </>
     )

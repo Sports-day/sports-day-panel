@@ -1,38 +1,26 @@
-import {FormType} from "../../../types";
-import {Sport, sportFactory} from "../../../src/models/SportModel";
+import {FormType} from "../../../../types";
+import {Game, gameFactory} from "../../../../src/models/GameModel";
 import React, {FormEvent, useRef, useState} from "react";
-import {
-    Button, Dialog,
-    DialogActions,
-    DialogContent,
-    DialogTitle,
-    SelectChangeEvent,
-    TextFieldProps
-} from "@mui/material";
-import {useFetchImages} from "../../../src/features/images/hook";
-import {SportEditFields} from "./SportEditFields";
+import {Button, Dialog, DialogActions, DialogContent, DialogTitle, TextFieldProps} from "@mui/material";
+import {GameEditFields} from "./GameEditFields";
 
-export type SportFormProps = {
+export type GameFormProps = {
     isOpen: boolean
     setClose: VoidFunction
     formType: FormType
     refresh: VoidFunction
-    sport?: Sport
+    sportId: number
+    game?: Game
 }
 
-export function SportForm(props: SportFormProps) {
+export function GameForm(props: GameFormProps) {
     //  ref
     const nameRef = useRef<TextFieldProps>(null)
     const descriptionRef = useRef<TextFieldProps>(null)
     const wightRef = useRef<TextFieldProps>(null)
     //  state
-    const [iconIdState, setIconIdState] = useState<string>(props.sport?.iconId?.toString() ?? '')
-    //  images
-    const {images} = useFetchImages()
-
-    const handleImageIdChange = (e: SelectChangeEvent) => {
-        setIconIdState(e.target.value.toString())
-    }
+    const [typeState, setTypeState] = useState<string>(props.game?.type ?? '')
+    const [calculationTypeState, setCalculationTypeState] = useState<string>(props.game?.calculationType ?? '')
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
@@ -42,31 +30,45 @@ export function SportForm(props: SportFormProps) {
             return
         }
 
+        //  type invalid
+        if (typeState !== "tournament" && typeState !== "league") {
+            return
+        }
+
+        //  calculationType invalid
+        if (calculationTypeState !== "total_score" && calculationTypeState !== "diff_score") {
+            return
+        }
+
         if (props.formType === "create") {
-            await sportFactory().create({
+            await gameFactory().create({
                 name: nameRef.current?.value as string,
                 description: descriptionRef.current?.value as string,
-                iconId: iconIdState === '' ? null : +iconIdState,
+                sportId: props.sportId,
+                type: typeState,
+                calculationType: calculationTypeState,
                 weight: wightRef.current?.value as number
             })
         } else {
-            const id = props.sport?.id
+            const id = props.game?.id
             if(!id) return
 
-            await sportFactory().update(
+            await gameFactory().update(
                 id,
                 {
-                    name: nameRef.current?.value as string,
-                    description: descriptionRef.current?.value as string,
-                    iconId: iconIdState === '' ? null : +iconIdState,
-                    weight: wightRef.current?.value as number
-                }
-            )
+                name: nameRef.current?.value as string,
+                description: descriptionRef.current?.value as string,
+                sportId: props.sportId,
+                type: typeState,
+                calculationType: calculationTypeState,
+                weight: wightRef.current?.value as number
+            })
         }
 
         props.refresh()
         props.setClose()
     }
+
 
     return (
         <>
@@ -83,14 +85,15 @@ export function SportForm(props: SportFormProps) {
                         {props.formType === "create" ? "競技作成" : "競技編集"}
                     </DialogTitle>
                     <DialogContent>
-                        <SportEditFields
+                        <GameEditFields
                             nameRef={nameRef}
                             descriptionRef={descriptionRef}
                             wightRef={wightRef}
-                            iconIdState={iconIdState}
-                            handleImageIdChange={handleImageIdChange}
-                            images={images}
-                            sport={props.sport}
+                            typeState={typeState}
+                            setTypeState={setTypeState}
+                            calculationTypeState={calculationTypeState}
+                            setCalculationTypeState={setCalculationTypeState}
+                            game={props.game}
                         />
                     </DialogContent>
                     <DialogActions>
@@ -115,4 +118,5 @@ export function SportForm(props: SportFormProps) {
             </Dialog>
         </>
     )
+
 }

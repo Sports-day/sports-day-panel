@@ -1,6 +1,4 @@
-import {FormType} from "../../../types";
-import {Group, groupFactory} from "../../../src/models/GroupModel";
-import React, {useContext, useRef, useState} from "react";
+import React, {useRef, useState} from "react";
 import {
     Button,
     Dialog,

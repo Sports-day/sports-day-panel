@@ -1,6 +1,7 @@
 import {GetServerSidePropsContext, NextPage} from "next";
 import {useSession} from "next-auth/react";
 import {PitDashboard} from "../../../../components/pit/PitDashboard";
+import {SportPanel} from "../../../../components/pit/sports/sport/SportPanel";
 
 type Props = {
     sportId: number
@@ -16,7 +17,7 @@ const AdminSportId: NextPage<Props> = (props: {sportId: number}) => {
         return (
             <>
                 <PitDashboard>
-                    {props.sportId}
+                    <SportPanel id={props.sportId} />
                 </PitDashboard>
             </>
         )

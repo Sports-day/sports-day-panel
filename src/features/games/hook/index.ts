@@ -3,7 +3,7 @@ import {Game, gameFactory, LeagueResult, TournamentResult} from "../../../models
 import {useAsync, useAsyncRetry} from "react-use";
 import {Match} from "../../../models/MatchModel";
 import {useFetchMyTeams} from "../../teams/hook";
-import {teamFactory} from "../../../models/TeamModel";
+import {Team, teamFactory} from "../../../models/TeamModel";
 
 export const useFetchGames = () => {
     const [games, setGames] = useState<Game[]>([])
@@ -49,6 +49,7 @@ export const useFetchGame = (gameId: number) => {
     return {
         game: game,
         isFetching: isFetching,
+        refresh: state.retry,
     }
 }
 
@@ -213,5 +214,31 @@ export const useFetchMyTeamGames = () => {
     return {
         games: games,
         isFetching: isFetching,
+    }
+}
+
+
+export const useFetchGameEntries = (gameId: number) => {
+    const [teams , setTeams] = useState<Team[]>([])
+    const [isFetching, setIsFetching] = useState(true)
+
+    const state = useAsyncRetry(async () => {
+        try {
+            setIsFetching(true);
+
+            const data = await gameFactory().getGameEntries(gameId);
+            setTeams(data);
+        } catch (e) {
+            console.log(e);
+        } finally {
+            setIsFetching(false);
+        }
+    })
+
+
+    return {
+        teams: teams,
+        isFetching: isFetching,
+        refresh: state.retry,
     }
 }
