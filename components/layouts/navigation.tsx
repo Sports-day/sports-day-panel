@@ -78,7 +78,7 @@ export const Navigation = () => {
                         direction={"row"}
                         justifyContent={"flex-start"}
                         alignItems={"center"}
-                        spacing={3}
+                        spacing={2}
                         px={3}
                         width={"100%"}
                     >
@@ -122,7 +122,7 @@ export const Navigation = () => {
                             direction={"row"}
                             justifyContent={"flex-start"}
                             alignItems={"center"}
-                            spacing={3}
+                            spacing={2}
                             px={3}
                             width={"100%"}
                         >
@@ -148,7 +148,7 @@ export const Navigation = () => {
                             direction={"row"}
                             justifyContent={"flex-start"}
                             alignItems={"center"}
-                            spacing={3}
+                            spacing={2}
                             px={3}
                             width={"100%"}
                         >
@@ -174,7 +174,7 @@ export const Navigation = () => {
                             direction={"row"}
                             justifyContent={"flex-start"}
                             alignItems={"center"}
-                            spacing={3}
+                            spacing={2}
                             px={3}
                             width={"100%"}
                         >

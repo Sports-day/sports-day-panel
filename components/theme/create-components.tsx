@@ -62,9 +62,9 @@ export function createComponents(config: any) {
         MuiCardContent: {
             styleOverrides: {
                 root: {
-                    padding: '20px 20px',
+                    padding: '15px 20px',
                     '&:last-child': {
-                        paddingBottom: '20px'
+                        paddingBottom: '15px'
                     }
                 }
             }

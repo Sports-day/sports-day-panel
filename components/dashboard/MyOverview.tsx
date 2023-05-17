@@ -67,9 +67,9 @@ export const MyOverview = (props:any) => {
                                         </Typography>
                                     </Stack>
                                 </Stack>
-                                    <SvgIcon>
-                                        <HiArrowRightCircle color="#FFF"/>
-                                    </SvgIcon>
+                                <SvgIcon>
+                                    <HiArrowRightCircle color="#FFF"/>
+                                </SvgIcon>
                             </Stack>
                         </Button>
                     </Stack>

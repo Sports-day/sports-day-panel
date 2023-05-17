@@ -32,7 +32,7 @@ export const MySchedule = (props:any) => {
         <Card sx={{height: "fit-content"}}>
             <CardContent>
                 <Stack
-                    spacing={2}
+                    spacing={0}
                 >
                     <Button sx={{width:"100%"}}>
                         <Stack
