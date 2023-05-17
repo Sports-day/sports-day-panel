@@ -20,7 +20,6 @@ export type TeamProfileProps = {
 }
 
 export const TeamProfile = (props: TeamProfileProps) => {
-    const team = props.team
     //  ref
     const nameRef = useRef<TextFieldProps>(null)
     const descriptionRef = useRef<TextFieldProps>(null)
