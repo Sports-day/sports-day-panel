@@ -1,13 +1,13 @@
 import styles from "../../../../styles/Pit.module.scss";
-import {Game} from "../../../../src/models/GameModel";
 import {Box, Button, CircularProgress} from "@mui/material";
-import {useState} from "react";
-import {useFetchGameEntries} from "../../../../src/features/games/hook";
+import {useContext, useState} from "react";
 import {GameEntryList} from "./GameEntryList";
 import {GameEntryForm} from "./GameEntryForm";
+import {EntriesContext, GameContext} from "../../context";
 
-export function GameEntries(props: { game: Game, refresh: VoidFunction }) {
-    const {teams, isFetching, refresh: refreshTeams} = useFetchGameEntries(props.game.id)
+export function GameEntries(props: {isFetching: boolean}) {
+    const {data: game, refresh} = useContext(GameContext)
+    const {data: teams, refresh: refreshTeams} = useContext(EntriesContext)
     //  state
     const [isAppendEntry, setIsAppendEntry] = useState<boolean>(false)
 
@@ -28,7 +28,7 @@ export function GameEntries(props: { game: Game, refresh: VoidFunction }) {
                     追加
                 </Button>
 
-                {isFetching ?
+                {props.isFetching ?
                     <Box
                         sx={{
                             display: "flex",
@@ -42,7 +42,7 @@ export function GameEntries(props: { game: Game, refresh: VoidFunction }) {
                     :
                     <>
                         <GameEntryList
-                            gameId={props.game.id}
+                            gameId={game.id}
                             entries={teams}
                             refresh={refreshTeams}
                         />
@@ -54,7 +54,7 @@ export function GameEntries(props: { game: Game, refresh: VoidFunction }) {
                             entryIds={
                                 teams.map(team => team.id)
                             }
-                            gameId={props.game.id}
+                            gameId={game.id}
                         />
                     </>
                 }

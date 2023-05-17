@@ -1,17 +1,19 @@
-import {Game, gameFactory} from "../../../../src/models/GameModel";
-import React, {FormEvent, useRef, useState} from "react";
+import {gameFactory} from "../../../../src/models/GameModel";
+import React, {FormEvent, useContext, useRef, useState} from "react";
 import {Box, Button, TextFieldProps} from "@mui/material";
 import {GameEditFields} from "./GameEditFields";
 import styles from "../../../../styles/Pit.module.scss";
+import {GameContext} from "../../context";
 
-export function GameProfile(props: { game: Game, refresh: VoidFunction }) {
+export function GameProfile() {
+    const {data: game, refresh} = useContext(GameContext)
     //  ref
     const nameRef = useRef<TextFieldProps>(null)
     const descriptionRef = useRef<TextFieldProps>(null)
     const wightRef = useRef<TextFieldProps>(null)
     //  state
-    const [typeState, setTypeState] = useState<string>(props.game?.type ?? '')
-    const [calculationTypeState, setCalculationTypeState] = useState<string>(props.game?.calculationType ?? '')
+    const [typeState, setTypeState] = useState<string>(game?.type ?? '')
+    const [calculationTypeState, setCalculationTypeState] = useState<string>(game?.calculationType ?? '')
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
@@ -32,17 +34,17 @@ export function GameProfile(props: { game: Game, refresh: VoidFunction }) {
         }
 
         await gameFactory().update(
-            props.game.id,
+            game.id,
             {
                 name: nameRef.current?.value as string,
                 description: descriptionRef.current?.value as string,
-                sportId: props.game.sportId,
+                sportId: game.sportId,
                 type: typeState,
                 calculationType: calculationTypeState,
                 weight: wightRef.current?.value as number
             })
 
-        props.refresh()
+        refresh()
     }
 
     return (
@@ -67,7 +69,7 @@ export function GameProfile(props: { game: Game, refresh: VoidFunction }) {
                             setTypeState={setTypeState}
                             calculationTypeState={calculationTypeState}
                             setCalculationTypeState={setCalculationTypeState}
-                            game={props.game}
+                            game={game}
                         />
                         <Button
                             type={"submit"}

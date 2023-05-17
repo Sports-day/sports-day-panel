@@ -1,6 +1,9 @@
-import {Game} from "../../../../../src/models/GameModel";
+import {useContext} from "react";
+import {EntriesContext, GameContext} from "../../../context";
 
-export function TournamentController(props: { game: Game, refresh: VoidFunction }) {
+export function TournamentController() {
+    const {data: game, refresh} = useContext(GameContext)
+    const {data: teams, refresh: refreshTeams} = useContext(EntriesContext)
 
     return (
         <>

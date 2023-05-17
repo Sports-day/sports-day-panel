@@ -57,8 +57,20 @@ export const GamesContext = createContext<GamesContextType>({
     refresh: () => {}
 })
 
+export type GameContextType = GenericContextType<Game>
+export const GameContext = createContext<GameContextType>({
+    data: {} as Game,
+    refresh: () => {}
+})
+
 export type MatchesContextType = GenericContextType<Match[]>
 export const MatchesContext = createContext<MatchesContextType>({
+    data: [],
+    refresh: () => {}
+})
+
+export type EntriesContextType = GenericContextType<Team[]>
+export const EntriesContext = createContext<EntriesContextType>({
     data: [],
     refresh: () => {}
 })
