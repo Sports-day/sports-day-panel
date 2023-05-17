@@ -233,25 +233,19 @@ const Id: NextPage<Props> = (props: Props) => {
                             justifyContent={"flex-start"}
                             alignItems={"flex-start"}
                             spacing={3}
-                            sx={{
-                                width: "100vw",
-                            }}
+                            width={"90vw"}
                         >
-                            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                                <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                                    <Tab label="Item One" {...tabProps(0)} />
-                                    <Tab label="Item Two" {...tabProps(1)} />
-                                    <Tab label="Item Three" {...tabProps(2)} />
-                                </Tabs>
-                            </Box>
-                            <TabPanel value={value} index={0}>
-                                1
-                            </TabPanel>
-                            <TabPanel value={value} index={1}>
-                            </TabPanel>
-                            <TabPanel value={value} index={2}>
-                                Item Three
-                            </TabPanel>
+                            <GamePointBar
+                                chartSeries={[
+                                    {
+                                        data: [18, 16, 5, 8, 3, 14, 14]
+                                    },
+                                    {
+                                        data: [18, 16, 5, 8, 3, 14, 14]
+                                    },
+                                ]}
+                                sx={{ height: '100%', width: "100%"}}
+                            />
                         </Stack>
                     </Stack>
                 </Container>
