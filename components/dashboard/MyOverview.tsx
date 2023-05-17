@@ -1,10 +1,31 @@
-import {Avatar, Button, Container, Divider, Stack, SvgIcon, Typography, Unstable_Grid2 as Grid} from "@mui/material";
-import {HiArrowRightCircle} from "react-icons/hi2";
+import {
+    Avatar,
+    Button,
+    Box,
+    Container,
+    Divider,
+    List,
+    ListItem,
+    ListItemText,
+    Stack,
+    styled,
+    SvgIcon,
+    Typography,
+    SwipeableDrawer,
+    Unstable_Grid2 as Grid, IconButton
+} from "@mui/material";
+import {HiArrowRightCircle, HiOutlineArrowRight, HiOutlineTableCells, HiXMark} from "react-icons/hi2";
 import * as React from "react";
 
 
 export const MyOverview = (props:any) => {
    const {overviewSport, overviewTeam, overviewRank} = props;
+   const member = ["田中 太郎","中田 太郎","田村 太郎","村田 太郎","瀬川 太郎","川瀬 太郎"];
+
+    const [open, setOpen] = React.useState(false);
+    const toggleDrawer = (newOpen: boolean) => () => {
+        setOpen(newOpen);
+    };
 
     return(
         <Container
@@ -57,7 +78,7 @@ export const MyOverview = (props:any) => {
                 </Grid>
                 <Grid xs={12} sm={12} lg={12}><Divider/></Grid>
                 <Grid xs={6} sm={6} lg={6}>
-                    <Button sx={{width:"100%"}}>
+                    <Button onClick={toggleDrawer(true)} sx={{width:"100%"}}>
                         <Stack
                             direction={"row"}
                             justifyContent={"space-between"}
@@ -81,6 +102,53 @@ export const MyOverview = (props:any) => {
                             </SvgIcon>
                         </Stack>
                     </Button>
+                    <SwipeableDrawer
+                        anchor="bottom"
+                        open={open}
+                        onClose={toggleDrawer(false)}
+                        onOpen={toggleDrawer(true)}
+                        swipeAreaWidth={50}
+                        disableSwipeToOpen={false}
+                        ModalProps={{
+                            keepMounted: true,
+                        }}
+                    >
+                        <Container
+                            maxWidth={"xl"}
+                            sx={{
+                                py: 3,
+                                px: 3,
+                                overflow: "auto"
+                            }}
+                        >
+                            <Stack
+                                direction={"row"}
+                                justifyContent={"space-between"}
+                                alignItems={"center"}
+                                sx={{width:"100%"}}
+                            >
+                                <Typography
+                                    color={"textSecondary"}
+                                >
+                                    チームメンバー
+                                </Typography>
+                                <IconButton onClick={toggleDrawer(false)}>
+                                    <SvgIcon>
+                                        <HiXMark color={"99A5D6"}/>
+                                    </SvgIcon>
+                                </IconButton>
+                            </Stack>
+                            <List >
+                                {member.map((name,index) => {
+                                    return (
+                                        <ListItem key={name} disablePadding>
+                                            <ListItemText primary={member[index]} sx={{py:1}}/>
+                                        </ListItem>
+                                    );
+                                })}
+                            </List>
+                        </Container>
+                    </SwipeableDrawer>
                 </Grid>
                 <Grid xs={6} sm={6} lg={6}>
                     <Button sx={{width:"100%"}}>
