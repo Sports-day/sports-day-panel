@@ -56,7 +56,7 @@ function tabProps(index: number) {
 const Sport: NextPage = () => {
     const sport = "競技名";
     const best = ["チーム1","チーム2","チーム3"];
-    const {progress} = useFetchSportProgress();
+    const progress = 12
     const {teams} = useFetchMyTeams();
 
     const [value, setValue] = React.useState(0);
