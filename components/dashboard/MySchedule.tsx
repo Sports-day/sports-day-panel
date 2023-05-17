@@ -19,9 +19,11 @@ import {
 
 } from "react-icons/hi2";
 import * as React from "react";
+import {useFetchMySportMatches} from "../../src/features/matches/hook";
 
 
 export const MySchedule = (props:any) => {
+    const {matches} = useFetchMySportMatches();
     const {
         scTeam1, scTeam2, scTeam3,
         scTime1, scTime2, scTime3,

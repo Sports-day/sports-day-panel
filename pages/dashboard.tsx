@@ -13,6 +13,9 @@ import MySchedule from "../components/dashboard/MySchedule";
 import {SportsListElement} from "../components/dashboard/SportsListElement";
 import {useFetchMyTeams} from "../src/features/teams/hook";
 import {useFetchMySport, useFetchSports} from "../src/features/sports/hook";
+import {Navigation} from "../components/layouts/navigation";
+import {ThemeProvider} from "@mui/material/styles";
+import {createTheme} from "../components/theme";
 
 
 
@@ -20,6 +23,7 @@ const DashBoard: NextPage = () => {
     const {teams} = useFetchMyTeams();
     const {sport} = useFetchMySport();
     const {sports} = useFetchSports();
+    const theme = createTheme();
     //my overview
     const myRank = "順位";
 
@@ -34,10 +38,11 @@ const DashBoard: NextPage = () => {
     const [listLink1, listLink2, listLink3] = ["/sport", "/sport", "/sport"];
 
     return(
-        <>
+        <ThemeProvider theme={theme}>
             <Head>
                 <title>SPORTSDAY : Dashboard</title>
             </Head>
+            <Navigation/>
             <Box
                 component={"main"}
                 sx={{
@@ -100,7 +105,7 @@ const DashBoard: NextPage = () => {
                     </Stack>
                 </Container>
             </Box>
-        </>
+        </ThemeProvider>
     )
 }
 

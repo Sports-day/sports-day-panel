@@ -19,6 +19,8 @@ import {GamePointBar} from "../components/game/game-pointbar"
 import * as React from "react";
 import {useFetchSportGames, useFetchSportProgress} from "../src/features/sports/hook";
 import {useFetchMyTeams} from "../src/features/teams/hook";
+import {createTheme} from "../components/theme";
+import {ThemeProvider} from "@mui/material/styles";
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -54,6 +56,7 @@ function tabProps(index: number) {
 }
 
 const Sport: NextPage = () => {
+    const theme = createTheme();
     const sport = "競技名";
     const best = ["チーム1","チーム2","チーム3"];
     const progress = 12
@@ -64,6 +67,7 @@ const Sport: NextPage = () => {
 
     return(
         <>
+            <ThemeProvider theme={theme}>
             <Head>
                 <title>SPORTSDAY : {sport}</title>
             </Head>
@@ -225,17 +229,7 @@ const Sport: NextPage = () => {
                                 </Tabs>
                             </Box>
                             <TabPanel value={value} index={0}>
-                                <GamePointBar
-                                    chartSeries={[
-                                        {
-                                            data: [18, 16, 5, 8, 3, 14, 14]
-                                        },
-                                        {
-                                            data: [11, 12, 15, 18, 13, 4, 2]
-                                        },
-                                    ]}
-                                    sx={{ height: '100%', width: "100%"}}
-                                />
+                                1
                             </TabPanel>
                             <TabPanel value={value} index={1}>
                             </TabPanel>
@@ -246,6 +240,7 @@ const Sport: NextPage = () => {
                     </Stack>
                 </Container>
             </Box>
+            </ThemeProvider>
         </>
     )
 }
