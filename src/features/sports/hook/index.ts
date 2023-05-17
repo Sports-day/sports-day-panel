@@ -32,7 +32,7 @@ export const useFetchSports = () => {
 }
 
 /**
- * Fetches a sport
+ * Fetches a sports
  * @param sportId
  */
 export const useFetchSport = (sportId: number) => {
@@ -60,7 +60,7 @@ export const useFetchSport = (sportId: number) => {
 }
 
 /**
- * Fetches the games of a sport
+ * Fetches the games of a sports
  * @param sportId
  */
 export const useFetchSportGames = (sportId: number) => {
@@ -93,7 +93,7 @@ export const useFetchSportGames = (sportId: number) => {
 }
 
 /**
- * Fetches the progress of a sport
+ * Fetches the progress of a sports
  * @param sportId
  */
 export const useFetchSportProgress = (sportId: number) => {
@@ -161,7 +161,7 @@ export const useFetchMySports = () => {
 }
 
 /**
- * Fetches the sport with the highest weight
+ * Fetches the sports with the highest weight
  */
 export const useFetchMySport = () => {
     const [sport, setSport] = useState<Sport>()

@@ -11,16 +11,17 @@ import {
     Typography,
     Unstable_Grid2 as Grid,
 } from "@mui/material";
-import {GameProgress} from "../components/game/game-progress";
-import {GameBest} from "../components/game/game-best";
-import {Navigation} from "../components/layouts/navigation";
+import {GameProgress} from "../../components/game/game-progress";
+import {GameBest} from "../../components/game/game-best";
+import {Navigation} from "../../components/layouts/navigation";
 import {HiArrowLeftCircle, HiEllipsisHorizontalCircle} from "react-icons/hi2";
-import {GamePointBar} from "../components/game/game-pointbar"
+import {GamePointBar} from "../../components/game/game-pointbar"
 import * as React from "react";
-import {useFetchSportGames, useFetchSportProgress} from "../src/features/sports/hook";
-import {useFetchMyTeams} from "../src/features/teams/hook";
-import {createTheme} from "../components/theme";
+import {useFetchSport, useFetchSportGames, useFetchSportProgress} from "../../src/features/sports/hook";
+import {useFetchMyTeams} from "../../src/features/teams/hook";
+import {createTheme} from "../../components/theme";
 import {ThemeProvider} from "@mui/material/styles";
+import {useRouter} from "next/router";
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -59,12 +60,23 @@ type Props = {
     sportId: number
 }
 
-const Sport: NextPage<Props> = (props: Props) => {
+const Id: NextPage<Props> = (props: Props) => {
+    //  router
+    const router = useRouter()
     const theme = createTheme();
-    const sport = "競技名";
-    const best = ["チーム1","チーム2","チーム3"];
-    const progress = 12
+    const {sport, isFetching} = useFetchSport(props.sportId)
+    const {progress} = useFetchSportProgress(props.sportId)
     const {teams} = useFetchMyTeams();
+
+    if (!isFetching && !sport) {
+        //  404
+        router.push("/404").then()
+        return null
+    }
+
+
+    const sportName = sport?.name;
+    const best = ["チーム1","チーム2","チーム3"];
 
     const [value, setValue] = React.useState(0);
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {setValue(newValue);};
@@ -73,7 +85,7 @@ const Sport: NextPage<Props> = (props: Props) => {
         <>
             <ThemeProvider theme={theme}>
             <Head>
-                <title>SPORTSDAY : {sport}</title>
+                <title>SPORTSDAY : {sportName}</title>
             </Head>
             <Navigation/>
             <Box
@@ -114,14 +126,14 @@ const Sport: NextPage<Props> = (props: Props) => {
                             }}
                         >
                             <Avatar
-                                alt={sport}
+                                alt={sportName}
                                 sx={{height: "3.5em", width: "3.5em"}}
                                 src={"/public/images/basketball.jpg"}
                             >
 
                             </Avatar>
                             <Typography sx={{color: "#FFF", fontSize: "30px", fontWeight: "bold"}}>
-                                {sport}
+                                {sportName}
                             </Typography>
                         </Stack>
                     </Stack>
@@ -264,8 +276,8 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
     }
 
     return {
-        props: {id: id}
+        props: {sportId: id}
     }
 }
 
-export default Sport
+export default Id

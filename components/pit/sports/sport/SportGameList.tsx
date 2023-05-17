@@ -16,7 +16,7 @@ export function SportGameList(props: { games: Game[] }) {
                     sx={{
                         minWidth: 650,
                     }}
-                    aria-label={"sport games table"}
+                    aria-label={"sports games table"}
                 >
                     <TableHead>
                         <TableRow>

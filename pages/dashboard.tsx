@@ -35,7 +35,7 @@ const DashBoard: NextPage = () => {
     //sports list
     const [listSport1, listSport2, listSport3] = ["競技1", "競技2", "競技3"];
     const [listIcon1, listIcon2, listIcon3] = ["1", "2", "3"];
-    const [listLink1, listLink2, listLink3] = ["/sport", "/sport", "/sport"];
+    const [listLink1, listLink2, listLink3] = ["/sports", "/sports", "/sports"];
 
     return(
         <ThemeProvider theme={theme}>
@@ -96,7 +96,7 @@ const DashBoard: NextPage = () => {
                                         <SportsListElement
                                             comp={sport.name}
                                             icon={listIcon1}
-                                            link={listLink1}
+                                            link={`/sports/${sport.id}`}
                                         />
                                     </Grid>
                                 );
