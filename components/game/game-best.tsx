@@ -2,7 +2,12 @@ import {Card, CardContent, Divider, Stack, Typography}from "@mui/material";
 export const GameBest = (props:any) => {
     const {value1, value2, value3} = props;
     return(
-        <Card sx={{height: "260px"}}>
+        <Card sx={{
+            height: "260px",
+            "@media (min-width: 360px) and (max-width: 400px)": {
+                height: "230px"
+            }
+        }}>
             <CardContent>
                 <Stack
                     spacing={2}

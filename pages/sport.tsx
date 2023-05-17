@@ -5,7 +5,9 @@ import {
     Box,
     Button,
     Container,
-    Stack, SvgIcon,
+    Stack,
+    SvgIcon,
+    Tab, Tabs,
     Typography,
     Unstable_Grid2 as Grid,
 } from "@mui/material";
@@ -15,16 +17,55 @@ import {Navigation} from "../components/layouts/navigation";
 import {HiArrowLeftCircle, HiEllipsisHorizontalCircle} from "react-icons/hi2";
 import {GamePointBar} from "../components/game/game-pointbar"
 import * as React from "react";
+import {useFetchSportGames, useFetchSportProgress} from "../src/features/sports/hook";
+import {useFetchMyTeams} from "../src/features/teams/hook";
 
-const Home: NextPage = () => {
+interface TabPanelProps {
+    children?: React.ReactNode;
+    index: number;
+    value: number;
+}
+
+function TabPanel(props: TabPanelProps) {
+    const { children, value, index, ...other } = props;
+
+    return (
+        <div
+            role="tabpanel"
+            hidden={value !== index}
+            id={`simple-tabpanel-${index}`}
+            aria-labelledby={`simple-tab-${index}`}
+            {...other}
+        >
+            {value === index && (
+                <Box sx={{ p: 3 }}>
+                    <Typography>{children}</Typography>
+                </Box>
+            )}
+        </div>
+    );
+}
+
+function tabProps(index: number) {
+    return {
+        id: `simple-tab-${index}`,
+        'aria-controls': `simple-tabpanel-${index}`,
+    };
+}
+
+const Sport: NextPage = () => {
     const sport = "競技名";
     const best = ["チーム1","チーム2","チーム3"];
-    const progress = 1;
+    const {progress} = useFetchSportProgress();
+    const {teams} = useFetchMyTeams();
+
+    const [value, setValue] = React.useState(0);
+    const handleChange = (event: React.SyntheticEvent, newValue: number) => {setValue(newValue);};
 
     return(
         <>
             <Head>
-                <title>SPORTSDAY : Home</title>
+                <title>SPORTSDAY : {sport}</title>
             </Head>
             <Navigation/>
             <Box
@@ -176,17 +217,31 @@ const Home: NextPage = () => {
                                 width: "100vw",
                             }}
                         >
-                            <GamePointBar
-                                chartSeries={[
-                                    {
-                                        data: [18, 16, 5, 8, 3, 14, 14]
-                                    },
-                                    {
-                                        data: [18, 16, 5, 8, 3, 14, 14]
-                                    },
-                                ]}
-                                sx={{ height: '100%', width: "100%"}}
-                            />
+                            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                                <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                                    <Tab label="Item One" {...tabProps(0)} />
+                                    <Tab label="Item Two" {...tabProps(1)} />
+                                    <Tab label="Item Three" {...tabProps(2)} />
+                                </Tabs>
+                            </Box>
+                            <TabPanel value={value} index={0}>
+                                <GamePointBar
+                                    chartSeries={[
+                                        {
+                                            data: [18, 16, 5, 8, 3, 14, 14]
+                                        },
+                                        {
+                                            data: [11, 12, 15, 18, 13, 4, 2]
+                                        },
+                                    ]}
+                                    sx={{ height: '100%', width: "100%"}}
+                                />
+                            </TabPanel>
+                            <TabPanel value={value} index={1}>
+                            </TabPanel>
+                            <TabPanel value={value} index={2}>
+                                Item Three
+                            </TabPanel>
                         </Stack>
                     </Stack>
                 </Container>
@@ -195,4 +250,4 @@ const Home: NextPage = () => {
     )
 }
 
-export default Home
+export default Sport

@@ -57,13 +57,16 @@ export const GameProgress = (props: any) => {
     return (
         <Card
             sx={{
-                height: '260px'
+                height: '260px',
+                "@media (min-width: 360px) and (max-width: 400px)": {
+                    height: "230px"
+                }
             }}
         >
             <CardContent>
                 <Typography
                     color={"textSecondary"}
-                    sx={{pb: "30px"}}
+                    sx={{pb: "25px"}}
                 >
                     競技の進行状況
                 </Typography>

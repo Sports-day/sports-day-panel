@@ -2,20 +2,25 @@ import {NextPage} from "next";
 import Head from "next/head";
 import {
     Box,
-    Container,
+    Container, List, ListItem, ListItemText,
     Stack,
+    Typography,
     Unstable_Grid2 as Grid,
 } from "@mui/material";
 import * as React from "react";
 import MyOverview from "../components/dashboard/MyOverview";
 import MySchedule from "../components/dashboard/MySchedule";
 import {SportsListElement} from "../components/dashboard/SportsListElement";
+import {useFetchMyTeams} from "../src/features/teams/hook";
+import {useFetchMySport, useFetchSports} from "../src/features/sports/hook";
+
+
 
 const DashBoard: NextPage = () => {
-
+    const {teams} = useFetchMyTeams();
+    const {sport} = useFetchMySport();
+    const {sports} = useFetchSports();
     //my overview
-    const mySport = "競技名";
-    const myTeam = "チーム";
     const myRank = "順位";
 
     //my schedule
@@ -55,8 +60,8 @@ const DashBoard: NextPage = () => {
                 }}
                 >
                     <MyOverview
-                        overviewSport={mySport}
-                        overviewTeam={myTeam}
+                        overviewSport={sport?.name}
+                        overviewTeam={teams[0]?.name}
                         overviewRank={myRank}
                     />
                 </Container>
@@ -80,29 +85,17 @@ const DashBoard: NextPage = () => {
                                     scLocation1={location1} scLocation2={location2} scLocation3={location3}
                                 />
                             </Grid>
-
-                            <Grid sm={12} md={12} lg={12}>
-                                <SportsListElement
-                                    comp={listSport1}
-                                    icon={listIcon1}
-                                    link={listLink1}
-                                />
-                            </Grid>
-                            <Grid sm={12} md={12} lg={12}>
-                                <SportsListElement
-                                    comp={listSport2}
-                                    icon={listIcon2}
-                                    link={listLink2}
-                                />
-                            </Grid>
-                            <Grid sm={12} md={12} lg={12}>
-                                <SportsListElement
-                                    comp={listSport3}
-                                    icon={listIcon3}
-                                    link={listLink3}
-                                />
-                            </Grid>
-
+                            {sports.map((sport) => {
+                                return (
+                                    <Grid sm={12} md={12} lg={12} key={sport.id}>
+                                        <SportsListElement
+                                            comp={sport.name}
+                                            icon={listIcon1}
+                                            link={listLink1}
+                                        />
+                                    </Grid>
+                                );
+                            })}
                         </Grid>
                     </Stack>
                 </Container>
