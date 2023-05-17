@@ -1,4 +1,4 @@
-import {NextPage} from "next";
+import {GetServerSidePropsContext, NextPage} from "next";
 import Head from "next/head";
 import {
     Avatar,
@@ -55,7 +55,11 @@ function tabProps(index: number) {
     };
 }
 
-const Sport: NextPage = () => {
+type Props = {
+    sportId: number
+}
+
+const Sport: NextPage<Props> = (props: Props) => {
     const theme = createTheme();
     const sport = "競技名";
     const best = ["チーム1","チーム2","チーム3"];
@@ -243,6 +247,25 @@ const Sport: NextPage = () => {
             </ThemeProvider>
         </>
     )
+}
+
+export const getServerSideProps = async (context: GetServerSidePropsContext) => {
+    if (!context.query.id) {
+        return {
+            notFound: true,
+        }
+    }
+    const id = +context.query.id
+
+    if (isNaN(id)) {
+        return {
+            notFound: true,
+        }
+    }
+
+    return {
+        props: {id: id}
+    }
 }
 
 export default Sport
