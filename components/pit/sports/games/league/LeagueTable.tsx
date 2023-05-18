@@ -52,7 +52,7 @@ export function LeagueTable() {
                 :
                 <>
                     <h3>
-                        状態: {result?.isFinished ? "終了" : "進行中"}
+                        状態: {(result as LeagueResult)?.finished ? "終了" : "進行中"}
                     </h3>
                     <TableContainer
                         sx={{
