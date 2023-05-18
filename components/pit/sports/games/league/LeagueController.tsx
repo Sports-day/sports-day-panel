@@ -1,6 +1,6 @@
 import styles from "../../../../../styles/Pit.module.scss";
 import {useContext, useState} from "react";
-import {EntriesContext, GameContext} from "../../../context";
+import {EntriesContext, GameContext} from "../../../../context";
 import {ConfirmDialog} from "../../../ConfirmDialog";
 import {gameFactory} from "../../../../../src/models/GameModel";
 import {Button} from "@mui/material";
@@ -28,6 +28,8 @@ export function LeagueController() {
     return (
         <>
             <div className={styles.content}>
+                <h2>リーグ表</h2>
+
                 <Button
                     variant="contained"
                     sx={{

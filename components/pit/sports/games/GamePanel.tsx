@@ -6,7 +6,7 @@ import {GameProfile} from "./GameProfile";
 import {GameEntries} from "./GameEntries";
 import {LeagueController} from "./league/LeagueController";
 import {TournamentController} from "./tournament/TournamentController";
-import {EntriesContext, GameContext} from "../../context";
+import {EntriesContext, GameContext} from "../../../context";
 
 export function GamePanel(props: { id: number }) {
     //  router
@@ -64,15 +64,11 @@ export function GamePanel(props: { id: number }) {
                                 {/* matches */}
                                 {game?.type === "league" ?
                                     <>
-                                        <h2>リーグ</h2>
-
                                         {/* controller */}
                                         <LeagueController />
                                     </>
                                     :
                                     <>
-                                        <h2>トーナメント</h2>
-
                                         {/* controller */}
                                         {/*@ts-ignore*/}
                                         <TournamentController />
