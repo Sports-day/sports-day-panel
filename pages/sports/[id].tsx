@@ -93,6 +93,7 @@ const Id: NextPage<Props> = (props: Props) => {
                 sx={{
                     flexGrow: 1,
                     py: 5,
+                    overflow:"hidden"
                 }}
             >
                 <Container
@@ -109,9 +110,7 @@ const Id: NextPage<Props> = (props: Props) => {
                         spacing={3}
                         sx={{
                             position: "relative",
-                            left: "-8px",
-                            top: "-8px",
-                            width: "100vw",
+                            width: "101vw",
                             height:"fit-content",
                             backgroundColor: "#23398a",
                         }}
@@ -141,14 +140,14 @@ const Id: NextPage<Props> = (props: Props) => {
                 <Container
                     maxWidth={"xl"}
                     disableGutters
-                    sx={{px:0.5, pb:3}}
+                    sx={{px:1, pb:3}}
                 >
                     <Stack
                         direction={"row"}
                         justifyContent={"space-between"}
                         alignItems={"center"}
                     >
-                        <Button href={"/"}>
+                        <Button onClick={() => router.back()}>
                             <Stack
                                 direction={"row"}
                                 justifyContent={"space-between"}
@@ -186,7 +185,7 @@ const Id: NextPage<Props> = (props: Props) => {
                         justifyContent={"space-between"}
                         spacing={3}
                     >
-                        <Grid container spacing={2}>
+                        <Grid container spacing={1.5}>
 
                             <Grid xs={12} sm={6} lg={6}>
                                 <GameBest
@@ -221,9 +220,7 @@ const Id: NextPage<Props> = (props: Props) => {
                         spacing={3}
                         sx={{
                             position: "relative",
-                            left: "-8px",
-                            top: "-8px",
-                            width: "100vw",
+                            width: "101vw",
                             height:"fit-content",
                             backgroundColor: "#23398a",
                         }}

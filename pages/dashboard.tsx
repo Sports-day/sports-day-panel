@@ -47,7 +47,8 @@ const DashBoard: NextPage = () => {
                 component={"main"}
                 sx={{
                     flexGrow: 1,
-                    py: 5
+                    py: 5,
+                    overflow:"hidden"
                 }}
             >
                 <Container
@@ -57,9 +58,7 @@ const DashBoard: NextPage = () => {
                         paddingTop: "0px",
                         paddingBottom: "20px",
                         position: "relative",
-                        left: "-8px",
-                        top: "-8px",
-                        width: "100vw",
+                        width: "101vw",
                         height:"fit-content",
                         backgroundColor: "#23398a",
                 }}
@@ -74,14 +73,14 @@ const DashBoard: NextPage = () => {
                 <Container
                     maxWidth={"xl"}
                     disableGutters
-                    sx={{px:0.5, py:3}}
+                    sx={{px:1, py:3}}
                 >
                     <Stack
                         direction={"column"}
                         justifyContent={"space-between"}
                         spacing={3}
                     >
-                        <Grid container spacing={2}>
+                        <Grid container spacing={1.5}>
 
                             <Grid xs={12} sm={12} lg={12}>
                                 <MySchedule
