@@ -5,7 +5,7 @@ export const GameBest = (props:any) => {
         <Card sx={{
             height: "260px",
             "@media (min-width: 360px) and (max-width: 400px)": {
-                height: "230px"
+                height: "220px"
             }
         }}>
             <CardContent>

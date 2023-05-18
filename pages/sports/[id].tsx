@@ -7,9 +7,8 @@ import {
     Container,
     Stack,
     SvgIcon,
-    Tab, Tabs,
     Typography,
-    Unstable_Grid2 as Grid,
+    Unstable_Grid2 as Grid
 } from "@mui/material";
 import {GameProgress} from "../../components/game/game-progress";
 import {GameBest} from "../../components/game/game-best";
@@ -22,39 +21,6 @@ import {useFetchMyTeams} from "../../src/features/teams/hook";
 import {createTheme} from "../../components/theme";
 import {ThemeProvider} from "@mui/material/styles";
 import {useRouter} from "next/router";
-
-interface TabPanelProps {
-    children?: React.ReactNode;
-    index: number;
-    value: number;
-}
-
-function TabPanel(props: TabPanelProps) {
-    const { children, value, index, ...other } = props;
-
-    return (
-        <div
-            role="tabpanel"
-            hidden={value !== index}
-            id={`simple-tabpanel-${index}`}
-            aria-labelledby={`simple-tab-${index}`}
-            {...other}
-        >
-            {value === index && (
-                <Box sx={{ p: 3 }}>
-                    <Typography>{children}</Typography>
-                </Box>
-            )}
-        </div>
-    );
-}
-
-function tabProps(index: number) {
-    return {
-        id: `simple-tab-${index}`,
-        'aria-controls': `simple-tabpanel-${index}`,
-    };
-}
 
 type Props = {
     sportId: number
@@ -78,14 +44,11 @@ const Id: NextPage<Props> = (props: Props) => {
     const sportName = sport?.name;
     const best = ["チーム1","チーム2","チーム3"];
 
-    const [value, setValue] = React.useState(0);
-    const handleChange = (event: React.SyntheticEvent, newValue: number) => {setValue(newValue);};
-
     return(
         <>
             <ThemeProvider theme={theme}>
             <Head>
-                <title>SPORTSDAY : {sportName}</title>
+                <title>{`SPORTSDAY : ${sportName}`}</title>
             </Head>
             <Navigation/>
             <Box
@@ -153,10 +116,17 @@ const Id: NextPage<Props> = (props: Props) => {
                                 justifyContent={"space-between"}
                                 alignItems={"flex-start"}
                                 spacing={1}
-                                sx={{padding:1, py:3}}
+                                sx={{
+                                    padding:1,
+                                    py:3,
+                                    color:"#23398A",
+                                    "@media (prefers-color-scheme: dark)": {
+                                        color:"#FFFFFF"
+                                    }
+                                }}
                             >
                                 <SvgIcon>
-                                    <HiArrowLeftCircle color="#23398a"/>
+                                    <HiArrowLeftCircle/>
                                 </SvgIcon>
                                 <Typography>
                                     戻る
@@ -169,13 +139,20 @@ const Id: NextPage<Props> = (props: Props) => {
                                 justifyContent={"space-between"}
                                 alignItems={"flex-start"}
                                 spacing={1}
-                                sx={{padding:1, py:3}}
+                                sx={{
+                                    padding:1,
+                                    py:3,
+                                    color:"#23398A",
+                                    "@media (prefers-color-scheme: dark)": {
+                                        color:"#FFFFFF"
+                                    }
+                                }}
                             >
                                 <Typography>
                                     ルールを見る
                                 </Typography>
                                 <SvgIcon>
-                                    <HiEllipsisHorizontalCircle color="#23398a"/>
+                                    <HiEllipsisHorizontalCircle/>
                                 </SvgIcon>
                             </Stack>
                         </Button>
@@ -228,21 +205,32 @@ const Id: NextPage<Props> = (props: Props) => {
                         <Stack
                             direction={"column"}
                             justifyContent={"flex-start"}
-                            alignItems={"flex-start"}
+                            alignItems={"center"}
                             spacing={3}
-                            width={"90vw"}
+                            width={"100vw"}
                         >
-                            <GamePointBar
-                                chartSeries={[
-                                    {
-                                        data: [18, 16, 5, 8, 3, 14, 14]
-                                    },
-                                    {
-                                        data: [18, 16, 5, 8, 3, 14, 14]
-                                    },
-                                ]}
-                                sx={{ height: '100%', width: "100%"}}
-                            />
+                            <Stack
+                                width={"100%"}
+                                maxWidth={"xl"}
+                                sx={{px:2, pb:3, pt:3}}
+                                spacing={2}
+                            >
+                                <Typography sx={{color: "#99a5d6", fontSize: "14px"}}>
+                                    対戦一覧
+                                </Typography>
+                                <GamePointBar
+                                    leftScore={80}
+                                    rightScore={70}
+                                />
+                                <GamePointBar
+                                    leftScore={80}
+                                    rightScore={70}
+                                />
+                                <GamePointBar
+                                    leftScore={80}
+                                    rightScore={70}
+                                />
+                            </Stack>
                         </Stack>
                     </Stack>
                 </Container>

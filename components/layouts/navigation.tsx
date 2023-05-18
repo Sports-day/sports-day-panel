@@ -24,6 +24,7 @@ import {
 } from '@mui/material';
 import Logo from "public/logo.svg"
 import {signOut, useSession} from "next-auth/react";
+import Link from "next/link";
 
 type Anchor = 'top';
 
@@ -60,9 +61,11 @@ export const Navigation = () => {
                         alignItems={"center"}
                         sx={{marginRight: "10px", padding:"8px 5px 40px"}}
                     >
-                        <Toolbar>
-                            <Logo width={20*8.45} height={20} fill={'white'}/>
-                        </Toolbar>
+                        <Link href={"dashboard/"}>
+                            <Box>
+                                <Logo width={20*8.45} height={20} fill={'white'}/>
+                            </Box>
+                        </Link>
                         <IconButton onClick={toggleDrawer(anchor, true)}>
                             <SvgIcon color="primary">
                                 <HiXMark color="#FFF"/>

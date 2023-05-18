@@ -1,119 +1,120 @@
-import PropTypes from 'prop-types';
-import ArrowPathIcon from '@heroicons/react/24/solid/ArrowPathIcon';
-import ArrowRightIcon from '@heroicons/react/24/solid/ArrowRightIcon';
-import {Button, Card, CardActions, CardContent, Stack, SvgIcon, Typography } from '@mui/material';
-import {Chart} from "../chart";
-import {alpha, useTheme} from '@mui/material/styles';
+import {
+    Box,
+    Stack,
+    styled,
+    LinearProgress,
+    Typography, SvgIcon,
+} from "@mui/material";
+import {linearProgressClasses} from "@mui/material";
+import {ThemeProvider} from "@mui/material/styles";
+import * as React from "react";
+import {createTheme} from "../theme";
+import {HiClock} from "react-icons/hi2";
+import {MdOutlineSportsScore} from "react-icons/md";
 
-const useChartOptions = () => {
-    const theme = useTheme();
+const theme = createTheme();
 
-    return {
-        chart: {
-            background: 'transparent',
-            stacked: false
-        },
-        colors: ["#FFC900", alpha("#FFC900", 0.5)],
-        dataLabels: {
-            enabled: false
-        },
-        fill: {
-            opacity: 1,
-            type: 'solid'
-        },
-        grid: {
-            borderColor: theme.palette.divider,
-            strokeDashArray: 2,
-            xaxis: {
-                lines: {
-                    show: false
-                }
-            },
-            yaxis: {
-                lines: {
-                    show: true
-                }
-            }
-        },
-        legend: {
-            show: false
-        },
-        plotOptions: {
-            bar: {
-                horizontal: true,
-                barHeight: '10px',
-                borderRadius: 0
-            }
-        },
-        stroke: {
-            colors: ['transparent'],
-            show: true,
-            width: 2
-        },
-        theme: {
-            mode: theme.palette.mode
-        },
-        xaxis: {
-            axisBorder: {
-                color: theme.palette.divider,
-                show: true
-            },
-            axisTicks: {
-                color: theme.palette.divider,
-                show: true
-            },
-            categories: [
-                'data1',
-                'data2',
-                'data3',
-                'data4',
-                'data5',
-                'data6',
-                'data7',
-                'data8',
-                'data9',
-                'data10',
-                'data11',
-                'data12'
-            ],
-            labels: {
-                show: false
-            }
-        },
-        yaxis: {
-            labels: {
-                formatter: (value: any) => (value > 0 ? `${value}` : `${value}`),
-                offsetX: -5,
-                style: {
-                    colors: theme.palette.text.secondary
-                }
-            }
-        }
-    };
-};
+const PointBar = styled(LinearProgress)(({ theme }) => ({
+    height: 4.5,
+    borderRadius: 2,
+    [`&.${linearProgressClasses.colorPrimary}`]: {backgroundColor: '#435BBC',},
+    [`& .${linearProgressClasses.bar}`]: {borderRadius: 2, backgroundColor: '#ffc900',},
+}));
 
 export const GamePointBar = (props: any) => {
-    const { chartSeries, sx } = props;
-    const chartOptions: any = useChartOptions();
+    const {leftScore, rightScore, leftTeam, rightTeam} = props;
+    return(
+        <>
+            <Stack
+                direction={"column"}
+                spacing={1}
+                sx={{width: "100%", height:"fit-content"}}
+            >
+                <Stack
+                    direction={"row"}
+                    justifyContent={"center"}
+                    alignItems={"space-between"}
+                    spacing={0}
+                >
+                    <Stack
+                        direction={"column"}
+                        justifyContent={"space-between"}
+                        alignItems={"space-between"}
+                        maxWidth={'xl'}
+                        sx={{ width: '100%' }}
+                        spacing={0.5}
+                    >
+                        <Stack
+                            direction={"row"}
+                            justifyContent={"space-between"}
+                            alignItems={"flex-end"}
+                            spacing={0}
+                        >
+                            <Typography sx={{color: "#FFF", fontSize: "16px", fontWeight: "bold"}}>
+                                10
+                            </Typography>
+                            <Stack direction={"row"}>
+                                <SvgIcon fontSize={"small"} sx={{position:"relative", top:"2px"}}>
+                                    <HiClock color="#99a5d6"/>
+                                </SvgIcon>
+                                <Typography sx={{color: "#99a5d6", fontSize: "14px"}}>
+                                    10:00
+                                </Typography>
+                            </Stack>
+                            <Typography sx={{color: "#FFF", fontSize: "14px"}}>
+                                E1
+                            </Typography>
+                        </Stack>
+                        <Box>
+                            <ThemeProvider theme={{direction:"rtl"}}>
+                                <PointBar
+                                    variant={"determinate"}
+                                    value={leftScore}
+                                />
+                            </ThemeProvider>
+                        </Box>
+                    </Stack>
+                    <Typography sx={{color: "#99a5d6", fontSize: "10px", px:0.5, position:"relative", top:"8px"}}>VS</Typography>
+                    <Stack
+                        direction={"column"}
+                        justifyContent={"space-between"}
+                        alignItems={"space-between"}
+                        maxWidth={'xl'}
+                        sx={{ width: '100%' }}
+                        spacing={0.5}
+                    >
+                        <Stack
+                            direction={"row"}
+                            justifyContent={"space-between"}
+                            alignItems={"flex-end"}
+                            spacing={0}
+                        >
+                            <Typography sx={{color: "#FFF", fontSize: "14px"}}>
+                                M1
+                            </Typography>
+                            <Stack direction={"row"}>
+                                <SvgIcon fontSize={"small"} sx={{position:"relative", top:"2px"}}>
+                                    <MdOutlineSportsScore color="#99a5d6"/>
+                                </SvgIcon>
+                                <Typography sx={{color: "#99a5d6", fontSize: "14px"}}>
+                                    C1
+                                </Typography>
+                            </Stack>
+                            <Typography sx={{color: "#FFF", fontSize: "16px", fontWeight: "bold"}}>
+                                10
+                            </Typography>
+                        </Stack>
+                        <Box>
+                            <PointBar
+                                variant={"determinate"}
+                                value={leftScore}
+                            />
+                        </Box>
+                    </Stack>
+                </Stack>
+            </Stack>
+        </>
+    )
+}
 
-    return (
-        <Card
-            sx={sx}
-        >
-            <CardContent>
-                <Chart
-                    height="300px"
-                    options={chartOptions}
-                    series={chartSeries}
-                    type="bar"
-                    width="100%"
-                />
-            </CardContent>
-        </Card>
-    );
-};
-
-GamePointBar.protoTypes = {
-    chartSeries: PropTypes.array.isRequired,
-    sx: PropTypes.object
-};
+export default GamePointBar

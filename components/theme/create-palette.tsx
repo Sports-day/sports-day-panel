@@ -13,7 +13,7 @@ export function createPalette() {
             selected: alpha(neutral[900], 0.12)
         },
         background: {
-            default: neutral[50],
+            default: '#E8EBF8',
             paper: neutral[900]
         },
         divider: neutral[700],

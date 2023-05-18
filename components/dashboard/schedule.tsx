@@ -1,9 +1,7 @@
 import {
-    Avatar,
     Box,
     Button, Card,
     CardContent,
-    Container,
     Divider,
     Stack,
     SvgIcon,
@@ -11,7 +9,6 @@ import {
     Unstable_Grid2 as Grid
 } from "@mui/material";
 import {
-    HiArrowRightCircle,
     HiOutlineTableCells,
     HiOutlineArrowRight,
     HiMapPin,
@@ -22,7 +19,7 @@ import * as React from "react";
 import {useFetchMySportMatches} from "../../src/features/matches/hook";
 
 
-export const MySchedule = (props:any) => {
+export const Schedule = (props:any) => {
     const {matches} = useFetchMySportMatches();
     const {
         scTeam1, scTeam2, scTeam3,
@@ -109,7 +106,7 @@ export const MySchedule = (props:any) => {
                                 </Stack>
                         </Grid>
 
-                        <Grid sm={12} md={12} lg={12}><Divider/></Grid>
+                        <Grid xs={12} sm={12} lg={12}><Divider/></Grid>
 
                         <Grid xs={12} sm={6} lg={6}>
                             <Stack
@@ -160,7 +157,7 @@ export const MySchedule = (props:any) => {
                             </Stack>
                         </Grid>
 
-                        <Grid sm={12} md={12} lg={12}><Divider/></Grid>
+                        <Grid xs={12} sm={12} lg={12}><Divider/></Grid>
 
                         <Grid xs={12} sm={6} lg={6}>
                             <Stack
@@ -218,4 +215,4 @@ export const MySchedule = (props:any) => {
     );
 };
 
-export default MySchedule;
+export default Schedule;
