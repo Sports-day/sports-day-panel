@@ -1,12 +1,12 @@
 import {createContext} from "react";
-import {Group} from "../../../src/models/GroupModel";
-import {Class} from "../../../src/models/ClassModel";
-import { User } from "../../../src/models/UserModel";
-import {MicrosoftAccount} from "../../../src/models/MicrosoftAccountModel";
-import {Team} from "../../../src/models/TeamModel";
-import {Sport} from "../../../src/models/SportModel";
-import {Game} from "../../../src/models/GameModel";
-import {Match} from "../../../src/models/MatchModel";
+import {Group} from "../../src/models/GroupModel";
+import {Class} from "../../src/models/ClassModel";
+import { User } from "../../src/models/UserModel";
+import {MicrosoftAccount} from "../../src/models/MicrosoftAccountModel";
+import {Team} from "../../src/models/TeamModel";
+import {Sport} from "../../src/models/SportModel";
+import {Game} from "../../src/models/GameModel";
+import {Match} from "../../src/models/MatchModel";
 
 export type GenericContextType<T> = {
     data: T

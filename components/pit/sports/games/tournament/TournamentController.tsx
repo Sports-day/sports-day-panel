@@ -1,5 +1,5 @@
 import {useContext} from "react";
-import {EntriesContext, GameContext} from "../../../context";
+import {EntriesContext, GameContext} from "../../../../context";
 
 export function TournamentController() {
     const {data: game, refresh} = useContext(GameContext)

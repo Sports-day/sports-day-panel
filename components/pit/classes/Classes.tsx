@@ -2,7 +2,7 @@ import {useFetchClasses} from "../../../src/features/classes/hooks";
 import {useState} from "react";
 import styles from "../../../styles/Pit.module.scss";
 import {Button} from "@mui/material";
-import {ClassesContext, GroupsContext} from "../context";
+import {ClassesContext, GroupsContext} from "../../context";
 import {ClassList} from "./ClassList";
 import {useFetchGroups} from "../../../src/features/groups/hook";
 import {ClassForm} from "./ClassForm";

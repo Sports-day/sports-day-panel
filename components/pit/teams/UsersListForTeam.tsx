@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import {User} from "../../../src/models/UserModel";
 import {useContext, useRef, useState} from "react";
-import {ClassesContext, UsersContext} from "../context";
+import {ClassesContext, UsersContext} from "../../context";
 import {UsersListHead} from "./UsersListHead";
 
 export type UsersListForTeamProps = {

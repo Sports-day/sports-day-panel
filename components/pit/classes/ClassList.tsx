@@ -1,7 +1,7 @@
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import {ClassContent} from "./ClassContent";
 import {useContext} from "react";
-import {ClassesContext} from "../context";
+import {ClassesContext} from "../../context";
 
 export function ClassList() {
     const {data: classes, refresh} = useContext(ClassesContext)

@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import {FormType} from "../../../types";
 import {Class, classFactory} from "../../../src/models/ClassModel";
-import {GroupsContext} from "../context";
+import {GroupsContext} from "../../context";
 
 export type ClassFormProps = {
     isOpen: boolean

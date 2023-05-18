@@ -1,7 +1,7 @@
 import styles from "../../../styles/Pit.module.scss";
 import {MicrosoftAccount, microsoftAccountFactory} from "../../../src/models/MicrosoftAccountModel";
 import React, {useContext, useState} from "react";
-import {ClassesContext, UsersContext} from "../context";
+import {ClassesContext, UsersContext} from "../../context";
 import {
     Button,
     Checkbox,

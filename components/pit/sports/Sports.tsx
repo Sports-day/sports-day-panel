@@ -1,6 +1,6 @@
 import styles from "../../../styles/Pit.module.scss";
 import {useFetchSports} from "../../../src/features/sports/hook";
-import {SportsContext} from "../context";
+import {SportsContext} from "../../context";
 import {Box, Button, CircularProgress} from "@mui/material";
 import { SportForm } from "./SportForm";
 import {SportList} from "./SportList";

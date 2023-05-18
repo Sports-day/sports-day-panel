@@ -1,4 +1,4 @@
-import {UsersContext} from "../context";
+import {UsersContext} from "../../context";
 import {useContext} from "react";
 import {UserContent} from "./UserContent";
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";

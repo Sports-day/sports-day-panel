@@ -12,7 +12,7 @@ import {
     TextField,
     TextFieldProps
 } from "@mui/material";
-import {ClassesContext} from "../context";
+import {ClassesContext} from "../../context";
 
 export type UserFormProps = {
     isOpen: boolean

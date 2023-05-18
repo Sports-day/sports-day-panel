@@ -2,7 +2,7 @@ import {Button, TableCell, TableRow} from "@mui/material";
 import {useContext, useState} from "react";
 import {Class, classFactory} from "../../../src/models/ClassModel";
 import {ClassForm} from "./ClassForm";
-import {GroupsContext} from "../context";
+import {GroupsContext} from "../../context";
 import {ConfirmInputDialog} from "../ConfirmInputDialog";
 
 export function ClassContent(props: { class: Class, refresh: VoidFunction }) {

@@ -1,4 +1,4 @@
-import {SportsContext} from "../context";
+import {SportsContext} from "../../context";
 import {useContext} from "react";
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import { SportContent } from "./SportContent";

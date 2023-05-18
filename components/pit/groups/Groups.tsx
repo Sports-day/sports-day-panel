@@ -4,7 +4,7 @@ import styles from "../../../styles/Pit.module.scss";
 import {GroupForm} from "./GroupForm";
 import {Button} from "@mui/material";
 import {useState} from "react";
-import {GroupsContext} from "../context";
+import {GroupsContext} from "../../context";
 
 export function Groups() {
     const {groups, refresh: refreshGroup} = useFetchGroups()

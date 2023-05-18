@@ -2,7 +2,7 @@ import styles from "../../../styles/Pit.module.scss";
 import {useFetchUsers} from "../../../src/features/users/hook";
 import {useFetchTeams} from "../../../src/features/teams/hook";
 import {useFetchClasses} from "../../../src/features/classes/hooks";
-import {ClassesContext, TeamsContext, UsersContext} from "../context";
+import {ClassesContext, TeamsContext, UsersContext} from "../../context";
 import {Box, Button, CircularProgress} from "@mui/material";
 import { UserList } from "./UserList";
 import {UserForm} from "./UserForm";

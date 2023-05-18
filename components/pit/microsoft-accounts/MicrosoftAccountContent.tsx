@@ -2,7 +2,7 @@ import {MicrosoftAccount, microsoftAccountFactory} from "../../../src/models/Mic
 import {Button, Link, TableCell, TableRow} from "@mui/material";
 import {ConfirmDialog} from "../ConfirmDialog";
 import {useContext, useState} from "react";
-import {UsersContext} from "../context";
+import {UsersContext} from "../../context";
 import {MicrosoftAccountEditForm} from "./MicrosoftAccountEditForm";
 
 export type MicrosoftAccountContent = {
