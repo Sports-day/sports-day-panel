@@ -32,6 +32,7 @@ export function MatchesTable(props: MatchesTableProps) {
     return (
         <>
             <div className={styles.content} >
+                <h2>マッチ一覧</h2>
                 <TableContainer>
                     <Table
                         aria-label={"matches table"}
