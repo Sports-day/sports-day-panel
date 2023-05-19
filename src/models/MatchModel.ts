@@ -14,6 +14,8 @@ export type Match = {
     status: MatchStatus,
     note: string | null,
     judge: string | null,
+    parents: number[],
+    children: number[],
     createdAt: string,
     updatedAt: string
 }

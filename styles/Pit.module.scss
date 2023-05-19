@@ -74,6 +74,15 @@
     position: relative;
   }
 
+  .tournamentTree {
+    //  full width - sidebar width - padding - margin
+    width: calc(100vw - 340px - 40px);
+    margin: 0 20px 0 20px;
+    height: 800px;
+    border: #DDDDDD solid 2px;
+    border-radius: 10px;
+  }
+
   .sportProfile {
     display: flex;
     flex-direction: row;
