@@ -7,6 +7,7 @@ import {Team} from "../../src/models/TeamModel";
 import {Sport} from "../../src/models/SportModel";
 import {Game} from "../../src/models/GameModel";
 import {Match} from "../../src/models/MatchModel";
+import {Location} from "../../src/models/LocationModel";
 
 export type GenericContextType<T> = {
     data: T
@@ -71,6 +72,12 @@ export const MatchesContext = createContext<MatchesContextType>({
 
 export type EntriesContextType = GenericContextType<Team[]>
 export const EntriesContext = createContext<EntriesContextType>({
+    data: [],
+    refresh: () => {}
+})
+
+export type LocationsContextType = GenericContextType<Location[]>
+export const LocationsContext = createContext<LocationsContextType>({
     data: [],
     refresh: () => {}
 })
