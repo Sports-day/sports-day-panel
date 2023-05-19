@@ -5,6 +5,7 @@ import {
     Box,
     Button,
     Container,
+    Divider,
     Stack,
     SvgIcon,
     Typography,
@@ -21,6 +22,7 @@ import {useFetchMyTeams} from "../../src/features/teams/hook";
 import {createTheme} from "../../components/theme";
 import {ThemeProvider} from "@mui/material/styles";
 import {useRouter} from "next/router";
+import {Footer} from "../../components/layouts/footer";
 
 type Props = {
     sportId: number
@@ -53,6 +55,7 @@ const Id: NextPage<Props> = (props: Props) => {
             <Navigation/>
             <Box
                 component={"main"}
+                minHeight={"96vh"}
                 sx={{
                     flexGrow: 1,
                     py: 5,
@@ -103,7 +106,7 @@ const Id: NextPage<Props> = (props: Props) => {
                 <Container
                     maxWidth={"xl"}
                     disableGutters
-                    sx={{px:1, pb:3}}
+                    sx={{px:1, pb:0}}
                 >
                     <Stack
                         direction={"row"}
@@ -187,14 +190,16 @@ const Id: NextPage<Props> = (props: Props) => {
                     disableGutters
                     sx={{
                         paddingTop: "0px",
-                        paddingBottom: "20px"
+                        position:"relative",
+                        bottom:"-40px"
                     }}
                 >
                     <Stack
                         direction={"column"}
-                        justifyContent={"center"}
+                        justifyContent={"flex-start"}
                         alignItems={"center"}
                         spacing={3}
+                        minHeight={"50vh"}
                         sx={{
                             position: "relative",
                             width: "101vw",
@@ -231,10 +236,15 @@ const Id: NextPage<Props> = (props: Props) => {
                                     rightScore={70}
                                 />
                             </Stack>
+                            <Divider/>
+                            <Typography sx={{color: "#99a5d6", fontSize: "14px"}}>
+                                対戦が終了すると項目が追加されます
+                            </Typography>
                         </Stack>
                     </Stack>
                 </Container>
             </Box>
+            <Footer/>
             </ThemeProvider>
         </>
     )

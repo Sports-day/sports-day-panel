@@ -59,7 +59,7 @@ export const Navigation = () => {
                         direction={"row"}
                         justifyContent={"space-between"}
                         alignItems={"center"}
-                        sx={{marginRight: "10px", padding:"8px 5px 40px"}}
+                        sx={{marginRight: "10px", paddingLeft:"30px",paddingRight:"6px", py: 3}}
                     >
                         <Link href={"dashboard/"}>
                             <Box>

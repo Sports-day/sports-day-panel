@@ -17,6 +17,8 @@ import {ThemeProvider} from "@mui/material/styles";
 import {createTheme} from "../components/theme";
 import {motion, HTMLMotionProps} from "framer-motion";
 import Link from "next/link";
+import {Footer} from "../components/layouts/footer";
+import {useFetchMySportMatches} from "../src/features/matches/hook";
 
 type PageTransitionProps = HTMLMotionProps<'div'>
 type PageTransitionRef = React.ForwardedRef<HTMLDivElement>
@@ -26,6 +28,7 @@ const DashBoard: NextPage = () => {
     const {teams} = useFetchMyTeams();
     const {sport} = useFetchMySport();
     const {sports} = useFetchSports();
+    const {matches} = useFetchMySportMatches();
     const theme = createTheme();
     //my overview
     const myRank = "順位";
@@ -57,6 +60,7 @@ const DashBoard: NextPage = () => {
                 <Navigation/>
                 <Box
                     component={"main"}
+                    minHeight={"96vh"}
                     sx={{
                         flexGrow: 1,
                         py: 5,
@@ -95,11 +99,7 @@ const DashBoard: NextPage = () => {
                             <Grid container spacing={1.5}>
 
                                 <Grid xs={12} sm={12} lg={12}>
-                                    <Schedule
-                                        scTeam1={team1} scTeam2={team2} scTeam3={team3}
-                                        scTime1={time1} scTime2={time2} scTime3={time3}
-                                        scLocation1={location1} scLocation2={location2} scLocation3={location3}
-                                    />
+                                    <Schedule matches={matches}/>
                                 </Grid>
                                 {sports.map((sport) => {
                                     return (
@@ -116,6 +116,7 @@ const DashBoard: NextPage = () => {
                         </Stack>
                     </Container>
                 </Box>
+                <Footer/>
             </ThemeProvider>
         </motion.div>
     )
