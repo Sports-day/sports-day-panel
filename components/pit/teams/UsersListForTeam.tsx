@@ -41,23 +41,25 @@ export function UsersListForTeam(props: UsersListForTeamProps) {
     const userComponents = users
         .filter(user => !ignoreUserIds.includes(user.id))
         .filter(user => {
-        if (filterWord == "") return true
-        const classModel = classes?.find(classModel => classModel.id === user.classId)
+            if (filterWord == "") return true
+            const classModel = classes?.find(classModel => classModel.id === user.classId)
 
-        return user.name.includes(filterWord)
-            || user.id.toString().includes(filterWord)
-            || user.studentId.toString().includes(filterWord)
-            || classModel?.name.includes(filterWord)
-    }).map(user => {
-        return (
-            <User
-                user={user}
-                addUser={addUser}
-                removeUser={removeUser}
-                key={user.id}
-            />
-        )
-    })
+            return filterWord.split(" ").some(word => {
+                return user.name.includes(word)
+                    || user.id.toString().includes(word)
+                    || user.studentId.toString().includes(word)
+                    || classModel?.name.includes(word)
+            })
+        }).map(user => {
+            return (
+                <User
+                    user={user}
+                    addUser={addUser}
+                    removeUser={removeUser}
+                    key={user.id}
+                />
+            )
+        })
 
     return (
         <>
@@ -90,7 +92,7 @@ export function UsersListForTeam(props: UsersListForTeamProps) {
 }
 
 
-function User(props: { user: User, addUser: (user: number) => void, removeUser: (user: number) => void}) {
+function User(props: { user: User, addUser: (user: number) => void, removeUser: (user: number) => void }) {
     const {data: classes} = useContext(ClassesContext)
     const classModel = classes?.find(classModel => classModel.id === props.user.classId)
 
@@ -103,7 +105,7 @@ function User(props: { user: User, addUser: (user: number) => void, removeUser: 
                     <Checkbox
                         color={"primary"}
                         onChange={(event) => {
-                            if(event.target.checked) {
+                            if (event.target.checked) {
                                 props.addUser(props.user.id)
                             } else {
                                 props.removeUser(props.user.id)
