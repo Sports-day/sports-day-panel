@@ -48,7 +48,7 @@ export function ImageForm(props: ImageFormProps) {
         const file = files[0]
         const reader = new FileReader()
         reader.onload = () => {
-            if (reader.result !== null && reader.result.toString().length >= 16777215) {
+            if (reader.result !== null && reader.result.toString().length > 65535) {
                 alert("ファイルサイズが大きすぎます。")
                 return
             }
