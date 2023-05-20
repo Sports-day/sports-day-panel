@@ -27,16 +27,19 @@ export function GameForm(props: GameFormProps) {
 
         //  weight invalid
         if (isNaN(parseInt(wightRef.current?.value as string))) {
+            alert("重みは数値で入力してください。(0~100)")
             return
         }
 
         //  type invalid
         if (typeState !== "tournament" && typeState !== "league") {
+            alert("トーナメントもしくはリーグが選択可能です。")
             return
         }
 
         //  calculationType invalid
         if (calculationTypeState !== "total_score" && calculationTypeState !== "diff_score") {
+            alert("合計得点もしくは得失点差が選択可能です。")
             return
         }
 

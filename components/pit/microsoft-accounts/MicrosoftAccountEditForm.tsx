@@ -72,10 +72,13 @@ export function MicrosoftAccountEditForm(props: MicrosoftAccountEditFormProps) {
 
         //  not selected
         if (linkedUser === -1) {
+            alert("ユーザーを選択してください。")
             return
         }
+
         //  linked user id not exist
         if (!users.some(user => user.id === +linkedUser)) {
+            alert("ユーザーが存在しません。")
             return
         }
 

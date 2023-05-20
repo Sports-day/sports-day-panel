@@ -39,6 +39,7 @@ export function ClassForm(props: ClassFormProps) {
 
         //  group id not exist
         if (!groups.some(group => group.id === +groupState)) {
+            alert("グループが存在しません。")
             return
         }
 

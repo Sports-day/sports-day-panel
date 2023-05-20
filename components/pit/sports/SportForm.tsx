@@ -39,6 +39,7 @@ export function SportForm(props: SportFormProps) {
 
         //  weight invalid
         if (isNaN(parseInt(wightRef.current?.value as string))) {
+            alert("重みは数値で入力してください。(0~100)")
             return
         }
 

@@ -34,6 +34,7 @@ export function TeamCreateForm(props: TeamCreateFormProps) {
         e.preventDefault()
 
         if (!classes.some(classModel => classModel.id === +classState)) {
+            alert("クラスが存在しません。")
             return
         }
 
