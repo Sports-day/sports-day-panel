@@ -45,7 +45,7 @@ export function MatchContent(props: MatchContentProps) {
             <TableRow>
                 <TableCell>
                     <Link
-                        href={`/admin/matches/${sport?.id}`}
+                        href={`/admin/matches/${props.match.id}`}
                     >
                         {props.match.id}
                     </Link>
