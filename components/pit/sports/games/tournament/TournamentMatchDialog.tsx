@@ -47,7 +47,7 @@ export function TournamentMatchDialog(props: TournamentMatchDialogProps) {
                     </DialogTitle>
                     <DialogContent>
                         <Link
-                            href={`/admins/matches/${props.matchId}`}
+                            href={`/admin/matches/${props.matchId}`}
                         >
                             <Typography>
                                 マッチ画面に飛ぶ
