@@ -49,10 +49,28 @@ export function TournamentController() {
         setIsOpenNodeDetail(true)
     }
 
+    const updateTree = async () => {
+        await gameFactory().updateTournamentTree(game.id)
+
+        refresh()
+    }
+
     return (
         <>
             <div className={styles.content}>
                 <h2>トーナメント表</h2>
+
+                <Button
+                    variant="contained"
+                    sx={{
+                        position: "absolute",
+                        right: "20px",
+                        top: "60px",
+                    }}
+                    onClick={updateTree}
+                >
+                    ツリー状態更新
+                </Button>
 
                 {matches.length <= 0 &&
                     <Button
