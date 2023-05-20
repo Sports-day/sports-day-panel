@@ -1,10 +1,10 @@
 import styles from "../../../../../styles/Pit.module.scss";
 import {useContext, useState} from "react";
 import {EntriesContext, GameContext} from "../../../../context";
-import {ConfirmDialog} from "../../../ConfirmDialog";
 import {gameFactory} from "../../../../../src/models/GameModel";
 import {Button} from "@mui/material";
 import {LeagueTable} from "./LeagueTable";
+import {LeagueCreator} from "./LeagueCreator";
 
 export function LeagueController() {
     const {data: game, refresh} = useContext(GameContext)
@@ -39,19 +39,18 @@ export function LeagueController() {
                     }}
                     onClick={() => setIsOpenGenerateLeague(true)}
                 >
-                    作成
+                    リーグ表作成
                 </Button>
 
-                <ConfirmDialog
-                    open={isOpenGenerateLeague}
-                    onClose={() => setIsOpenGenerateLeague(false)}
-                    onConfirm={generateLeague}
-                    confirmText={"リーグ表の生成"}
-                    confirmColor={"primary"}
-                >
-                    リーグ表を生成しますか？
-                    すでに作成している場合、マッチが全削除されます。
-                </ConfirmDialog>
+                <LeagueCreator
+                    isOpen={isOpenGenerateLeague}
+                    setClose={() => setIsOpenGenerateLeague(false)}
+                    refresh={() => {
+                        refresh()
+                        refreshTeams()
+                    }}
+                    game={game}
+                />
 
                 <LeagueTable />
             </div>
