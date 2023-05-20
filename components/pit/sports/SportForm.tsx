@@ -2,7 +2,8 @@ import {FormType} from "../../../types";
 import {Sport, sportFactory} from "../../../src/models/SportModel";
 import React, {FormEvent, useRef, useState} from "react";
 import {
-    Button, Dialog,
+    Box,
+    Button, CircularProgress, Dialog,
     DialogActions,
     DialogContent,
     DialogTitle,
@@ -28,7 +29,7 @@ export function SportForm(props: SportFormProps) {
     //  state
     const [iconIdState, setIconIdState] = useState<string>(props.sport?.iconId?.toString() ?? '')
     //  images
-    const {images} = useFetchImages()
+    const {images, isFetching} = useFetchImages()
 
     const handleImageIdChange = (e: SelectChangeEvent) => {
         setIconIdState(e.target.value.toString())
@@ -43,16 +44,22 @@ export function SportForm(props: SportFormProps) {
             return
         }
 
+        //  iconId invalid
+        if (iconIdState !== '-1' && !images?.some(image => image.id === +iconIdState)) {
+            alert('アイコンが正しく選択されていません。')
+            return
+        }
+
         if (props.formType === "create") {
             await sportFactory().create({
                 name: nameRef.current?.value as string,
                 description: descriptionRef.current?.value as string,
-                iconId: iconIdState === '' ? null : +iconIdState,
+                iconId: iconIdState === '-1' ? null : +iconIdState,
                 weight: wightRef.current?.value as number
             })
         } else {
             const id = props.sport?.id
-            if(!id) return
+            if (!id) return
 
             await sportFactory().update(
                 id,
@@ -71,6 +78,7 @@ export function SportForm(props: SportFormProps) {
 
     return (
         <>
+
             <Dialog
                 open={props.isOpen}
                 onClose={props.setClose}
@@ -84,15 +92,30 @@ export function SportForm(props: SportFormProps) {
                         {props.formType === "create" ? "競技作成" : "競技編集"}
                     </DialogTitle>
                     <DialogContent>
-                        <SportEditFields
-                            nameRef={nameRef}
-                            descriptionRef={descriptionRef}
-                            wightRef={wightRef}
-                            iconIdState={iconIdState}
-                            handleImageIdChange={handleImageIdChange}
-                            images={images}
-                            sport={props.sport}
-                        />
+                        {isFetching ?
+                            <Box
+                                sx={{
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    mt: "100px",
+                                }}
+                            >
+                                <CircularProgress/>
+                            </Box>
+                            :
+                            <>
+                                <SportEditFields
+                                    nameRef={nameRef}
+                                    descriptionRef={descriptionRef}
+                                    wightRef={wightRef}
+                                    iconIdState={iconIdState}
+                                    handleImageIdChange={handleImageIdChange}
+                                    images={images}
+                                    sport={props.sport}
+                                />
+                            </>
+                        }
                     </DialogContent>
                     <DialogActions>
                         <Button
@@ -114,6 +137,7 @@ export function SportForm(props: SportFormProps) {
                     </DialogActions>
                 </form>
             </Dialog>
+
         </>
     )
 }

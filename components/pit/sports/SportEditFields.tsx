@@ -73,6 +73,14 @@ export function SportEditFields(props: SportEditFieldsProps) {
                 }}
                 onChange={props.handleImageIdChange}
             >
+                <MenuItem
+                    value={"-1"}
+                    sx={{
+                        color: "red"
+                    }}
+                >
+                    未選択
+                </MenuItem>
                 {
                     props.images?.map((image) => {
                         return (

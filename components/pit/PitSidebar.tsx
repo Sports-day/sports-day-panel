@@ -33,6 +33,10 @@ export function PitSidebar() {
                 url={"/admin/locations"}
             />
             <PitSidebarContent
+                name={"画像"}
+                url={"/admin/images"}
+            />
+            <PitSidebarContent
                 name={"Microsoftアカウント"}
                 url={"/admin/microsoft-accounts"}
             />
