@@ -76,3 +76,19 @@ export const useFetchMyTeams = () => {
         isFetching: isFetching,
     };
 }
+
+export const useFetchMyTeamRank = () => {
+    const [rank, setRank] = useState<number>();
+    const [isFetching, setIsFetching] = useState(true);
+
+
+    useAsync(async () => {
+        //  TODO チームのランク
+        setRank(2)
+        setIsFetching(false)
+    });
+    return {
+        rank: rank,
+        isFetching: isFetching,
+    };
+}

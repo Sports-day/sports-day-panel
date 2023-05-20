@@ -10,7 +10,7 @@ import * as React from "react";
 import Overview from "../components/dashboard/overview";
 import Schedule from "../components/dashboard/schedule";
 import {SportsListElement} from "../components/dashboard/SportsListElement";
-import {useFetchMyTeams} from "../src/features/teams/hook";
+import {useFetchMyTeamRank, useFetchMyTeams} from "../src/features/teams/hook";
 import {useFetchMySport, useFetchSports} from "../src/features/sports/hook";
 import {Navigation} from "../components/layouts/navigation";
 import {ThemeProvider} from "@mui/material/styles";
@@ -31,7 +31,7 @@ const DashBoard: NextPage = () => {
     const {matches} = useFetchMySportMatches();
     const theme = createTheme();
     //my overview
-    const myRank = "順位";
+    const {rank: myRank} = useFetchMyTeamRank();
 
     //my schedule
     const [team1,team2,team3]=["X1-1","X1-2","X1-3"];
