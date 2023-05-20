@@ -2,7 +2,6 @@ import {
     Box,
     Button, Card,
     CardContent,
-    Divider,
     Stack,
     SvgIcon,
     Typography,
@@ -11,19 +10,13 @@ import {
 import {
     HiOutlineTableCells,
     HiOutlineArrowRight,
-    HiMapPin,
-    HiClock
-
 } from "react-icons/hi2";
 import * as React from "react";
-import {useFetchMySportMatches, useFetchMatch, useFetchMatches} from "../../../src/features/matches/hook";
-import {ScheduleContent} from "./schedule-content";
-import {useFetchGame} from "../../../src/features/games/hook";
-import {useFetchTeams} from "../../../src/features/teams/hook";
+import {ScheduleContent} from "./ScheduleContent";
 
 
 export const Schedule = (props:any) => {
-    const {matches} = useFetchMySportMatches()
+    const {matches} = props;
 
     return(
         <Card sx={{height: "fit-content"}}>
@@ -55,7 +48,7 @@ export const Schedule = (props:any) => {
                     </Button>
                     <Grid container spacing={1}>
 
-                        {matches.map((match) => {
+                        {matches.map((match:any) => {
                             return(
                                 <ScheduleContent
                                     key={match.id}

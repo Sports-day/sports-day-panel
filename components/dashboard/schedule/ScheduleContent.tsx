@@ -1,11 +1,17 @@
 import {Divider, Stack, SvgIcon, Typography, Unstable_Grid2 as Grid} from "@mui/material";
 import {HiClock, HiMapPin} from "react-icons/hi2";
 import * as React from "react";
+import {useFetchTeams} from "../../../src/features/teams/hook";
 
 export const ScheduleContent = (props:any) => {
     const {match, time, location} = props;
+    const {teams} = useFetchTeams();
+    const teamId = match;
+    const teamModel = teams.find(team => team.id === teamId);
+    const formattedTime = new Date(time).toLocaleTimeString("ja-JP");
     return (
         <>
+            <Grid xs={12} sm={12} lg={12}><Divider/></Grid>
             <Grid xs={12} sm={6} lg={6}>
                 <Stack
                     alignItems={"center"}
@@ -18,7 +24,7 @@ export const ScheduleContent = (props:any) => {
                         VS
                     </Typography>
                     <Typography fontSize={"24px"} fontWeight={"bold"}>
-                        {match}
+                        {teamModel?.name.slice(4)}
                     </Typography>
                 </Stack>
             </Grid>
@@ -37,7 +43,7 @@ export const ScheduleContent = (props:any) => {
                             <HiClock color="#99a5d6"/>
                         </SvgIcon>
                         <Typography sx={{color: "#99a5d6", fontSize: "14px", py: "5px"}}>
-                            {time}
+                            {formattedTime}
                         </Typography>
                     </Stack>
                     <Stack
@@ -54,7 +60,6 @@ export const ScheduleContent = (props:any) => {
                     </Stack>
                 </Stack>
             </Grid>
-            <Grid xs={12} sm={12} lg={12}><Divider/></Grid>
         </>
     )
 }

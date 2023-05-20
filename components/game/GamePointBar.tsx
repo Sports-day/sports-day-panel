@@ -13,7 +13,6 @@ import {HiClock} from "react-icons/hi2";
 import {MdOutlineSportsScore} from "react-icons/md";
 
 const theme = createTheme();
-
 const PointBar = styled(LinearProgress)(({ theme }) => ({
     height: 4.5,
     borderRadius: 2,
@@ -22,7 +21,8 @@ const PointBar = styled(LinearProgress)(({ theme }) => ({
 }));
 
 export const GamePointBar = (props: any) => {
-    const {leftScore, rightScore, leftTeam, rightTeam} = props;
+
+    const {leftScore, rightScore, leftTeam, rightTeam, umpireTeam, time} = props;
     return(
         <>
             <Stack
@@ -51,18 +51,18 @@ export const GamePointBar = (props: any) => {
                             spacing={0}
                         >
                             <Typography sx={{color: "#FFF", fontSize: "16px", fontWeight: "bold"}}>
-                                10
+                                {leftScore}
                             </Typography>
                             <Stack direction={"row"}>
                                 <SvgIcon fontSize={"small"} sx={{position:"relative", top:"2px"}}>
                                     <HiClock color="#99a5d6"/>
                                 </SvgIcon>
                                 <Typography sx={{color: "#99a5d6", fontSize: "14px"}}>
-                                    10:00
+                                    {time}
                                 </Typography>
                             </Stack>
                             <Typography sx={{color: "#FFF", fontSize: "14px"}}>
-                                E1
+                                {leftTeam}
                             </Typography>
                         </Stack>
                         <Box>
@@ -90,24 +90,24 @@ export const GamePointBar = (props: any) => {
                             spacing={0}
                         >
                             <Typography sx={{color: "#FFF", fontSize: "14px"}}>
-                                M1
+                                {rightTeam}
                             </Typography>
                             <Stack direction={"row"}>
                                 <SvgIcon fontSize={"small"} sx={{position:"relative", top:"2px"}}>
                                     <MdOutlineSportsScore color="#99a5d6"/>
                                 </SvgIcon>
                                 <Typography sx={{color: "#99a5d6", fontSize: "14px"}}>
-                                    C1
+                                    {umpireTeam}
                                 </Typography>
                             </Stack>
                             <Typography sx={{color: "#FFF", fontSize: "16px", fontWeight: "bold"}}>
-                                10
+                                {rightScore}
                             </Typography>
                         </Stack>
                         <Box>
                             <PointBar
                                 variant={"determinate"}
-                                value={leftScore}
+                                value={rightScore}
                             />
                         </Box>
                     </Stack>

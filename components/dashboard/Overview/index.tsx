@@ -14,11 +14,17 @@ import {
 } from "@mui/material";
 import {HiArrowRightCircle, HiXMark} from "react-icons/hi2";
 import * as React from "react";
+import {useFetchTeams} from "../../../src/features/teams/hook";
+import {useFetchUsers} from "../../../src/features/users/hook";
 
 
-export const Overview = (props:any) => {
+export const Index = (props:any) => {
    const {overviewSport, overviewTeam, overviewRank} = props;
-   const member = ["田中 太郎","中田 太郎","田村 太郎","村田 太郎","瀬川 太郎","川瀬 太郎"];
+   const {teams} = useFetchTeams();
+   const {users} = useFetchUsers();
+   const userModel = users.find(user => user.id === overviewTeam);
+   const member = [userModel?.name];
+   console.log(userModel?.name)
 
     const [open, setOpen] = React.useState(false);
     const toggleDrawer = (newOpen: boolean) => () => {
@@ -188,4 +194,4 @@ export const Overview = (props:any) => {
     );
 };
 
-export default Overview;
+export default Index;

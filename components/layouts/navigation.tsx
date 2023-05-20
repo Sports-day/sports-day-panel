@@ -146,7 +146,7 @@ export const Navigation = () => {
                                 </Typography>
                             </Stack>
                         </Button>
-
+                    { session && session.user.role == "admin" &&
                         <Button href={"/admin"}>
                             <Stack
                                 direction={"row"}
@@ -172,6 +172,7 @@ export const Navigation = () => {
                                 </Typography>
                             </Stack>
                         </Button>
+                    }
 
                         <Button onClick={() => signOut()}>
                             <Stack

@@ -40,18 +40,14 @@ const DashBoard: NextPage = () => {
 
     const icon=1;
 
-    const onTheRight={x:'100%'}
-    const inTheCenter = {x:'0'}
-    const onTheLeft = {x:'-100%'}
-
     const transition = {duration: 0.6, ease: 'easeInOut'}
 
     return(
         <motion.div
-            initial={{opacity:0}}
+            initial={{opacity:0.3}}
             animate={{opacity:1}}
-            exit={{opacity:0}}
-            transition={{duration: 0.3, ease: 'easeInOut'}}
+            exit={{opacity:0.3}}
+            transition={{duration: 0.5, ease: 'easeInOut'}}
         >
             <ThemeProvider theme={theme}>
                 <Head>

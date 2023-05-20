@@ -12,10 +12,10 @@ import {
     Unstable_Grid2 as Grid
 } from "@mui/material";
 import {GameProgress} from "../../components/game/game-progress";
-import {GameBest} from "../../components/game/game-best";
+import {GameBest} from "../../components/game/GameBest";
 import {Navigation} from "../../components/layouts/navigation";
 import {HiArrowLeftCircle, HiEllipsisHorizontalCircle} from "react-icons/hi2";
-import {GamePointBar} from "../../components/game/game-pointbar"
+import {GamePointBar} from "../../components/game/GamePointBar"
 import * as React from "react";
 import {useFetchSport, useFetchSportGames, useFetchSportProgress} from "../../src/features/sports/hook";
 import {useFetchMyTeams} from "../../src/features/teams/hook";
@@ -23,6 +23,7 @@ import {createTheme} from "../../components/theme";
 import {ThemeProvider} from "@mui/material/styles";
 import {useRouter} from "next/router";
 import {Footer} from "../../components/layouts/footer";
+import {useFetchGameResult} from "../../src/features/games/hook";
 
 type Props = {
     sportId: number
@@ -35,7 +36,8 @@ const Id: NextPage<Props> = (props: Props) => {
     const {sport, isFetching} = useFetchSport(props.sportId)
     const {progress} = useFetchSportProgress(props.sportId)
     const {teams} = useFetchMyTeams();
-
+    const {result} = useFetchGameResult(0)
+    console.log(result)
     if (!isFetching && !sport) {
         //  404
         router.push("/404").then()
@@ -108,6 +110,7 @@ const Id: NextPage<Props> = (props: Props) => {
                     disableGutters
                     sx={{px:1, pb:0}}
                 >
+
                     <Stack
                         direction={"row"}
                         justifyContent={"space-between"}
@@ -124,7 +127,7 @@ const Id: NextPage<Props> = (props: Props) => {
                                     py:3,
                                     color:"#23398A",
                                     "@media (prefers-color-scheme: dark)": {
-                                        color:"#FFFFFF"
+                                        color:"#99a5d6"
                                     }
                                 }}
                             >
@@ -147,7 +150,7 @@ const Id: NextPage<Props> = (props: Props) => {
                                     py:3,
                                     color:"#23398A",
                                     "@media (prefers-color-scheme: dark)": {
-                                        color:"#FFFFFF"
+                                        color:"#99a5d6"
                                     }
                                 }}
                             >
@@ -160,6 +163,7 @@ const Id: NextPage<Props> = (props: Props) => {
                             </Stack>
                         </Button>
                     </Stack>
+
                     <Stack
                         direction={"column"}
                         justifyContent={"space-between"}
@@ -169,7 +173,7 @@ const Id: NextPage<Props> = (props: Props) => {
 
                             <Grid xs={12} sm={6} lg={6}>
                                 <GameBest
-                                    value1={best[0]}
+                                    value1={result}
                                     value2={best[1]}
                                     value3={best[2]}
                                 />
@@ -224,16 +228,12 @@ const Id: NextPage<Props> = (props: Props) => {
                                     対戦一覧
                                 </Typography>
                                 <GamePointBar
-                                    leftScore={80}
-                                    rightScore={70}
-                                />
-                                <GamePointBar
-                                    leftScore={80}
-                                    rightScore={70}
-                                />
-                                <GamePointBar
-                                    leftScore={80}
-                                    rightScore={70}
+                                    leftScore={12}
+                                    leftTeam={"L1"}
+                                    rightScore={34}
+                                    rightTeam={"R1"}
+                                    umpireTeam={"U1"}
+                                    time={"TE:ST"}
                                 />
                             </Stack>
                             <Divider/>
