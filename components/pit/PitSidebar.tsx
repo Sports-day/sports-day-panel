@@ -4,10 +4,10 @@ import {PitSidebarContent} from "./PitSidebarContent";
 export function PitSidebar() {
     return (
         <div className={styles.sidebar}>
-            <PitSidebarContent
-                name={"グループ"}
-                url={"/admin/groups"}
-            />
+            {/*<PitSidebarContent*/}
+            {/*    name={"グループ"}*/}
+            {/*    url={"/admin/groups"}*/}
+            {/*/>*/}
             <PitSidebarContent
                 name={"クラス"}
                 url={"/admin/classes"}
