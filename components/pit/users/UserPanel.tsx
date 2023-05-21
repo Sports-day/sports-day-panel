@@ -8,7 +8,7 @@ export function UserPanel(props: { id: number }) {
     //  router
     const router = useRouter()
     //  fetch
-    const {user, refresh, isFetching} = useFetchUser(props.id)
+    const {user, isFetching} = useFetchUser(props.id)
 
     if (!isFetching && !user) {
         //  404

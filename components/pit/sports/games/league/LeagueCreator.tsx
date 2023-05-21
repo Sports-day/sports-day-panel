@@ -1,6 +1,6 @@
 import {Game, gameFactory} from "../../../../../src/models/GameModel";
 import {useFetchLocations} from "../../../../../src/features/locations/hook";
-import React, {FormEvent, useState} from "react";
+import {useState} from "react";
 import {
     Button,
     Dialog,
@@ -11,7 +11,6 @@ import {
     MenuItem,
     Select,
     SelectChangeEvent,
-    Typography
 } from "@mui/material";
 import {ConfirmInputDialog} from "../../../ConfirmInputDialog";
 

@@ -1,29 +1,15 @@
 import styles from "../../../../../styles/Pit.module.scss";
 import {useContext, useState} from "react";
 import {EntriesContext, GameContext} from "../../../../context";
-import {gameFactory} from "../../../../../src/models/GameModel";
 import {Button} from "@mui/material";
 import {LeagueTable} from "./LeagueTable";
 import {LeagueCreator} from "./LeagueCreator";
 
 export function LeagueController() {
     const {data: game, refresh} = useContext(GameContext)
-    const {data: teams, refresh: refreshTeams} = useContext(EntriesContext)
+    const {refresh: refreshTeams} = useContext(EntriesContext)
     //  state
     const [isOpenGenerateLeague, setIsOpenGenerateLeague] = useState<boolean>(false)
-
-    const generateLeague = async () => {
-        //  delete
-        await gameFactory().deleteGameMatches(game.id)
-        //  generate
-        await gameFactory().makeLeagueMatches(
-            game.id,
-            null
-        )
-
-        refresh()
-        refreshTeams()
-    }
 
     return (
         <>

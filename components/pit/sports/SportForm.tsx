@@ -2,15 +2,14 @@ import {FormType} from "../../../types";
 import {Sport, sportFactory} from "../../../src/models/SportModel";
 import React, {FormEvent, useContext, useRef, useState} from "react";
 import {
-    Box,
-    Button, CircularProgress, Dialog,
+    Button,
+    Dialog,
     DialogActions,
     DialogContent,
     DialogTitle,
     SelectChangeEvent,
     TextFieldProps
 } from "@mui/material";
-import {useFetchImages} from "../../../src/features/images/hook";
 import {SportEditFields} from "./SportEditFields";
 import {ImagesContext} from "../../context";
 

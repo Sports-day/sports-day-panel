@@ -3,17 +3,11 @@ import {Sport, sportFactory} from "../../../../src/models/SportModel";
 import {SportIcon} from "./SportIcon";
 import {
     Avatar,
-    Box, Button, CircularProgress, Divider,
-    InputLabel,
-    MenuItem,
-    Select,
+    Box, Button,
     SelectChangeEvent,
-    TextField,
     TextFieldProps,
-    Typography
 } from "@mui/material";
 import React, {FormEvent, useContext, useRef, useState} from "react";
-import {useFetchImages} from "../../../../src/features/images/hook";
 import {SportEditFields} from "../SportEditFields";
 import {ImagesContext} from "../../../context";
 

@@ -1,10 +1,8 @@
-import styles from "../../../styles/Pit.module.scss";
 import {MicrosoftAccount, microsoftAccountFactory} from "../../../src/models/MicrosoftAccountModel";
 import React, {useContext, useState} from "react";
 import {ClassesContext, UsersContext} from "../../context";
 import {
     Button,
-    Checkbox,
     Dialog,
     DialogActions,
     DialogContent, DialogTitle, InputLabel, MenuItem, Select,
@@ -61,10 +59,6 @@ export function MicrosoftAccountEditForm(props: MicrosoftAccountEditFormProps) {
 
     const handleRoleChange = (e: SelectChangeEvent) => {
         setRoleState(e.target.value.toString())
-    }
-
-    const handleLinkedUserChange = (value: number) => {
-        setLinkedUser(value)
     }
 
     const handleSubmit = async (e: React.FormEvent) => {

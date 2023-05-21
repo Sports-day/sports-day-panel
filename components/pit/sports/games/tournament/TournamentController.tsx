@@ -13,7 +13,7 @@ import {TournamentMatchDialog} from "./TournamentMatchDialog";
 
 export function TournamentController() {
     const {data: game, refresh} = useContext(GameContext)
-    const {data: teams, refresh: refreshTeams} = useContext(EntriesContext)
+    const {data: teams} = useContext(EntriesContext)
     const {matches, isFetching: isFetchingMatches, refresh: refreshMatches} = useFetchGameMatches(game.id)
     // const {result, isFetching: isFetchingResult} = useFetchGameResult(game.id)
     //  state
@@ -104,7 +104,7 @@ export function TournamentController() {
                     >
                         <Tree
                             data={treeData}
-                            onNodeClick={(node, event) => handleMatchClick(node)}
+                            onNodeClick={(node) => handleMatchClick(node)}
                         />
                     </div>
                 }
