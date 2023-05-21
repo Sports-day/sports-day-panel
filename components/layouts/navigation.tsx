@@ -24,6 +24,7 @@ import {
 } from '@mui/material';
 import Logo from "public/logo.svg"
 import {signOut, useSession} from "next-auth/react";
+import Link from "next/link";
 
 type Anchor = 'top';
 
@@ -58,11 +59,13 @@ export const Navigation = () => {
                         direction={"row"}
                         justifyContent={"space-between"}
                         alignItems={"center"}
-                        sx={{marginRight: "10px", padding:"8px 5px 40px"}}
+                        sx={{marginRight: "10px", paddingLeft:"30px",paddingRight:"6px", py: 3}}
                     >
-                        <Toolbar>
-                            <Logo width={20*8.45} height={20} fill={'white'}/>
-                        </Toolbar>
+                        <Link href={"dashboard/"}>
+                            <Box>
+                                <Logo width={20*8.45} height={20} fill={'white'}/>
+                            </Box>
+                        </Link>
                         <IconButton onClick={toggleDrawer(anchor, true)}>
                             <SvgIcon color="primary">
                                 <HiXMark color="#FFF"/>
@@ -143,7 +146,7 @@ export const Navigation = () => {
                                 </Typography>
                             </Stack>
                         </Button>
-
+                    { session && session.user.role == "admin" &&
                         <Button href={"/admin"}>
                             <Stack
                                 direction={"row"}
@@ -169,6 +172,7 @@ export const Navigation = () => {
                                 </Typography>
                             </Stack>
                         </Button>
+                    }
 
                         <Button onClick={() => signOut()}>
                             <Stack
