@@ -7,6 +7,7 @@ export type SportEditFieldsProps = {
     nameRef: RefObject<TextFieldProps>
     descriptionRef: RefObject<TextFieldProps>
     wightRef: RefObject<TextFieldProps>
+    ruleIdRef: RefObject<TextFieldProps>
     iconIdState: string
     handleImageIdChange: (e: SelectChangeEvent) => void
     images?: Image[]
@@ -54,6 +55,20 @@ export function SportEditFields(props: SportEditFieldsProps) {
                 label={"重み(0~100)"}
                 inputRef={props.wightRef}
                 defaultValue={!props.sport ? "0" : props.sport.weight}
+                fullWidth
+                required
+                sx={{
+                    my: '20px'
+                }}
+            />
+            {/* rule */}
+            <TextField
+                type={"text"}
+                name={"rule"}
+                id={"rule"}
+                label={"ルール番号"}
+                inputRef={props.ruleIdRef}
+                defaultValue={!props.sport ? "0" : props.sport.ruleId}
                 fullWidth
                 required
                 sx={{
