@@ -1,7 +1,7 @@
 import {GroupContent} from "./GroupContent";
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import {useContext} from "react";
-import {GroupsContext} from "../context";
+import {GroupsContext} from "../../context";
 
 export function GroupList() {
     const {data: groups, refresh} = useContext(GroupsContext)

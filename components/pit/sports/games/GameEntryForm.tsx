@@ -15,7 +15,7 @@ import {
 import React, {useContext} from "react";
 import {useFetchClasses} from "../../../../src/features/classes/hooks";
 import {Team} from "../../../../src/models/TeamModel";
-import {ClassesContext} from "../../context";
+import {ClassesContext} from "../../../context";
 import {gameFactory} from "../../../../src/models/GameModel";
 
 export type GameEntryFormProps = {

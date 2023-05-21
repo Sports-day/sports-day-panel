@@ -1,12 +1,14 @@
 import {createContext} from "react";
-import {Group} from "../../../src/models/GroupModel";
-import {Class} from "../../../src/models/ClassModel";
-import { User } from "../../../src/models/UserModel";
-import {MicrosoftAccount} from "../../../src/models/MicrosoftAccountModel";
-import {Team} from "../../../src/models/TeamModel";
-import {Sport} from "../../../src/models/SportModel";
-import {Game} from "../../../src/models/GameModel";
-import {Match} from "../../../src/models/MatchModel";
+import {Group} from "../../src/models/GroupModel";
+import {Class} from "../../src/models/ClassModel";
+import { User } from "../../src/models/UserModel";
+import {MicrosoftAccount} from "../../src/models/MicrosoftAccountModel";
+import {Team} from "../../src/models/TeamModel";
+import {Sport} from "../../src/models/SportModel";
+import {Game} from "../../src/models/GameModel";
+import {Match} from "../../src/models/MatchModel";
+import {Location} from "../../src/models/LocationModel";
+import {Image} from "../../src/models/ImageModel";
 
 export type GenericContextType<T> = {
     data: T
@@ -71,6 +73,18 @@ export const MatchesContext = createContext<MatchesContextType>({
 
 export type EntriesContextType = GenericContextType<Team[]>
 export const EntriesContext = createContext<EntriesContextType>({
+    data: [],
+    refresh: () => {}
+})
+
+export type LocationsContextType = GenericContextType<Location[]>
+export const LocationsContext = createContext<LocationsContextType>({
+    data: [],
+    refresh: () => {}
+})
+
+export type ImagesContextType = GenericContextType<Image[]>
+export const ImagesContext = createContext<ImagesContextType>({
     data: [],
     refresh: () => {}
 })

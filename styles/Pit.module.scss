@@ -74,6 +74,15 @@
     position: relative;
   }
 
+  .tournamentTree {
+    //  full width - sidebar width - padding - margin
+    width: calc(100vw - 340px - 40px);
+    margin: 100px 20px 0 20px;
+    height: 800px;
+    border: #DDDDDD solid 2px;
+    border-radius: 10px;
+  }
+
   .sportProfile {
     display: flex;
     flex-direction: row;
@@ -86,6 +95,33 @@
       margin-left: 60px;
       width: 100%;
     }
+  }
+
+  .matchFormView {
+    display: flex;
+    flex-direction: row;
+    margin: 20px 0;
+
+    .matchEntity {
+      width: 40%;
+    }
+
+    .vs {
+      width: 10%;
+      margin: auto 10% auto 0;
+      text-align: center;
+      font-size: 24px;
+    }
+  }
+
+  .slashCell {
+    transform: rotate(21deg);
+    width: 149px;
+    border: 0;
+    border-top: 1px solid #333;
+    margin: 0;
+    padding: 0;
+    transform-origin: 50% 0;
   }
 }
 

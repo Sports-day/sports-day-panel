@@ -4,7 +4,7 @@ import {useState} from "react";
 import {Box, Button, CircularProgress} from "@mui/material";
 import {TeamCreateForm} from "./TeamCreateForm";
 import {TeamList} from "./TeamList";
-import {ClassesContext} from "../context";
+import {ClassesContext} from "../../context";
 import {useFetchClasses} from "../../../src/features/classes/hooks";
 
 

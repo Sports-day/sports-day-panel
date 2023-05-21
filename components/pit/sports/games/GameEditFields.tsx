@@ -104,7 +104,7 @@ export function GameEditFields(props: GameEditFieldsProps) {
                 onChange={handleCalculationTypeChange}
             >
                 <MenuItem
-                    value={"total_sore"}
+                    value={"total_score"}
                 >
                     総合得点
                 </MenuItem>

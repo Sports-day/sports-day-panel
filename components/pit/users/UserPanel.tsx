@@ -2,15 +2,13 @@ import {useRouter} from "next/router";
 import {useFetchUser} from "../../../src/features/users/hook";
 import styles from "../../../styles/Pit.module.scss";
 import {Box, CircularProgress} from "@mui/material";
-import {TeamProfile} from "../teams/TeamProfile";
-import {TeamUsers} from "../teams/TeamUsers";
 import {UserTeams} from "./UserTeams";
 
 export function UserPanel(props: { id: number }) {
     //  router
     const router = useRouter()
     //  fetch
-    const {user, refresh, isFetching} = useFetchUser(props.id)
+    const {user, isFetching} = useFetchUser(props.id)
 
     if (!isFetching && !user) {
         //  404

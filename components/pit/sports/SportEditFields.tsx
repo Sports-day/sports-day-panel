@@ -7,6 +7,7 @@ export type SportEditFieldsProps = {
     nameRef: RefObject<TextFieldProps>
     descriptionRef: RefObject<TextFieldProps>
     wightRef: RefObject<TextFieldProps>
+    ruleIdRef: RefObject<TextFieldProps>
     iconIdState: string
     handleImageIdChange: (e: SelectChangeEvent) => void
     images?: Image[]
@@ -60,6 +61,20 @@ export function SportEditFields(props: SportEditFieldsProps) {
                     my: '20px'
                 }}
             />
+            {/* rule */}
+            <TextField
+                type={"text"}
+                name={"rule"}
+                id={"rule"}
+                label={"ルール番号"}
+                inputRef={props.ruleIdRef}
+                defaultValue={!props.sport ? "0" : props.sport.ruleId}
+                fullWidth
+                required
+                sx={{
+                    my: '20px'
+                }}
+            />
             {/* icon */}
             <InputLabel id="icon-select">アイコン</InputLabel>
             <Select
@@ -73,6 +88,14 @@ export function SportEditFields(props: SportEditFieldsProps) {
                 }}
                 onChange={props.handleImageIdChange}
             >
+                <MenuItem
+                    value={"-1"}
+                    sx={{
+                        color: "red"
+                    }}
+                >
+                    未選択
+                </MenuItem>
                 {
                     props.images?.map((image) => {
                         return (

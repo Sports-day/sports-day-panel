@@ -2,11 +2,12 @@ import styles from "../../../styles/Pit.module.scss";
 import {useFetchUsers} from "../../../src/features/users/hook";
 import {useFetchTeams} from "../../../src/features/teams/hook";
 import {useFetchClasses} from "../../../src/features/classes/hooks";
-import {ClassesContext, TeamsContext, UsersContext} from "../context";
+import {ClassesContext, TeamsContext, UsersContext} from "../../context";
 import {Box, Button, CircularProgress} from "@mui/material";
 import { UserList } from "./UserList";
 import {UserForm} from "./UserForm";
 import {useState} from "react";
+import {UserCreatorWithCSV} from "./UserCreatorWithCSV";
 
 export function Users() {
     const {users, isFetching: isFetchingUsers, refresh: refreshUsers} = useFetchUsers()
@@ -15,6 +16,7 @@ export function Users() {
 
     //  state
     const [isCreatorOpen, setIsCreatorOpen] = useState(false)
+    const [isAutomaticCreatorOpen, setIsAutomaticCreatorOpen] = useState(false)
 
     return (
         <>
@@ -44,6 +46,17 @@ export function Users() {
                                 variant="contained"
                                 sx={{
                                     position: "absolute",
+                                    right: "100px",
+                                    top: "20px",
+                                }}
+                                onClick={() => setIsAutomaticCreatorOpen(true)}
+                            >
+                                一括作成(CSV)
+                            </Button>
+                            <Button
+                                variant="contained"
+                                sx={{
+                                    position: "absolute",
                                     right: "20px",
                                     top: "20px",
                                 }}
@@ -69,6 +82,12 @@ export function Users() {
                                         isOpen={isCreatorOpen}
                                         setClose={() => setIsCreatorOpen(false)}
                                         formType={"create"}
+                                        refresh={refreshUsers}
+                                    />
+
+                                    <UserCreatorWithCSV
+                                        isOpen={isAutomaticCreatorOpen}
+                                        setClose={() => setIsAutomaticCreatorOpen(false)}
                                         refresh={refreshUsers}
                                     />
 

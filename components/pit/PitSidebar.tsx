@@ -4,10 +4,10 @@ import {PitSidebarContent} from "./PitSidebarContent";
 export function PitSidebar() {
     return (
         <div className={styles.sidebar}>
-            <PitSidebarContent
-                name={"グループ"}
-                url={"/admin/groups"}
-            />
+            {/*<PitSidebarContent*/}
+            {/*    name={"グループ"}*/}
+            {/*    url={"/admin/groups"}*/}
+            {/*/>*/}
             <PitSidebarContent
                 name={"クラス"}
                 url={"/admin/classes"}
@@ -23,6 +23,18 @@ export function PitSidebar() {
             <PitSidebarContent
                 name={"競技"}
                 url={"/admin/sports"}
+            />
+            <PitSidebarContent
+                name={"マッチ"}
+                url={"/admin/matches"}
+            />
+            <PitSidebarContent
+                name={"ロケーション"}
+                url={"/admin/locations"}
+            />
+            <PitSidebarContent
+                name={"画像"}
+                url={"/admin/images"}
             />
             <PitSidebarContent
                 name={"Microsoftアカウント"}

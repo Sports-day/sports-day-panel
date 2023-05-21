@@ -1,5 +1,5 @@
 import {useContext} from "react";
-import {MicrosoftAccountsContext} from "../context";
+import {MicrosoftAccountsContext} from "../../context";
 import {MicrosoftAccountContent} from "./MicrosoftAccountContent";
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 

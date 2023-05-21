@@ -6,7 +6,8 @@ import {GameProfile} from "./GameProfile";
 import {GameEntries} from "./GameEntries";
 import {LeagueController} from "./league/LeagueController";
 import {TournamentController} from "./tournament/TournamentController";
-import {EntriesContext, GameContext} from "../../context";
+import {EntriesContext, GameContext} from "../../../context";
+import {GameMatches} from "./GameMatches";
 
 export function GamePanel(props: { id: number }) {
     //  router
@@ -53,7 +54,7 @@ export function GamePanel(props: { id: number }) {
                             <>
                                 <h1>{game?.name}</h1>
 
-                                <GameProfile />
+                                <GameProfile/>
 
                                 <Divider light/>
 
@@ -61,21 +62,26 @@ export function GamePanel(props: { id: number }) {
 
                                 <Divider light/>
 
+                                <GameMatches
+                                    // @ts-ignore
+                                    sportId={game?.sportId}
+                                    // @ts-ignore
+                                    gameId={game?.id}
+                                />
+
+                                <Divider light/>
+
                                 {/* matches */}
                                 {game?.type === "league" ?
                                     <>
-                                        <h2>リーグ</h2>
-
                                         {/* controller */}
-                                        <LeagueController />
+                                        <LeagueController/>
                                     </>
                                     :
                                     <>
-                                        <h2>トーナメント</h2>
-
                                         {/* controller */}
                                         {/*@ts-ignore*/}
-                                        <TournamentController />
+                                        <TournamentController/>
                                     </>
                                 }
                             </>

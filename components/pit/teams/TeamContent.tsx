@@ -1,7 +1,7 @@
 import {TableCell, TableRow, Link, Button} from "@mui/material";
 import {Team, teamFactory} from "../../../src/models/TeamModel";
 import {useContext, useState} from "react";
-import {ClassesContext} from "../context";
+import {ClassesContext} from "../../context";
 import {ConfirmInputDialog} from "../ConfirmInputDialog";
 
 export function TeamContent(props: { team: Team, refresh: VoidFunction }) {

@@ -1,13 +1,15 @@
 import styles from "../../../styles/Pit.module.scss";
 import {useFetchSports} from "../../../src/features/sports/hook";
-import {SportsContext} from "../context";
+import {ImagesContext, SportsContext} from "../../context";
 import {Box, Button, CircularProgress} from "@mui/material";
 import { SportForm } from "./SportForm";
 import {SportList} from "./SportList";
 import {useState} from "react";
+import {useFetchImages} from "../../../src/features/images/hook";
 
 export function Sports() {
     const {sports, refresh: refreshSports, isFetching: isFetchingSports} = useFetchSports()
+    const {images, refresh: refreshImages, isFetching: isFetchingImages} = useFetchImages()
     // const {games, refresh: refreshGames, isFetching: isFetchingGames} = useFetchGames()
 
     //  state
@@ -21,6 +23,12 @@ export function Sports() {
                     refresh: refreshSports
                 }}
             >
+                <ImagesContext.Provider
+                    value={{
+                        data: images,
+                        refresh: refreshImages
+                    }}
+                >
                     <div className={styles.content}>
                         <h1>競技</h1>
 
@@ -36,7 +44,7 @@ export function Sports() {
                             作成
                         </Button>
 
-                        {isFetchingSports ?
+                        {isFetchingSports && isFetchingImages ?
                             <Box
                                 sx={{
                                     display: "flex",
@@ -60,6 +68,7 @@ export function Sports() {
                             </>
                         }
                     </div>
+                </ImagesContext.Provider>
             </SportsContext.Provider>
         </>
     )

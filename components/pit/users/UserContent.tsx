@@ -2,7 +2,7 @@ import {User, userFactory} from "../../../src/models/UserModel";
 import {Button, Link, TableCell, TableRow} from "@mui/material";
 import {ConfirmDialog} from "../ConfirmDialog";
 import {useContext, useState} from "react";
-import {ClassesContext} from "../context";
+import {ClassesContext} from "../../context";
 import { UserForm } from "./UserForm";
 
 export function UserContent(props: {user: User, refresh: VoidFunction}) {

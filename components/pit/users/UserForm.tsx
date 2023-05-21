@@ -12,7 +12,7 @@ import {
     TextField,
     TextFieldProps
 } from "@mui/material";
-import {ClassesContext} from "../context";
+import {ClassesContext} from "../../context";
 
 export type UserFormProps = {
     isOpen: boolean
@@ -46,11 +46,13 @@ export function UserForm(props: UserFormProps) {
 
         //  class id not exist
         if (!classes.some(class_ => class_.id === +classState)) {
+            alert("クラスが存在しません。")
             return
         }
 
         //  gender invalid
         if (genderState !== "male" && genderState !== "female") {
+            alert("性別は男性か女性が選択可能です。")
             return
         }
 

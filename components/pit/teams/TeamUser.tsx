@@ -1,7 +1,7 @@
 import {User} from "../../../src/models/UserModel"
 import {Button, TableCell, TableRow, Link} from "@mui/material";
 import {useContext, useState} from "react";
-import {ClassesContext} from "../context";
+import {ClassesContext} from "../../context";
 import {ConfirmDialog} from "../ConfirmDialog";
 import {teamFactory} from "../../../src/models/TeamModel";
 

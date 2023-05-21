@@ -1,10 +1,8 @@
-import styles from "../../../styles/Pit.module.scss";
 import {MicrosoftAccount, microsoftAccountFactory} from "../../../src/models/MicrosoftAccountModel";
 import React, {useContext, useState} from "react";
-import {ClassesContext, UsersContext} from "../context";
+import {ClassesContext, UsersContext} from "../../context";
 import {
     Button,
-    Checkbox,
     Dialog,
     DialogActions,
     DialogContent, DialogTitle, InputLabel, MenuItem, Select,
@@ -63,19 +61,18 @@ export function MicrosoftAccountEditForm(props: MicrosoftAccountEditFormProps) {
         setRoleState(e.target.value.toString())
     }
 
-    const handleLinkedUserChange = (value: number) => {
-        setLinkedUser(value)
-    }
-
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
 
         //  not selected
         if (linkedUser === -1) {
+            alert("ユーザーを選択してください。")
             return
         }
+
         //  linked user id not exist
         if (!users.some(user => user.id === +linkedUser)) {
+            alert("ユーザーが存在しません。")
             return
         }
 

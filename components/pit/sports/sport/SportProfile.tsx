@@ -3,28 +3,24 @@ import {Sport, sportFactory} from "../../../../src/models/SportModel";
 import {SportIcon} from "./SportIcon";
 import {
     Avatar,
-    Box, Button, Divider,
-    InputLabel,
-    MenuItem,
-    Select,
+    Box, Button,
     SelectChangeEvent,
-    TextField,
     TextFieldProps,
-    Typography
 } from "@mui/material";
-import React, {FormEvent, useRef, useState} from "react";
-import {useFetchImages} from "../../../../src/features/images/hook";
+import React, {FormEvent, useContext, useRef, useState} from "react";
 import {SportEditFields} from "../SportEditFields";
+import {ImagesContext} from "../../../context";
 
 export function SportProfile(props: { sport: Sport, refresh: VoidFunction }) {
     //  ref
     const nameRef = useRef<TextFieldProps>(null)
     const descriptionRef = useRef<TextFieldProps>(null)
     const wightRef = useRef<TextFieldProps>(null)
+    const ruleIdRef = useRef<TextFieldProps>(null)
     //  state
-    const [iconIdState, setIconIdState] = useState<string>(props.sport?.iconId?.toString() ?? '')
+    const [iconIdState, setIconIdState] = useState<string>(props.sport?.iconId?.toString() ?? '-1')
     //  images
-    const {images} = useFetchImages()
+    const {data: images} = useContext(ImagesContext)
 
     const handleImageIdChange = (e: SelectChangeEvent) => {
         setIconIdState(e.target.value.toString())
@@ -35,8 +31,22 @@ export function SportProfile(props: { sport: Sport, refresh: VoidFunction }) {
 
         //  weight invalid
         if (isNaN(parseInt(wightRef.current?.value as string))) {
+            alert('重みは0~100の整数で入力してください。')
             return
         }
+
+        //  ruleId invalid
+        if (isNaN(parseInt(ruleIdRef.current?.value as string))) {
+            alert("ルールIdは数値で入力してください。")
+            return
+        }
+
+        //  iconId invalid
+        if (iconIdState !== '-1' && !images?.some(image => image.id === +iconIdState)) {
+            alert('アイコンが正しく選択されていません。')
+            return
+        }
+
 
         const id = props.sport?.id
         if (!id) return
@@ -46,8 +56,9 @@ export function SportProfile(props: { sport: Sport, refresh: VoidFunction }) {
             {
                 name: nameRef.current?.value as string,
                 description: descriptionRef.current?.value as string,
-                iconId: iconIdState === '' ? null : +iconIdState,
-                weight: wightRef.current?.value as number
+                iconId: iconIdState === '-1' ? null : +iconIdState,
+                weight: wightRef.current?.value as number,
+                ruleId: ruleIdRef.current?.value as number,
             }
         )
 
@@ -83,6 +94,7 @@ export function SportProfile(props: { sport: Sport, refresh: VoidFunction }) {
                                     nameRef={nameRef}
                                     descriptionRef={descriptionRef}
                                     wightRef={wightRef}
+                                    ruleIdRef={ruleIdRef}
                                     iconIdState={iconIdState}
                                     handleImageIdChange={handleImageIdChange}
                                     images={images}

@@ -1,6 +1,6 @@
 import styles from "../../../styles/Pit.module.scss";
 import {useFetchMicrosoftAccounts} from "../../../src/features/microsoft-account/hooks";
-import {ClassesContext, MicrosoftAccountsContext, UsersContext} from "../context";
+import {ClassesContext, MicrosoftAccountsContext, UsersContext} from "../../context";
 import {MicrosoftAccountList} from "./MicrosoftAccountList";
 import {useFetchUsers} from "../../../src/features/users/hook";
 import {useFetchClasses} from "../../../src/features/classes/hooks";

@@ -11,7 +11,7 @@ export function SportIcon(props: { iconId: number }) {
                     width: "200px",
                     height: "200px",
                 }}
-                src={`data:image/png;base64, ${image?.attachment}`}
+                src={image?.attachment}
             />
         </>
     )

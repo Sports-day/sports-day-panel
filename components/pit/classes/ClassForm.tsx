@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import {FormType} from "../../../types";
 import {Class, classFactory} from "../../../src/models/ClassModel";
-import {GroupsContext} from "../context";
+import {GroupsContext} from "../../context";
 
 export type ClassFormProps = {
     isOpen: boolean
@@ -39,6 +39,7 @@ export function ClassForm(props: ClassFormProps) {
 
         //  group id not exist
         if (!groups.some(group => group.id === +groupState)) {
+            alert("グループが存在しません。")
             return
         }
 

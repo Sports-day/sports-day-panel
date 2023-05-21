@@ -15,7 +15,7 @@ const deleteMatch = async (id: number): Promise<void> => {
     await ApiClient.delete(`/matches/${id}`)
 }
 
-const updateMatch = async (id: number, omittedMatch: Omit<Match, "id" | "createdAt" | "updatedAt">): Promise<Match> => {
+const updateMatch = async (id: number, omittedMatch: Omit<Match, "id" | "parents" | "children" | "createdAt" | "updatedAt">): Promise<Match> => {
     const {data} = await ApiClient.put(`/matches/${id}`, omittedMatch)
     return data.data
 }
@@ -24,7 +24,7 @@ export type MatchRepository = {
     getMatches: () => Promise<Match[]>,
     getMatch: (id: number) => Promise<Match>,
     deleteMatch: (id: number) => Promise<void>,
-    updateMatch: (id: number, omittedMatch: Omit<Match, "id" | "createdAt" | "updatedAt">) => Promise<Match>,
+    updateMatch: (id: number, omittedMatch: Omit<Match, "id" | "parents" | "children" | "createdAt" | "updatedAt">) => Promise<Match>,
 }
 
 export const matchRepository: MatchRepository = {

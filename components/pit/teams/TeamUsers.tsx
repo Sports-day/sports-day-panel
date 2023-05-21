@@ -3,7 +3,7 @@ import {Team} from "../../../src/models/TeamModel";
 import {useFetchUsers} from "../../../src/features/users/hook";
 import {Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 import {useFetchClasses} from "../../../src/features/classes/hooks";
-import {ClassesContext, UsersContext} from "../context";
+import {ClassesContext, UsersContext} from "../../context";
 import {TeamUser} from "./TeamUser";
 import {TeamUserForm} from "./TeamUserForm";
 import {useState} from "react";

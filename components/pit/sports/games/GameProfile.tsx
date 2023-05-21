@@ -3,7 +3,7 @@ import React, {FormEvent, useContext, useRef, useState} from "react";
 import {Box, Button, TextFieldProps} from "@mui/material";
 import {GameEditFields} from "./GameEditFields";
 import styles from "../../../../styles/Pit.module.scss";
-import {GameContext} from "../../context";
+import {GameContext} from "../../../context";
 
 export function GameProfile() {
     const {data: game, refresh} = useContext(GameContext)

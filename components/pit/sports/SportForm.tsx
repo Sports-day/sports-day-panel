@@ -1,16 +1,17 @@
 import {FormType} from "../../../types";
 import {Sport, sportFactory} from "../../../src/models/SportModel";
-import React, {FormEvent, useRef, useState} from "react";
+import React, {FormEvent, useContext, useRef, useState} from "react";
 import {
-    Button, Dialog,
+    Button,
+    Dialog,
     DialogActions,
     DialogContent,
     DialogTitle,
     SelectChangeEvent,
     TextFieldProps
 } from "@mui/material";
-import {useFetchImages} from "../../../src/features/images/hook";
 import {SportEditFields} from "./SportEditFields";
+import {ImagesContext} from "../../context";
 
 export type SportFormProps = {
     isOpen: boolean
@@ -25,10 +26,11 @@ export function SportForm(props: SportFormProps) {
     const nameRef = useRef<TextFieldProps>(null)
     const descriptionRef = useRef<TextFieldProps>(null)
     const wightRef = useRef<TextFieldProps>(null)
+    const ruleIdRef = useRef<TextFieldProps>(null)
     //  state
     const [iconIdState, setIconIdState] = useState<string>(props.sport?.iconId?.toString() ?? '')
     //  images
-    const {images} = useFetchImages()
+    const {data: images} = useContext(ImagesContext)
 
     const handleImageIdChange = (e: SelectChangeEvent) => {
         setIconIdState(e.target.value.toString())
@@ -39,6 +41,19 @@ export function SportForm(props: SportFormProps) {
 
         //  weight invalid
         if (isNaN(parseInt(wightRef.current?.value as string))) {
+            alert("重みは数値で入力してください。(0~100)")
+            return
+        }
+
+        //  ruleId invalid
+        if (isNaN(parseInt(ruleIdRef.current?.value as string))) {
+            alert("ルールIdは数値で入力してください。")
+            return
+        }
+
+        //  iconId invalid
+        if (iconIdState !== '-1' && !images?.some(image => image.id === +iconIdState)) {
+            alert('アイコンが正しく選択されていません。')
             return
         }
 
@@ -46,12 +61,13 @@ export function SportForm(props: SportFormProps) {
             await sportFactory().create({
                 name: nameRef.current?.value as string,
                 description: descriptionRef.current?.value as string,
-                iconId: iconIdState === '' ? null : +iconIdState,
-                weight: wightRef.current?.value as number
+                iconId: iconIdState === '-1' ? null : +iconIdState,
+                weight: wightRef.current?.value as number,
+                ruleId: ruleIdRef.current?.value as number
             })
         } else {
             const id = props.sport?.id
-            if(!id) return
+            if (!id) return
 
             await sportFactory().update(
                 id,
@@ -59,7 +75,8 @@ export function SportForm(props: SportFormProps) {
                     name: nameRef.current?.value as string,
                     description: descriptionRef.current?.value as string,
                     iconId: iconIdState === '' ? null : +iconIdState,
-                    weight: wightRef.current?.value as number
+                    weight: wightRef.current?.value as number,
+                    ruleId: ruleIdRef.current?.value as number
                 }
             )
         }
@@ -70,6 +87,7 @@ export function SportForm(props: SportFormProps) {
 
     return (
         <>
+
             <Dialog
                 open={props.isOpen}
                 onClose={props.setClose}
@@ -83,15 +101,18 @@ export function SportForm(props: SportFormProps) {
                         {props.formType === "create" ? "競技作成" : "競技編集"}
                     </DialogTitle>
                     <DialogContent>
+
                         <SportEditFields
                             nameRef={nameRef}
                             descriptionRef={descriptionRef}
                             wightRef={wightRef}
+                            ruleIdRef={ruleIdRef}
                             iconIdState={iconIdState}
                             handleImageIdChange={handleImageIdChange}
                             images={images}
                             sport={props.sport}
                         />
+
                     </DialogContent>
                     <DialogActions>
                         <Button
@@ -113,6 +134,7 @@ export function SportForm(props: SportFormProps) {
                     </DialogActions>
                 </form>
             </Dialog>
+
         </>
     )
 }

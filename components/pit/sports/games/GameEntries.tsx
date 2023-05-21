@@ -3,7 +3,7 @@ import {Box, Button, CircularProgress} from "@mui/material";
 import {useContext, useState} from "react";
 import {GameEntryList} from "./GameEntryList";
 import {GameEntryForm} from "./GameEntryForm";
-import {EntriesContext, GameContext} from "../../context";
+import {EntriesContext, GameContext} from "../../../context";
 
 export function GameEntries(props: {isFetching: boolean}) {
     const {data: game, refresh} = useContext(GameContext)
