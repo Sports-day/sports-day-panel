@@ -7,7 +7,7 @@ import {
     Unstable_Grid2 as Grid,
 } from "@mui/material";
 import * as React from "react";
-import Overview from "../components/dashboard/overview";
+import Overview from "../components/dashboard/Overview";
 import Schedule from "../components/dashboard/schedule";
 import {SportsListElement} from "../components/dashboard/SportsListElement";
 import {useFetchMyTeamRank, useFetchMyTeams} from "../src/features/teams/hook";
@@ -15,13 +15,9 @@ import {useFetchMySport, useFetchSports} from "../src/features/sports/hook";
 import {Navigation} from "../components/layouts/navigation";
 import {ThemeProvider} from "@mui/material/styles";
 import {createTheme} from "../components/theme";
-import {motion, HTMLMotionProps} from "framer-motion";
-import Link from "next/link";
+import {motion} from "framer-motion";
 import {Footer} from "../components/layouts/footer";
 import {useFetchMySportMatches} from "../src/features/matches/hook";
-
-type PageTransitionProps = HTMLMotionProps<'div'>
-type PageTransitionRef = React.ForwardedRef<HTMLDivElement>
 
 
 const DashBoard: NextPage = () => {
@@ -30,17 +26,8 @@ const DashBoard: NextPage = () => {
     const {sports} = useFetchSports();
     const {matches} = useFetchMySportMatches();
     const theme = createTheme();
-    //my overview
     const {rank: myRank} = useFetchMyTeamRank();
-
-    //my schedule
-    const [team1,team2,team3]=["X1-1","X1-2","X1-3"];
-    const [time1,time2,time3]=["10:00","11:00","12:00"];
-    const [location1,location2,location3]=["場所1","場所2","場所3"];
-
     const icon=1;
-
-    const transition = {duration: 0.6, ease: 'easeInOut'}
 
     return(
         <motion.div

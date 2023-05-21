@@ -15,7 +15,6 @@ import {GameProgress} from "../../components/game/game-progress";
 import {GameBest} from "../../components/game/GameBest";
 import {Navigation} from "../../components/layouts/navigation";
 import {HiArrowLeftCircle, HiEllipsisHorizontalCircle} from "react-icons/hi2";
-import {GamePointBar} from "../../components/game/GamePointBar"
 import * as React from "react";
 import {useFetchSport, useFetchSportGames, useFetchSportProgress} from "../../src/features/sports/hook";
 import {useFetchMyTeams} from "../../src/features/teams/hook";
@@ -24,6 +23,9 @@ import {ThemeProvider} from "@mui/material/styles";
 import {useRouter} from "next/router";
 import {Footer} from "../../components/layouts/footer";
 import {useFetchGameResult} from "../../src/features/games/hook";
+import {useFetchImage} from "../../src/features/images/hook";
+import {useFetchGameMatches} from "../../src/features/games/hook";
+import {GameList} from "../../components/game/GameList"
 
 type Props = {
     sportId: number
@@ -36,13 +38,11 @@ const Id: NextPage<Props> = (props: Props) => {
     const {sport, isFetching} = useFetchSport(props.sportId)
     const {progress} = useFetchSportProgress(props.sportId)
     const {teams} = useFetchMyTeams();
-    const {result} = useFetchGameResult(0)
-    console.log(result)
-    if (!isFetching && !sport) {
-        //  404
-        router.push("/404").then()
-        return null
-    }
+    const {result} = useFetchGameResult(props.sportId)
+    const {image} = useFetchImage(props.sportId)
+    const {games, isFetching: isFethingGames} = useFetchSportGames(props.sportId)
+
+
 
 
     const sportName = sport?.name;
@@ -64,6 +64,8 @@ const Id: NextPage<Props> = (props: Props) => {
                     overflow:"hidden"
                 }}
             >
+
+                {/*MainVisual*/}
                 <Container
                     maxWidth={false}
                     disableGutters
@@ -95,7 +97,7 @@ const Id: NextPage<Props> = (props: Props) => {
                             <Avatar
                                 alt={sportName}
                                 sx={{height: "3.5em", width: "3.5em"}}
-                                src={"/public/images/basketball.jpg"}
+                                src={image?.attachment}
                             >
 
                             </Avatar>
@@ -105,12 +107,14 @@ const Id: NextPage<Props> = (props: Props) => {
                         </Stack>
                     </Stack>
                 </Container>
+
                 <Container
                     maxWidth={"xl"}
                     disableGutters
                     sx={{px:1, pb:0}}
                 >
 
+                    {/*MiddleNavigation*/}
                     <Stack
                         direction={"row"}
                         justifyContent={"space-between"}
@@ -164,6 +168,7 @@ const Id: NextPage<Props> = (props: Props) => {
                         </Button>
                     </Stack>
 
+                    {/*GameProgress, BestTeam*/}
                     <Stack
                         direction={"column"}
                         justifyContent={"space-between"}
@@ -188,61 +193,11 @@ const Id: NextPage<Props> = (props: Props) => {
 
                         </Grid>
                     </Stack>
+
                 </Container>
-                <Container
-                    maxWidth={false}
-                    disableGutters
-                    sx={{
-                        paddingTop: "0px",
-                        position:"relative",
-                        bottom:"-40px"
-                    }}
-                >
-                    <Stack
-                        direction={"column"}
-                        justifyContent={"flex-start"}
-                        alignItems={"center"}
-                        spacing={3}
-                        minHeight={"50vh"}
-                        sx={{
-                            position: "relative",
-                            width: "101vw",
-                            height:"fit-content",
-                            backgroundColor: "#23398a",
-                        }}
-                    >
-                        <Stack
-                            direction={"column"}
-                            justifyContent={"flex-start"}
-                            alignItems={"center"}
-                            spacing={3}
-                            width={"100vw"}
-                        >
-                            <Stack
-                                width={"100%"}
-                                maxWidth={"xl"}
-                                sx={{px:2, pb:3, pt:3}}
-                                spacing={2}
-                            >
-                                <Typography sx={{color: "#99a5d6", fontSize: "14px"}}>
-                                    対戦一覧
-                                </Typography>
-                                <GamePointBar
-                                    leftScore={12}
-                                    leftTeam={"L1"}
-                                    rightScore={34}
-                                    rightTeam={"R1"}
-                                    umpireTeam={"U1"}
-                                    time={"TE:ST"}
-                                />
-                            </Stack>
-                            <Divider/>
-                            <Typography sx={{color: "#99a5d6", fontSize: "14px"}}>
-                                対戦が終了すると項目が追加されます
-                            </Typography>
-                        </Stack>
-                    </Stack>
-                </Container>
+
+                <GameList sportId={props.sportId}/>
+
             </Box>
             <Footer/>
             </ThemeProvider>

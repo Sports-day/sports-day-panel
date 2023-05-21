@@ -1,8 +1,10 @@
 import {Avatar, Button, Card, CardContent, Stack, Typography} from "@mui/material";
+import {useFetchImage} from "../../src/features/images/hook";
 
 
 export const SportsListElement = (props:any) => {
-    const {comp,icon,link} =props;
+    const {image} = useFetchImage(props.sportId)
+    const {comp, link} =props;
     return (
         <Card>
             <Button sx={{width:"100%"}} href={link}>
@@ -16,7 +18,7 @@ export const SportsListElement = (props:any) => {
                         <Avatar
                             alt={comp}
                             sx={{height: "3.5em", width: "3.5em"}}
-                            src={icon}
+                            src={image?.attachment}
                         >
 
                         </Avatar>

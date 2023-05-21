@@ -8,12 +8,11 @@ import {
 import {linearProgressClasses} from "@mui/material";
 import {ThemeProvider} from "@mui/material/styles";
 import * as React from "react";
-import {createTheme} from "../theme";
 import {HiClock} from "react-icons/hi2";
 import {MdOutlineSportsScore} from "react-icons/md";
+import {useFetchTeams} from "../../../src/features/teams/hook";
 
-const theme = createTheme();
-const PointBar = styled(LinearProgress)(({ theme }) => ({
+const PointBar = styled(LinearProgress)(({}) => ({
     height: 4.5,
     borderRadius: 2,
     [`&.${linearProgressClasses.colorPrimary}`]: {backgroundColor: '#435BBC',},
@@ -21,8 +20,11 @@ const PointBar = styled(LinearProgress)(({ theme }) => ({
 }));
 
 export const GamePointBar = (props: any) => {
-
-    const {leftScore, rightScore, leftTeam, rightTeam, umpireTeam, time} = props;
+    const {teams} = useFetchTeams();
+    const {leftScore, rightScore, leftTeamId, rightTeamId, umpireTeam, time} = props;
+    const leftTeam = teams.find(team => team.id === leftTeamId);
+    const rightTeam = teams.find(team => team.id === rightTeamId);
+    const formattedTime = new Date(time).toLocaleTimeString("ja-JP");
     return(
         <>
             <Stack
@@ -58,11 +60,11 @@ export const GamePointBar = (props: any) => {
                                     <HiClock color="#99a5d6"/>
                                 </SvgIcon>
                                 <Typography sx={{color: "#99a5d6", fontSize: "14px"}}>
-                                    {time}
+                                    {formattedTime}
                                 </Typography>
                             </Stack>
                             <Typography sx={{color: "#FFF", fontSize: "14px"}}>
-                                {leftTeam}
+                                {leftTeam?.name.slice(4)}
                             </Typography>
                         </Stack>
                         <Box>
@@ -90,7 +92,7 @@ export const GamePointBar = (props: any) => {
                             spacing={0}
                         >
                             <Typography sx={{color: "#FFF", fontSize: "14px"}}>
-                                {rightTeam}
+                                {rightTeam?.name.slice(4)}
                             </Typography>
                             <Stack direction={"row"}>
                                 <SvgIcon fontSize={"small"} sx={{position:"relative", top:"2px"}}>
@@ -116,5 +118,3 @@ export const GamePointBar = (props: any) => {
         </>
     )
 }
-
-export default GamePointBar
