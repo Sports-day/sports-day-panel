@@ -1,6 +1,6 @@
 import {FormType} from "../../../types";
 import {Sport, sportFactory} from "../../../src/models/SportModel";
-import React, {FormEvent, useRef, useState} from "react";
+import React, {FormEvent, useContext, useRef, useState} from "react";
 import {
     Box,
     Button, CircularProgress, Dialog,
@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import {useFetchImages} from "../../../src/features/images/hook";
 import {SportEditFields} from "./SportEditFields";
+import {ImagesContext} from "../../context";
 
 export type SportFormProps = {
     isOpen: boolean
@@ -26,10 +27,11 @@ export function SportForm(props: SportFormProps) {
     const nameRef = useRef<TextFieldProps>(null)
     const descriptionRef = useRef<TextFieldProps>(null)
     const wightRef = useRef<TextFieldProps>(null)
+    const ruleIdRef = useRef<TextFieldProps>(null)
     //  state
     const [iconIdState, setIconIdState] = useState<string>(props.sport?.iconId?.toString() ?? '')
     //  images
-    const {images, isFetching} = useFetchImages()
+    const {data: images} = useContext(ImagesContext)
 
     const handleImageIdChange = (e: SelectChangeEvent) => {
         setIconIdState(e.target.value.toString())
@@ -44,6 +46,12 @@ export function SportForm(props: SportFormProps) {
             return
         }
 
+        //  ruleId invalid
+        if (isNaN(parseInt(ruleIdRef.current?.value as string))) {
+            alert("ルールIdは数値で入力してください。")
+            return
+        }
+
         //  iconId invalid
         if (iconIdState !== '-1' && !images?.some(image => image.id === +iconIdState)) {
             alert('アイコンが正しく選択されていません。')
@@ -55,7 +63,8 @@ export function SportForm(props: SportFormProps) {
                 name: nameRef.current?.value as string,
                 description: descriptionRef.current?.value as string,
                 iconId: iconIdState === '-1' ? null : +iconIdState,
-                weight: wightRef.current?.value as number
+                weight: wightRef.current?.value as number,
+                ruleId: ruleIdRef.current?.value as number
             })
         } else {
             const id = props.sport?.id
@@ -67,7 +76,8 @@ export function SportForm(props: SportFormProps) {
                     name: nameRef.current?.value as string,
                     description: descriptionRef.current?.value as string,
                     iconId: iconIdState === '' ? null : +iconIdState,
-                    weight: wightRef.current?.value as number
+                    weight: wightRef.current?.value as number,
+                    ruleId: ruleIdRef.current?.value as number
                 }
             )
         }
@@ -92,30 +102,18 @@ export function SportForm(props: SportFormProps) {
                         {props.formType === "create" ? "競技作成" : "競技編集"}
                     </DialogTitle>
                     <DialogContent>
-                        {isFetching ?
-                            <Box
-                                sx={{
-                                    display: "flex",
-                                    justifyContent: "center",
-                                    alignItems: "center",
-                                    mt: "100px",
-                                }}
-                            >
-                                <CircularProgress/>
-                            </Box>
-                            :
-                            <>
-                                <SportEditFields
-                                    nameRef={nameRef}
-                                    descriptionRef={descriptionRef}
-                                    wightRef={wightRef}
-                                    iconIdState={iconIdState}
-                                    handleImageIdChange={handleImageIdChange}
-                                    images={images}
-                                    sport={props.sport}
-                                />
-                            </>
-                        }
+
+                        <SportEditFields
+                            nameRef={nameRef}
+                            descriptionRef={descriptionRef}
+                            wightRef={wightRef}
+                            ruleIdRef={ruleIdRef}
+                            iconIdState={iconIdState}
+                            handleImageIdChange={handleImageIdChange}
+                            images={images}
+                            sport={props.sport}
+                        />
+
                     </DialogContent>
                     <DialogActions>
                         <Button
