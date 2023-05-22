@@ -8,7 +8,7 @@ const headers = {
     "Content-Type": "application/json",
 };
 
-export const ApiClient = axios.create({ baseURL, headers });
+export const ApiClient = axios.create({ baseURL, headers, timeout: 1000*20 });
 
 // error handling
 ApiClient.interceptors.response.use(
