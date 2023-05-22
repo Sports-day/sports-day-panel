@@ -7,6 +7,7 @@ export type MicrosoftAccount = {
     mailAccountName: string | null,
     role: Role,
     userId: number | null,
+    linkLater: boolean,
     firstLogin: string,
     lastLogin: string
 }
@@ -34,6 +35,9 @@ export const microsoftAccountFactory = (repo?: MicrosoftAccountRepository) => {
         },
         unlinkUser: async (id: number | "me"): Promise<void> => {
             return await repository.unlinkMicrosoftAccount(id)
+        },
+        linkLater: async (id: number | "me"): Promise<void> => {
+            return await repository.linkLaterMicrosoftAccount(id)
         }
     }
 }
