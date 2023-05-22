@@ -64,14 +64,8 @@ export function MicrosoftAccountEditForm(props: MicrosoftAccountEditFormProps) {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
 
-        //  not selected
-        if (linkedUser === -1) {
-            alert("ユーザーを選択してください。")
-            return
-        }
-
         //  linked user id not exist
-        if (!users.some(user => user.id === +linkedUser)) {
+        if (linkedUser !== -1 && !users.some(user => user.id === +linkedUser)) {
             alert("ユーザーが存在しません。")
             return
         }
@@ -82,11 +76,18 @@ export function MicrosoftAccountEditForm(props: MicrosoftAccountEditFormProps) {
             roleState
         )
 
-        //  link User
-        await microsoftAccountFactory().linkUser(
-            props.microsoftAccount.id,
-            linkedUser
-        )
+        if (linkedUser === -1) {
+            //  unlink User
+            await microsoftAccountFactory().unlinkUser(
+                props.microsoftAccount.id
+            )
+        } else {
+            //  link User
+            await microsoftAccountFactory().linkUser(
+                props.microsoftAccount.id,
+                linkedUser
+            )
+        }
 
         props.refresh()
         props.setClose()
@@ -190,6 +191,22 @@ export function MicrosoftAccountEditForm(props: MicrosoftAccountEditFormProps) {
                         }}
                     />
                     <UsersListHead>
+                        <User
+                            user={{
+                                id: -1,
+                                name: "未選択",
+                                studentId: "-1",
+                                gender: "male",
+                                classId: -1,
+                                teamIds: [],
+                                createdAt: new Date().toISOString(),
+                                updatedAt: new Date().toISOString()
+                            }}
+                            onClick={() => {
+                                setLinkedUser(-1)
+                                setIsOpenSelectUser(false)
+                            }}
+                        />
                         {userComponents}
                     </UsersListHead>
                 </DialogContent>
