@@ -151,11 +151,11 @@ export function createComponents(config: any) {
             styleOverrides: {
                 root: {
                     backgroundColor: 'transparent',
-                    borderRadius: 8,
+                    borderRadius: 15,
                     borderStyle: 'solid',
-                    borderWidth: 1,
+                    borderWidth: 2,
                     overflow: 'hidden',
-                    borderColor: palette.neutral[200],
+                    borderColor: palette.neutral[500],
                     transition: muiTheme.transitions.create([
                         'border-color',
                         'box-shadow'
@@ -175,15 +175,15 @@ export function createComponents(config: any) {
                     [`&.${filledInputClasses.focused}`]: {
                         backgroundColor: 'transparent',
                         borderColor: palette.primary.main,
-                        boxShadow: `${palette.primary.main} 0 0 0 2px`
+                        boxShadow: `${palette.primary.main} 0 0 0 1px`
                     },
                     [`&.${filledInputClasses.error}`]: {
                         borderColor: palette.error.main,
-                        boxShadow: `${palette.error.main} 0 0 0 2px`
+                        boxShadow: `${palette.error.main} 0 0 0 1px`
                     }
                 },
                 input: {
-                    fontSize: 14,
+                    fontSize: 16,
                     fontWeight: 500,
                     lineHeight: '24px'
                 }
@@ -195,14 +195,14 @@ export function createComponents(config: any) {
                     '&:hover': {
                         backgroundColor: palette.action.hover,
                         [`& .${outlinedInputClasses.notchedOutline}`]: {
-                            borderColor: palette.neutral[200]
+                            borderColor: palette.neutral[500]
                         }
                     },
                     [`&.${outlinedInputClasses.focused}`]: {
                         backgroundColor: 'transparent',
                         [`& .${outlinedInputClasses.notchedOutline}`]: {
                             borderColor: palette.primary.main,
-                            boxShadow: `${palette.primary.main} 0 0 0 2px`
+                            boxShadow: `${palette.primary.main} 0 0 0 0px`
                         }
                     },
                     [`&.${filledInputClasses.error}`]: {
@@ -213,7 +213,7 @@ export function createComponents(config: any) {
                     }
                 },
                 input: {
-                    fontSize: 14,
+                    fontSize: 16,
                     fontWeight: 500,
                     lineHeight: '24px',
                 },

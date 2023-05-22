@@ -52,9 +52,9 @@ export const Schedule = (props:any) => {
                             return(
                                 <ScheduleContent
                                     key={match.id}
-                                    match={match.id}
+                                    teamId={match.id}
                                     time={match.startAt}
-                                    location={match.locationId}
+                                    locationId={match.locationId}
                                 />
 
                             );
