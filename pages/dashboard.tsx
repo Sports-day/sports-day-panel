@@ -3,7 +3,8 @@ import Head from "next/head";
 import {
     Box,
     Container,
-    Stack,
+    Drawer,
+    Stack, Typography,
     Unstable_Grid2 as Grid,
 } from "@mui/material";
 import * as React from "react";
@@ -18,6 +19,14 @@ import {createTheme} from "../components/theme";
 import {motion} from "framer-motion";
 import {Footer} from "../components/layouts/footer";
 import {useFetchMySportMatches} from "../src/features/matches/hook";
+
+const FirstLogin = () => {
+    return(
+        <Drawer>
+            <Typography>    a</Typography>
+        </Drawer>
+    )
+}
 
 
 const DashBoard: NextPage = () => {
@@ -46,7 +55,6 @@ const DashBoard: NextPage = () => {
                     minHeight={"96vh"}
                     sx={{
                         flexGrow: 1,
-                        py: 5,
                         overflow:"hidden"
                     }}
                 >
@@ -54,7 +62,7 @@ const DashBoard: NextPage = () => {
                         maxWidth={false}
                         disableGutters
                         sx={{
-                            paddingTop: "0px",
+                            paddingTop: 5,
                             paddingBottom: "20px",
                             position: "relative",
                             width: "101vw",

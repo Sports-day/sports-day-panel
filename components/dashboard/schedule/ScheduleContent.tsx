@@ -2,13 +2,15 @@ import {Divider, Stack, SvgIcon, Typography, Unstable_Grid2 as Grid} from "@mui/
 import {HiClock, HiMapPin} from "react-icons/hi2";
 import * as React from "react";
 import {useFetchTeams} from "../../../src/features/teams/hook";
+import {useFetchLocations} from "../../../src/features/locations/hook";
 
 export const ScheduleContent = (props:any) => {
-    const {match, time, location} = props;
+    const {teamId, time, locationId} = props;
     const {teams} = useFetchTeams();
-    const teamId = match;
+    const {locations} = useFetchLocations();
     const teamModel = teams.find(team => team.id === teamId);
     const formattedTime = new Date(time).toLocaleTimeString("ja-JP");
+    const locationModel = locations.find(location => location.id === locationId)
     return (
         <>
             <Grid xs={12} sm={12} lg={12}><Divider/></Grid>
@@ -55,7 +57,7 @@ export const ScheduleContent = (props:any) => {
                             <HiMapPin color="#99a5d6"/>
                         </SvgIcon>
                         <Typography sx={{color: "#99a5d6", fontSize: "14px", py: "5px"}}>
-                            {location}
+                            {locationModel?.name}
                         </Typography>
                     </Stack>
                 </Stack>

@@ -60,7 +60,7 @@ const Id: NextPage<Props> = (props: Props) => {
                 minHeight={"96vh"}
                 sx={{
                     flexGrow: 1,
-                    py: 5,
+                    pb: 5,
                     overflow:"hidden"
                 }}
             >
@@ -69,9 +69,6 @@ const Id: NextPage<Props> = (props: Props) => {
                 <Container
                     maxWidth={false}
                     disableGutters
-                    sx={{
-                        paddingTop: "0px",
-                }}
                 >
                     <Stack
                         direction={"row"}
@@ -79,6 +76,7 @@ const Id: NextPage<Props> = (props: Props) => {
                         alignItems={"center"}
                         spacing={3}
                         sx={{
+                            paddingTop: 5,
                             position: "relative",
                             width: "101vw",
                             height:"fit-content",

@@ -1,11 +1,9 @@
 import {
     Avatar,
     Button,
+    Box,
     Container,
     Divider,
-    List,
-    ListItem,
-    ListItemText,
     Stack,
     SvgIcon,
     Typography,
@@ -18,13 +16,12 @@ import {useFetchTeams} from "../../../src/features/teams/hook";
 import {useFetchUsers} from "../../../src/features/users/hook";
 
 
-export const Index = (props:any) => {
+export const Overview = (props:any) => {
    const {overviewSport, overviewTeam, overviewRank} = props;
    const {teams} = useFetchTeams();
    const {users} = useFetchUsers();
-   const userModel = users.find(user => user.id === overviewTeam);
-   const member = [userModel?.name];
-   console.log(userModel?.name)
+   const userModel = users.filter(user => user.teamIds === overviewTeam);
+   const member = userModel.length;
 
     const [open, setOpen] = React.useState(false);
     const toggleDrawer = (newOpen: boolean) => () => {
@@ -138,19 +135,19 @@ export const Index = (props:any) => {
                                 </Typography>
                                 <IconButton onClick={toggleDrawer(false)}>
                                     <SvgIcon>
-                                        <HiXMark color={"99A5D6"}/>
+                                        <HiXMark color={"#99A5D6"}/>
                                     </SvgIcon>
                                 </IconButton>
                             </Stack>
-                            <List >
-                                {member.map((name,index) => {
+                                {userModel.map((user,index) => {
                                     return (
-                                        <ListItem key={name} disablePadding>
-                                            <ListItemText primary={member[index]} sx={{py:1}}/>
-                                        </ListItem>
+                                        <Box key={user.id}>
+                                            <Typography color={"textSecondary"}>
+                                                {user?.name}
+                                            </Typography>
+                                        </Box>
                                     );
                                 })}
-                            </List>
                         </Container>
                     </SwipeableDrawer>
                 </Grid>
@@ -194,4 +191,4 @@ export const Index = (props:any) => {
     );
 };
 
-export default Index;
+export default Overview;
