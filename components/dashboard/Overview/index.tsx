@@ -12,16 +12,18 @@ import {
 } from "@mui/material";
 import {HiArrowRightCircle, HiXMark} from "react-icons/hi2";
 import * as React from "react";
-import {useFetchTeams} from "../../../src/features/teams/hook";
 import {useFetchUsers} from "../../../src/features/users/hook";
 
+export type OverviewProps = {
+    overviewSport: string;
+    overviewTeam: number[];
+    overviewRank: number;
+}
 
-export const Overview = (props:any) => {
+export const Overview = (props: OverviewProps) => {
    const {overviewSport, overviewTeam, overviewRank} = props;
-   const {teams} = useFetchTeams();
    const {users} = useFetchUsers();
    const userModel = users.filter(user => user.teamIds === overviewTeam);
-   const member = userModel.length;
 
     const [open, setOpen] = React.useState(false);
     const toggleDrawer = (newOpen: boolean) => () => {
@@ -139,15 +141,15 @@ export const Overview = (props:any) => {
                                     </SvgIcon>
                                 </IconButton>
                             </Stack>
-                                {userModel.map((user,index) => {
-                                    return (
-                                        <Box key={user.id}>
-                                            <Typography color={"textSecondary"}>
-                                                {user?.name}
-                                            </Typography>
-                                        </Box>
-                                    );
-                                })}
+                                {/*{userModel.map((user,index) => {*/}
+                                {/*    return (*/}
+                                {/*        <Box key={user.id}>*/}
+                                {/*            <Typography color={"textSecondary"}>*/}
+                                {/*                {user?.name}*/}
+                                {/*            </Typography>*/}
+                                {/*        </Box>*/}
+                                {/*    );*/}
+                                {/*})}*/}
                         </Container>
                     </SwipeableDrawer>
                 </Grid>

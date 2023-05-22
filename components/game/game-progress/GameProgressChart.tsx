@@ -1,5 +1,4 @@
-import PropTypes from "prop-types";
-import {Card, CardContent,　Stack, Typography}from "@mui/material";
+import {Typography}from "@mui/material";
 import {Chart} from "../../chart";
 import {useTheme} from "@mui/material/styles";
 

@@ -5,6 +5,10 @@ import {GamePointBar} from "./GamePointBar";
 
 export const GameListContent = (props:any) => {
     const {matches} = useFetchGameMatches(props.game.id)
+    const maxLeftScore = Math.max.apply(Math, matches.map(match => match.leftScore))
+    const maxRightScore = Math.max.apply(Math, matches.map(match => match.rightScore))
+    const maxScore = maxLeftScore > maxRightScore ? maxLeftScore : maxRightScore
+    const barOffset = (maxScore == 0) ? 1 : (95 / maxScore)
 
     return(
         <>
@@ -18,6 +22,7 @@ export const GameListContent = (props:any) => {
                             rightTeamId={match.rightTeamId}
                             umpireTeam={match.judge}
                             time={match.startAt}
+                            barOffset={barOffset}
                         />
                     </Box>
                 )

@@ -1,15 +1,12 @@
 import type {NextPage} from 'next'
 import {signIn} from "next-auth/react";
 import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Auth.module.css'
-import {Avatar, Box, Button, Card, CardContent, Container, Grid, Stack, SvgIcon, Typography} from "@mui/material";
+import {Box, Button, Card, CardContent, Container, Stack, Typography} from "@mui/material";
 import Logo from "public/logo.svg"
 import MSLogo from "public/ms.svg"
 import * as React from "react";
 import {ThemeProvider} from "@mui/material/styles";
 import {createTheme} from "../components/theme";
-import {Footer} from "../components/layouts/footer";
 
 const Auth: NextPage = () => {
     const theme = createTheme();

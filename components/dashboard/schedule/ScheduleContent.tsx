@@ -4,7 +4,13 @@ import * as React from "react";
 import {useFetchTeams} from "../../../src/features/teams/hook";
 import {useFetchLocations} from "../../../src/features/locations/hook";
 
-export const ScheduleContent = (props:any) => {
+export type ScheduleContentProps = {
+    teamId: number;
+    time: string;
+    locationId: number;
+}
+
+export const ScheduleContent = (props:ScheduleContentProps) => {
     const {teamId, time, locationId} = props;
     const {teams} = useFetchTeams();
     const {locations} = useFetchLocations();

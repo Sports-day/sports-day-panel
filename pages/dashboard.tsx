@@ -3,8 +3,7 @@ import Head from "next/head";
 import {
     Box,
     Container,
-    Drawer,
-    Stack, Typography,
+    Stack,
     Unstable_Grid2 as Grid,
 } from "@mui/material";
 import * as React from "react";
@@ -19,15 +18,6 @@ import {createTheme} from "../components/theme";
 import {motion} from "framer-motion";
 import {Footer} from "../components/layouts/footer";
 import {useFetchMySportMatches} from "../src/features/matches/hook";
-
-const FirstLogin = () => {
-    return(
-        <Drawer>
-            <Typography>    a</Typography>
-        </Drawer>
-    )
-}
-
 
 const DashBoard: NextPage = () => {
     const {teams} = useFetchMyTeams();

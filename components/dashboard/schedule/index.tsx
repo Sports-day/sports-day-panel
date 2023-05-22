@@ -7,13 +7,9 @@ import {
     Typography,
     Unstable_Grid2 as Grid
 } from "@mui/material";
-import {
-    HiOutlineTableCells,
-    HiOutlineArrowRight,
-} from "react-icons/hi2";
+import {HiOutlineTableCells, HiOutlineArrowRight} from "react-icons/hi2";
 import * as React from "react";
 import {ScheduleContent} from "./ScheduleContent";
-
 
 export const Schedule = (props:any) => {
     const {matches} = props;

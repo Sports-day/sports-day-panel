@@ -3,7 +3,7 @@ import {Card, CardContent,　Stack, Typography}from "@mui/material";
 import {GameProgressChart} from "./GameProgressChart";
 
 export const GameProgress = (props: any) => {
-    const { chartSeries, labels, sx } = props;
+    const { chartSeries, labels } = props;
     return (
         <Card
             sx={{

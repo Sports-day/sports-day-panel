@@ -1,17 +1,9 @@
-import {Card, CardContent, Divider, Stack, Typography}from "@mui/material";
-import {useFetchMyGameResults} from "../../../src/features/games/hook";
-import {useFetchTeams} from "../../../src/features/teams/hook";
+import {Card, CardContent, Stack, Typography}from "@mui/material";
 import {GameBestContent} from "./GameBestContent";
 
-export const GameBest = (props:any) => {
-    const {value1, value2, value3} = props;
-    const {results} = useFetchMyGameResults();
-    const {teams} = useFetchTeams();
-
+export const GameBest = () => {
     const rank = [1,2,3];
     const team = ["チーム1","チーム2","チーム3"];
-
-
 
     return(
         <Card sx={{
