@@ -3,14 +3,17 @@ import {useSession} from "next-auth/react";
 import Auth from './auth';
 import Dashboard from './dashboard';
 import Firstlogin from "./firstlogin";
+import {useFetchMicrosoftAccount} from "../src/features/microsoft-account/hooks";
+
 const Index: NextPage = () => {
     const {data: session} = useSession()
-    const firstlogin = false;
-    if (session) {
+    const {microsoftAccount, isFetching} = useFetchMicrosoftAccount("me")
+
+    if (session && !isFetching) {
         //  ログイン済み
         return (
             <>
-                {firstlogin
+                {microsoftAccount?.userId === null && !microsoftAccount?.linkLater
                     ? <Firstlogin />
                     : <Dashboard />
                 }
