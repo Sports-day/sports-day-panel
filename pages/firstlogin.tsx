@@ -95,12 +95,12 @@ export const Firstlogin = () => {
                                 sx={{color:"#23398A"}}
                             >
 
-                                //デフォルト名
+                                {/*//デフォルト名*/}
                                 <MenuItem value={defaultName}>
                                     <em>{defaultName}</em>
                                 </MenuItem>
 
-                                //ユーザー名リスト
+                                {/*//ユーザー名リスト*/}
                                 {users.map((user)=>{
                                     return(
                                         <MenuItem key={user.id} value={user.id}>{user?.name}</MenuItem>
