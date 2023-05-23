@@ -95,15 +95,15 @@ export const GameList = (props: GameListProps) => {
                             <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                                 {games.map((game) => {
                                     return(
-                                        <Tab label={game.name} {...a11yProps(game.id)} />
+                                        <Tab key={game.id} label={game.name} {...a11yProps(game.id)} />
                                     )
                                 })}
                             </Tabs>
                         </Box>
                         {games.map((game) => {
                             return(
-                                <TabPanel value={value} index={game.id-1}>
-                                    <GameListContent key={game.id} game={game}/>
+                                <TabPanel key={game.id} value={value} index={game.id-1}>
+                                    <GameListContent game={game}/>
                                     <Divider/>
                                 </TabPanel>
                             )

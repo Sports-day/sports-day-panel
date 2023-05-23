@@ -116,10 +116,10 @@ export const Navigation = () => {
                             width={"100%"}
                         >
                             <Typography sx={{color: "#99a5d6", fontSize: "32px"}}>
-                                Project info
+                                SPORTSDAYについて
                             </Typography>
                             <Typography sx={{color: "#99a5d6", fontSize: "16px", wordWrap: "break-word"}}>
-                                description
+                                このwebアプリは、リアルタイムにデータを集計して現況を可視化することで、球技大会の運営をサポートするだけでなく、学生の参加をより促すために製作され、今回の球技大会に試験的に導入されています。
                             </Typography>
                         </Stack>
 

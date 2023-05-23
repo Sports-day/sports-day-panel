@@ -1,9 +1,10 @@
 import {NextPage} from "next";
 import Head from "next/head";
 import {
+    Alert,
     Box,
     Container,
-    Stack,
+    Stack, Typography,
     Unstable_Grid2 as Grid,
 } from "@mui/material";
 import * as React from "react";
@@ -84,27 +85,41 @@ const DashBoard: NextPage = () => {
                                     overflow: "hidden"
                                 }}
                             >
-                                {mySport && myTeam &&
-                                    <Container
-                                        maxWidth={false}
-                                        disableGutters
-                                        sx={{
-                                            paddingTop: 5,
-                                            paddingBottom: "20px",
-                                            position: "relative",
-                                            width: "101vw",
-                                            height: "fit-content",
-                                            backgroundColor: "#23398a",
-                                        }}
-                                    >
+                                <Container
+                                    maxWidth={false}
+                                    disableGutters
+                                    sx={{
+                                        paddingTop: 5,
+                                        paddingBottom: "20px",
+                                        position: "relative",
+                                        width: "101vw",
+                                        height: "fit-content",
+                                        backgroundColor: "#23398a",
+                                    }}
+                                >
+                                    {mySport && myTeam &&
                                         <Overview
                                             mySport={mySport}
                                             myTeam={myTeam}
                                             myTeamUsers={myTeamUsers}
                                             myTeamRank={myTeamRank}
                                         />
-                                    </Container>
-                                }
+                                    }
+                                    {!mySport && !myTeam &&
+                                        <Stack
+                                            direction={"column"}
+                                            justifyContent={"center"}
+                                            alignItems={"center"}
+                                            spacing={1}
+                                            pt={8}
+                                            px={2}
+                                            width={"100%"}
+                                            maxWidth={"xl"}
+                                        >
+                                            <Alert severity={"info"}>あなたには競技がアサインされていません。各競技の進行状況のみをご覧いだだけます。</Alert>
+                                        </Stack>
+                                    }
+                                </Container>
 
                                 <Container
                                     maxWidth={"xl"}

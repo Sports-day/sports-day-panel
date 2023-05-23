@@ -15,7 +15,7 @@ export const GameBest = () => {
         }}>
             <CardContent>
                 <Stack
-                    spacing={2}
+                    spacing={1.7}
                 >
                     <Typography
                         color={"textSecondary"}
