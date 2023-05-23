@@ -17,8 +17,11 @@ import React, {FormEvent, useRef, useState} from "react";
 import dayjs, {Dayjs} from "dayjs";
 import {DateTimePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
+import {ConfirmInputDialog} from "../ConfirmInputDialog";
+import { useRouter } from "next/router";
 
 export function MatchEditForm(props: { match: Match, refresh: VoidFunction }) {
+    const router = useRouter()
     //  refs
     const leftTeamScoreRef = useRef<TextFieldProps>(null)
     const rightTeamScoreRef = useRef<TextFieldProps>(null)
@@ -31,6 +34,7 @@ export function MatchEditForm(props: { match: Match, refresh: VoidFunction }) {
     const [result, setResult] = useState<string>(props.match.result ?? "")
     const [status, setStatus] = useState<string>(props.match.status ?? "")
     const [locationId, setLocationId] = useState<string>(props.match.locationId?.toString() ?? "-1")
+    const [isDeleteOpen, setIsDeleteOpen] = useState<boolean>(false)
 
     //  fetch
     const {sport, isFetching: isFetchingSport} = useFetchSport(props.match.sportId)
@@ -111,6 +115,12 @@ export function MatchEditForm(props: { match: Match, refresh: VoidFunction }) {
         )
 
         props.refresh()
+    }
+
+    const handleDelete = async () => {
+        await matchFactory().delete(props.match.id)
+
+        await router.back()
     }
 
     const handleLeftTeamChange = (event: SelectChangeEvent) => {
@@ -448,18 +458,51 @@ export function MatchEditForm(props: { match: Match, refresh: VoidFunction }) {
                                 最終更新: { new Date(props.match.startAt).toLocaleString("ja-JP") }
                             </p>
 
-                            <Button
-                                type={"submit"}
-                                variant={"contained"}
+                            <Box
                                 sx={{
-                                    width: "100px",
-                                    my: "20px"
+                                    display: "flex",
+                                    flexDirection: "row",
+                                    mb: "20px"
                                 }}
                             >
-                                保存
-                            </Button>
+                                <Button
+                                    type={"submit"}
+                                    variant={"contained"}
+                                    sx={{
+                                        width: "80px"
+                                    }}
+                                >
+                                    保存
+                                </Button>
+
+
+                                <Button
+                                    onClick={() => setIsDeleteOpen(true)}
+                                    color={"error"}
+                                    variant={"contained"}
+                                    sx={{
+                                        width: "80px",
+                                        ml: "10px"
+                                    }}
+                                >
+                                    削除
+                                </Button>
+                            </Box>
                         </Box>
                     </form>
+
+                    <ConfirmInputDialog
+                        open={isDeleteOpen}
+                        onClose={() => setIsDeleteOpen(false)}
+                        onConfirm={handleDelete}
+                        confirmText={"削除"}
+                        confirmKeyword={props.match.id.toString()}
+                        confirmColor={"error"}
+                    >
+                        <Typography>
+                            本当に削除しますか？
+                        </Typography>
+                    </ConfirmInputDialog>
                 </>
             }
         </>

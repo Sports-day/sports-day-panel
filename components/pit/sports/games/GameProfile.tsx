@@ -1,11 +1,14 @@
 import {gameFactory} from "../../../../src/models/GameModel";
 import React, {FormEvent, useContext, useRef, useState} from "react";
-import {Box, Button, TextFieldProps} from "@mui/material";
+import {Box, Button, TextFieldProps, Typography} from "@mui/material";
 import {GameEditFields} from "./GameEditFields";
 import styles from "../../../../styles/Pit.module.scss";
 import {GameContext} from "../../../context";
+import {ConfirmInputDialog} from "../../ConfirmInputDialog";
+import {useRouter} from "next/router";
 
 export function GameProfile() {
+    const router = useRouter()
     const {data: game, refresh} = useContext(GameContext)
     //  ref
     const nameRef = useRef<TextFieldProps>(null)
@@ -14,6 +17,7 @@ export function GameProfile() {
     //  state
     const [typeState, setTypeState] = useState<string>(game?.type ?? '')
     const [calculationTypeState, setCalculationTypeState] = useState<string>(game?.calculationType ?? '')
+    const [isDeleteOpen, setIsDeleteOpen] = useState<boolean>(false)
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
@@ -47,6 +51,12 @@ export function GameProfile() {
         refresh()
     }
 
+    const handleDelete = async () => {
+        await gameFactory().delete(game.id)
+
+        await router.back()
+    }
+
     return (
         <>
             <div className={styles.content}>
@@ -71,20 +81,53 @@ export function GameProfile() {
                             setCalculationTypeState={setCalculationTypeState}
                             game={game}
                         />
-                        <Button
-                            type={"submit"}
-                            variant={"contained"}
+
+                        <Box
                             sx={{
-                                width: "80px",
-                                my: "20px"
+                                display: "flex",
+                                flexDirection: "row",
+                                mb: "20px"
                             }}
                         >
-                            保存
-                        </Button>
+                            <Button
+                                type={"submit"}
+                                variant={"contained"}
+                                sx={{
+                                    width: "80px"
+                                }}
+                            >
+                                保存
+                            </Button>
+
+
+                            <Button
+                                onClick={() => setIsDeleteOpen(true)}
+                                color={"error"}
+                                variant={"contained"}
+                                sx={{
+                                    width: "80px",
+                                    ml: "10px"
+                                }}
+                            >
+                                削除
+                            </Button>
+                        </Box>
                     </Box>
                 </form>
-            </div>
 
+                <ConfirmInputDialog
+                    open={isDeleteOpen}
+                    onClose={() => setIsDeleteOpen(false)}
+                    onConfirm={handleDelete}
+                    confirmText={"削除"}
+                    confirmKeyword={game.name}
+                    confirmColor={"error"}
+                >
+                    <Typography>
+                        本当に削除しますか？
+                    </Typography>
+                </ConfirmInputDialog>
+            </div>
         </>
     )
 }
