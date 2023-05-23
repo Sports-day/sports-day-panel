@@ -4,6 +4,7 @@ import Auth from './auth';
 import Dashboard from './dashboard';
 import Firstlogin from "./firstlogin";
 import {useFetchMicrosoftAccount} from "../src/features/microsoft-account/hooks";
+import {MicrosoftAccountContext} from "../components/context";
 
 const Index: NextPage = () => {
     const {data: session} = useSession()
@@ -13,15 +14,24 @@ const Index: NextPage = () => {
         //  ログイン済み
         return (
             <>
-                {microsoftAccount?.userId === null && !microsoftAccount?.linkLater
-                    ? <Firstlogin />
-                    : <Dashboard />
-                }
+                <MicrosoftAccountContext.Provider
+                    value={{
+                        //  @ts-ignore
+                        data: microsoftAccount,
+                        refresh: () => {
+                        }
+                    }}
+                >
+                    {microsoftAccount?.userId === null && !microsoftAccount?.linkLater
+                        ? <Firstlogin/>
+                        : <Dashboard/>
+                    }
+                </MicrosoftAccountContext.Provider>
             </>
         )
     } else {
         //  ログイン待ち
-        return <Auth />;
+        return <Auth/>;
     }
 }
 

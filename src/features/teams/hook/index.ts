@@ -2,6 +2,7 @@ import {useAsync, useAsyncRetry} from "react-use";
 import {useState} from "react";
 import {Team, teamFactory} from "../../../models/TeamModel";
 import {useFetchMyUser} from "../../users/hook";
+import {User} from "../../../models/UserModel";
 
 export const useFetchTeams = () => {
     const [teams, setTeams] = useState<Team[]>([]);
@@ -50,6 +51,31 @@ export const useFetchTeam = (teamId: number) => {
         isFetching: isFetching,
         refresh: state.retry,
     };
+}
+
+export const useFetchTeamUsers = (teamId: number) => {
+    const [users, setUsers] = useState<User[]>([]);
+    const [isFetching, setIsFetching] = useState(true);
+
+    const state = useAsyncRetry(async () => {
+        try {
+            setIsFetching(true);
+            const data = await teamFactory().getTeamUsers(teamId);
+            setUsers(data);
+        }
+        catch (e) {
+            console.log(e);
+        }
+        finally {
+            setIsFetching(false);
+        }
+    })
+
+    return {
+        users: users,
+        isFetching: isFetching,
+        refresh: state.retry,
+    }
 }
 
 export const useFetchMyTeams = () => {

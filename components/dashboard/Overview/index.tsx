@@ -1,31 +1,35 @@
 import {
     Avatar,
     Button,
-    Box,
     Container,
     Divider,
     Stack,
     SvgIcon,
     Typography,
     SwipeableDrawer,
-    Unstable_Grid2 as Grid, IconButton
+    Unstable_Grid2 as Grid, IconButton, Box
 } from "@mui/material";
 import {HiArrowRightCircle, HiXMark} from "react-icons/hi2";
-import * as React from "react";
-import {useFetchUsers} from "../../../src/features/users/hook";
+import {Sport} from "../../../src/models/SportModel";
+import {Team} from "../../../src/models/TeamModel";
+import {User} from "../../../src/models/UserModel";
+import {useContext, useState} from "react";
+import {ImagesContext} from "../../context";
+
 
 export type OverviewProps = {
-    overviewSport: string;
-    overviewTeam: number[];
-    overviewRank: number;
+    mySport: Sport;
+    myTeam: Team;
+    myTeamUsers: User[];
+    myTeamRank: number;
 }
 
 export const Overview = (props: OverviewProps) => {
-   const {overviewSport, overviewTeam, overviewRank} = props;
-   const {users} = useFetchUsers();
-   const userModel = users.filter(user => user.teamIds === overviewTeam);
+    //  image
+    const {data: images} = useContext(ImagesContext)
+    const icon = images.find(image => image.id === props.mySport.iconId)
 
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
     const toggleDrawer = (newOpen: boolean) => () => {
         setOpen(newOpen);
     };
@@ -52,9 +56,9 @@ export const Overview = (props: OverviewProps) => {
                             >
                                 <Stack direction={"row"} spacing={3}>
                                     <Avatar
-                                        alt={overviewSport}
+                                        alt={props.mySport.name}
                                         sx={{height: "3.5em", width: "3.5em"}}
-                                        src={"/public/images/basketball.jpg"}
+                                        src={icon?.attachment}
                                     >
 
                                     </Avatar>
@@ -68,7 +72,7 @@ export const Overview = (props: OverviewProps) => {
                                             あなたの競技
                                         </Typography>
                                         <Typography sx={{color: "#FFF", fontSize: "16px"}}>
-                                            {overviewSport}
+                                            {props.mySport.name}
                                         </Typography>
                                     </Stack>
                                 </Stack>
@@ -97,7 +101,7 @@ export const Overview = (props: OverviewProps) => {
                                     あなたのチーム
                                 </Typography>
                                 <Typography sx={{color: "#FFF", fontSize: "24px", fontWeight: "bold"}}>
-                                    {overviewTeam}
+                                    {props.myTeam.name}
                                 </Typography>
                             </Stack>
                             <SvgIcon>
@@ -141,15 +145,15 @@ export const Overview = (props: OverviewProps) => {
                                     </SvgIcon>
                                 </IconButton>
                             </Stack>
-                                {/*{userModel.map((user,index) => {*/}
-                                {/*    return (*/}
-                                {/*        <Box key={user.id}>*/}
-                                {/*            <Typography color={"textSecondary"}>*/}
-                                {/*                {user?.name}*/}
-                                {/*            </Typography>*/}
-                                {/*        </Box>*/}
-                                {/*    );*/}
-                                {/*})}*/}
+                                {props.myTeamUsers.map(user => {
+                                    return (
+                                        <Box key={user.id}>
+                                            <Typography color={"textSecondary"}>
+                                                {user.name}
+                                            </Typography>
+                                        </Box>
+                                    );
+                                })}
                         </Container>
                     </SwipeableDrawer>
                 </Grid>
@@ -175,7 +179,7 @@ export const Overview = (props: OverviewProps) => {
                                     spacing={1}
                                 >
                                     <Typography sx={{color: "#FFF", fontSize: "24px", fontWeight: "bold"}}>
-                                        {overviewRank}
+                                        {props.myTeamRank}
                                     </Typography>
                                     <Typography sx={{color: "#99a5d6", fontSize: "14px", py: "5px"}}>
                                         位
