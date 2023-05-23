@@ -97,7 +97,7 @@ export const Navigation = () => {
                                 width: "3.5em",
                                 backgroundColor: "#5664e3",
                             }}
-                            src={"/public/images/basketball.jpg"}
+                            // src={"/public/images/basketball.jpg"}
                         >
                         </Avatar>
                         <Typography sx={{color: "#99a5d6", fontSize: "16px"}}>
