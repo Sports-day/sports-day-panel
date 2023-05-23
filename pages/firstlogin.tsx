@@ -15,14 +15,15 @@ import {createTheme} from "../components/theme";
 import {useFetchUsers} from "../src/features/users/hook";
 import {MicrosoftAccount, microsoftAccountFactory} from "../src/models/MicrosoftAccountModel";
 import {useState} from "react";
+import {useRouter} from "next/router";
 
 export const FirstLogin = (props: { microsoftAccount: MicrosoftAccount }) => {
+    const router = useRouter()
     const {data: session} = useSession();
     const theme = createTheme();
     const {users} = useFetchUsers();
-
-
-    const [studentId, setStudentId] = useState<string>(props.microsoftAccount.mailAccountName ?? "");
+    //  state
+    const [studentId, setStudentId] = useState<string>(props.microsoftAccount?.mailAccountName ?? "-1");
 
     const handleChange = (event: SelectChangeEvent) => {
         setStudentId(event.target.value);
@@ -30,6 +31,9 @@ export const FirstLogin = (props: { microsoftAccount: MicrosoftAccount }) => {
 
     const handleLinkLater = async () => {
         await microsoftAccountFactory().linkLater("me")
+
+        //  reload
+        router.reload()
     }
 
     const handleLinkUser = async () => {
@@ -46,6 +50,9 @@ export const FirstLogin = (props: { microsoftAccount: MicrosoftAccount }) => {
 
         //  link
         await microsoftAccountFactory().linkUser("me", user.id)
+
+        //  reload
+        router.reload()
     }
 
     return (
@@ -136,7 +143,6 @@ export const FirstLogin = (props: { microsoftAccount: MicrosoftAccount }) => {
                                 <Button
                                     onClick={handleLinkUser}
                                     sx={{width: "100%"}}
-                                    href={"/"}
                                 >
                                     <CardContent sx={{width: "fit-content"}}>
                                         <Typography sx={{color: "#FFF", fontSize: "16px"}}>
@@ -149,7 +155,6 @@ export const FirstLogin = (props: { microsoftAccount: MicrosoftAccount }) => {
                                 <Button
                                     onClick={handleLinkLater}
                                     sx={{py: 1, px: 2, width: "fit-content"}}
-                                    href={"/"}
                                 >
                                     <Typography sx={{fontSize: "16px", color: "23398A"}}>あとで設定</Typography>
                                 </Button>
