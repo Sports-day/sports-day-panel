@@ -1,8 +1,7 @@
 import {useState} from "react";
 import {Game, gameFactory, LeagueResult, TournamentResult} from "../../../models/GameModel";
-import {useAsync, useAsyncRetry} from "react-use";
+import {useAsyncRetry} from "react-use";
 import {Match} from "../../../models/MatchModel";
-import {useFetchMyTeams} from "../../teams/hook";
 import {Team, teamFactory} from "../../../models/TeamModel";
 
 export const useFetchGames = () => {
@@ -120,45 +119,6 @@ export const useFetchGameResult = (gameId: number) => {
 }
 
 /**
- * Fetch my game results
- */
-export const useFetchMyGameResults = () => {
-    const [results, setResults] = useState<(TournamentResult | LeagueResult)[]>([])
-    const [isFetching, setIsFetching] = useState(true)
-
-    const {games, isFetching: isFetchingGames} = useFetchMyTeamGames();
-
-    const state = useAsyncRetry(async () => {
-        if(!isFetchingGames) {
-            try {
-                setIsFetching(true);
-
-                for (const game of games) {
-                    if (game.type === "league") {
-                        const data = await gameFactory().getLeagueResult(game.id);
-                        setResults(results => [...results, data]);
-                    }
-                    else if (game.type === "tournament") {
-                        const data = await gameFactory().getTournamentResult(game.id);
-                        setResults(results => [...results, data]);
-                    }
-                }
-            }catch (e) {
-                console.log(e);
-            } finally {
-                setIsFetching(false);
-            }
-        }
-    }, [isFetchingGames])
-
-    return {
-        results: results,
-        isFetching: isFetching,
-        refresh: state.retry,
-    }
-}
-
-/**
  * Fetches all games of a team
  * @param teamId
  */
@@ -187,36 +147,6 @@ export const useFetchTeamGames = (teamId: number) => {
         refresh: state.retry,
     }
 }
-
-/**
- * Fetches all games of a user
- */
-export const useFetchMyTeamGames = () => {
-    const [games, setGames] = useState<Game[]>([])
-    const [isFetching, setIsFetching] = useState(true)
-
-    const {teams, isFetching: isFetchingTeams} = useFetchMyTeams();
-
-    useAsync(async () => {
-        if (!isFetchingTeams) {
-            try {
-                const data = await gameFactory().index()
-                    .then(values => values.filter(value => teams.some(team => team.enteredGameIds.includes(value.id))));
-                setGames(data);
-            } catch (e) {
-                console.log(e);
-            } finally {
-                setIsFetching(false);
-            }
-        }
-    }, [isFetchingTeams])
-
-    return {
-        games: games,
-        isFetching: isFetching,
-    }
-}
-
 
 export const useFetchGameEntries = (gameId: number) => {
     const [teams , setTeams] = useState<Team[]>([])

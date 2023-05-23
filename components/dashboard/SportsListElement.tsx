@@ -1,13 +1,21 @@
 import {Avatar, Button, Card, CardContent, Stack, Typography} from "@mui/material";
 import {useFetchImage} from "../../src/features/images/hook";
+import {useContext} from "react";
+import {ImagesContext} from "../context";
+import {Sport} from "../../src/models/SportModel";
 
 
-export const SportsListElement = (props:any) => {
-    const {image} = useFetchImage(props.sportId)
-    const {comp, link} =props;
+export type SportsListElementProps = {
+    sport: Sport;
+}
+
+export const SportsListElement = (props: SportsListElementProps) => {
+    const {data: images} = useContext(ImagesContext)
+    const image = images?.find(image => image.id === props.sport.iconId)
+
     return (
         <Card>
-            <Button sx={{width:"100%"}} href={link}>
+            <Button sx={{width:"100%"}} href={`/sports/${props.sport.id}`}>
                 <CardContent sx={{width:"100%"}}>
                     <Stack
                         direction={"row"}
@@ -16,14 +24,14 @@ export const SportsListElement = (props:any) => {
                         spacing={2}
                     >
                         <Avatar
-                            alt={comp}
+                            alt={props.sport.name}
                             sx={{height: "3.5em", width: "3.5em"}}
                             src={image?.attachment}
                         >
 
                         </Avatar>
                         <Typography sx={{color: "#FFF", fontSize: "16px", fontWeight: "bold"}}>
-                            {comp}
+                            {props.sport.name}
                         </Typography>
                     </Stack>
                 </CardContent>

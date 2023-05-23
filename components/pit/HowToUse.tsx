@@ -3,9 +3,7 @@ import ReactMarkdown from "react-markdown";
 
 const markdown = `
 # 使い方
-## Markdownでカキカキ
-Markdown最高かよ!  
-Markdown最高かよ!
+あとで書きます
 `
 export function HowToUse() {
     return (

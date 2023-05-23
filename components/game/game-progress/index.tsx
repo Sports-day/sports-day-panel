@@ -1,9 +1,19 @@
 import PropTypes from "prop-types";
 import {Card, CardContent,　Stack, Typography}from "@mui/material";
 import {GameProgressChart} from "./GameProgressChart";
+import {useContext} from "react";
+import {MatchesContext} from "../../context";
 
-export const GameProgress = (props: any) => {
-    const { chartSeries, labels, sx } = props;
+export const GameProgress = () => {
+    const {data: matches} = useContext(MatchesContext)
+
+    let total = matches.length
+    let finished = matches.filter(match => match.status == "finished").length
+    const result = Math.round((finished / total) * 100)
+
+    const chartSeries = [result, 100-result]
+    const labels = ["完了した競技", "未完了の競技"]
+
     return (
         <Card
             sx={{
@@ -33,10 +43,4 @@ export const GameProgress = (props: any) => {
             </CardContent>
         </Card>
     );
-};
-
-GameProgress.propTypes = {
-    chartSeries: PropTypes.array.isRequired,
-    labels: PropTypes.array.isRequired,
-    sx: PropTypes.object
 };

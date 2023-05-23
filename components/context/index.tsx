@@ -88,3 +88,9 @@ export const ImagesContext = createContext<ImagesContextType>({
     data: [],
     refresh: () => {}
 })
+
+export type MicrosoftAccountContext = GenericContextType<MicrosoftAccount>
+export const MicrosoftAccountContext = createContext<MicrosoftAccountContext>({
+    data: {} as MicrosoftAccount,
+    refresh: () => {}
+})

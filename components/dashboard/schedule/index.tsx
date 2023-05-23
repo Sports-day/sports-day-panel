@@ -7,16 +7,17 @@ import {
     Typography,
     Unstable_Grid2 as Grid
 } from "@mui/material";
-import {
-    HiOutlineTableCells,
-    HiOutlineArrowRight,
-} from "react-icons/hi2";
+import {HiOutlineTableCells, HiOutlineArrowRight} from "react-icons/hi2";
 import * as React from "react";
 import {ScheduleContent} from "./ScheduleContent";
+import {Match} from "../../../src/models/MatchModel";
 
+export type ScheduleProps = {
+    matches: Match[]
+    myTeamId: number
+}
 
-export const Schedule = (props:any) => {
-    const {matches} = props;
+export const Schedule = (props: ScheduleProps) => {
 
     return(
         <Card sx={{height: "fit-content"}}>
@@ -48,13 +49,12 @@ export const Schedule = (props:any) => {
                     </Button>
                     <Grid container spacing={1}>
 
-                        {matches.map((match:any) => {
+                        {props.matches.map((match: Match) => {
                             return(
                                 <ScheduleContent
                                     key={match.id}
-                                    match={match.id}
-                                    time={match.startAt}
-                                    location={match.locationId}
+                                    match={match}
+                                    myTeamId={props.myTeamId}
                                 />
 
                             );

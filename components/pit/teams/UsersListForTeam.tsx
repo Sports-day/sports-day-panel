@@ -44,7 +44,8 @@ export function UsersListForTeam(props: UsersListForTeamProps) {
             if (filterWord == "") return true
             const classModel = classes?.find(classModel => classModel.id === user.classId)
 
-            return filterWord.split(" ").some(word => {
+            return filterWord.split("\n").some(uWord => {
+                const word = uWord.replace("◎", "")
                 return user.name.includes(word)
                     || user.id.toString().includes(word)
                     || user.studentId.toString().includes(word)
@@ -79,6 +80,8 @@ export function UsersListForTeam(props: UsersListForTeamProps) {
                         top: "20px",
                         width: "200px"
                     }}
+                    multiline
+                    rows={2}
                 />
 
                 {/*table*/}

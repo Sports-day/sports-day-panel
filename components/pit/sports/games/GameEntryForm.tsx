@@ -58,6 +58,7 @@ export function GameEntryForm(props: GameEntryFormProps) {
             const classModel = classes?.find(classModel => classModel.id === team.classId)
 
             return team.id.toString().includes(filterWord)
+                || team.description.includes(filterWord)
                 || team.name.includes(filterWord)
                 || classModel?.name.includes(filterWord)
         })

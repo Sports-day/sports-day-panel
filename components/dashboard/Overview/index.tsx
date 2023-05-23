@@ -3,30 +3,33 @@ import {
     Button,
     Container,
     Divider,
-    List,
-    ListItem,
-    ListItemText,
     Stack,
     SvgIcon,
     Typography,
     SwipeableDrawer,
-    Unstable_Grid2 as Grid, IconButton
+    Unstable_Grid2 as Grid, IconButton, Box
 } from "@mui/material";
 import {HiArrowRightCircle, HiXMark} from "react-icons/hi2";
-import * as React from "react";
-import {useFetchTeams} from "../../../src/features/teams/hook";
-import {useFetchUsers} from "../../../src/features/users/hook";
+import {Sport} from "../../../src/models/SportModel";
+import {Team} from "../../../src/models/TeamModel";
+import {User} from "../../../src/models/UserModel";
+import {useContext, useState} from "react";
+import {ImagesContext} from "../../context";
 
 
-export const Index = (props:any) => {
-   const {overviewSport, overviewTeam, overviewRank} = props;
-   const {teams} = useFetchTeams();
-   const {users} = useFetchUsers();
-   const userModel = users.find(user => user.id === overviewTeam);
-   const member = [userModel?.name];
-   console.log(userModel?.name)
+export type OverviewProps = {
+    mySport: Sport;
+    myTeam: Team;
+    myTeamUsers: User[];
+    myTeamRank: number;
+}
 
-    const [open, setOpen] = React.useState(false);
+export const Overview = (props: OverviewProps) => {
+    //  image
+    const {data: images} = useContext(ImagesContext)
+    const icon = images.find(image => image.id === props.mySport.iconId)
+
+    const [open, setOpen] = useState(false);
     const toggleDrawer = (newOpen: boolean) => () => {
         setOpen(newOpen);
     };
@@ -53,9 +56,9 @@ export const Index = (props:any) => {
                             >
                                 <Stack direction={"row"} spacing={3}>
                                     <Avatar
-                                        alt={overviewSport}
+                                        alt={props.mySport.name}
                                         sx={{height: "3.5em", width: "3.5em"}}
-                                        src={"/public/images/basketball.jpg"}
+                                        src={icon?.attachment}
                                     >
 
                                     </Avatar>
@@ -69,7 +72,7 @@ export const Index = (props:any) => {
                                             あなたの競技
                                         </Typography>
                                         <Typography sx={{color: "#FFF", fontSize: "16px"}}>
-                                            {overviewSport}
+                                            {props.mySport.name}
                                         </Typography>
                                     </Stack>
                                 </Stack>
@@ -98,7 +101,7 @@ export const Index = (props:any) => {
                                     あなたのチーム
                                 </Typography>
                                 <Typography sx={{color: "#FFF", fontSize: "24px", fontWeight: "bold"}}>
-                                    {overviewTeam}
+                                    {props.myTeam.name}
                                 </Typography>
                             </Stack>
                             <SvgIcon>
@@ -138,19 +141,19 @@ export const Index = (props:any) => {
                                 </Typography>
                                 <IconButton onClick={toggleDrawer(false)}>
                                     <SvgIcon>
-                                        <HiXMark color={"99A5D6"}/>
+                                        <HiXMark color={"#99A5D6"}/>
                                     </SvgIcon>
                                 </IconButton>
                             </Stack>
-                            <List >
-                                {member.map((name,index) => {
+                                {props.myTeamUsers.map(user => {
                                     return (
-                                        <ListItem key={name} disablePadding>
-                                            <ListItemText primary={member[index]} sx={{py:1}}/>
-                                        </ListItem>
+                                        <Box key={user.id}>
+                                            <Typography color={"textSecondary"}>
+                                                {user.name}
+                                            </Typography>
+                                        </Box>
                                     );
                                 })}
-                            </List>
                         </Container>
                     </SwipeableDrawer>
                 </Grid>
@@ -176,7 +179,7 @@ export const Index = (props:any) => {
                                     spacing={1}
                                 >
                                     <Typography sx={{color: "#FFF", fontSize: "24px", fontWeight: "bold"}}>
-                                        {overviewRank}
+                                        {props.myTeamRank}
                                     </Typography>
                                     <Typography sx={{color: "#99a5d6", fontSize: "14px", py: "5px"}}>
                                         位
@@ -194,4 +197,4 @@ export const Index = (props:any) => {
     );
 };
 
-export default Index;
+export default Overview;

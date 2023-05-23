@@ -1,14 +1,29 @@
 import {Divider, Stack, SvgIcon, Typography, Unstable_Grid2 as Grid} from "@mui/material";
 import {HiClock, HiMapPin} from "react-icons/hi2";
 import * as React from "react";
-import {useFetchTeams} from "../../../src/features/teams/hook";
+import {useContext} from "react";
+import {LocationsContext, TeamsContext} from "../../context";
+import {Match} from "../../../src/models/MatchModel";
 
-export const ScheduleContent = (props:any) => {
-    const {match, time, location} = props;
-    const {teams} = useFetchTeams();
-    const teamId = match;
-    const teamModel = teams.find(team => team.id === teamId);
-    const formattedTime = new Date(time).toLocaleTimeString("ja-JP");
+export type ScheduleContentProps = {
+    match: Match;
+    myTeamId: number;
+}
+
+export const ScheduleContent = (props: ScheduleContentProps) => {
+    //  context
+    const {data: locations} = useContext(LocationsContext)
+    const {data: teams} = useContext(TeamsContext)
+
+    //  team is null
+    if (!props.match.leftTeamId || !props.match.rightTeamId) return null;
+    //  get team
+    const opponentTeamId = props.match.leftTeamId === props.myTeamId ? props.match.rightTeamId : props.match.leftTeamId
+    const teamModel = teams.find(team => team.id === opponentTeamId)
+    //  get time and location
+    const formattedTime = new Date(props.match.startAt).toLocaleTimeString("ja-JP");
+    const locationModel = locations.find(location => location.id === props.match.locationId)
+
     return (
         <>
             <Grid xs={12} sm={12} lg={12}><Divider/></Grid>
@@ -55,7 +70,7 @@ export const ScheduleContent = (props:any) => {
                             <HiMapPin color="#99a5d6"/>
                         </SvgIcon>
                         <Typography sx={{color: "#99a5d6", fontSize: "14px", py: "5px"}}>
-                            {location}
+                            {locationModel?.name}
                         </Typography>
                     </Stack>
                 </Stack>

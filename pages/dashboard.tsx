@@ -1,106 +1,161 @@
 import {NextPage} from "next";
 import Head from "next/head";
 import {
+    Alert,
     Box,
     Container,
-    Stack,
+    Stack, Typography,
     Unstable_Grid2 as Grid,
 } from "@mui/material";
 import * as React from "react";
 import Overview from "../components/dashboard/Overview";
 import Schedule from "../components/dashboard/schedule";
 import {SportsListElement} from "../components/dashboard/SportsListElement";
-import {useFetchMyTeamRank, useFetchMyTeams} from "../src/features/teams/hook";
-import {useFetchMySport, useFetchSports} from "../src/features/sports/hook";
 import {Navigation} from "../components/layouts/navigation";
 import {ThemeProvider} from "@mui/material/styles";
 import {createTheme} from "../components/theme";
 import {motion} from "framer-motion";
 import {Footer} from "../components/layouts/footer";
-import {useFetchMySportMatches} from "../src/features/matches/hook";
-
+import {ImagesContext, LocationsContext, TeamsContext} from "../components/context";
+import {useFetchDashboard} from "../src/features/unit/dashboard";
+import {Loading} from "../components/layouts/loading";
 
 const DashBoard: NextPage = () => {
-    const {teams} = useFetchMyTeams();
-    const {sport} = useFetchMySport();
-    const {sports} = useFetchSports();
-    const {matches} = useFetchMySportMatches();
-    const theme = createTheme();
-    const {rank: myRank} = useFetchMyTeamRank();
-    const icon=1;
+    //  Unit Hook
+    const {
+        isFetching,
+        images,
+        locations,
+        teams,
+        sports,
+        //  for individual section
+        mySport,
+        myTeam,
+        myTeamUsers,
+        myTeamMatches,
+        myTeamRank
+    } = useFetchDashboard()
 
-    return(
+    const theme = createTheme();
+
+    if (isFetching) {
+        return (
+            <Loading/>
+        )
+    }
+
+    return (
         <motion.div
-            initial={{opacity:0.3}}
-            animate={{opacity:1}}
-            exit={{opacity:0.3}}
+            initial={{opacity: 0}}
+            animate={{opacity: 1}}
+            exit={{opacity: 0}}
             transition={{duration: 0.5, ease: 'easeInOut'}}
         >
-            <ThemeProvider theme={theme}>
-                <Head>
-                    <title>SPORTSDAY : Dashboard</title>
-                </Head>
-                <Navigation/>
-                <Box
-                    component={"main"}
-                    minHeight={"96vh"}
-                    sx={{
-                        flexGrow: 1,
-                        py: 5,
-                        overflow:"hidden"
+            <ImagesContext.Provider
+                value={{
+                    data: images,
+                    refresh: () => {
+                    }
+                }}
+            >
+                <LocationsContext.Provider
+                    value={{
+                        data: locations,
+                        refresh: () => {
+                        }
                     }}
                 >
-                    <Container
-                        maxWidth={false}
-                        disableGutters
-                        sx={{
-                            paddingTop: "0px",
-                            paddingBottom: "20px",
-                            position: "relative",
-                            width: "101vw",
-                            height:"fit-content",
-                            backgroundColor: "#23398a",
+                    <TeamsContext.Provider
+                        value={{
+                            data: teams,
+                            refresh: () => {
+                            }
                         }}
                     >
-                        <Overview
-                            overviewSport={sport?.name}
-                            overviewTeam={teams[0]?.name}
-                            overviewRank={myRank}
-                        />
-                    </Container>
+                        <ThemeProvider theme={theme}>
+                            <Head>
+                                <title>SPORTSDAY : Dashboard</title>
+                            </Head>
+                            <Navigation/>
+                            <Box
+                                component={"main"}
+                                minHeight={"96vh"}
+                                sx={{
+                                    flexGrow: 1,
+                                    overflow: "hidden"
+                                }}
+                            >
+                                <Container
+                                    maxWidth={false}
+                                    disableGutters
+                                    sx={{
+                                        paddingTop: 5,
+                                        paddingBottom: "20px",
+                                        position: "relative",
+                                        width: "101vw",
+                                        height: "fit-content",
+                                        backgroundColor: "#23398a",
+                                    }}
+                                >
+                                    {mySport && myTeam &&
+                                        <Overview
+                                            mySport={mySport}
+                                            myTeam={myTeam}
+                                            myTeamUsers={myTeamUsers}
+                                            myTeamRank={myTeamRank}
+                                        />
+                                    }
+                                    {!mySport && !myTeam &&
+                                        <Stack
+                                            direction={"column"}
+                                            justifyContent={"center"}
+                                            alignItems={"center"}
+                                            spacing={1}
+                                            pt={8}
+                                            px={2}
+                                            width={"100%"}
+                                            maxWidth={"xl"}
+                                        >
+                                            <Alert severity={"info"}>あなたには競技がアサインされていません。各競技の進行状況のみをご覧いだだけます。</Alert>
+                                        </Stack>
+                                    }
+                                </Container>
 
-                    <Container
-                        maxWidth={"xl"}
-                        disableGutters
-                        sx={{px:1, py:3}}
-                    >
-                        <Stack
-                            direction={"column"}
-                            justifyContent={"space-between"}
-                            spacing={3}
-                        >
-                            <Grid container spacing={1.5}>
+                                <Container
+                                    maxWidth={"xl"}
+                                    disableGutters
+                                    sx={{px: 1, py: 3}}
+                                >
+                                    <Stack
+                                        direction={"column"}
+                                        justifyContent={"space-between"}
+                                        spacing={3}
+                                    >
+                                        <Grid container spacing={1.5}>
 
-                                <Grid xs={12} sm={12} lg={12}>
-                                    <Schedule matches={matches}/>
-                                </Grid>
-                                {sports.map((sport) => {
-                                    return (
-                                        <Grid xs={12} sm={12} lg={12} key={sport.id}>
-                                            <SportsListElement
-                                                comp={sport.name}
-                                                icon={icon}
-                                                link={`/sports/${sport.id}`}
-                                            />
+                                            {mySport && myTeam &&
+                                                <Grid xs={12} sm={12} lg={12}>
+                                                    <Schedule matches={myTeamMatches} myTeamId={myTeam.id}/>
+                                                </Grid>
+                                            }
+                                            {sports.map((sport) => {
+                                                return (
+                                                    <Grid xs={12} sm={12} lg={12} key={sport.id}>
+                                                        <SportsListElement
+                                                            sport={sport}
+                                                        />
+                                                    </Grid>
+                                                );
+                                            })}
                                         </Grid>
-                                    );
-                                })}
-                            </Grid>
-                        </Stack>
-                    </Container>
-                </Box>
-                <Footer/>
-            </ThemeProvider>
+                                    </Stack>
+                                </Container>
+                            </Box>
+                            <Footer/>
+                        </ThemeProvider>
+                    </TeamsContext.Provider>
+                </LocationsContext.Provider>
+            </ImagesContext.Provider>
         </motion.div>
     )
 }

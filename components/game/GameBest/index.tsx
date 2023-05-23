@@ -1,17 +1,10 @@
-import {Card, CardContent, Divider, Stack, Typography}from "@mui/material";
-import {useFetchMyGameResults} from "../../../src/features/games/hook";
-import {useFetchTeams} from "../../../src/features/teams/hook";
+import {Card, CardContent, Stack, Typography}from "@mui/material";
 import {GameBestContent} from "./GameBestContent";
+import {Sport} from "../../../src/models/SportModel";
+import {useFetchSportBest3} from "../../../src/features/sports/hook";
 
-export const GameBest = (props:any) => {
-    const {value1, value2, value3} = props;
-    const {results} = useFetchMyGameResults();
-    const {teams} = useFetchTeams();
-
-    const rank = [1,2,3];
-    const team = ["チーム1","チーム2","チーム3"];
-
-
+export const GameBest = () => {
+    const { bestTeams, isFetching } = useFetchSportBest3()
 
     return(
         <Card sx={{
@@ -22,7 +15,7 @@ export const GameBest = (props:any) => {
         }}>
             <CardContent>
                 <Stack
-                    spacing={2}
+                    spacing={1.7}
                 >
                     <Typography
                         color={"textSecondary"}
@@ -31,10 +24,15 @@ export const GameBest = (props:any) => {
                         競技内ベスト3
                     </Typography>
 
-                    <GameBestContent key={team}
-                        rank={rank[0]}
-                        team={team[0]}
-                    />
+                    {bestTeams.map((team) => {
+                        return (
+                            <GameBestContent
+                                key={team.team.id}
+                                team={team.team.name}
+                                rank={team.rank}
+                            />
+                        );
+                    })}
 
                 </Stack>
             </CardContent>

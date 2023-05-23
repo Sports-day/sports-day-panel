@@ -11,6 +11,8 @@ import * as React from "react";
 import {HiClock} from "react-icons/hi2";
 import {MdOutlineSportsScore} from "react-icons/md";
 import {useFetchTeams} from "../../../src/features/teams/hook";
+import {useContext} from "react";
+import {TeamsContext} from "../../context";
 
 const PointBar = styled(LinearProgress)(({}) => ({
     height: 4.5,
@@ -20,8 +22,9 @@ const PointBar = styled(LinearProgress)(({}) => ({
 }));
 
 export const GamePointBar = (props: any) => {
-    const {teams} = useFetchTeams();
-    const {leftScore, rightScore, leftTeamId, rightTeamId, umpireTeam, time} = props;
+    const {data: teams} = useContext(TeamsContext);
+
+    const {leftScore, rightScore, leftTeamId, rightTeamId, umpireTeam, time, barOffset} = props;
     const leftTeam = teams.find(team => team.id === leftTeamId);
     const rightTeam = teams.find(team => team.id === rightTeamId);
     const formattedTime = new Date(time).toLocaleTimeString("ja-JP");
@@ -71,7 +74,7 @@ export const GamePointBar = (props: any) => {
                             <ThemeProvider theme={{direction:"rtl"}}>
                                 <PointBar
                                     variant={"determinate"}
-                                    value={leftScore}
+                                    value={leftScore * barOffset}
                                 />
                             </ThemeProvider>
                         </Box>
@@ -109,7 +112,7 @@ export const GamePointBar = (props: any) => {
                         <Box>
                             <PointBar
                                 variant={"determinate"}
-                                value={rightScore}
+                                value={rightScore * barOffset}
                             />
                         </Box>
                     </Stack>

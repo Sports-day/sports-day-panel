@@ -28,6 +28,10 @@ const unlinkMicrosoftAccount = async (id: number | "me"): Promise<void> => {
     await ApiClient.delete(`/microsoft-accounts/${id}/link-user`)
 }
 
+const linkLaterMicrosoftAccount = async (id: number | "me"): Promise<void> => {
+    await ApiClient.post(`/microsoft-accounts/${id}/link-user/later`, {})
+}
+
 export type MicrosoftAccountRepository = {
     getMicrosoftAccounts: () => Promise<MicrosoftAccount[]>,
     getMicrosoftAccount: (id: number | "me") => Promise<MicrosoftAccount>,
@@ -35,6 +39,7 @@ export type MicrosoftAccountRepository = {
     setMicrosoftAccountRole: (id: number | "me", role: string) => Promise<MicrosoftAccount>,
     linkMicrosoftAccount: (id: number | "me", userId: number) => Promise<void>,
     unlinkMicrosoftAccount: (id: number | "me") => Promise<void>,
+    linkLaterMicrosoftAccount: (id: number | "me") => Promise<void>,
 }
 
 export const microsoftAccountRepository: MicrosoftAccountRepository = {
@@ -44,4 +49,5 @@ export const microsoftAccountRepository: MicrosoftAccountRepository = {
     setMicrosoftAccountRole,
     linkMicrosoftAccount,
     unlinkMicrosoftAccount,
+    linkLaterMicrosoftAccount,
 }

@@ -25,6 +25,7 @@ import {
 import Logo from "public/logo.svg"
 import {signOut, useSession} from "next-auth/react";
 import Link from "next/link";
+import { alpha } from '@mui/material/styles';
 
 type Anchor = 'top';
 
@@ -49,7 +50,10 @@ export const Navigation = () => {
     const list = (anchor: Anchor) => (
         <>
             <Box
-                sx={{ width: '100vw' , height: '100vh', overflow:'hidden'}}
+                sx={{
+                    backdropFilter: 'blur(6px)',
+                    backgroundColor: alpha('#23398A', 0.5),
+                    width: '100vw' , height: '100vh', overflow:'hidden'}}
                 role="Navigation"
                 onClick={toggleDrawer(anchor, false)}
                 onKeyDown={toggleDrawer(anchor, false)}
@@ -93,7 +97,7 @@ export const Navigation = () => {
                                 width: "3.5em",
                                 backgroundColor: "#5664e3",
                             }}
-                            src={"/public/images/basketball.jpg"}
+                            src={"/"}
                         >
                         </Avatar>
                         <Typography sx={{color: "#99a5d6", fontSize: "16px"}}>
@@ -112,10 +116,10 @@ export const Navigation = () => {
                             width={"100%"}
                         >
                             <Typography sx={{color: "#99a5d6", fontSize: "32px"}}>
-                                Project info
+                                SPORTSDAYについて
                             </Typography>
                             <Typography sx={{color: "#99a5d6", fontSize: "16px", wordWrap: "break-word"}}>
-                                description
+                                このwebアプリは、リアルタイムにデータを集計して現況を可視化することで、球技大会の運営をサポートするだけでなく、学生の参加をより促すために製作され、今回の球技大会に試験的に導入されています。
                             </Typography>
                         </Stack>
 
@@ -216,7 +220,8 @@ export const Navigation = () => {
                     elevation={0}
                     sx={{
                         height: "80px",
-                        backgroundColor: "#23398a"
+                        backdropFilter: 'blur(6px)',
+                        backgroundColor: alpha('#23398A', 0.7),
                     }}
                 >
                     <Container
@@ -260,7 +265,6 @@ export const Navigation = () => {
     } else {
         return(
             <>
-                a
             </>
         )
     }
