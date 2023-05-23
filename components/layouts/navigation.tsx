@@ -53,7 +53,7 @@ export const Navigation = () => {
                 sx={{
                     backdropFilter: 'blur(6px)',
                     backgroundColor: alpha('#23398A', 0.5),
-                    width: '100vw' , height: '100vh', overflow:'hidden'}}
+                    width: '100vw' , height: '100vh', overflow:'scrollable'}}
                 role="Navigation"
                 onClick={toggleDrawer(anchor, false)}
                 onKeyDown={toggleDrawer(anchor, false)}
@@ -65,11 +65,11 @@ export const Navigation = () => {
                         alignItems={"center"}
                         sx={{marginRight: "10px", paddingLeft:"30px",paddingRight:"6px", py: 3}}
                     >
-                        <Link href={"dashboard/"}>
-                            <Box>
-                                <Logo width={20*8.45} height={20} fill={'white'}/>
-                            </Box>
-                        </Link>
+                        <Box>
+                            <Button href={"/"}>
+                                <Logo width={20 * 8.45} height={20} fill={'white'}/>
+                            </Button>
+                        </Box>
                         <IconButton onClick={toggleDrawer(anchor, true)}>
                             <SvgIcon color="primary">
                                 <HiXMark color="#FFF"/>
@@ -112,13 +112,14 @@ export const Navigation = () => {
                             justifyContent={"flex-start"}
                             alignItems={"flex-start"}
                             spacing={1}
-                            px={5}
+                            px={4}
+                            py={1}
                             width={"100%"}
                         >
-                            <Typography sx={{color: "#99a5d6", fontSize: "32px"}}>
+                            <Typography sx={{color: "#99a5d6", fontSize: "24px"}}>
                                 SPORTSDAYについて
                             </Typography>
-                            <Typography sx={{color: "#99a5d6", fontSize: "16px", wordWrap: "break-word"}}>
+                            <Typography sx={{color: "#99a5d6", fontSize: "16px", lineHeight:2, wordWrap: "break-word"}}>
                                 このwebアプリは、リアルタイムにデータを集計して現況を可視化することで、球技大会の運営をサポートするだけでなく、学生の参加をより促すために製作され、今回の球技大会に試験的に導入されています。
                             </Typography>
                         </Stack>
@@ -185,6 +186,7 @@ export const Navigation = () => {
                                 alignItems={"center"}
                                 spacing={2}
                                 px={3}
+                                pb={2}
                                 width={"100%"}
                             >
                                 <Avatar
@@ -234,10 +236,11 @@ export const Navigation = () => {
                             alignItems={"center"}
                             sx={{marginRight: "10px", padding: "8px 5px"}}
                         >
-
-                            <Toolbar>
-                                <Logo width={20 * 8.45} height={20} fill={'white'}/>
-                            </Toolbar>
+                            <Box py={2} px={2}>
+                                <Button href={"/"}>
+                                    <Logo width={20 * 8.45} height={20} fill={'white'}/>
+                                </Button>
+                            </Box>
                             {(['top'] as const).map((anchor) => (
                                 <React.Fragment key={"top"}>
                                     <IconButton onClick={toggleDrawer(anchor, true)}>
