@@ -90,8 +90,10 @@ const DashBoard: NextPage = () => {
                                     disableGutters
                                     sx={{
                                         paddingTop: 5,
-                                        paddingBottom: "20px",
+                                        paddingBottom: "0px",
+                                        marginBottom:"30px",
                                         position: "relative",
+                                        zIndex: 1,
                                         width: "101vw",
                                         height: "fit-content",
                                         backgroundColor: "#23398a",
@@ -120,11 +122,28 @@ const DashBoard: NextPage = () => {
                                         </Stack>
                                     }
                                 </Container>
+                                <Container
+                                    maxWidth={false}
+                                    sx={{
+                                        width: "140vw",
+                                        height:"100px",
+                                        left:"-20vw",
+                                        top:"-100px",
+                                        zIndex: "0",
+                                        position:"relative",
+                                        backgroundColor: "#23398a",
+                                        borderTopLeftRadius:"10px",
+                                        borderTopRightRadius:"10px",
+                                        borderBottomLeftRadius: "50% 50%",
+                                        borderBottomRightRadius: "50% 50%",
+                                    }}
+                                >
+                                </Container>
 
                                 <Container
                                     maxWidth={"xl"}
                                     disableGutters
-                                    sx={{px: 1, py: 3}}
+                                    sx={{px: 1, py: 3, mt:"-90px"}}
                                 >
                                     <Stack
                                         direction={"column"}

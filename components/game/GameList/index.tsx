@@ -86,16 +86,30 @@ export const GameList = (props: GameListProps) => {
                         width={"100%"}
                         maxWidth={"xl"}
                         sx={{px:2, pb:3, pt:3}}
-                        spacing={2}
+                        spacing={5}
                     >
                         <Typography sx={{color: "#99a5d6", fontSize: "14px"}}>
                             対戦一覧
                         </Typography>
-                        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                            <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                        <Box sx={{ borderBottom: 0, borderColor: 'divider' }}>
+                            <Tabs
+                                value={value}
+                                onChange={handleChange}
+                                variant={"scrollable"}
+                                scrollButtons={"auto"}
+                                aria-label="basic tabs example"
+                                TabIndicatorProps={{
+                                    style: {
+                                        zIndex: 0,
+                                        backgroundColor: '#ffffff',
+                                        borderRadius: '25px',
+                                        height: '50px'
+                                    }
+                                }}
+                            >
                                 {games.map((game) => {
                                     return(
-                                        <Tab key={game.id} label={game.name} {...a11yProps(game.id)} />
+                                        <Tab sx={{zIndex:1, px:2, color:"#99a5d6", border:"1px solid #FFF", borderRadius:"24px"}} key={game.id} label={game.name} {...a11yProps(game.id)} />
                                     )
                                 })}
                             </Tabs>
@@ -104,13 +118,11 @@ export const GameList = (props: GameListProps) => {
                             return(
                                 <TabPanel key={game.id} value={value} index={game.id-1}>
                                     <GameListContent game={game}/>
-                                    <Divider/>
                                 </TabPanel>
                             )
                         })}
 
                     </Stack>
-                    <Divider/>
                     <Typography sx={{color: "#99a5d6", fontSize: "14px"}}>
                         対戦が終了すると項目が追加されます
                     </Typography>
