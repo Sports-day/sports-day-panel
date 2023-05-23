@@ -1,4 +1,4 @@
-import {Container, Divider, Stack, Typography} from "@mui/material";
+import {Box, Container, Divider, Stack, Tab, Tabs, Typography} from "@mui/material";
 import * as React from "react";
 import {GameListContent} from "./GameListContent";
 import {useContext} from "react";
@@ -8,8 +8,49 @@ export type GameListProps = {
     sportId: number
 }
 
+interface TabPanelProps {
+    children?: React.ReactNode;
+    index: number;
+    value: number;
+}
+
+function TabPanel(props: TabPanelProps) {
+    const { children, value, index, ...other } = props;
+
+    return (
+        <div
+            role="tabpanel"
+            hidden={value !== index}
+            id={`simple-tabpanel-${index}`}
+            aria-labelledby={`simple-tab-${index}`}
+            {...other}
+        >
+            {value === index && (
+                <Stack
+                direction={"column"}
+                justifyContent={"flex-start"}
+                spacing={3}
+                >
+                   {children}
+                </Stack>
+            )}
+        </div>
+    );
+}
+
+function a11yProps(index: number) {
+    return {
+        id: `simple-tab-${index}`,
+        'aria-controls': `simple-tabpanel-${index}`,
+    };
+}
+
 export const GameList = (props: GameListProps) => {
     const {data: games} = useContext(GamesContext)
+    const [value, setValue] = React.useState(0);
+    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+        setValue(newValue);
+    };
 
     return(
         <Container
@@ -50,11 +91,22 @@ export const GameList = (props: GameListProps) => {
                         <Typography sx={{color: "#99a5d6", fontSize: "14px"}}>
                             対戦一覧
                         </Typography>
-
+                        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                            <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                                {games.map((game) => {
+                                    return(
+                                        <Tab label={game.name} {...a11yProps(game.id)} />
+                                    )
+                                })}
+                            </Tabs>
+                        </Box>
                         {games.map((game) => {
-                            return (
-                                <GameListContent key={game.id} game={game}/>
-                            );
+                            return(
+                                <TabPanel value={value} index={game.id-1}>
+                                    <GameListContent key={game.id} game={game}/>
+                                    <Divider/>
+                                </TabPanel>
+                            )
                         })}
 
                     </Stack>

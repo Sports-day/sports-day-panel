@@ -17,6 +17,7 @@ import {motion} from "framer-motion";
 import {Footer} from "../components/layouts/footer";
 import {ImagesContext, LocationsContext, TeamsContext} from "../components/context";
 import {useFetchDashboard} from "../src/features/unit/dashboard";
+import {Loading} from "../components/layouts/loading";
 
 const DashBoard: NextPage = () => {
     //  Unit Hook
@@ -38,17 +39,15 @@ const DashBoard: NextPage = () => {
 
     if (isFetching) {
         return (
-            <div>
-                ローディング画面
-            </div>
+            <Loading/>
         )
     }
 
     return (
         <motion.div
-            initial={{opacity: 0.3}}
+            initial={{opacity: 0}}
             animate={{opacity: 1}}
-            exit={{opacity: 0.3}}
+            exit={{opacity: 0}}
             transition={{duration: 0.5, ease: 'easeInOut'}}
         >
             <ImagesContext.Provider

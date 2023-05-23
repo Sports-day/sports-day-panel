@@ -23,6 +23,9 @@ import {useFetchImage} from "../../src/features/images/hook";
 import {GameList} from "../../components/game/GameList"
 import {useFetchSportData} from "../../src/features/unit/sports";
 import {GamesContext, LocationsContext, MatchesContext, TeamsContext} from "../../components/context";
+import {Loading} from "../../components/layouts/loading";
+import {motion} from "framer-motion";
+import {AnimatePresence} from "framer-motion";
 
 type Props = {
     sportId: number
@@ -49,14 +52,18 @@ const Id: NextPage<Props> = (props: Props) => {
 
     if (isFetching) {
         return (
-            <>
-                ローディング画面
-            </>
+            <Loading/>
         )
     }
 
     return (
-        <>
+        <AnimatePresence>
+            <motion.div
+                initial={{opacity: 0}}
+                animate={{opacity: 1}}
+                exit={{opacity: 0}}
+                transition={{duration: 0.5, ease: 'easeInOut'}}
+            >
             <GamesContext.Provider
                 value={{
                     data: games,
@@ -229,7 +236,8 @@ const Id: NextPage<Props> = (props: Props) => {
                     </MatchesContext.Provider>
                 </TeamsContext.Provider>
             </GamesContext.Provider>
-        </>
+            </motion.div>
+        </AnimatePresence>
     )
 }
 
