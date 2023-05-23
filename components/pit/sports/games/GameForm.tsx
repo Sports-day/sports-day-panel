@@ -3,6 +3,7 @@ import {Game, gameFactory} from "../../../../src/models/GameModel";
 import React, {FormEvent, useRef, useState} from "react";
 import {Button, Dialog, DialogActions, DialogContent, DialogTitle, TextFieldProps} from "@mui/material";
 import {GameEditFields} from "./GameEditFields";
+import {useRouter} from "next/router";
 
 export type GameFormProps = {
     isOpen: boolean
@@ -14,6 +15,7 @@ export type GameFormProps = {
 }
 
 export function GameForm(props: GameFormProps) {
+    const router = useRouter()
     //  ref
     const nameRef = useRef<TextFieldProps>(null)
     const descriptionRef = useRef<TextFieldProps>(null)
@@ -44,7 +46,7 @@ export function GameForm(props: GameFormProps) {
         }
 
         if (props.formType === "create") {
-            await gameFactory().create({
+            const result = await gameFactory().create({
                 name: nameRef.current?.value as string,
                 description: descriptionRef.current?.value as string,
                 sportId: props.sportId,
@@ -52,6 +54,9 @@ export function GameForm(props: GameFormProps) {
                 calculationType: calculationTypeState,
                 weight: wightRef.current?.value as number
             })
+
+            //  redirect to game profile
+            await router.push(`/admin/sports/${props.sportId}/games/${result.id}`)
         } else {
             const id = props.game?.id
             if(!id) return

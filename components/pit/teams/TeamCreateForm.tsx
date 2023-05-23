@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import {useFetchClasses} from "../../../src/features/classes/hooks";
 import {teamFactory} from "../../../src/models/TeamModel";
+import {useRouter} from "next/router";
 
 export type TeamCreateFormProps = {
     isOpen: boolean
@@ -19,6 +20,7 @@ export type TeamCreateFormProps = {
 }
 
 export function TeamCreateForm(props: TeamCreateFormProps) {
+    const router = useRouter()
     //  ref
     const nameRef = useRef<TextFieldProps>(null)
     const descriptionRef = useRef<TextFieldProps>(null)
@@ -38,14 +40,16 @@ export function TeamCreateForm(props: TeamCreateFormProps) {
             return
         }
 
-        await teamFactory().create({
+        const result = await teamFactory().create({
             name: nameRef.current?.value as string,
             description: descriptionRef.current?.value as string,
             classId: +classState
         })
 
-        props.refresh()
-        props.setClose()
+        //  redirect to team profile
+        await router.push(`/admin/teams/${result.id}`)
+        // props.refresh()
+        // props.setClose()
     }
 
     return (
