@@ -8,10 +8,10 @@ export function PitSidebar() {
             {/*    name={"グループ"}*/}
             {/*    url={"/admin/groups"}*/}
             {/*/>*/}
-            <PitSidebarContent
-                name={"クラス"}
-                url={"/admin/classes"}
-            />
+            {/*<PitSidebarContent*/}
+            {/*    name={"クラス"}*/}
+            {/*    url={"/admin/classes"}*/}
+            {/*/>*/}
             <PitSidebarContent
                 name={"チーム"}
                 url={"/admin/teams"}
