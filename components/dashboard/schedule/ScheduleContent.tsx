@@ -39,7 +39,7 @@ export const ScheduleContent = (props: ScheduleContentProps) => {
                         VS
                     </Typography>
                     <Typography fontSize={"24px"} fontWeight={"bold"}>
-                        {teamModel?.name.slice(4)}
+                        {teamModel?.name}
                     </Typography>
                 </Stack>
             </Grid>
