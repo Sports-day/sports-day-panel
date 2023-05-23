@@ -10,9 +10,11 @@ import {
     Select,
     SelectChangeEvent,
     TextField,
-    TextFieldProps
+    TextFieldProps, Typography
 } from "@mui/material";
 import {useFetchClasses} from "../../../src/features/classes/hooks";
+import {useRouter} from "next/router";
+import {ConfirmInputDialog} from "../ConfirmInputDialog";
 
 export type TeamProfileProps = {
     team: Team
@@ -20,12 +22,15 @@ export type TeamProfileProps = {
 }
 
 export const TeamProfile = (props: TeamProfileProps) => {
+    const router = useRouter()
     //  ref
     const nameRef = useRef<TextFieldProps>(null)
     const descriptionRef = useRef<TextFieldProps>(null)
     //  context
     const {classes} = useFetchClasses()
     const [classState, setClassState] = useState<string>(props.team?.classId.toString() ?? '')
+    //  state
+    const [isDeleteOpen, setIsDeleteOpen] = useState<boolean>(false)
 
     const handleClassChange = (e: SelectChangeEvent) => {
         setClassState(e.target.value.toString())
@@ -48,6 +53,12 @@ export const TeamProfile = (props: TeamProfileProps) => {
         )
 
         props.refresh()
+    }
+
+    const handleDelete = async () => {
+        await teamFactory().delete(props.team.id)
+
+        await router.back()
     }
 
     return (
@@ -117,20 +128,53 @@ export const TeamProfile = (props: TeamProfileProps) => {
                             }
                         </Select>
 
-                        <Button
-                            type={"submit"}
-                            variant={"contained"}
+                        <Box
                             sx={{
-                                width: "80px",
+                                display: "flex",
+                                flexDirection: "row",
                                 my: "20px"
                             }}
                         >
-                            保存
-                        </Button>
+                            <Button
+                                type={"submit"}
+                                variant={"contained"}
+                                sx={{
+                                    width: "80px"
+                                }}
+                            >
+                                保存
+                            </Button>
+
+
+                            <Button
+                                onClick={() => setIsDeleteOpen(true)}
+                                color={"error"}
+                                variant={"contained"}
+                                sx={{
+                                    width: "80px",
+                                    ml: "10px"
+                                }}
+                            >
+                                削除
+                            </Button>
+                        </Box>
 
                         <Divider light/>
                     </Box>
                 </form>
+
+                <ConfirmInputDialog
+                    open={isDeleteOpen}
+                    onClose={() => setIsDeleteOpen(false)}
+                    onConfirm={handleDelete}
+                    confirmText={"削除"}
+                    confirmKeyword={props.team.name}
+                    confirmColor={"error"}
+                >
+                    <Typography>
+                        本当に削除しますか？
+                    </Typography>
+                </ConfirmInputDialog>
             </div>
         </>
     )

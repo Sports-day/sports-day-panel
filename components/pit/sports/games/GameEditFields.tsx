@@ -91,7 +91,7 @@ export function GameEditFields(props: GameEditFieldsProps) {
                 </MenuItem>
             </Select>
             {/* calculation type */}
-            <InputLabel id="calculation-type-select">大会形式</InputLabel>
+            <InputLabel id="calculation-type-select">採点方式</InputLabel>
             <Select
                 labelId={"calculation-type-select"}
                 id={"calculation-type"}

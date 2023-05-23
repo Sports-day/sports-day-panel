@@ -5,13 +5,16 @@ import {
     Avatar,
     Box, Button,
     SelectChangeEvent,
-    TextFieldProps,
+    TextFieldProps, Typography,
 } from "@mui/material";
 import React, {FormEvent, useContext, useRef, useState} from "react";
 import {SportEditFields} from "../SportEditFields";
 import {ImagesContext} from "../../../context";
+import {ConfirmInputDialog} from "../../ConfirmInputDialog";
+import {useRouter} from "next/router";
 
 export function SportProfile(props: { sport: Sport, refresh: VoidFunction }) {
+    const router = useRouter()
     //  ref
     const nameRef = useRef<TextFieldProps>(null)
     const descriptionRef = useRef<TextFieldProps>(null)
@@ -19,6 +22,7 @@ export function SportProfile(props: { sport: Sport, refresh: VoidFunction }) {
     const ruleIdRef = useRef<TextFieldProps>(null)
     //  state
     const [iconIdState, setIconIdState] = useState<string>(props.sport?.iconId?.toString() ?? '-1')
+    const [isDeleteOpen, setIsDeleteOpen] = useState<boolean>(false)
     //  images
     const {data: images} = useContext(ImagesContext)
 
@@ -65,6 +69,12 @@ export function SportProfile(props: { sport: Sport, refresh: VoidFunction }) {
         props.refresh()
     }
 
+    const handleDelete = async () => {
+        await sportFactory().delete(props.sport.id)
+
+        await router.back()
+    }
+
     return (
         <>
             <div className={styles.content}>
@@ -101,20 +111,53 @@ export function SportProfile(props: { sport: Sport, refresh: VoidFunction }) {
                                     sport={props.sport}
                                 />
 
-                                <Button
-                                    type={"submit"}
-                                    variant={"contained"}
+                                <Box
                                     sx={{
-                                        width: "80px",
-                                        my: "20px"
+                                        display: "flex",
+                                        flexDirection: "row",
+                                        mb: "20px"
                                     }}
                                 >
-                                    保存
-                                </Button>
+                                    <Button
+                                        type={"submit"}
+                                        variant={"contained"}
+                                        sx={{
+                                            width: "80px"
+                                        }}
+                                    >
+                                        保存
+                                    </Button>
+
+
+                                    <Button
+                                        onClick={() => setIsDeleteOpen(true)}
+                                        color={"error"}
+                                        variant={"contained"}
+                                        sx={{
+                                            width: "80px",
+                                            ml: "10px"
+                                        }}
+                                    >
+                                        削除
+                                    </Button>
+                                </Box>
                             </Box>
                         </form>
                     </div>
                 </div>
+
+                <ConfirmInputDialog
+                    open={isDeleteOpen}
+                    onClose={() => setIsDeleteOpen(false)}
+                    onConfirm={handleDelete}
+                    confirmText={"削除"}
+                    confirmKeyword={props.sport.name}
+                    confirmColor={"error"}
+                >
+                    <Typography>
+                        本当に削除しますか？
+                    </Typography>
+                </ConfirmInputDialog>
             </div>
         </>
     )
