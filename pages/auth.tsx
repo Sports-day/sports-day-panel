@@ -20,7 +20,7 @@ const Auth: NextPage = () => {
             </Head>
             <Box
                 maxHeight={"100vh"}
-                sx={{backgroundColor:"#e8ebf8", width: '100vw' , height: '90vh', overflow:'hidden'}}
+                sx={{backgroundColor:"#e8ebf8", width: '100vw' , height: '100vh', overflow:'hidden'}}
             >
                 <Container
                     maxWidth={"xl"}
@@ -42,15 +42,15 @@ const Auth: NextPage = () => {
                             alignItems={"flex-start"}
                             spacing={2}
                         >
-                            <Typography fontSize={"24px"} fontWeight={"bold"}>みんなの</Typography>
-                            <Typography fontSize={"24px"} fontWeight={"bold"}>球技大会、</Typography>
-                            <Typography fontSize={"24px"} fontWeight={"bold"}>あなたの</Typography>
+                            <Typography fontSize={"24px"} fontWeight={"bold"} color={"#000"}>みんなの</Typography>
+                            <Typography fontSize={"24px"} fontWeight={"bold"} color={"#000"}>球技大会、</Typography>
+                            <Typography fontSize={"24px"} fontWeight={"bold"} color={"#000"}>あなたの</Typography>
                             <Stack
                                 direction={"row"}
                                 spacing={0.5}
                             >
                                 <Logo width={22*8.45} height={22} fill={"black"}/>
-                                <Typography fontSize={"24px"} fontWeight={"bold"} sx={{position:"relative", bottom:"9px"}}>。</Typography>
+                                <Typography fontSize={"24px"} fontWeight={"bold"} color={"#000"} sx={{position:"relative", bottom:"9px"}}>。</Typography>
                             </Stack>
                         </Stack>
                         <Stack width={"fit-content"}>
