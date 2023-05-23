@@ -12,7 +12,7 @@ import {
     TableRow,
     TextField
 } from "@mui/material";
-import React, {useContext} from "react";
+import React, {FormEvent, useContext} from "react";
 import {useFetchClasses} from "../../../../src/features/classes/hooks";
 import {Team} from "../../../../src/models/TeamModel";
 import {ClassesContext} from "../../../context";
@@ -41,7 +41,9 @@ export function GameEntryForm(props: GameEntryFormProps) {
         setSelectedTeams(selectedTeams.filter(id => id !== teamId))
     }
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (e: FormEvent) => {
+        e.preventDefault()
+
         await gameFactory().addGameEntries(
             props.gameId,
             selectedTeams
