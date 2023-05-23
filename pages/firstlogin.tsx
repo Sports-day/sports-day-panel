@@ -9,28 +9,49 @@ import {
     Stack,
     Typography
 } from "@mui/material"
-import * as React from "react";
 import {useSession} from "next-auth/react";
 import {ThemeProvider} from "@mui/material/styles";
 import {createTheme} from "../components/theme";
 import {useFetchUsers} from "../src/features/users/hook";
+import {MicrosoftAccount, microsoftAccountFactory} from "../src/models/MicrosoftAccountModel";
+import {useState} from "react";
 
-export const Firstlogin = () => {
-    const {users} = useFetchUsers();
+export const FirstLogin = (props: { microsoftAccount: MicrosoftAccount }) => {
     const {data: session} = useSession();
     const theme = createTheme();
+    const {users} = useFetchUsers();
 
-    const [name, setName] = React.useState('');
+
+    const [studentId, setStudentId] = useState<string>(props.microsoftAccount.mailAccountName ?? "");
+
     const handleChange = (event: SelectChangeEvent) => {
-        setName(event.target.value);
+        setStudentId(event.target.value);
     };
 
-    const defaultName = "デフォルト"
+    const handleLinkLater = async () => {
+        await microsoftAccountFactory().linkLater("me")
+    }
 
-    return(
+    const handleLinkUser = async () => {
+        if (studentId === "-1") {
+            alert("自分の名前を選択してください")
+            return
+        }
+
+        const user = users.find(user => user.studentId === studentId)
+        if (!user) {
+            alert("ユーザーが見つかりませんでした")
+            return
+        }
+
+        //  link
+        await microsoftAccountFactory().linkUser("me", user.id)
+    }
+
+    return (
         <ThemeProvider theme={theme}>
             <Box
-                sx={{ width: '100vw' , height: '100vh', overflow:'hidden'}}
+                sx={{width: '100vw', height: '100vh', overflow: 'hidden'}}
             >
                 <Container maxWidth={"xl"} disableGutters>
                     <Stack
@@ -45,7 +66,7 @@ export const Firstlogin = () => {
                             pt={5}
                             pb={7}
                             width={"100%"}
-                            sx={{backgroundColor:"#23398a"}}
+                            sx={{backgroundColor: "#23398a"}}
                         >
                             <Box pb={2}>
                                 <Avatar
@@ -71,7 +92,7 @@ export const Firstlogin = () => {
                 <Container
                     maxWidth={"xl"}
                     disableGutters
-                    sx={{px:1, py:3}}
+                    sx={{px: 1, py: 3}}
                 >
                     <Stack
                         direction={"column"}
@@ -85,25 +106,25 @@ export const Firstlogin = () => {
                         <Typography fontSize={"16px"} pb={3}>
                             お名前が合っているか確認してください。
                         </Typography>
-                        <FormControl variant="filled" sx={{ m: 10, width:"100%"}}>
+                        <FormControl variant="filled" sx={{m: 10, width: "100%"}}>
                             <InputLabel id="demo-simple-select-autowidth-label">名前</InputLabel>
                             <Select
-                                value={name}
+                                value={studentId}
                                 onChange={handleChange}
                                 autoWidth
                                 label="名前"
-                                sx={{color:"#23398A"}}
+                                sx={{color: "#23398A"}}
                             >
 
                                 {/*//デフォルト名*/}
-                                <MenuItem value={defaultName}>
-                                    <em>{defaultName}</em>
+                                <MenuItem value={"-1"}>
+                                    <em>自分の名前を選択してください</em>
                                 </MenuItem>
 
                                 {/*//ユーザー名リスト*/}
-                                {users.map((user)=>{
-                                    return(
-                                        <MenuItem key={user.id} value={user.id}>{user?.name}</MenuItem>
+                                {users.map((user) => {
+                                    return (
+                                        <MenuItem key={user.id} value={user.studentId}>{user.name}</MenuItem>
                                     )
                                 })}
 
@@ -113,18 +134,26 @@ export const Firstlogin = () => {
                         <Stack width={"100%"} pt={5}>
                             <Card>
                                 <Button
-
-                                    // onClick={}
-
-                                    sx={{width:"100%"}}
+                                    onClick={handleLinkUser}
+                                    sx={{width: "100%"}}
+                                    href={"/"}
                                 >
-                                    <CardContent sx={{width:"fit-content"}}>
+                                    <CardContent sx={{width: "fit-content"}}>
                                         <Typography sx={{color: "#FFF", fontSize: "16px"}}>
                                             確認してはじめる
                                         </Typography>
                                     </CardContent>
                                 </Button>
                             </Card>
+                            <Box pt={2} alignSelf={"center"}>
+                                <Button
+                                    onClick={handleLinkLater}
+                                    sx={{py: 1, px: 2, width: "fit-content"}}
+                                    href={"/"}
+                                >
+                                    <Typography sx={{fontSize: "16px", color: "23398A"}}>あとで設定</Typography>
+                                </Button>
+                            </Box>
                         </Stack>
 
                     </Stack>
@@ -134,4 +163,4 @@ export const Firstlogin = () => {
     )
 }
 
-export default Firstlogin;
+export default FirstLogin;

@@ -2,7 +2,7 @@ import type {NextPage} from 'next'
 import {useSession} from "next-auth/react";
 import Auth from './auth';
 import Dashboard from './dashboard';
-import Firstlogin from "./firstlogin";
+import FirstLogin from "./firstlogin";
 import {useFetchMicrosoftAccount} from "../src/features/microsoft-account/hooks";
 import {MicrosoftAccountContext} from "../components/context";
 
@@ -23,7 +23,7 @@ const Index: NextPage = () => {
                     }}
                 >
                     {microsoftAccount?.userId === null && !microsoftAccount?.linkLater
-                        ? <Firstlogin/>
+                        ? <FirstLogin microsoftAccount={microsoftAccount} />
                         : <Dashboard/>
                     }
                 </MicrosoftAccountContext.Provider>
