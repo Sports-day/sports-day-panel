@@ -1,8 +1,8 @@
 import {useState} from "react";
 import {Sport, sportFactory} from "../../../models/SportModel";
 import {useAsync, useAsyncRetry} from "react-use";
-import {Game, gameFactory} from "../../../models/GameModel";
-import {useFetchMyTeamGames} from "../../games/hook";
+import {Game, gameFactory, LeagueTeamResult} from "../../../models/GameModel";
+import {Team} from "../../../models/TeamModel";
 
 /**
  * Fetches all sports
@@ -133,19 +133,32 @@ export const useFetchSportProgress = (sportId: number) => {
     }
 }
 
-export const useFetchMySports = () => {
-    const [sports, setSports] = useState<Sport[]>()
+export type BestTeam = {
+    team: Team
+    rank: number
+}
+
+export const useFetchSportBest3 = (sportId: number) => {
+    const [bestTeams, setBestTeams] = useState<BestTeam[]>([])
     const [isFetching, setIsFetching] = useState(true)
 
-    const {games, isFetching: isFetchingGames} = useFetchMyTeamGames()
+    const {games, isFetching: isFetchingGames} = useFetchSportGames(sportId)
 
     useAsync(async () => {
         if(!isFetchingGames) {
             try {
-                const sportIds = games.map(game => game.sportId)
-                const result = await sportFactory().index()
-                    .then(values => values.filter(value => sportIds.includes(value.id)))
-                setSports(result)
+                const teamResults: LeagueTeamResult[] = []
+                // Get all league result
+                for (const game of games) {
+                    if (game.type != "tournament") continue
+                    //  fetch
+                    const result = await gameFactory().getLeagueResult(game.id)
+                    result.teams.forEach(team => teamResults.push(team))
+                }
+
+                //  sort
+                teamResults.sort((a, b) => b.score - a.score)
+
             } catch (e) {
                 console.log(e);
             } finally {
@@ -155,36 +168,7 @@ export const useFetchMySports = () => {
     }, [isFetchingGames])
 
     return {
-        sports: sports,
-        isFetching: isFetching,
-    }
-}
-
-/**
- * Fetches the sports with the highest weight
- */
-export const useFetchMySport = () => {
-    const [sport, setSport] = useState<Sport>()
-    const [isFetching, setIsFetching] = useState(true)
-
-    const {sports, isFetching: isFetchingSports} = useFetchMySports()
-
-    useAsync(async () => {
-        if(!isFetchingSports) {
-            try {
-                sports?.sort((a, b) => a.weight + b.weight)
-
-                setSport(sports?.[0])
-            } catch (e) {
-                console.log(e);
-            } finally {
-                setIsFetching(false);
-            }
-        }
-    }, [isFetchingSports])
-
-    return {
-        sport: sport,
+        bestTeams: bestTeams,
         isFetching: isFetching,
     }
 }
