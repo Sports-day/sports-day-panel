@@ -1,9 +1,10 @@
 import {Card, CardContent, Stack, Typography}from "@mui/material";
 import {GameBestContent} from "./GameBestContent";
+import {Sport} from "../../../src/models/SportModel";
+import {useFetchSportBest3} from "../../../src/features/sports/hook";
 
 export const GameBest = () => {
-    const rank = [1,2,3];
-    const team = ["チーム1","チーム2","チーム3"];
+    const { bestTeams, isFetching } = useFetchSportBest3()
 
     return(
         <Card sx={{
@@ -23,10 +24,15 @@ export const GameBest = () => {
                         競技内ベスト3
                     </Typography>
 
-                    <GameBestContent key={team}
-                        rank={rank[0]}
-                        team={team[0]}
-                    />
+                    {bestTeams.map((team) => {
+                        return (
+                            <GameBestContent
+                                key={team.team.id}
+                                team={team.team.name}
+                                rank={team.rank}
+                            />
+                        );
+                    })}
 
                 </Stack>
             </CardContent>

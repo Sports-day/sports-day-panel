@@ -1,11 +1,15 @@
 import {Container, Divider, Stack, Typography} from "@mui/material";
 import * as React from "react";
-import {useFetchSportGames} from "../../../src/features/sports/hook";
 import {GameListContent} from "./GameListContent";
+import {useContext} from "react";
+import {GamesContext} from "../../context";
 
-export const GameList = (props:any) => {
-    const {sportId} = props;
-    const {games, isFetching: isFethingGames} = useFetchSportGames(sportId)
+export type GameListProps = {
+    sportId: number
+}
+
+export const GameList = (props: GameListProps) => {
+    const {data: games} = useContext(GamesContext)
 
     return(
         <Container

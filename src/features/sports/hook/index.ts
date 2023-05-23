@@ -1,8 +1,9 @@
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {Sport, sportFactory} from "../../../models/SportModel";
 import {useAsync, useAsyncRetry} from "react-use";
 import {Game, gameFactory, LeagueTeamResult} from "../../../models/GameModel";
 import {Team} from "../../../models/TeamModel";
+import {GamesContext, MatchesContext, TeamsContext} from "../../../../components/context";
 
 /**
  * Fetches all sports
@@ -92,80 +93,44 @@ export const useFetchSportGames = (sportId: number) => {
     }
 }
 
-/**
- * Fetches the progress of a sports
- * @param sportId
- */
-export const useFetchSportProgress = (sportId: number) => {
-    const [progress, setProgress] = useState<number>(0)
-    const [isFetching, setIsFetching] = useState(true)
-
-    const {games, isFetching: isFetchingGames} = useFetchSportGames(sportId)
-
-    const state = useAsyncRetry(async () => {
-        if(!isFetchingGames) {
-            try {
-                setIsFetching(true);
-
-                let total = 0
-                let finished = 0
-
-                for (const game of games) {
-                    const matches = await gameFactory().getGameMatches(game.id)
-
-                    total += matches.length
-                    finished += matches.filter(match => match.status == "finished").length
-                }
-
-                const result = Math.round((finished / total) * 100)
-                setProgress(result)
-            } catch (e) {
-                console.log(e);
-            } finally {
-                setIsFetching(false);
-            }
-        }
-    }, [isFetchingGames])
-
-    return {
-        progress: progress,
-        isFetching: isFetching,
-    }
-}
-
 export type BestTeam = {
     team: Team
     rank: number
 }
 
-export const useFetchSportBest3 = (sportId: number) => {
+export const useFetchSportBest3 = () => {
     const [bestTeams, setBestTeams] = useState<BestTeam[]>([])
     const [isFetching, setIsFetching] = useState(true)
 
-    const {games, isFetching: isFetchingGames} = useFetchSportGames(sportId)
+    const {data: games} = useContext(GamesContext)
+    const {data: teams} = useContext(TeamsContext)
 
     useAsync(async () => {
-        if(!isFetchingGames) {
-            try {
-                const teamResults: LeagueTeamResult[] = []
-                // Get all league result
-                for (const game of games) {
-                    if (game.type != "tournament") continue
-                    //  fetch
-                    const result = await gameFactory().getLeagueResult(game.id)
-                    result.teams.forEach(team => teamResults.push(team))
-                }
-
-                //  sort
-                teamResults.sort((a, b) => b.score - a.score)
-
-            } catch (e) {
-                console.log(e);
-            } finally {
-                setIsFetching(false);
+        try {
+            const teamResults: LeagueTeamResult[] = []
+            // Get all league result
+            for (const game of games) {
+                if (game.type == "tournament") continue
+                //  fetch
+                const result = await gameFactory().getLeagueResult(game.id)
+                result.teams.forEach(team => teamResults.push(team))
             }
+
+            //  sort
+            teamResults.sort((a, b) => b.score - a.score)
+
+            setBestTeams(teamResults.slice(0, 3).map((teamResult, index) => {
+                return {
+                    team: teams.find(team => team.id == teamResult.teamId),
+                    rank: index + 1
+                } as BestTeam
+            }))
+        } catch (e) {
+            console.log(e);
+        } finally {
+            setIsFetching(false);
         }
-    }, [isFetchingGames])
+    })
 
     return {
         bestTeams: bestTeams,

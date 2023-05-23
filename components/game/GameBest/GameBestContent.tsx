@@ -1,6 +1,6 @@
 import {Divider, Stack, Typography} from "@mui/material";
 
-export const GameBestContent = (props: any) => {
+export const GameBestContent = (props: { rank: number, team: string }) => {
     const {rank, team} = props;
     return(
         <>
