@@ -85,7 +85,7 @@ export function GameForm(props: GameFormProps) {
                     onSubmit={handleSubmit}
                 >
                     <DialogTitle>
-                        {props.formType === "create" ? "競技作成" : "競技編集"}
+                        {props.formType === "create" ? "リーグ・トーナメント作成" : "リーグ・トーナメント編集"}
                     </DialogTitle>
                     <DialogContent>
                         <GameEditFields
