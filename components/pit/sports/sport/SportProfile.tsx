@@ -7,9 +7,8 @@ import {
     SelectChangeEvent,
     TextFieldProps, Typography,
 } from "@mui/material";
-import React, {FormEvent, useContext, useRef, useState} from "react";
+import React, {FormEvent, useRef, useState} from "react";
 import {SportEditFields} from "../SportEditFields";
-import {ImagesContext} from "../../../context";
 import {ConfirmInputDialog} from "../../ConfirmInputDialog";
 import {useRouter} from "next/router";
 import {useFetchImages} from "../../../../src/features/images/hook";
