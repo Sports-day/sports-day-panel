@@ -157,7 +157,7 @@ function makeLeagueTable(game: Game, entries: Team[], matches: Match[], result: 
                     }
                     <StyledTableCell>
                         <Typography>
-                            順位(要検証！同順なし！ごめん！)
+                            順位(要検証！)
                         </Typography>
                     </StyledTableCell>
                 </TableRow>
