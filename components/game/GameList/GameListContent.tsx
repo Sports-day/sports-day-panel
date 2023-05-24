@@ -16,7 +16,9 @@ export const GameListContent = (props: { game: Game }) => {
 
     return (
         <>
-            {filteredMatches.map((match) => {
+            {filteredMatches
+                .sort((a, b) => a.startAt.localeCompare(b.startAt))
+                .map((match) => {
                 return (
                     <Box key={match.id}>
                         <GamePointBar

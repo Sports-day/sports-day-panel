@@ -72,7 +72,7 @@ export function SportProfile(props: { sport: Sport, refresh: VoidFunction }) {
     const handleDelete = async () => {
         await sportFactory().delete(props.sport.id)
 
-        await router.back()
+        await router.push("/admin/sports")
     }
 
     return (
