@@ -157,7 +157,9 @@ const DashBoard: NextPage = () => {
                                                     <Schedule matches={myTeamMatches} myTeamId={myTeam.id}/>
                                                 </Grid>
                                             }
-                                            {sports.map((sport) => {
+                                            {sports
+                                                .sort((a, b) => b.weight - a.weight)
+                                                .map((sport) => {
                                                 return (
                                                     <Grid xs={12} sm={12} lg={12} key={sport.id}>
                                                         <SportsListElement

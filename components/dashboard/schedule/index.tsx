@@ -19,29 +19,29 @@ export type ScheduleProps = {
 
 export const Schedule = (props: ScheduleProps) => {
 
-    return(
+    return (
         <Card sx={{height: "fit-content"}}>
             <CardContent>
                 <Stack
                     spacing={0}
                 >
-                    <Button sx={{width:"100%"}}>
+                    <Button sx={{width: "100%"}}>
                         <Stack
                             direction={"row"}
                             justifyContent={"space-between"}
                             alignItems={"center"}
-                            sx={{width:"100%"}}
+                            sx={{width: "100%"}}
                         >
                             <Typography
                                 color={"textSecondary"}
                             >
                                 あなたの試合
                             </Typography>
-                            <Box sx={{position:"relative", top:"8px"}}>
-                                <SvgIcon fontSize={"small"} sx={{position:"relative", bottom:"3px"}}>
+                            <Box sx={{position: "relative", top: "8px"}}>
+                                <SvgIcon fontSize={"small"} sx={{position: "relative", bottom: "3px"}}>
                                     <HiOutlineTableCells color="#99a5d6"/>
                                 </SvgIcon>
-                                <SvgIcon fontSize={"small"} sx={{position:"relative", bottom:"3px"}}>
+                                <SvgIcon fontSize={"small"} sx={{position: "relative", bottom: "3px"}}>
                                     <HiOutlineArrowRight color="#99a5d6"/>
                                 </SvgIcon>
                             </Box>
@@ -49,16 +49,18 @@ export const Schedule = (props: ScheduleProps) => {
                     </Button>
                     <Grid container spacing={1}>
 
-                        {props.matches.map((match: Match) => {
-                            return(
-                                <ScheduleContent
-                                    key={match.id}
-                                    match={match}
-                                    myTeamId={props.myTeamId}
-                                />
+                        {props.matches
+                            .sort((a, b) => a.startAt.localeCompare(b.startAt))
+                            .map((match: Match) => {
+                                return (
+                                    <ScheduleContent
+                                        key={match.id}
+                                        match={match}
+                                        myTeamId={props.myTeamId}
+                                    />
 
-                            );
-                        })}
+                                );
+                            })}
 
                     </Grid>
                 </Stack>

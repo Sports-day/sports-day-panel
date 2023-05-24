@@ -17,7 +17,7 @@ const AdminMicrosoftAccountsIndex: NextPage = () => {
             </>
         )
     } else {
-        return (<p>please login</p>)
+        return null
     }
 }
 

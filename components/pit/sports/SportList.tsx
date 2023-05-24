@@ -5,7 +5,9 @@ import { SportContent } from "./SportContent";
 
 export function SportList() {
     const {data: sports, refresh} = useContext(SportsContext)
-    const sportComponents = sports.map(sport => {
+    const sportComponents = sports
+        .sort((a, b) => b.weight - a.weight)
+        .map(sport => {
         return (
             <SportContent sport={sport} key={sport.id} refresh={refresh}/>
         )

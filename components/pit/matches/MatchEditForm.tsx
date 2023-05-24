@@ -120,7 +120,7 @@ export function MatchEditForm(props: { match: Match, refresh: VoidFunction }) {
     const handleDelete = async () => {
         await matchFactory().delete(props.match.id)
 
-        await router.back()
+        await router.push("/pit/matches")
     }
 
     const handleLeftTeamChange = (event: SelectChangeEvent) => {

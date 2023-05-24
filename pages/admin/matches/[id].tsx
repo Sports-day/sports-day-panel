@@ -22,7 +22,7 @@ const AdminMatchId: NextPage<Props> = ({id}) => {
             </>
         )
     } else {
-        return (<p>please login</p>)
+        return null
     }
 }
 
