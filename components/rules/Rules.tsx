@@ -7,16 +7,16 @@ import {RuleStrackout} from "./RuleStrackout";
 import {RulePetanque} from "./RulePetanque";
 
 export type RuleProps = {
-    sportId: number;
+    ruleId: number;
 }
 
 export const Rules = (props: RuleProps) => {
-    const {sportId} = props;
-    if (sportId === 1){return <RuleBeachball/>}
-    if (sportId === 2){return <RuleBadminton/>}
-    if (sportId === 3){return <RuleKickbase/>}
-    if (sportId === 4){return <RulePetanque/>}
-    if (sportId === 5){return <RuleStrackout/>}
-    if (sportId === 6){return <RuleDodgebee/>}
+    const {ruleId} = props;
+    if (ruleId === 1){return <RuleBeachball/>}
+    if (ruleId === 2){return <RuleBadminton/>}
+    if (ruleId === 3){return <RuleKickbase/>}
+    if (ruleId === 4){return <RulePetanque/>}
+    if (ruleId === 5){return <RuleStrackout/>}
+    if (ruleId === 6){return <RuleDodgebee/>}
     return(<> </>)
 }

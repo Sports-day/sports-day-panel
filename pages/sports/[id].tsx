@@ -259,7 +259,7 @@ const Id: NextPage<Props> = (props: Props) => {
                                             >
                                                 <DialogTitle id="scroll-dialog-title" fontSize={"16px"} color={"#99a5d6"}>{sport.name}のルール</DialogTitle>
                                                 <DialogContent dividers={scroll === 'paper'}>
-                                                    <Rules sportId={sport.id}/>
+                                                    <Rules ruleId={sport.ruleId}/>
                                                 </DialogContent>
                                                 <DialogActions>
                                                     <Stack
