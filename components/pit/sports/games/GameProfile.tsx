@@ -54,7 +54,7 @@ export function GameProfile() {
     const handleDelete = async () => {
         await gameFactory().delete(game.id)
 
-        await router.back()
+        await router.push(`/admin/sports/${game.sportId}`)
     }
 
     return (
