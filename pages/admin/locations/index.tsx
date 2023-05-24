@@ -17,7 +17,7 @@ const AdminLocationsIndex: NextPage = () => {
             </>
         )
     } else {
-        return (<p>please login</p>)
+        return null
     }
 }
 

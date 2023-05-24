@@ -22,7 +22,7 @@ const AdminSportId: NextPage<Props> = (props: {sportId: number}) => {
             </>
         )
     } else {
-        return (<p>please login</p>)
+        return null
     }
 }
 
