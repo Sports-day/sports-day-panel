@@ -12,6 +12,7 @@ import {SportEditFields} from "../SportEditFields";
 import {ImagesContext} from "../../../context";
 import {ConfirmInputDialog} from "../../ConfirmInputDialog";
 import {useRouter} from "next/router";
+import {useFetchImages} from "../../../../src/features/images/hook";
 
 export function SportProfile(props: { sport: Sport, refresh: VoidFunction }) {
     const router = useRouter()
@@ -24,7 +25,7 @@ export function SportProfile(props: { sport: Sport, refresh: VoidFunction }) {
     const [iconIdState, setIconIdState] = useState<string>(props.sport?.iconId?.toString() ?? '-1')
     const [isDeleteOpen, setIsDeleteOpen] = useState<boolean>(false)
     //  images
-    const {data: images} = useContext(ImagesContext)
+    const {images} = useFetchImages()
 
     const handleImageIdChange = (e: SelectChangeEvent) => {
         setIconIdState(e.target.value.toString())
@@ -82,7 +83,7 @@ export function SportProfile(props: { sport: Sport, refresh: VoidFunction }) {
                 <div className={styles.sportProfile}>
                     <div className={styles.sportIcon}>
                         {props.sport.iconId ?
-                            <SportIcon iconId={props.sport.iconId}/>
+                            <SportIcon icon={images.find(image => image.id === props.sport.iconId)}/>
                             :
                             <Avatar
                                 sx={{
