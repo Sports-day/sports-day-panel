@@ -3,7 +3,9 @@ import {Game} from "../../../../src/models/GameModel";
 import {SportGameContent} from "./SportGameContent";
 
 export function SportGameList(props: { games: Game[] }) {
-    const sportGameComponents = props.games.map(game => {
+    const sportGameComponents = props.games
+        .sort((a, b) => b.weight - a.weight)
+        .map(game => {
         return (
             <SportGameContent game={game} key={game.id} />
         )

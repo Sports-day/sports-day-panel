@@ -15,7 +15,7 @@ interface TabPanelProps {
 }
 
 function TabPanel(props: TabPanelProps) {
-    const { children, value, index, ...other } = props;
+    const {children, value, index, ...other} = props;
 
     return (
         <div
@@ -27,11 +27,11 @@ function TabPanel(props: TabPanelProps) {
         >
             {value === index && (
                 <Stack
-                direction={"column"}
-                justifyContent={"flex-start"}
-                spacing={3}
+                    direction={"column"}
+                    justifyContent={"flex-start"}
+                    spacing={3}
                 >
-                   {children}
+                    {children}
                 </Stack>
             )}
         </div>
@@ -52,14 +52,14 @@ export const GameList = (props: GameListProps) => {
         setValue(newValue);
     };
 
-    return(
+    return (
         <Container
             maxWidth={false}
             disableGutters
             sx={{
                 paddingTop: "0px",
-                position:"relative",
-                bottom:"-40px"
+                position: "relative",
+                bottom: "-40px"
             }}
         >
             <Stack
@@ -71,7 +71,7 @@ export const GameList = (props: GameListProps) => {
                 sx={{
                     position: "relative",
                     width: "101vw",
-                    height:"fit-content",
+                    height: "fit-content",
                     backgroundColor: "#23398a",
                 }}
             >
@@ -85,13 +85,13 @@ export const GameList = (props: GameListProps) => {
                     <Stack
                         width={"100%"}
                         maxWidth={"xl"}
-                        sx={{px:2, pb:3, pt:3}}
+                        sx={{px: 2, pb: 3, pt: 3}}
                         spacing={5}
                     >
                         <Typography sx={{color: "#99a5d6", fontSize: "14px"}}>
                             対戦一覧
                         </Typography>
-                        <Box sx={{ borderBottom: 0, borderColor: 'divider' }}>
+                        <Box sx={{borderBottom: 0, borderColor: 'divider'}}>
                             <Tabs
                                 value={value}
                                 onChange={handleChange}
@@ -108,19 +108,27 @@ export const GameList = (props: GameListProps) => {
                                 }}
                             >
                                 {games.map((game) => {
-                                    return(
-                                        <Tab sx={{zIndex:1, px:2, color:"#99a5d6", border:"1px solid #FFF", borderRadius:"24px"}} key={game.id} label={game.name} {...a11yProps(game.id)} />
+                                    return (
+                                        <Tab sx={{
+                                            zIndex: 1,
+                                            px: 2,
+                                            color: "#99a5d6",
+                                            border: "1px solid #FFF",
+                                            borderRadius: "24px"
+                                        }} key={game.id} label={game.name} {...a11yProps(game.id)} />
                                     )
                                 })}
                             </Tabs>
                         </Box>
-                        {games.map((game) => {
-                            return(
-                                <TabPanel key={game.id} value={value} index={game.id-1}>
-                                    <GameListContent game={game}/>
-                                </TabPanel>
-                            )
-                        })}
+                        {games
+                            .sort((a, b) => b.weight - a.weight)
+                            .map((game) => {
+                                return (
+                                    <TabPanel key={game.id} value={value} index={game.id - 1}>
+                                        <GameListContent game={game}/>
+                                    </TabPanel>
+                                )
+                            })}
 
                     </Stack>
                     <Typography sx={{color: "#99a5d6", fontSize: "14px"}}>
