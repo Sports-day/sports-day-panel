@@ -59,7 +59,8 @@ export const GameList = (props: GameListProps) => {
             sx={{
                 paddingTop: "0px",
                 position:"relative",
-                bottom:"-40px"
+                bottom:"-40px",
+                height:"fit-content",
             }}
         >
             <Stack
@@ -123,7 +124,7 @@ export const GameList = (props: GameListProps) => {
                         })}
 
                     </Stack>
-                    <Typography sx={{color: "#99a5d6", fontSize: "14px"}}>
+                    <Typography sx={{color: "#99a5d6", fontSize: "14px", pb:3}}>
                         対戦が終了すると項目が追加されます
                     </Typography>
                 </Stack>

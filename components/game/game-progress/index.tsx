@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import {Card, CardContent,　Stack, Typography}from "@mui/material";
 import {GameProgressChart} from "./GameProgressChart";
 import {useContext} from "react";

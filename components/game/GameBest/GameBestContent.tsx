@@ -4,7 +4,6 @@ export const GameBestContent = (props: { rank: number, team: string }) => {
     const {rank, team} = props;
     return(
         <>
-            <Divider/>
             <Stack
                 alignItems={"flex-start"}
                 direction={"row"}
@@ -17,6 +16,7 @@ export const GameBestContent = (props: { rank: number, team: string }) => {
                     {team}
                 </Typography>
             </Stack>
+            {rank !== 3 && <Divider/>}
         </>
     )
 }
