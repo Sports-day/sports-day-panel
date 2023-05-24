@@ -1,9 +1,8 @@
 import {useFetchImage} from "../../../../src/features/images/hook";
 import {Avatar} from "@mui/material";
+import {Image} from "../../../../src/models/ImageModel";
 
-export function SportIcon(props: { iconId: number }) {
-    const {image} = useFetchImage(props.iconId)
-
+export function SportIcon(props: { icon?: Image }) {
     return (
         <>
             <Avatar
@@ -11,7 +10,7 @@ export function SportIcon(props: { iconId: number }) {
                     width: "200px",
                     height: "200px",
                 }}
-                src={image?.attachment}
+                src={props.icon?.attachment}
             />
         </>
     )
