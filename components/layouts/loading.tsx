@@ -16,7 +16,9 @@ export const Loading = () => {
             >
                 <Box sx={{pt:"2px"}}>
                     <Logo width={20*8.45} height={20} fill={'#23398A'}/>
-                    <LinearProgress/>
+                    <Box sx={{pt:2}}>
+                        <LinearProgress/>
+                    </Box>
                 </Box>
             </Stack>
     )

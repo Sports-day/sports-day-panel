@@ -4,7 +4,7 @@ import {
     Alert,
     Box,
     Container,
-    Stack, Typography,
+    Stack,
     Unstable_Grid2 as Grid,
 } from "@mui/material";
 import * as React from "react";
@@ -143,7 +143,7 @@ const DashBoard: NextPage = () => {
                                 <Container
                                     maxWidth={"xl"}
                                     disableGutters
-                                    sx={{px: 1, py: 3, mt:"-90px"}}
+                                    sx={{px: 1, py: 3, mt:"-100px"}}
                                 >
                                     <Stack
                                         direction={"column"}

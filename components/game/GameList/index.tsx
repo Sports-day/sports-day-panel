@@ -27,11 +27,11 @@ function TabPanel(props: TabPanelProps) {
         >
             {value === index && (
                 <Stack
-                    direction={"column"}
-                    justifyContent={"flex-start"}
-                    spacing={3}
+                direction={"column"}
+                justifyContent={"flex-start"}
+                spacing={3}
                 >
-                    {children}
+                   {children}
                 </Stack>
             )}
         </div>
@@ -58,6 +58,7 @@ export const GameList = (props: GameListProps) => {
             disableGutters
             sx={{
                 paddingTop: "0px",
+                height:"fit-content",
                 position: "relative",
                 bottom: "-40px"
             }}

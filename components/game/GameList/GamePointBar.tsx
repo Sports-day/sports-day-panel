@@ -10,7 +10,6 @@ import {ThemeProvider} from "@mui/material/styles";
 import * as React from "react";
 import {HiClock} from "react-icons/hi2";
 import {MdOutlineSportsScore} from "react-icons/md";
-import {useFetchTeams} from "../../../src/features/teams/hook";
 import {useContext} from "react";
 import {TeamsContext} from "../../context";
 
@@ -27,7 +26,7 @@ export const GamePointBar = (props: any) => {
     const {leftScore, rightScore, leftTeamId, rightTeamId, umpireTeam, time, barOffset} = props;
     const leftTeam = teams.find(team => team.id === leftTeamId);
     const rightTeam = teams.find(team => team.id === rightTeamId);
-    const formattedTime = new Date(time).toLocaleTimeString("ja-JP");
+    const formattedTime = new Date(time).toLocaleTimeString("ja-JP", {hour: '2-digit', minute:'2-digit'});
     return(
         <>
             <Stack

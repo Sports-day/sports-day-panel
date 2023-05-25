@@ -15,11 +15,14 @@ export const GameBest = () => {
         }}>
             <CardContent>
                 <Stack
-                    spacing={1.7}
+                    direction={"column"}
+                    justifyContent={"space-between"}
+                    alignItems={"space-between"}
+                    spacing={2}
                 >
                     <Typography
                         color={"textSecondary"}
-                        sx={{pb: "10px", fontSize: "16px"}}
+                        sx={{fontSize: "16px"}}
                     >
                         競技内ベスト3
                     </Typography>

@@ -21,7 +21,7 @@ export const ScheduleContent = (props: ScheduleContentProps) => {
     const opponentTeamId = props.match.leftTeamId === props.myTeamId ? props.match.rightTeamId : props.match.leftTeamId
     const teamModel = teams.find(team => team.id === opponentTeamId)
     //  get time and location
-    const formattedTime = new Date(props.match.startAt).toLocaleTimeString("ja-JP");
+    const formattedTime = new Date(props.match.startAt).toLocaleTimeString("ja-JP", {hour: '2-digit', minute:'2-digit'});
     const locationModel = locations.find(location => location.id === props.match.locationId)
 
     return (

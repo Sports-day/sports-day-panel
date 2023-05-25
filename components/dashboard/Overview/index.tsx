@@ -15,6 +15,8 @@ import {Team} from "../../../src/models/TeamModel";
 import {User} from "../../../src/models/UserModel";
 import {useContext, useState} from "react";
 import {ImagesContext} from "../../context";
+import * as React from "react";
+import {alpha} from "@mui/material/styles";
 
 
 export type OverviewProps = {
@@ -114,8 +116,8 @@ export const Overview = (props: OverviewProps) => {
                         open={open}
                         onClose={toggleDrawer(false)}
                         onOpen={toggleDrawer(true)}
-                        swipeAreaWidth={0}
-                        disableSwipeToOpen={false}
+                        swipeAreaWidth={5}
+                        disableSwipeToOpen={true}
                         ModalProps={{
                             keepMounted: true,
                         }}
@@ -123,9 +125,10 @@ export const Overview = (props: OverviewProps) => {
                         <Container
                             maxWidth={"xl"}
                             sx={{
-                                py: 3,
+                                pt: 1,
+                                pb: 5,
                                 px: 3,
-                                overflow: "auto"
+                                overflow: "scrollable"
                             }}
                         >
                             <Stack
@@ -133,27 +136,40 @@ export const Overview = (props: OverviewProps) => {
                                 justifyContent={"space-between"}
                                 alignItems={"center"}
                                 sx={{width:"100%"}}
+                                py={1}
                             >
                                 <Typography
-                                    color={"textSecondary"}
+                                    color={"#E8EBF8"}
+                                    fontWeight={"bold"}
                                 >
-                                    チームメンバー
+                                    あなたのチームメンバー
                                 </Typography>
                                 <IconButton onClick={toggleDrawer(false)}>
                                     <SvgIcon>
-                                        <HiXMark color={"#99A5D6"}/>
+                                        <HiXMark color={"#E8EBF8"}/>
                                     </SvgIcon>
                                 </IconButton>
                             </Stack>
+                            <Stack
+                                direction={"column"}
+                                justifyContent={"flex-start"}
+                                alignItems={"flex-start"}
+                                spacing={2}
+                                pt={2}
+                            >
                                 {props.myTeamUsers.map(user => {
                                     return (
-                                        <Box key={user.id}>
-                                            <Typography color={"textSecondary"}>
+                                        <>
+                                            <Box sx={{width:"100%"}} key={user.id}>
+                                                <Divider/>
+                                            </Box>
+                                            <Typography color={"#99a5d6"} fontSize={"16px"}>
                                                 {user.name}
                                             </Typography>
-                                        </Box>
+                                        </>
                                     );
                                 })}
+                            </Stack>
                         </Container>
                     </SwipeableDrawer>
                 </Grid>
