@@ -20,7 +20,17 @@ const PointBar = styled(LinearProgress)(({}) => ({
     [`& .${linearProgressClasses.bar}`]: {borderRadius: 2, backgroundColor: '#ffc900',},
 }));
 
-export const GamePointBar = (props: any) => {
+export type GamePointBarProps = {
+    leftScore: number,
+    rightScore: number,
+    leftTeamId: number | null,
+    rightTeamId: number | null,
+    umpireTeam: string,
+    time: string,
+    barOffset: number,
+}
+
+export const GamePointBar = (props: GamePointBarProps) => {
     const {data: teams} = useContext(TeamsContext);
 
     const {leftScore, rightScore, leftTeamId, rightTeamId, umpireTeam, time, barOffset} = props;
@@ -66,7 +76,7 @@ export const GamePointBar = (props: any) => {
                                 </Typography>
                             </Stack>
                             <Typography sx={{color: "#FFF", fontSize: "14px"}}>
-                                {leftTeam?.name.slice(4)}
+                                {leftTeam?.name}
                             </Typography>
                         </Stack>
                         <Box>
@@ -94,7 +104,7 @@ export const GamePointBar = (props: any) => {
                             spacing={0}
                         >
                             <Typography sx={{color: "#FFF", fontSize: "14px"}}>
-                                {rightTeam?.name.slice(4)}
+                                {rightTeam?.name}
                             </Typography>
                             <Stack direction={"row"}>
                                 <SvgIcon fontSize={"small"} sx={{position:"relative", top:"2px"}}>

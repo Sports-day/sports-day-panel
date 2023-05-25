@@ -1,15 +1,16 @@
-
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@mui/material";
 
-import { Team } from "../../../src/models/TeamModel";
+import {Team} from "../../../src/models/TeamModel";
 import {TeamContent} from "./TeamContent";
 
-export function TeamList(props: {teams: Team[], refresh: VoidFunction }) {
-    const teamComponents = props.teams.map(team => {
-        return (
-            <TeamContent team={team} refresh={props.refresh} key={team.id}/>
-        )
-    })
+export function TeamList(props: { teams: Team[], refresh: VoidFunction }) {
+    const teamComponents = props.teams
+        .sort((a, b) => a.id - b.id)
+        .map(team => {
+            return (
+                <TeamContent team={team} refresh={props.refresh} key={team.id}/>
+            )
+        })
 
     return (
         <>

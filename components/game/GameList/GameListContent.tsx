@@ -1,6 +1,5 @@
 import {Box} from "@mui/material";
 import * as React from "react";
-import {useFetchGameMatches} from "../../../src/features/games/hook";
 import {GamePointBar} from "./GamePointBar";
 import {Game} from "../../../src/models/GameModel";
 import {useContext} from "react";
@@ -23,10 +22,10 @@ export const GameListContent = (props: { game: Game }) => {
                     <Box key={match.id}>
                         <GamePointBar
                             leftScore={match.leftScore}
-                            leftTeamId={match.leftTeamId}
                             rightScore={match.rightScore}
+                            leftTeamId={match.leftTeamId}
                             rightTeamId={match.rightTeamId}
-                            umpireTeam={match.judge}
+                            umpireTeam={match.judge ?? ""}
                             time={match.startAt}
                             barOffset={barOffset}
                         />
