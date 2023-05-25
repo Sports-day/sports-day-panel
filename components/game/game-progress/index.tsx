@@ -8,7 +8,8 @@ export const GameProgress = () => {
 
     let total = matches.length
     let finished = matches.filter(match => match.status == "finished").length
-    const result = Math.round((finished / total) * 100)
+    const calculatedResult = Math.round((finished / total) * 100)
+    const result = isNaN(calculatedResult) ? 0 : calculatedResult
 
     const chartSeries = [result, 100-result]
     const labels = ["完了した競技", "未完了の競技"]
