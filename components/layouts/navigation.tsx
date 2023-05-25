@@ -4,6 +4,7 @@ import {
     HiXMark,
     HiBars2,
     HiArrowLeftCircle,
+    HiEllipsisHorizontal,
     HiCog6Tooth,
 } from "react-icons/hi2";
 import {
@@ -16,7 +17,7 @@ import {
     Container,
     IconButton,
     Stack,
-    SvgIcon, Toolbar,
+    SvgIcon,
     SwipeableDrawer,
     Button,
     Divider,
@@ -24,7 +25,6 @@ import {
 } from '@mui/material';
 import Logo from "public/logo.svg"
 import {signOut, useSession} from "next-auth/react";
-import Link from "next/link";
 import { alpha } from '@mui/material/styles';
 
 type Anchor = 'top';
@@ -105,52 +105,79 @@ export const Navigation = () => {
                         </Typography>
                     </Stack>
 
-                        <Divider/>
+                    <Divider/>
 
+                    <Stack
+                        direction={"column"}
+                        justifyContent={"flex-start"}
+                        alignItems={"flex-start"}
+                        spacing={1}
+                        px={4}
+                        py={1}
+                        width={"100%"}
+                    >
+                        <Typography sx={{color: "#99a5d6", fontSize: "24px"}}>
+                            SPORTSDAYとは？
+                        </Typography>
+                        <Typography sx={{color: "#99a5d6", fontSize: "16px", lineHeight:2, wordWrap: "break-word"}}>
+                            このアプリは2人の学生が製作し、今回の球技大会に試験的に導入されています。
+                        </Typography>
+                    </Stack>
+
+                    <Button href={"pages/about"}>
                         <Stack
-                            direction={"column"}
+                            direction={"row"}
                             justifyContent={"flex-start"}
-                            alignItems={"flex-start"}
-                            spacing={1}
-                            px={4}
-                            py={1}
+                            alignItems={"center"}
+                            spacing={2}
+                            px={3}
                             width={"100%"}
                         >
-                            <Typography sx={{color: "#99a5d6", fontSize: "24px"}}>
-                                SPORTSDAYについて
-                            </Typography>
-                            <Typography sx={{color: "#99a5d6", fontSize: "16px", lineHeight:2, wordWrap: "break-word"}}>
-                                このwebアプリは、リアルタイムにデータを集計して現況を可視化することで、球技大会の運営をサポートするだけでなく、学生の参加をより促すために製作され、今回の球技大会に試験的に導入されています。
+                            <Avatar
+                                sx={{
+                                    height: "3em",
+                                    width: "3em",
+                                    backgroundColor: "#99a5d6",
+                                }}
+                            >
+                                <SvgIcon>
+                                    <HiEllipsisHorizontal color="#23398A"/>
+                                </SvgIcon>
+                            </Avatar>
+                            <Typography sx={{color: "#99a5d6", fontSize: "16px"}}>
+                                詳しく見る
                             </Typography>
                         </Stack>
+                    </Button>
 
-                        <Divider/>
+                    <Divider/>
 
-                        <Button href={"https://github.com/orgs/Sports-day/repositories"}　target="_blank">
-                            <Stack
-                                direction={"row"}
-                                justifyContent={"flex-start"}
-                                alignItems={"center"}
-                                spacing={2}
-                                px={3}
-                                width={"100%"}
+                    <Button href={"https://github.com/orgs/Sports-day/repositories"}　target="_blank">
+                        <Stack
+                            direction={"row"}
+                            justifyContent={"flex-start"}
+                            alignItems={"center"}
+                            spacing={2}
+                            px={3}
+                            width={"100%"}
+                        >
+                            <Avatar
+                                sx={{
+                                    height: "3em",
+                                    width: "3em",
+                                    backgroundColor: "#FFF",
+                                }}
                             >
-                                <Avatar
-                                    sx={{
-                                        height: "3.5em",
-                                        width: "3.5em",
-                                        backgroundColor: "#5664e3",
-                                    }}
-                                >
-                                    <SvgIcon>
-                                        <GoMarkGithub color="#FFF"/>
-                                    </SvgIcon>
-                                </Avatar>
-                                <Typography sx={{color: "#99a5d6", fontSize: "16px"}}>
-                                    GitHub : SPORTSDAY
-                                </Typography>
-                            </Stack>
-                        </Button>
+                                <SvgIcon>
+                                    <GoMarkGithub color="#23398A"/>
+                                </SvgIcon>
+                            </Avatar>
+                            <Typography sx={{color: "#FFF", fontSize: "16px"}}>
+                                GitHub : SPORTSDAY
+                            </Typography>
+                        </Stack>
+                    </Button>
+
                     { session && session.user.role == "admin" &&
                         <Button href={"/admin"}>
                             <Stack
@@ -163,16 +190,16 @@ export const Navigation = () => {
                             >
                                 <Avatar
                                     sx={{
-                                        height: "3.5em",
-                                        width: "3.5em",
-                                        backgroundColor: "#5664e3",
+                                        height: "3em",
+                                        width: "3em",
+                                        backgroundColor: "#FFF",
                                     }}
                                 >
                                     <SvgIcon>
-                                        <HiCog6Tooth color="#FFF"/>
+                                        <HiCog6Tooth color="#23398A"/>
                                     </SvgIcon>
                                 </Avatar>
-                                <Typography sx={{color: "#99a5d6", fontSize: "16px"}}>
+                                <Typography sx={{color: "#FFF", fontSize: "16px"}}>
                                     管理ページ
                                 </Typography>
                             </Stack>
@@ -191,16 +218,16 @@ export const Navigation = () => {
                             >
                                 <Avatar
                                     sx={{
-                                        height: "3.5em",
-                                        width: "3.5em",
-                                        backgroundColor: "#5664e3",
+                                        height: "3em",
+                                        width: "3em",
+                                        backgroundColor: "#FFF",
                                     }}
                                 >
                                     <SvgIcon>
-                                        <HiArrowLeftCircle color="#FFF"/>
+                                        <HiArrowLeftCircle color="#23398A"/>
                                     </SvgIcon>
                                 </Avatar>
-                                <Typography sx={{color: "#99a5d6", fontSize: "16px"}}>
+                                <Typography sx={{color: "#FFF", fontSize: "16px"}}>
                                     ログアウト
                                 </Typography>
                             </Stack>

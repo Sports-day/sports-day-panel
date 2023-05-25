@@ -92,7 +92,7 @@ export const GameList = (props: GameListProps) => {
                         <Typography sx={{color: "#99a5d6", fontSize: "14px"}}>
                             対戦一覧
                         </Typography>
-                        <Box sx={{borderBottom: 0, borderColor: 'divider'}}>
+                        <Box sx={{borderBottom: 0, borderColor: 'divider', width: '100vw'}}>
                             <Tabs
                                 value={value}
                                 onChange={handleChange}
@@ -103,8 +103,8 @@ export const GameList = (props: GameListProps) => {
                                     style: {
                                         zIndex: 0,
                                         backgroundColor: '#ffffff',
-                                        borderRadius: '25px',
-                                        height: '50px'
+                                        borderRadius: '24px',
+                                        height: '48px',
                                     }
                                 }}
                             >

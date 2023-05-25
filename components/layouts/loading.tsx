@@ -11,14 +11,16 @@ export const Loading = () => {
                 alignItems={"center"}
                 spacing={1}
                 sx={{
-                    backgroundColor: '#E8EBF8',
-                    width: '100vw' , height: '100vh', overflow:'hidden'}}
+                    width: '100vw' ,
+                    height: '100vh',
+                    overflow:'hidden'
+                }}
             >
                 <Box sx={{pt:"2px"}}>
-                    <Logo width={20*8.45} height={20} fill={'#23398A'}/>
-                    <Box sx={{pt:2}}>
-                        <LinearProgress/>
-                    </Box>
+                    <Logo width={20*8.45} height={20} fill={'#5664e3'}/>
+                    {/*<Box sx={{pt:2}}>*/}
+                    {/*    <LinearProgress/>*/}
+                    {/*</Box>*/}
                 </Box>
             </Stack>
     )

@@ -28,6 +28,10 @@ export const GameBest = () => {
                     </Typography>
 
                     {bestTeams.map((team) => {
+                        if (!team.team) {
+                            return null
+                        }
+
                         return (
                             <GameBestContent
                                 key={team.team.id}
