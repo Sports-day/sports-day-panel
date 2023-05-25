@@ -54,7 +54,7 @@ export const RuleStrackout = () => {
                 <Grid xs={6} sm={6} lg={3}>
                     <RuleNumCard title={"チーム人数"} content={"6 〜 8"} sub={"人"}/>
                 </Grid>
-                <Grid xs={6} sm={6} lg={3}>
+                <Grid xs={12} sm={12} lg={3}>
                     <RuleNumCard title={"担当審判"} content={"参加チーム"} sub={"1試合あたり1~2人"}/>
                 </Grid>
                 <Grid xs={12} sm={12} lg={6}>
