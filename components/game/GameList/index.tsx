@@ -27,11 +27,11 @@ function TabPanel(props: TabPanelProps) {
         >
             {value === index && (
                 <Stack
-                direction={"column"}
-                justifyContent={"flex-start"}
-                spacing={3}
+                    direction={"column"}
+                    justifyContent={"flex-start"}
+                    spacing={3}
                 >
-                   {children}
+                    {children}
                 </Stack>
             )}
         </div>
@@ -48,9 +48,14 @@ function a11yProps(index: number) {
 export const GameList = (props: GameListProps) => {
     const {data: games} = useContext(GamesContext)
     const [value, setValue] = React.useState(0);
+
+    const sortedGame = games.sort((a, b) => b.weight - a.weight)
+
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
     };
+
+    console.log("state: ", value)
 
     return (
         <Container
@@ -58,7 +63,7 @@ export const GameList = (props: GameListProps) => {
             disableGutters
             sx={{
                 paddingTop: "0px",
-                height:"fit-content",
+                height: "fit-content",
                 position: "relative",
                 bottom: "-40px"
             }}
@@ -108,7 +113,7 @@ export const GameList = (props: GameListProps) => {
                                     }
                                 }}
                             >
-                                {games.map((game) => {
+                                {sortedGame.map((game, index) => {
                                     return (
                                         <Tab sx={{
                                             zIndex: 1,
@@ -116,20 +121,19 @@ export const GameList = (props: GameListProps) => {
                                             color: "#99a5d6",
                                             border: "1px solid #FFF",
                                             borderRadius: "24px"
-                                        }} key={game.id} label={game.name} {...a11yProps(game.id)} />
+                                        }} key={game.id} label={game.name} {...a11yProps(index)} />
                                     )
                                 })}
                             </Tabs>
                         </Box>
-                        {games
-                            .sort((a, b) => b.weight - a.weight)
-                            .map((game) => {
+                        {sortedGame.map((game, index) => {
                                 return (
-                                    <TabPanel key={game.id} value={value} index={game.id - 1}>
+                                    <TabPanel key={game.id} value={value} index={index}>
                                         <GameListContent game={game}/>
                                     </TabPanel>
                                 )
-                            })}
+                            })
+                        }
 
                     </Stack>
                     <Typography sx={{color: "#99a5d6", fontSize: "14px"}}>
