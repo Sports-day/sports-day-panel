@@ -91,25 +91,29 @@ export const GameList = (props: GameListProps) => {
                     <Stack
                         width={"100%"}
                         maxWidth={"xl"}
-                        sx={{px: 2, pb: 3, pt: 3}}
+                        sx={{px: 2, pb: 3, pt: 4}}
                         spacing={5}
                     >
                         <Typography sx={{color: "#99a5d6", fontSize: "14px"}}>
                             対戦一覧
                         </Typography>
-                        <Box sx={{borderBottom: 0, borderColor: 'divider', width: '100vw'}}>
+                        <Box sx={{
+                            width: '100vw',
+                            position: "relative",
+                            pr: 2.5,
+                        }}>
                             <Tabs
                                 value={value}
                                 onChange={handleChange}
                                 variant={"scrollable"}
-                                scrollButtons={"auto"}
+                                scrollButtons={false}
                                 aria-label="basic tabs example"
                                 TabIndicatorProps={{
                                     style: {
                                         zIndex: 0,
-                                        backgroundColor: '#ffffff',
+                                        backgroundColor: '#FFF',
                                         borderRadius: '24px',
-                                        height: '48px',
+                                        height: '49px',
                                     }
                                 }}
                             >
@@ -117,7 +121,8 @@ export const GameList = (props: GameListProps) => {
                                     return (
                                         <Tab sx={{
                                             zIndex: 1,
-                                            px: 2,
+                                            px: 1.8,
+                                            mr: -2,
                                             color: "#99a5d6",
                                             border: "1px solid #FFF",
                                             borderRadius: "24px"

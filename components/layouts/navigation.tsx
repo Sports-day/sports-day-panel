@@ -124,7 +124,7 @@ export const Navigation = () => {
                         </Typography>
                     </Stack>
 
-                    <Button href={"pages/about"}>
+                    <Button href={"/about"}>
                         <Stack
                             direction={"row"}
                             justifyContent={"flex-start"}

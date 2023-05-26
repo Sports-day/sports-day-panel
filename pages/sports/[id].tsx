@@ -73,13 +73,6 @@ const Id: NextPage<Props> = (props: Props) => {
         return null
     }
 
-
-    if (isFetching) {
-        return (
-            <Loading/>
-        )
-    }
-
     return (
         <AnimatePresence mode={"wait"}>
             {isFetching && (
