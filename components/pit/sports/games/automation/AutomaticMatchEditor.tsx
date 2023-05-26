@@ -68,6 +68,8 @@ export function AutomaticMatchEditor(props: AutomaticMatchEditorProps) {
             return
         }
 
+        handleCSVDataChange()
+
         //  execute
         setIsExecuting(true)
         setProgress(0)
@@ -117,11 +119,6 @@ export function AutomaticMatchEditor(props: AutomaticMatchEditorProps) {
     }
 
     const handleCSVDataChange = () => {
-        /*
-        CSVからマッチを検索
-        ref,stateからマッチを編集
-        結果をレンダー
-        */
         if (csvDataRef.current?.value === undefined) {
             return
         }
@@ -260,7 +257,7 @@ export function AutomaticMatchEditor(props: AutomaticMatchEditorProps) {
                             id={"duration_time"}
                             label={"試合間隔(分)"}
                             inputRef={durationMinutesRef}
-                            defaultValue={"10"}
+                            defaultValue={"1"}
                             fullWidth
                             required
                             onChange={() => handleCSVDataChange()}
