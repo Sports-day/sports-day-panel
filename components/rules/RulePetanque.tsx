@@ -3,21 +3,25 @@ import {
     Grid,
     Stack,
     Typography,
-    DialogContentText,
+    DialogContentText, Button,
 } from "@mui/material";
 import {RuleNumCard} from "./rule-elements/RuleNumCard";
 import ReactMarkdown from "react-markdown";
 import * as React from "react";
 
 const markdown = `
-# 📗ルール
-- あ
 
 # 🥇採点方法
-- あ
+- 試合終了時の得点が多いチームが勝利とする
+- 勝ち点は、勝ち→3、引き分け→1、負け→0
+- リーグ内で勝ち点が同点の場合は得失点差で勝敗を決める
 
 # ⚠️注意事項
-- あ
+- 試合前と終了後の消毒を徹底する。
+- 試合後のボールの回収は審判が行う。
+- 試合間に器具の消毒を行う。
+- 出場選手は事前にルールの確認をしてから参加する。
+- 審判の指示に従う。
 `
 
 export const RulePetanque = () => {
@@ -51,6 +55,29 @@ export const RulePetanque = () => {
                     <RuleNumCard title={"女子ハンデ"} content={"なし"} sub={""}/>
                 </Grid>
             </Grid>
+            <Button
+                href={"https://fjpb.web.fc2.com/fjpb/petanque/game.htm"}
+                target="_blank"
+                sx={{
+                    width: "100%",
+                    height: "fit-content",
+                    padding: "20px",
+                    backgroundColor: "#fff",
+                    border: "1px solid #fff",
+                    borderRadius: "15px",
+                    borderBottomLeftRadius: "3px"}}
+            >
+                <Stack
+                    direction={"row"}
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                    spacing={2}
+                >
+                    <Typography sx={{color: "#5664e3", fontSize: "16px"}}>
+                        ルールはこちら
+                    </Typography>
+                </Stack>
+            </Button>
             <DialogContentText
                 id="scroll-dialog-description"
                 tabIndex={-1}
