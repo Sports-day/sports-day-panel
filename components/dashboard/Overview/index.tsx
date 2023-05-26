@@ -49,7 +49,7 @@ export const Overview = (props: OverviewProps) => {
                         alignItems={"center"}
                         spacing={3}
                     >
-                        <Button sx={{width:"100%"}}>
+                        <Button sx={{width:"100%"}} href={`/sports/${props.mySport.id}`}>
                             <Stack
                                 direction={"row"}
                                 justifyContent={"space-between"}
