@@ -364,6 +364,72 @@ const About: NextPage = () => {
 
                             </Grid>
 
+                            <Stack
+                                direction={"column"}
+                                justifyContent={"center"}
+                                alignItems={"center"}
+                                spacing={5}
+                                pt={15}
+                                pb={10}
+                            >
+                                <SvgIcon>
+                                    <FaQuoteLeft color={"#99a5d6"}/>
+                                </SvgIcon>
+                                <Typography fontSize={"20px"}>
+                                    設計
+                                </Typography>
+                            </Stack>
+
+                            <motion.div
+                                initial={{opacity: 0, scale: 0.8}}
+                                whileInView={{opacity: 1, scale: 1}}
+                                transition={{delay: 0.2, duration: 1, ease: [0.16, 1, 0.3, 1]}}
+                            >
+                                <Container maxWidth={"md"}>
+                                    <Card>
+                                        <CardMedia
+                                            component="img"
+                                            width={"100%"}
+                                            image="/sportsday-color.png"
+                                            alt="色"
+                                        />
+                                    </Card>
+                                </Container>
+                            </motion.div>
+
+                            <motion.div
+                                initial={{opacity: 0, scale: 0.8}}
+                                whileInView={{opacity: 1, scale: 1}}
+                                transition={{delay: 0.2, duration: 1, ease: [0.16, 1, 0.3, 1]}}
+                            >
+                                <Box py={3}>
+                                    <Card>
+                                        <CardMedia
+                                            component="img"
+                                            width={"100%"}
+                                            image="/sportsday-ui.png"
+                                            alt="UI"
+                                        />
+                                    </Card>
+                                </Box>
+                            </motion.div>
+
+                            <Stack
+                                direction={"column"}
+                                justifyContent={"center"}
+                                alignItems={"center"}
+                                spacing={5}
+                                pt={15}
+                                pb={10}
+                            >
+                                <SvgIcon>
+                                    <FaQuoteLeft color={"#99a5d6"}/>
+                                </SvgIcon>
+                                <Typography fontSize={"20px"}>
+                                    SPORTSDAYは、カラーバリアフリーや手の届きやすい位置のボタン配置、使用するフォントなどについて、ユニバーサルデザインを意識してUI・UXデザインを行いました。
+                                </Typography>
+                            </Stack>
+
                         </Container>
                     </Box>
                     <Footer/>
