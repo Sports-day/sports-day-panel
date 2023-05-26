@@ -77,7 +77,7 @@ const Page: NextPage = () => {
                                 <SvgIcon>
                                     <BiErrorAlt color={"#99a5d6"}/>
                                 </SvgIcon>
-                                <Typography fontSize= {"16px"} color= {"#99a5d6"}>ERROR</Typography>
+                                <Typography fontSize= {"16px"} color= {"#99a5d6"}>status code : see the console</Typography>
                             </Stack>
                         </Stack>
                         <Button

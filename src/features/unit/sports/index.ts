@@ -16,6 +16,7 @@ import {User} from "../../../models/UserModel";
 import {MicrosoftAccountContext} from "../../../../components/context";
 
 export type SportDataType = {
+    refresh: VoidFunction
     isFetching: boolean
     //  data
     sport: Sport
@@ -32,12 +33,12 @@ export type SportDataType = {
 
 export const useFetchSportData = (sportId: number) => {
     //  hook
-    const {sport, isFetching: isFetchingSport} = useFetchSport(sportId)
-    const {images, isFetching: isFetchingImages} = useFetchImages()
-    const {locations, isFetching: isFetchingLocations} = useFetchLocations()
-    const {teams, isFetching: isFetchingTeams} = useFetchTeams()
-    const {games, isFetching: isFetchingGames} = useFetchGames()
-    const {matches, isFetching: isFetchingMatches} = useFetchMatches()
+    const {sport, isFetching: isFetchingSport, refresh: refreshSport} = useFetchSport(sportId)
+    const {images, isFetching: isFetchingImages, refresh: refreshImages} = useFetchImages()
+    const {locations, isFetching: isFetchingLocations, refresh: refreshLocations} = useFetchLocations()
+    const {teams, isFetching: isFetchingTeams, refresh: refreshTeams} = useFetchTeams()
+    const {games, isFetching: isFetchingGames, refresh: refreshGames} = useFetchGames()
+    const {matches, isFetching: isFetchingMatches, refresh: refreshMatches} = useFetchMatches()
     //  state
     let filteredGames: Game[] = []
     let filteredTeams: Team[] = []
@@ -63,6 +64,14 @@ export const useFetchSportData = (sportId: number) => {
     })
 
     return {
+        refresh: () => {
+            refreshSport()
+            refreshImages()
+            refreshLocations()
+            refreshTeams()
+            refreshGames()
+            refreshMatches()
+        },
         isFetching: isFetchingSport || isFetchingImages || isFetchingLocations || isFetchingTeams || isFetchingGames || isFetchingMatches,
         locations: locations,
         image: images.find((image: Image) => sport?.iconId === image.id),

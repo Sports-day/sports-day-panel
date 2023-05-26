@@ -27,7 +27,7 @@ export const ScheduleContent = (props: ScheduleContentProps) => {
     return (
         <>
             <Grid xs={12} sm={12} lg={12}><Divider/></Grid>
-            <Grid xs={12} sm={6} lg={6}>
+            <Grid xs={12} sm={5} lg={6}>
                 <Stack
                     alignItems={"center"}
                     direction={"row"}
@@ -43,7 +43,7 @@ export const ScheduleContent = (props: ScheduleContentProps) => {
                     </Typography>
                 </Stack>
             </Grid>
-            <Grid xs={12} sm={6} lg={6}>
+            <Grid xs={12} sm={7} lg={6}>
                 <Stack
                     direction={"column"}
                     justifyContent={"center"}
