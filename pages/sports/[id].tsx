@@ -27,10 +27,12 @@ import {GameList} from "../../components/game/GameList"
 import {useFetchSportData} from "../../src/features/unit/sports";
 import {GamesContext, LocationsContext, MatchesContext, TeamsContext} from "../../components/context";
 import {Loading} from "../../components/layouts/loading";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import { DialogProps } from '@mui/material/Dialog';
 import {Rules} from "../../components/rules/Rules";
 import {motion, AnimatePresence} from "framer-motion";
+
+const REFRESH_INTERVAL = 1000 * 60 * 5
 
 type Props = {
     sportId: number
@@ -41,6 +43,7 @@ const Id: NextPage<Props> = (props: Props) => {
     const router = useRouter()
     const theme = createTheme();
     const {
+        refresh,
         isFetching,
         image,
         sport,
@@ -51,6 +54,13 @@ const Id: NextPage<Props> = (props: Props) => {
     } = useFetchSportData(props.sportId)
     const [open, setOpen] = useState(false);
     const [scroll, setScroll] = React.useState<DialogProps['scroll']>('paper');
+
+    useEffect(() => {
+        setInterval(() => {
+            refresh()
+        }, REFRESH_INTERVAL);
+    }, [refresh])
+
     const handleClickOpen = (scrollType: DialogProps['scroll']) => () => {
         setOpen(true);
         setScroll(scrollType);
