@@ -56,8 +56,11 @@ export function GameMatches(props: GameMatchesProps) {
                     sports={new Array(sport)}
                     games={new Array(game)}
                     teams={entries}
-                    matches={matches}
+                    matches={
+                        matches.sort((a, b) => a.startAt.localeCompare(b.startAt))
+                    }
                 />
+
             </div>
         </>
     )

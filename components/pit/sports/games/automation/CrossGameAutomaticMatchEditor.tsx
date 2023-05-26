@@ -19,14 +19,14 @@ import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {Team} from "../../../../../src/models/TeamModel";
 import {EditedMatchTable} from "./EditedMatchTable";
 import {Gender, userFactory} from "../../../../../src/models/UserModel";
+import {useFetchMatches} from "../../../../../src/features/matches/hook";
+import {useFetchTeams} from "../../../../../src/features/teams/hook";
 
-export type AutomaticMatchEditorProps = {
+export type CrossGameAutomaticMatchEditorProps = {
     isOpen: boolean
     setClose: VoidFunction
     refresh: VoidFunction
-    game: Game
-    matches: Match[]
-    entries: Team[]
+    games: Game[]
 }
 
 export type EditedMatch = {
@@ -38,19 +38,30 @@ export type EditedMatch = {
     status: "success" | "not_found_match" | "not_link_yet" | "team_invalid"
 }
 
-export function AutomaticMatchEditor(props: AutomaticMatchEditorProps) {
+export function CrossGameAutomaticMatchEditor(props: CrossGameAutomaticMatchEditorProps) {
     //  hook
     const {locations, isFetching: isFetchingLocations} = useFetchLocations()
+    const {matches, isFetching: isFetchingMatches} = useFetchMatches()
+    const {teams, isFetching: isFetchingTeams} = useFetchTeams()
     //  ref
     const durationMinutesRef = useRef<TextFieldProps>(null)
     const csvDataRef = useRef<TextFieldProps>(null)
     //  state
+    const [gamesSelected, setGamesSelected] = useState<number[]>([])
     const [startDateTime, setStartDateTime] = useState<Dayjs | null>(dayjs())
     const [locationId, setLocationId] = useState<string>("-1")
     const [editedMatchesState, setEditedMatchesState] = useState<EditedMatch[]>([])
     const [isDeleteUnlinkedMatch, setIsDeleteUnlinkedMatch] = useState<boolean>(false)
     const [progress, setProgress] = useState<number>(0)
     const [isExecuting, setIsExecuting] = useState<boolean>(false)
+    //  value
+    const filteredGames = props.games.filter(value => gamesSelected.includes(value.id))
+    const filteredMatches = matches.filter(value => filteredGames.some(game => game.id === value.gameId))
+    const filteredEntries = teams.filter(value => {
+        return filteredMatches.some(match => {
+            return match.leftTeamId === value.id || match.rightTeamId === value.id
+        })
+    })
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
@@ -77,7 +88,7 @@ export function AutomaticMatchEditor(props: AutomaticMatchEditorProps) {
         var index = 0
         for (const match of editedMatchesState) {
             //  original
-            const originalMatch = props.matches.find(value => value.id === match.id)
+            const originalMatch = matches.find(value => value.id === match.id)
             if (originalMatch !== undefined) {
                 if (match.status == "success") {
                     //  update match
@@ -136,8 +147,9 @@ export function AutomaticMatchEditor(props: AutomaticMatchEditorProps) {
             const judge = data[2]
 
             //  team
-            const leftTeam = props.entries.find(value => value.name === leftTeamName)
-            const rightTeam = props.entries.find(value => value.name === rightTeamName)
+            const leftTeam = filteredEntries.find(value => value.name === leftTeamName)
+            const rightTeam = filteredEntries.find(value => value.name === rightTeamName)
+
             //  if team not found
             if (leftTeam === undefined || rightTeam === undefined) {
                 //  failed
@@ -153,7 +165,7 @@ export function AutomaticMatchEditor(props: AutomaticMatchEditorProps) {
             }
 
             //  find match by team name
-            const match = props.matches.find(value => {
+            const match = filteredMatches.find(value => {
                 return (leftTeam.id === value.leftTeamId && rightTeam.id === value.rightTeamId)
                     || (leftTeam.id === value.rightTeamId && rightTeam.id === value.leftTeamId)
             })
@@ -186,11 +198,11 @@ export function AutomaticMatchEditor(props: AutomaticMatchEditorProps) {
         }
 
         //  add matches not exist in csv
-        const notExistMatches = props.matches.filter(value => {
+        const notExistMatches = filteredMatches.filter(value => {
             return !editedMatches.some(value1 => value1.id === value.id)
         }).map(match => {
-            const leftTeam = props.entries.find(team => team.id === match.leftTeamId)
-            const rightTeam = props.entries.find(team => team.id === match.rightTeamId)
+            const leftTeam = filteredEntries.find(team => team.id === match.leftTeamId)
+            const rightTeam = filteredEntries.find(team => team.id === match.rightTeamId)
 
             return {
                 id: match.id,
@@ -211,7 +223,17 @@ export function AutomaticMatchEditor(props: AutomaticMatchEditorProps) {
         setLocationId(e.target.value)
     }
 
-    if (isFetchingLocations) {
+    const handleGamesSelectChange = (event: SelectChangeEvent<typeof gamesSelected>) => {
+        const {
+            target: { value },
+        } = event;
+
+        setGamesSelected(value as number[]);
+
+        handleCSVDataChange()
+    }
+
+    if (isFetchingLocations || isFetchingMatches || isFetchingTeams) {
         return null
     }
 
@@ -226,7 +248,7 @@ export function AutomaticMatchEditor(props: AutomaticMatchEditorProps) {
                 <form onSubmit={handleSubmit}>
                     <DialogTitle>
                         <Typography>
-                            一括編集機能
+                            リーグ・トーナメント間試合一括編集機能
                         </Typography>
                     </DialogTitle>
                     <DialogContent
@@ -235,6 +257,36 @@ export function AutomaticMatchEditor(props: AutomaticMatchEditorProps) {
                             flexDirection: "column",
                         }}
                     >
+
+                        <InputLabel id="game-select">リーグ・トーナメント選択</InputLabel>
+                        <Select
+                            labelId={"game-select"}
+                            id={"game"}
+                            label={"リーグ・トーナメント選択"}
+                            value={gamesSelected}
+                            sx={{
+                                width: "300px",
+                                mb: '20px'
+                            }}
+                            onChange={handleGamesSelectChange}
+                            multiple
+                        >
+                            {
+                                props.games
+                                    .sort((a, b) => b.weight - a.weight)
+                                    .map(game => {
+                                    return (
+                                        <MenuItem
+                                            key={game.id}
+                                            value={game.id}
+                                        >
+                                            {game.name}
+                                        </MenuItem>
+                                    )
+                                })
+                            }
+                        </Select>
+
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                             <DateTimePicker
                                 label={"1試合目開始時刻"}
@@ -334,7 +386,7 @@ export function AutomaticMatchEditor(props: AutomaticMatchEditorProps) {
 
                         <EditedMatchTable
                             editedMatches={editedMatchesState}
-                            entries={props.entries}
+                            entries={filteredEntries}
                         />
 
                         {isExecuting &&
