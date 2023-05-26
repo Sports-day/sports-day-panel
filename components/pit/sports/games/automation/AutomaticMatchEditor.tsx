@@ -57,7 +57,7 @@ export function AutomaticMatchEditor(props: AutomaticMatchEditorProps) {
 
         //  validation
         //  exists location
-        if (locationId !== "-1" && !locations.some(value => value.id === parseInt(locationId))) {
+        if (!locations.some(value => value.id === parseInt(locationId))) {
             alert("場所を選択してください")
             return
         }
