@@ -125,7 +125,7 @@ export const Navigation = () => {
                         </Typography>
                     </Stack>
 
-                    <Button component={Link} href={"/about"} scroll={false}>
+                    <Button component={Link} href={"/about"}>
                         <Stack
                             direction={"row"}
                             justifyContent={"flex-start"}
@@ -138,14 +138,14 @@ export const Navigation = () => {
                                 sx={{
                                     height: "3em",
                                     width: "3em",
-                                    backgroundColor: "#99a5d6",
+                                    backgroundColor: "#FFF",
                                 }}
                             >
                                 <SvgIcon>
                                     <HiEllipsisHorizontal color="#23398A"/>
                                 </SvgIcon>
                             </Avatar>
-                            <Typography sx={{color: "#99a5d6", fontSize: "16px"}}>
+                            <Typography sx={{color: "#FFF", fontSize: "16px"}}>
                                 詳しく見る
                             </Typography>
                         </Stack>

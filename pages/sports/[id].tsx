@@ -78,10 +78,10 @@ const Id: NextPage<Props> = (props: Props) => {
             {isFetching && (
                 <motion.div
                     key={"loading"}
-                    initial={{opacity: 0, y: "10px"}}
-                    animate={{opacity: 1, y: "0px"}}
+                    initial={{opacity: 0}}
+                    animate={{opacity: 0.2}}
                     exit={{opacity: 0}}
-                    transition={{duration: 0.4, ease: [0.16, 1, 0.3, 1]}}
+                    transition={{duration: 0.2, ease: [0, 0.5, 0, 1]}}
                 >
                     <Loading/>
                 </motion.div>
@@ -122,7 +122,7 @@ const Id: NextPage<Props> = (props: Props) => {
                                             initial={{opacity: 0}}
                                             animate={{opacity: 1}}
                                             exit={{opacity: 0}}
-                                            transition={{duration: 0.4, ease: 'easeOut'}}
+                                            transition={{duration: 0.8, ease: [0.83, 0, 0.17, 1]}}
                                         >
                                             <Navigation/>
                                             <Box
@@ -137,10 +137,11 @@ const Id: NextPage<Props> = (props: Props) => {
 
                                                 {/*MainVisual*/}
                                                 <motion.div
-                                                    key={"mainvisual"}
+                                                    key={"main-visual"}
                                                     initial={{y: "-100px"}}
                                                     animate={{y: "0px"}}
-                                                    transition={{duration: 1, ease: [0.16, 1, 0.3, 1]}}
+                                                    exit={{opacity: 0, y:"-100px"}}
+                                                    transition={{duration: 0.7, ease: [0.54, -0.01, 0, 1]}}
                                                 >
                                                     <Container
                                                         maxWidth={false}
@@ -163,10 +164,10 @@ const Id: NextPage<Props> = (props: Props) => {
                                                             }}
                                                         >
                                                             <motion.div
-                                                                key={"overview-content"}
+                                                                key={"mainvisual-content"}
                                                                 initial={{opacity: 0, y: "50px"}}
                                                                 animate={{opacity: 1, y: "0px"}}
-                                                                transition={{delay:0.2, duration: 1, ease: [0.16, 1, 0.3, 1]}}
+                                                                transition={{delay:0.3, duration: 1, ease: [0.16, 1, 0.3, 1]}}
                                                             >
                                                                 <Stack
                                                                     direction={"row"}
@@ -331,7 +332,6 @@ const Id: NextPage<Props> = (props: Props) => {
                                                                     key={"gameprogress"}
                                                                     initial={{opacity: 0, y: "50px"}}
                                                                     animate={{opacity: 1, y: "0px"}}
-                                                                    exit={{opacity: 0, y: "50px"}}
                                                                     transition={{delay:0.4, duration: 1, ease: [0.16, 1, 0.3, 1]}}
                                                                 >
                                                                     <GameProgress/>

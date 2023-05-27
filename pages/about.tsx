@@ -7,7 +7,7 @@ import {
     Card,
     CardContent, CardMedia,
     Container,
-    Divider,
+    Divider, IconButton,
     Stack,
     SvgIcon,
     Typography,
@@ -18,7 +18,16 @@ import {createTheme} from "../components/theme";
 import {ThemeProvider} from "@mui/material/styles";
 import Logo from "public/logo.svg"
 import {Footer} from "../components/layouts/footer";
-import {FaQuoteLeft} from "react-icons/fa";
+import {
+    FaQuoteLeft,
+    FaTwitter
+} from "react-icons/fa";
+import {GoMarkGithub} from "react-icons/go";
+import {
+    HiCheckCircle,
+    HiPaintBrush
+} from "react-icons/hi2";
+import Link from "next/link";
 
 const About: NextPage = () => {
     const theme = createTheme();
@@ -52,7 +61,7 @@ const About: NextPage = () => {
                             initial={{y: "-70vh"}}
                             animate={{y: "0px"}}
                             exit={{y: "-70vh"}}
-                            transition={{delay: 0.5, duration: 1.2, ease: [0.16, 1, 0.3, 1]}}
+                            transition={{delay: 0.5, duration: 1.1, ease: [0.83, 0, 0.17, 1]}}
                         >
                             <Container
                                 maxWidth={false}
@@ -70,7 +79,7 @@ const About: NextPage = () => {
                                         position: "relative",
                                         zIndex: 1,
                                         width: "101vw",
-                                        height: "90vh",
+                                        height: "85vh",
                                         background: "linear-gradient(#23398A, #3352B5)"
                                     }}
                                 >
@@ -79,7 +88,7 @@ const About: NextPage = () => {
                                         initial={{opacity: 0, y: "50px"}}
                                         animate={{opacity: 1, y: "0px"}}
                                         exit={{opacity: 0, y: "50px"}}
-                                        transition={{delay:1.2, duration: 1, ease: [0.16, 1, 0.3, 1]}}
+                                        transition={{delay:1.5, duration: 1, ease: [0.16, 1, 0.3, 1]}}
                                     >
                                         <Stack
                                             direction={"row"}
@@ -167,6 +176,9 @@ const About: NextPage = () => {
                                 pt={15}
                                 pb={20}
                             >
+                                <SvgIcon>
+                                    <HiCheckCircle color={"#99a5d6"}/>
+                                </SvgIcon>
                                 <Typography fontSize={"20px"}>
                                     このアプリは、管理画面で入力された点数を自動的に計算・集計し、ユーザーがリアルタイムに結果を確認できるようにすることで、大会の進行をスムーズにし、学生の参加をより促進することを目的として製作しました。
                                 </Typography>
@@ -208,6 +220,18 @@ const About: NextPage = () => {
                                                         </Box>
                                                         <Typography variant={"h5"}>山本 哲也</Typography>
                                                     </Stack>
+                                                    <Stack
+                                                        direction={"row"}
+                                                        justifyContent={"center"}
+                                                        alignItems={"center"}
+                                                        spacing={1}
+                                                    >
+                                                        <IconButton component={Link} href={"https://github.com/testusuke"} target={"_blank"}>
+                                                            <SvgIcon>
+                                                                <GoMarkGithub color="#99a5d6"/>
+                                                            </SvgIcon>
+                                                        </IconButton>
+                                                    </Stack>
                                                 </Stack>
                                             </CardContent>
                                         </Card>
@@ -247,6 +271,23 @@ const About: NextPage = () => {
                                                             <Typography fontSize={"16px"} color={"#23398A"}>M4</Typography>
                                                         </Box>
                                                         <Typography variant={"h5"}>中村 祐輔</Typography>
+                                                    </Stack>
+                                                    <Stack
+                                                        direction={"row"}
+                                                        justifyContent={"center"}
+                                                        alignItems={"center"}
+                                                        spacing={1}
+                                                    >
+                                                        <IconButton component={Link} href={"https://github.com/1nayu"} target={"_blank"}>
+                                                            <SvgIcon>
+                                                                <GoMarkGithub color="#99a5d6"/>
+                                                            </SvgIcon>
+                                                        </IconButton>
+                                                        <IconButton component={Link} href={"https://twitter.com/1nayu"} target={"_blank"}>
+                                                            <SvgIcon>
+                                                                <FaTwitter color="#99a5d6"/>
+                                                            </SvgIcon>
+                                                        </IconButton>
                                                     </Stack>
                                                 </Stack>
                                             </CardContent>
@@ -366,10 +407,10 @@ const About: NextPage = () => {
                                 pb={10}
                             >
                                 <SvgIcon>
-                                    <FaQuoteLeft color={"#99a5d6"}/>
+                                    <HiPaintBrush color={"#99a5d6"}/>
                                 </SvgIcon>
                                 <Typography fontSize={"20px"}>
-                                    設計
+                                    多くの人に使ってもらえる設計
                                 </Typography>
                             </Stack>
 
@@ -422,6 +463,142 @@ const About: NextPage = () => {
                                     SPORTSDAYは、カラーバリアフリーや手の届きやすい位置のボタン配置、使用するフォントなどについて、ユニバーサルデザインを意識してUI・UXデザインを行いました。
                                 </Typography>
                             </Stack>
+
+                            <motion.div
+                                initial={{opacity: 0, scale: 0.8}}
+                                whileInView={{opacity: 1, scale: 1}}
+                                transition={{delay: 0.2, duration: 1, ease: [0.16, 1, 0.3, 1]}}
+                            >
+                                <Grid container spacing={1.5}>
+
+                                    <Grid xs={12} sm={6} lg={2}>
+                                        <Stack
+                                            direction={"column"}
+                                            justifyContent={"center"}
+                                            alignItems={"center"}
+                                            sx={{
+                                                width: "100%",
+                                                height: "200px",
+                                                padding: "20px",
+                                                backgroundColor: "#f1f2f6",
+                                                borderRadius: "15px",
+                                                borderBottomLeftRadius: "3px"}}
+                                        >
+                                            <img
+                                                width={"120px"}
+                                                src="/nextjs.png"
+                                                alt="nextjs"
+                                            />
+                                        </Stack>
+                                    </Grid>
+
+                                    <Grid xs={12} sm={6} lg={2}>
+                                        <Stack
+                                            direction={"column"}
+                                            justifyContent={"center"}
+                                            alignItems={"center"}
+                                            sx={{
+                                                width: "100%",
+                                                height: "200px",
+                                                padding: "20px",
+                                                backgroundColor: "#f1f2f6",
+                                                borderRadius: "15px",
+                                                borderBottomLeftRadius: "3px"}}
+                                        >
+                                            <img
+                                                width={"120px"}
+                                                src="/kubernetes.png"
+                                                alt="kubernetes"
+                                            />
+                                        </Stack>
+                                    </Grid>
+
+                                    <Grid xs={12} sm={6} lg={2}>
+                                        <Stack
+                                            direction={"column"}
+                                            justifyContent={"center"}
+                                            alignItems={"center"}
+                                            sx={{
+                                                width: "100%",
+                                                height: "200px",
+                                                padding: "20px",
+                                                backgroundColor: "#f1f2f6",
+                                                borderRadius: "15px",
+                                                borderBottomLeftRadius: "3px"}}
+                                        >
+                                            <img
+                                                width={"120px"}
+                                                src="/argocd.png"
+                                                alt="argocd"
+                                            />
+                                        </Stack>
+                                    </Grid>
+
+                                    <Grid xs={12} sm={6} lg={2}>
+                                        <Stack
+                                            direction={"column"}
+                                            justifyContent={"center"}
+                                            alignItems={"center"}
+                                            sx={{
+                                                width: "100%",
+                                                height: "200px",
+                                                padding: "20px",
+                                                backgroundColor: "#f1f2f6",
+                                                borderRadius: "15px",
+                                                borderBottomLeftRadius: "3px"}}
+                                        >
+                                            <img
+                                                width={"120px"}
+                                                src="/vultr.png"
+                                                alt="vultr"
+                                            />
+                                        </Stack>
+                                    </Grid>
+
+                                    <Grid xs={12} sm={6} lg={2}>
+                                        <Stack
+                                            direction={"column"}
+                                            justifyContent={"center"}
+                                            alignItems={"center"}
+                                            sx={{
+                                                width: "100%",
+                                                height: "200px",
+                                                padding: "20px",
+                                                backgroundColor: "#f1f2f6",
+                                                borderRadius: "15px",
+                                                borderBottomLeftRadius: "3px"}}
+                                        >
+                                            <img
+                                                width={"100px"}
+                                                src="/framer.png"
+                                                alt="framer"
+                                            />
+                                        </Stack>
+                                    </Grid>
+
+                                    <Grid xs={12} sm={6} lg={2}>
+                                        <Stack
+                                            direction={"column"}
+                                            justifyContent={"center"}
+                                            alignItems={"center"}
+                                            sx={{
+                                                width: "100%",
+                                                height: "200px",
+                                                padding: "20px",
+                                                backgroundColor: "#f1f2f6",
+                                                borderRadius: "15px",
+                                                borderBottomLeftRadius: "3px"}}
+                                        >
+                                            <img
+                                                width={"90px"}
+                                                src="/ndw.png"
+                                                alt="nayu386designworks"
+                                            />
+                                        </Stack>
+                                    </Grid>
+
+                                </Grid>
+                            </motion.div>
 
                         </Container>
                     </Box>
