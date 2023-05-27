@@ -4,7 +4,7 @@ import {
     Alert,
     Box,
     Container,
-    Stack,
+    Stack, Typography,
     Unstable_Grid2 as Grid,
 } from "@mui/material";
 import * as React from "react";
@@ -19,6 +19,7 @@ import {ImagesContext, LocationsContext, TeamsContext} from "../components/conte
 import {useFetchDashboard} from "../src/features/unit/dashboard";
 import {Loading} from "../components/layouts/loading";
 import {motion, AnimatePresence} from "framer-motion";
+import Link from "next/link";
 
 const DashBoard: NextPage = () => {
     //  Unit Hook
@@ -39,14 +40,14 @@ const DashBoard: NextPage = () => {
     const theme = createTheme();
 
     return (
-        <AnimatePresence mode={"wait"}>
+        <>
             {isFetching && (
                 <motion.div
                     key={"loading"}
-                    initial={{opacity: 0}}
-                    animate={{opacity: 1}}
+                    initial={{opacity: 0, y: "10px"}}
+                    animate={{opacity: 1, y: "0px"}}
                     exit={{opacity: 0}}
-                    transition={{duration: 0.1, ease: 'easeInOut'}}
+                    transition={{duration: 0.4, ease: [0.16, 1, 0.3, 1]}}
                 >
                     <Loading/>
                 </motion.div>
@@ -57,7 +58,7 @@ const DashBoard: NextPage = () => {
                 initial={{opacity: 0}}
                 animate={{opacity: 1}}
                 exit={{opacity: 0}}
-                transition={{duration: 0.4, ease: 'easeOut'}}
+                transition={{duration: 0.4, ease: [0.83, 0, 0.17, 1]}}
             >
                 <ImagesContext.Provider
                     value={{
@@ -97,8 +98,7 @@ const DashBoard: NextPage = () => {
                                         key={"overview-background"}
                                         initial={{y: "-100px"}}
                                         animate={{y: "0px"}}
-                                        exit={{y: "-100px"}}
-                                        transition={{duration: 1, ease: [0.16, 1, 0.3, 1]}}
+                                        transition={{duration: 0.5, ease: [0.83, 0, 0.17, 1]}}
                                     >
                                         <Container
                                             maxWidth={false}
@@ -118,7 +118,6 @@ const DashBoard: NextPage = () => {
                                                 key={"overview-content"}
                                                 initial={{opacity: 0, y: "50px"}}
                                                 animate={{opacity: 1, y: "0px"}}
-                                                exit={{opacity: 0, y: "50px"}}
                                                 transition={{delay:0.2, duration: 1, ease: [0.16, 1, 0.3, 1]}}
                                             >
                                                 {mySport && myTeam &&
@@ -168,7 +167,6 @@ const DashBoard: NextPage = () => {
                                         key={"dashboard-content"}
                                         initial={{opacity: 0, y: "50px"}}
                                         animate={{opacity: 1, y: "0px"}}
-                                        exit={{opacity: 0, y: "50px"}}
                                         transition={{delay:0.3, duration: 1, ease: [0.16, 1, 0.3, 1]}}
                                     >
                                         <Container
@@ -211,7 +209,7 @@ const DashBoard: NextPage = () => {
                 </ImagesContext.Provider>
             </motion.div>
             )}
-        </AnimatePresence>
+        </>
     )
 }
 

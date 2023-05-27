@@ -78,10 +78,10 @@ const Id: NextPage<Props> = (props: Props) => {
             {isFetching && (
                 <motion.div
                     key={"loading"}
-                    initial={{opacity: 0}}
-                    animate={{opacity: 1}}
+                    initial={{opacity: 0, y: "10px"}}
+                    animate={{opacity: 1, y: "0px"}}
                     exit={{opacity: 0}}
-                    transition={{duration: 0.1, ease: 'easeInOut'}}
+                    transition={{duration: 0.4, ease: [0.16, 1, 0.3, 1]}}
                 >
                     <Loading/>
                 </motion.div>
@@ -140,7 +140,6 @@ const Id: NextPage<Props> = (props: Props) => {
                                                 key={"mainvisual"}
                                                 initial={{y: "-100px"}}
                                                 animate={{y: "0px"}}
-                                                exit={{y: "-100px"}}
                                                 transition={{duration: 1, ease: [0.16, 1, 0.3, 1]}}
                                             >
                                                 <Container
@@ -167,7 +166,6 @@ const Id: NextPage<Props> = (props: Props) => {
                                                             key={"overview-content"}
                                                             initial={{opacity: 0, y: "50px"}}
                                                             animate={{opacity: 1, y: "0px"}}
-                                                            exit={{opacity: 0, y: "50px"}}
                                                             transition={{delay:0.2, duration: 1, ease: [0.16, 1, 0.3, 1]}}
                                                         >
                                                             <Stack
@@ -322,7 +320,6 @@ const Id: NextPage<Props> = (props: Props) => {
                                                                 key={"gamebest"}
                                                                 initial={{opacity: 0, y: "50px"}}
                                                                 animate={{opacity: 1, y: "0px"}}
-                                                                exit={{opacity: 0, y: "50px"}}
                                                                 transition={{delay:0.3, duration: 1, ease: [0.16, 1, 0.3, 1]}}
                                                             >
                                                                 <GameBest/>
@@ -350,7 +347,6 @@ const Id: NextPage<Props> = (props: Props) => {
                                                 key={"gamelist"}
                                                 initial={{opacity: 0, y: "50px"}}
                                                 animate={{opacity: 1, y: "0px"}}
-                                                exit={{opacity: 0, y: "50px"}}
                                                 transition={{delay:0.5, duration: 1, ease: [0.16, 1, 0.3, 1]}}
                                             >
                                                 <GameList sportId={props.sportId}/>

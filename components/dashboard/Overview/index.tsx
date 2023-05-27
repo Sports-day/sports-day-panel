@@ -16,7 +16,7 @@ import {User} from "../../../src/models/UserModel";
 import {useContext, useState} from "react";
 import {ImagesContext} from "../../context";
 import * as React from "react";
-import {alpha} from "@mui/material/styles";
+import Link from "next/link";
 
 
 export type OverviewProps = {
@@ -49,7 +49,12 @@ export const Overview = (props: OverviewProps) => {
                         alignItems={"center"}
                         spacing={3}
                     >
-                        <Button sx={{width:"100%"}} href={`/sports/${props.mySport.id}`}>
+                        <Button
+                            component={Link}
+                            sx={{width:"100%"}}
+                            href={`/sports/${props.mySport.id}`}
+                            scroll={false}
+                        >
                             <Stack
                                 direction={"row"}
                                 justifyContent={"space-between"}

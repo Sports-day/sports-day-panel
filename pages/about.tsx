@@ -42,7 +42,7 @@ const About: NextPage = () => {
                     <Head>
                         <title>{`SPORTSDAY : About`}</title>
                     </Head>
-                    <Navigation/>
+                    <Navigation bg={false}/>
                     <Box
                         component={"main"}
                         minHeight={"96vh"}
@@ -77,8 +77,8 @@ const About: NextPage = () => {
                                         position: "relative",
                                         zIndex: 1,
                                         width: "101vw",
-                                        height: "80vh",
-                                        backgroundColor: "#23398a",
+                                        height: "90vh",
+                                        background: "linear-gradient(#23398A, #3352B5)"
                                     }}
                                 >
                                     <motion.div
@@ -115,7 +115,7 @@ const About: NextPage = () => {
                                     top:"-150px",
                                     zIndex: "0",
                                     position:"relative",
-                                    backgroundColor: "#23398a",
+                                    backgroundColor: "#3352b5",
                                     borderTopLeftRadius:"10px",
                                     borderTopRightRadius:"10px",
                                     borderBottomLeftRadius: "50% 50%",

@@ -26,6 +26,7 @@ import {
 import Logo from "public/logo.svg"
 import {signOut, useSession} from "next-auth/react";
 import { alpha } from '@mui/material/styles';
+import Link from "next/link";
 
 type Anchor = 'top';
 
@@ -66,7 +67,7 @@ export const Navigation = () => {
                         sx={{marginRight: "10px", paddingLeft:"30px",paddingRight:"6px", py: 3}}
                     >
                         <Box>
-                            <Button href={"/"}>
+                            <Button component={Link} href={"/"} scroll={false}>
                                 <Logo width={20 * 8.45} height={20} fill={'white'}/>
                             </Button>
                         </Box>
@@ -124,7 +125,7 @@ export const Navigation = () => {
                         </Typography>
                     </Stack>
 
-                    <Button href={"/about"}>
+                    <Button component={Link} href={"/about"} scroll={false}>
                         <Stack
                             direction={"row"}
                             justifyContent={"flex-start"}
@@ -179,7 +180,7 @@ export const Navigation = () => {
                     </Button>
 
                     { session && session.user.role == "admin" &&
-                        <Button href={"/admin"}>
+                        <Button component={Link} href={"/admin"} scroll={false}>
                             <Stack
                                 direction={"row"}
                                 justifyContent={"flex-start"}
@@ -264,7 +265,7 @@ export const Navigation = () => {
                             sx={{marginRight: "10px", padding: "8px 5px"}}
                         >
                             <Box py={2} px={2}>
-                                <Button href={"/"}>
+                                <Button component={Link} href={"/"}　scroll={false}>
                                     <Logo width={20 * 8.45} height={20} fill={'white'}/>
                                 </Button>
                             </Box>
