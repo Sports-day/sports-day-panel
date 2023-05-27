@@ -1,4 +1,4 @@
-import {Box, Container, Divider, Stack, Tab, Tabs, Typography} from "@mui/material";
+import {Box, Container, Stack, Tab, Tabs, Typography} from "@mui/material";
 import * as React from "react";
 import {GameListContent} from "./GameListContent";
 import {useContext} from "react";

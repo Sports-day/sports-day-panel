@@ -98,7 +98,7 @@ const DashBoard: NextPage = () => {
                                             initial={{y: "-100px"}}
                                             animate={{y: "0px"}}
                                             exit={{opacity: 0, y:"-100px"}}
-                                            transition={{duration: 0.7, ease: [0.54, -0.01, 0, 1]}}
+                                            transition={{duration: 0.6, ease: [0.54, -0.01, 0, 1]}}
                                         >
                                             <Container
                                                 maxWidth={false}
@@ -118,7 +118,6 @@ const DashBoard: NextPage = () => {
                                                     key={"overview-content"}
                                                     initial={{opacity: 0, y: "50px"}}
                                                     animate={{opacity: 1, y: "0px"}}
-                                                    exit={{opacity: 0}}
                                                     transition={{delay:0.4, duration: 1, ease: [0.16, 1, 0.3, 1]}}
                                                 >
                                                     {mySport && myTeam &&
@@ -168,7 +167,6 @@ const DashBoard: NextPage = () => {
                                             key={"dashboard-content"}
                                             initial={{opacity: 0, y: "50px"}}
                                             animate={{opacity: 1, y: "0px"}}
-                                            exit={{opacity: 0}}
                                             transition={{delay:0.5, duration: 1, ease: [0.16, 1, 0.3, 1]}}
                                         >
                                             <Container

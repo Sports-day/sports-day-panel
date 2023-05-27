@@ -21,7 +21,6 @@ import {HiArrowLeftCircle, HiEllipsisHorizontalCircle, HiXMark} from "react-icon
 import * as React from "react";
 import {createTheme} from "../../components/theme";
 import {ThemeProvider} from "@mui/material/styles";
-import {useRouter} from "next/router";
 import {Footer} from "../../components/layouts/footer";
 import {GameList} from "../../components/game/GameList"
 import {useFetchSportData} from "../../src/features/unit/sports";

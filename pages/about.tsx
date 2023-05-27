@@ -28,6 +28,7 @@ import {
     HiPaintBrush
 } from "react-icons/hi2";
 import Link from "next/link";
+import Image from "next/image";
 
 const About: NextPage = () => {
     const theme = createTheme();
@@ -87,7 +88,6 @@ const About: NextPage = () => {
                                         key={"overview-content"}
                                         initial={{opacity: 0, y: "50px"}}
                                         animate={{opacity: 1, y: "0px"}}
-                                        exit={{opacity: 0, y: "50px"}}
                                         transition={{delay:1.5, duration: 1, ease: [0.16, 1, 0.3, 1]}}
                                     >
                                         <Stack
@@ -484,8 +484,9 @@ const About: NextPage = () => {
                                                 borderRadius: "15px",
                                                 borderBottomLeftRadius: "3px"}}
                                         >
-                                            <img
-                                                width={"120px"}
+                                            <Image
+                                                width={"120"}
+                                                height={"25"}
                                                 src="/nextjs.png"
                                                 alt="nextjs"
                                             />
@@ -505,8 +506,9 @@ const About: NextPage = () => {
                                                 borderRadius: "15px",
                                                 borderBottomLeftRadius: "3px"}}
                                         >
-                                            <img
-                                                width={"120px"}
+                                            <Image
+                                                width={"120"}
+                                                height={"61"}
                                                 src="/kubernetes.png"
                                                 alt="kubernetes"
                                             />
@@ -526,8 +528,9 @@ const About: NextPage = () => {
                                                 borderRadius: "15px",
                                                 borderBottomLeftRadius: "3px"}}
                                         >
-                                            <img
-                                                width={"120px"}
+                                            <Image
+                                                width={"120"}
+                                                height={"55"}
                                                 src="/argocd.png"
                                                 alt="argocd"
                                             />
@@ -547,8 +550,9 @@ const About: NextPage = () => {
                                                 borderRadius: "15px",
                                                 borderBottomLeftRadius: "3px"}}
                                         >
-                                            <img
-                                                width={"120px"}
+                                            <Image
+                                                width={"120"}
+                                                height={"120"}
                                                 src="/vultr.png"
                                                 alt="vultr"
                                             />
@@ -568,8 +572,9 @@ const About: NextPage = () => {
                                                 borderRadius: "15px",
                                                 borderBottomLeftRadius: "3px"}}
                                         >
-                                            <img
-                                                width={"100px"}
+                                            <Image
+                                                width={"100"}
+                                                height={"100"}
                                                 src="/framer.png"
                                                 alt="framer"
                                             />
@@ -589,8 +594,9 @@ const About: NextPage = () => {
                                                 borderRadius: "15px",
                                                 borderBottomLeftRadius: "3px"}}
                                         >
-                                            <img
-                                                width={"90px"}
+                                            <Image
+                                                width={"90"}
+                                                height={"90"}
                                                 src="/ndw.png"
                                                 alt="nayu386designworks"
                                             />
