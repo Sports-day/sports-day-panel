@@ -26,6 +26,7 @@ export type DashboardDataType = {
     matches: Match[]
     //  for individual section
     mySport: Sport | undefined
+    myGame: Game | undefined
     myTeam: Team | undefined
     myTeamUsers: User[]
     myTeamMatches: Match[]
@@ -47,6 +48,7 @@ export const useFetchDashboard = () => {
     const {data: microsoftAccount} = useContext(MicrosoftAccountContext)
     //  individual state
     const [mySportState, setMySport] = useState<Sport | undefined>(undefined)
+    const [myGameState, setMyGame] = useState<Game | undefined>(undefined)
     const [myTeamState, setMyTeam] = useState<Team | undefined>(undefined)
     const [myTeamMatchesState, setMyTeamMatches] = useState<Match[]>([])
     const [myTeamUsersState, setMyTeamUsers] = useState<User[]>([])
@@ -81,6 +83,8 @@ export const useFetchDashboard = () => {
             //  my game (sort by weight)
             games.sort((a, b) => b.weight - a.weight)
             const myGame = myGames[0]
+            //  set state
+            setMyGame(myGame)
 
             //  my team
             const myTeam = myTeams.find(team => team.enteredGameIds.includes(myGame.id))
@@ -149,6 +153,7 @@ export const useFetchDashboard = () => {
         matches: matches,
         //  for individual section
         mySport: mySportState,
+        myGame: myGameState,
         myTeam: myTeamState,
         myTeamUsers: myTeamUsersState,
         myTeamMatches: myTeamMatchesState,

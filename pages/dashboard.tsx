@@ -30,6 +30,7 @@ const DashBoard: NextPage = () => {
         sports,
         //  for individual section
         mySport,
+        myGame,
         myTeam,
         myTeamUsers,
         myTeamMatches,
@@ -181,9 +182,14 @@ const DashBoard: NextPage = () => {
                                                 >
                                                     <Grid container spacing={1.5}>
 
-                                                        {mySport && myTeam &&
+                                                        {mySport && myGame && myTeam &&
                                                             <Grid xs={12} sm={12} lg={12}>
-                                                                <Schedule matches={myTeamMatches} myTeamId={myTeam.id}/>
+                                                                <Schedule
+                                                                    sportId={mySport.id}
+                                                                    gameId={myGame.id}
+                                                                    matches={myTeamMatches}
+                                                                    myTeamId={myTeam.id}
+                                                                />
                                                             </Grid>
                                                         }
                                                         {sports

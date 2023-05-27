@@ -36,6 +36,7 @@ const REFRESH_INTERVAL = 1000 * 60 * 5
 
 type Props = {
     sportId: number
+    gameId: number | null
 }
 
 const Id: NextPage<Props> = (props: Props) => {
@@ -348,7 +349,7 @@ const Id: NextPage<Props> = (props: Props) => {
                                                     animate={{opacity: 1, y: "0px"}}
                                                     transition={{delay:0.5, duration: 1, ease: [0.16, 1, 0.3, 1]}}
                                                 >
-                                                    <GameList sportId={props.sportId}/>
+                                                    <GameList sportId={props.sportId} gameId={props.gameId} />
                                                 </motion.div>
 
                                             </Box>
@@ -378,8 +379,18 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
         }
     }
 
+    let game = null
+    if (context.query.gameId) {
+        if (!isNaN(parseInt(context.query.gameId as string))) {
+            game = parseInt(context.query.gameId as string)
+        }
+    }
+
     return {
-        props: {sportId: id}
+        props: {
+            sportId: id,
+            gameId: game
+        }
     }
 }
 
