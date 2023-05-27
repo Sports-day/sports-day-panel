@@ -14,7 +14,7 @@ import {RiAwardFill} from "react-icons/ri";
 import {Sport} from "../../../src/models/SportModel";
 import {Team} from "../../../src/models/TeamModel";
 import {User} from "../../../src/models/UserModel";
-import {useContext, useState} from "react";
+import {Fragment, useContext, useState} from "react";
 import {ImagesContext} from "../../context";
 import * as React from "react";
 import Link from "next/link";
@@ -200,14 +200,14 @@ export const Overview = (props: OverviewProps) => {
                             >
                                 {props.myTeamUsers.map(user => {
                                     return (
-                                        <>
-                                            <Box sx={{width:"100%"}} key={user.id}>
+                                        <Fragment key={user.id}>
+                                            <Box sx={{width:"100%"}}>
                                                 <Divider/>
                                             </Box>
                                             <Typography color={"#99a5d6"} fontSize={"16px"}>
                                                 {user.name}
                                             </Typography>
-                                        </>
+                                        </Fragment>
                                     );
                                 })}
                             </Stack>
