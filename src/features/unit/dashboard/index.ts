@@ -81,7 +81,7 @@ export const useFetchDashboard = () => {
             if (myGames.length === 0) break fetchBlock
 
             //  my game (sort by weight)
-            games.sort((a, b) => b.weight - a.weight)
+            myGames.sort((a, b) => b.weight - a.weight)
             const myGame = myGames[0]
             //  set state
             setMyGame(myGame)
