@@ -1,5 +1,4 @@
 import {Avatar, Button, Card, CardContent, Stack, Typography} from "@mui/material";
-import {useFetchImage} from "../../src/features/images/hook";
 import {useContext} from "react";
 import {ImagesContext} from "../context";
 import {Sport} from "../../src/models/SportModel";
