@@ -1,5 +1,4 @@
 import {
-    Box,
     Grid,
     Stack,
     Typography,
@@ -37,19 +36,22 @@ export const RulePetanque = () => {
             <Typography color={"#E8EBF8"}>フィールド図はありません</Typography>
             <Grid container>
                 <Grid xs={12} sm={12} lg={12}>
-                    <RuleNumCard title={"会場"} content={"校舎と武道場の間"} sub={"️☀️晴天時"}/>
+                    <RuleNumCard title={"会場"} content={"第一体育館と武道場の間"} sub={"️☀️晴天時"}/>
                 </Grid>
                 <Grid xs={12} sm={12} lg={12}>
-                    <RuleNumCard title={"会場"} content={"オープンラボ１"} sub={"️☔️雨天時"}/>
+                    <RuleNumCard title={"会場"} content={"オープンラボ2"} sub={"️☔️雨天時"}/>
                 </Grid>
                 <Grid xs={6} sm={6} lg={3}>
-                    <RuleNumCard title={"試合時間"} content={"10分"} sub={"準備を含めて"}/>
+                    <RuleNumCard title={"試合時間"} content={"6分"} sub={"-"}/>
                 </Grid>
                 <Grid xs={6} sm={6} lg={3}>
                     <RuleNumCard title={"チーム人数"} content={"6 〜 8"} sub={"人"}/>
                 </Grid>
-                <Grid xs={6} sm={6} lg={3}>
-                    <RuleNumCard title={"担当審判"} content={"参加チーム"} sub={"1試合あたり1~2人"}/>
+                <Grid xs={12} sm={12} lg={6}>
+                    <RuleNumCard title={"担当審判"} content={"学生会執行部と参加チーム"} sub={"1試合あたり1~2人"}/>
+                </Grid>
+                <Grid xs={12} sm={12} lg={6}>
+                    <RuleNumCard title={"試合形式"} content={"予選リーグ・決勝トーナメント"} sub={""}/>
                 </Grid>
                 <Grid xs={12} sm={12} lg={6}>
                     <RuleNumCard title={"女子ハンデ"} content={"なし"} sub={""}/>

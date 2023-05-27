@@ -1,8 +1,8 @@
 import {Avatar, Button, Card, CardContent, Stack, Typography} from "@mui/material";
-import {useFetchImage} from "../../src/features/images/hook";
 import {useContext} from "react";
 import {ImagesContext} from "../context";
 import {Sport} from "../../src/models/SportModel";
+import Link from "next/link";
 
 
 export type SportsListElementProps = {
@@ -15,7 +15,7 @@ export const SportsListElement = (props: SportsListElementProps) => {
 
     return (
         <Card>
-            <Button sx={{width:"100%"}} href={`/sports/${props.sport.id}`}>
+            <Button component={Link} sx={{width:"100%"}} href={`/sports/${props.sport.id}`} scroll={false}>
                 <CardContent sx={{width:"100%"}}>
                     <Stack
                         direction={"row"}

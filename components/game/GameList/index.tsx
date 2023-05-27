@@ -1,8 +1,9 @@
-import {Box, Container, Divider, Stack, Tab, Tabs, Typography} from "@mui/material";
+import {Box, Container, Stack, Tab, Tabs, Typography} from "@mui/material";
 import * as React from "react";
 import {GameListContent} from "./GameListContent";
 import {useContext} from "react";
 import {GamesContext} from "../../context";
+import {motion} from "framer-motion";
 
 export type GameListProps = {
     sportId: number
@@ -134,7 +135,14 @@ export const GameList = (props: GameListProps) => {
                         {sortedGame.map((game, index) => {
                                 return (
                                     <TabPanel key={game.id} value={value} index={index}>
-                                        <GameListContent game={game}/>
+                                        <motion.div
+                                            key={"overview-content"}
+                                            initial={{opacity: 0.3, y: "-20px"}}
+                                            animate={{opacity: 1, y: "0px"}}
+                                            transition={{duration: 0.7, ease: [0.16, 1, 0.3, 1]}}
+                                        >
+                                            <GameListContent game={game}/>
+                                        </motion.div>
                                     </TabPanel>
                                 )
                             })

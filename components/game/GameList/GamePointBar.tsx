@@ -42,6 +42,7 @@ export const GamePointBar = (props: GamePointBarProps) => {
             <Stack
                 direction={"column"}
                 spacing={1}
+                pb={3}
                 sx={{width: "100%", height:"fit-content"}}
             >
                 <Stack
