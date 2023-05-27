@@ -1,4 +1,4 @@
-import {Box} from "@mui/material";
+import {Stack} from "@mui/material";
 import * as React from "react";
 import {GamePointBar} from "./GamePointBar";
 import {Game} from "../../../src/models/GameModel";
@@ -19,7 +19,7 @@ export const GameListContent = (props: { game: Game }) => {
                 .sort((a, b) => a.startAt.localeCompare(b.startAt))
                 .map((match) => {
                 return (
-                    <Box key={match.id}>
+                    <Stack key={match.id}>
                         <GamePointBar
                             leftScore={match.leftScore}
                             rightScore={match.rightScore}
@@ -29,7 +29,7 @@ export const GameListContent = (props: { game: Game }) => {
                             time={match.startAt}
                             barOffset={barOffset}
                         />
-                    </Box>
+                    </Stack>
                 )
             })}
         </>
