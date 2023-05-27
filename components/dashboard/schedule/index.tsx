@@ -11,8 +11,11 @@ import {HiOutlineTableCells, HiOutlineArrowRight} from "react-icons/hi2";
 import * as React from "react";
 import {ScheduleContent} from "./ScheduleContent";
 import {Match} from "../../../src/models/MatchModel";
+import Link from "next/link";
 
 export type ScheduleProps = {
+    sportId: number
+    gameId: number
     matches: Match[]
     myTeamId: number
 }
@@ -25,7 +28,11 @@ export const Schedule = (props: ScheduleProps) => {
                 <Stack
                     spacing={0}
                 >
-                    <Button sx={{width: "100%"}}>
+                    <Button
+                        component={Link}
+                        sx={{width: "100%"}}
+                        href={`/sports/${props.sportId}?gameId=${props.gameId}`}
+                    >
                         <Stack
                             direction={"row"}
                             justifyContent={"space-between"}

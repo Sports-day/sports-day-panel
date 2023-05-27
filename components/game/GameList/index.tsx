@@ -1,12 +1,13 @@
 import {Box, Container, Stack, Tab, Tabs, Typography} from "@mui/material";
 import * as React from "react";
 import {GameListContent} from "./GameListContent";
-import {useContext} from "react";
+import {useContext, useEffect} from "react";
 import {GamesContext} from "../../context";
 import {motion} from "framer-motion";
 
 export type GameListProps = {
     sportId: number
+    gameId: number | null
 }
 
 interface TabPanelProps {
@@ -52,11 +53,21 @@ export const GameList = (props: GameListProps) => {
 
     const sortedGame = games.sort((a, b) => b.weight - a.weight)
 
+    useEffect(() => {
+        //  set tab value if game id not undefined
+        if (props.gameId) {
+            const index = sortedGame.findIndex(game => game.id === props.gameId)
+            if (index !== -1) {
+                setValue(index)
+            }
+        }
+    }, [sortedGame, props.gameId])
+
+
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
     };
 
-    console.log("state: ", value)
 
     return (
         <Container

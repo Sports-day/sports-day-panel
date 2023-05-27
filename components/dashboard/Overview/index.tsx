@@ -10,6 +10,7 @@ import {
     Unstable_Grid2 as Grid, IconButton, Box
 } from "@mui/material";
 import {HiArrowRightCircle, HiXMark} from "react-icons/hi2";
+import {RiAwardFill} from "react-icons/ri";
 import {Sport} from "../../../src/models/SportModel";
 import {Team} from "../../../src/models/TeamModel";
 import {User} from "../../../src/models/UserModel";
@@ -92,6 +93,41 @@ export const Overview = (props: OverviewProps) => {
                 </Grid>
                 <Grid xs={12} sm={12} lg={12}><Divider/></Grid>
                 <Grid xs={6} sm={6} lg={6}>
+                    <Box  p={1} sx={{width:"100%"}}>
+                        <Stack
+                            direction={"row"}
+                            justifyContent={"space-between"}
+                            alignItems={"center"}
+                            sx={{width:"100%"}}
+                        >
+                            <Stack
+                                direction={"column"}
+                                justifyContent={"center"}
+                                alignItems={"flex-start"}
+                            >
+                                <Typography sx={{color: "#99a5d6", fontSize: "14px"}}>
+                                    競技内順位
+                                </Typography>
+                                <Stack
+                                    direction={"row"}
+                                    alignItems={"flex-end"}
+                                    spacing={1}
+                                >
+                                    <Typography sx={{color: "#FFF", fontSize: "24px", fontWeight: "bold"}}>
+                                        {props.myTeamRank}
+                                    </Typography>
+                                    <Typography sx={{color: "#99a5d6", fontSize: "14px", py: "5px"}}>
+                                        位
+                                    </Typography>
+                                </Stack>
+                            </Stack>
+                            <SvgIcon>
+                                <RiAwardFill color="#99a5d6"/>
+                            </SvgIcon>
+                        </Stack>
+                    </Box>
+                </Grid>
+                <Grid xs={6} sm={6} lg={6}>
                     <Button onClick={toggleDrawer(true)} sx={{width:"100%"}}>
                         <Stack
                             direction={"row"}
@@ -112,7 +148,7 @@ export const Overview = (props: OverviewProps) => {
                                 </Typography>
                             </Stack>
                             <SvgIcon>
-                                    <HiArrowRightCircle color="#FFF"/>
+                                <HiArrowRightCircle color="#FFF"/>
                             </SvgIcon>
                         </Stack>
                     </Button>
@@ -177,41 +213,6 @@ export const Overview = (props: OverviewProps) => {
                             </Stack>
                         </Container>
                     </SwipeableDrawer>
-                </Grid>
-                <Grid xs={6} sm={6} lg={6}>
-                    <Button sx={{width:"100%"}}>
-                        <Stack
-                            direction={"row"}
-                            justifyContent={"space-between"}
-                            alignItems={"center"}
-                            sx={{width:"100%"}}
-                        >
-                            <Stack
-                                direction={"column"}
-                                justifyContent={"center"}
-                                alignItems={"flex-start"}
-                            >
-                                <Typography sx={{color: "#99a5d6", fontSize: "14px"}}>
-                                    競技内順位
-                                </Typography>
-                                <Stack
-                                    direction={"row"}
-                                    alignItems={"flex-end"}
-                                    spacing={1}
-                                >
-                                    <Typography sx={{color: "#FFF", fontSize: "24px", fontWeight: "bold"}}>
-                                        {props.myTeamRank}
-                                    </Typography>
-                                    <Typography sx={{color: "#99a5d6", fontSize: "14px", py: "5px"}}>
-                                        位
-                                    </Typography>
-                                </Stack>
-                            </Stack>
-                            <SvgIcon>
-                                <HiArrowRightCircle color="#FFF"/>
-                            </SvgIcon>
-                        </Stack>
-                    </Button>
                 </Grid>
             </Grid>
         </Container>
