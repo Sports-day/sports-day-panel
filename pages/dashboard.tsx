@@ -107,7 +107,6 @@ const DashBoard: NextPage = () => {
                                                 maxWidth={false}
                                                 disableGutters
                                                 sx={{
-                                                    paddingTop: 5,
                                                     paddingBottom: "0px",
                                                     marginBottom:"30px",
                                                     position: "relative",
@@ -125,18 +124,18 @@ const DashBoard: NextPage = () => {
                                                 >
                                                     <Container
                                                         maxWidth={"xl"}
-                                                        sx={{paddingTop: "50px"}}
+                                                        sx={{paddingTop: 8.5}}
                                                     >
-                                                    {informationList
-                                                        .map((info) => {
-                                                            return (
-                                                                <Notification
-                                                                    key={info.id}
-                                                                    infoName={info.name}
-                                                                    infoContent={info.content}
-                                                                />
-                                                            );
-                                                        })}
+                                                        {informationList
+                                                            .map((info) => {
+                                                                return (
+                                                                    <Notification
+                                                                        key={info.id}
+                                                                        infoName={info.name}
+                                                                        infoContent={info.content}
+                                                                    />
+                                                                );
+                                                            })}
                                                     </Container>
                                                     {mySport && myTeam &&
                                                         <Overview

@@ -471,7 +471,7 @@ const About: NextPage = () => {
                             >
                                 <Grid container spacing={1.5}>
 
-                                    <Grid xs={12} sm={6} lg={2}>
+                                    <Grid xs={12} sm={6} lg={3}>
                                         <Stack
                                             direction={"column"}
                                             justifyContent={"center"}
@@ -493,7 +493,29 @@ const About: NextPage = () => {
                                         </Stack>
                                     </Grid>
 
-                                    <Grid xs={12} sm={6} lg={2}>
+                                    <Grid xs={12} sm={6} lg={3}>
+                                        <Stack
+                                            direction={"column"}
+                                            justifyContent={"center"}
+                                            alignItems={"center"}
+                                            sx={{
+                                                width: "100%",
+                                                height: "200px",
+                                                padding: "20px",
+                                                backgroundColor: "#f1f2f6",
+                                                borderRadius: "15px",
+                                                borderBottomLeftRadius: "3px"}}
+                                        >
+                                            <Image
+                                                width={"120"}
+                                                height={"26"}
+                                                src="/kotlin-black.png"
+                                                alt="kotlin"
+                                            />
+                                        </Stack>
+                                    </Grid>
+
+                                    <Grid xs={12} sm={6} lg={3}>
                                         <Stack
                                             direction={"column"}
                                             justifyContent={"center"}
@@ -515,7 +537,7 @@ const About: NextPage = () => {
                                         </Stack>
                                     </Grid>
 
-                                    <Grid xs={12} sm={6} lg={2}>
+                                    <Grid xs={12} sm={6} lg={3}>
                                         <Stack
                                             direction={"column"}
                                             justifyContent={"center"}
@@ -537,7 +559,7 @@ const About: NextPage = () => {
                                         </Stack>
                                     </Grid>
 
-                                    <Grid xs={12} sm={6} lg={2}>
+                                    <Grid xs={12} sm={6} lg={3}>
                                         <Stack
                                             direction={"column"}
                                             justifyContent={"center"}
@@ -559,7 +581,29 @@ const About: NextPage = () => {
                                         </Stack>
                                     </Grid>
 
-                                    <Grid xs={12} sm={6} lg={2}>
+                                    <Grid xs={12} sm={6} lg={3}>
+                                        <Stack
+                                            direction={"column"}
+                                            justifyContent={"center"}
+                                            alignItems={"center"}
+                                            sx={{
+                                                width: "100%",
+                                                height: "200px",
+                                                padding: "20px",
+                                                backgroundColor: "#f1f2f6",
+                                                borderRadius: "15px",
+                                                borderBottomLeftRadius: "3px"}}
+                                        >
+                                            <Image
+                                                width={"80"}
+                                                height={"80"}
+                                                src="/ts.png"
+                                                alt="typescript"
+                                            />
+                                        </Stack>
+                                    </Grid>
+
+                                    <Grid xs={12} sm={6} lg={3}>
                                         <Stack
                                             direction={"column"}
                                             justifyContent={"center"}
@@ -581,7 +625,7 @@ const About: NextPage = () => {
                                         </Stack>
                                     </Grid>
 
-                                    <Grid xs={12} sm={6} lg={2}>
+                                    <Grid xs={12} sm={6} lg={3}>
                                         <Stack
                                             direction={"column"}
                                             justifyContent={"center"}
