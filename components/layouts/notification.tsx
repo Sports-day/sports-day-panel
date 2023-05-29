@@ -24,7 +24,8 @@ export const Notification = (props: NotificationProps) => {
             py={2}
             mt={1.5}
             sx={{
-                background: "#E8EBF8",
+                border: "1px solid #2c46a9",
+                backgroundColor: "#192d7a",
                 borderRadius: "15px",
                 borderBottomLeftRadius: "3px",
                 height:"fit-content",
@@ -42,7 +43,14 @@ export const Notification = (props: NotificationProps) => {
                 spacing={1}
             >
                 <Typography
-                    color={"#23398A"}
+                    color={"#99a5d6"}
+                    sx={{fontSize: "10px"}}
+                    lineHeight={"1.2em"}
+                >
+                    お知らせ
+                </Typography>
+                <Typography
+                    color={"#E8EBF8"}
                     sx={{fontSize: "14px"}}
                     lineHeight={"1.2em"}
                 >

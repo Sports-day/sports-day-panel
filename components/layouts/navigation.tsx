@@ -2,7 +2,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import {
     HiArrowLeftCircle,
-    HiCog6Tooth,
+    HiCog6Tooth, HiXMark,
 } from "react-icons/hi2";
 import {
     GoMarkGithub,
@@ -11,6 +11,7 @@ import {
     Menu,
     MoreHorizontal,
     X,
+    ScrollText
 } from "lucide-react";
 import {
     AppBar,
@@ -23,7 +24,7 @@ import {
     SwipeableDrawer,
     Button,
     Divider,
-    Typography,
+    Typography, DialogTitle, DialogContent, DialogActions, Dialog,
 } from '@mui/material';
 import Logo from "public/logo.svg"
 import Mark from "public/mark.svg"
@@ -31,12 +32,24 @@ import {signOut, useSession} from "next-auth/react";
 import { alpha } from '@mui/material/styles';
 import Link from "next/link";
 import {AiOutlineNotification} from "react-icons/all";
+import {useState} from "react";
+import {DialogProps} from "@mui/material/Dialog";
+import {Rules} from "../rules/Rules";
+import {DocsOverall} from "../rules/DocsOverall";
 
 type Anchor = 'top';
 
 export const Navigation = () => {
     const [state, setState] = React.useState({top: false, NotifTop: false});
-
+    const [open, setOpen] = useState(false);
+    const [scroll, setScroll] = React.useState<DialogProps['scroll']>('paper');
+    const handleClickOpen = (scrollType: DialogProps['scroll']) => () => {
+        setOpen(true);
+        setScroll(scrollType);
+    };
+    const handleClose = () => {
+        setOpen(false);
+    };
     const toggleDrawer =
         (anchor: Anchor, open: boolean) =>
             (event: React.KeyboardEvent | React.MouseEvent) => {
@@ -277,6 +290,47 @@ export const Navigation = () => {
                                 alignItems={"center"}
                                 spacing={2}
                             >
+                                <IconButton onClick={handleClickOpen('paper')} sx={{backgroundColor: "#2F479D"}}>
+                                    <SvgIcon>
+                                        <ScrollText color="#FFF"/>
+                                    </SvgIcon>
+                                </IconButton>
+                                <Dialog
+                                    open={open}
+                                    onClose={handleClose}
+                                    scroll={scroll}
+                                    aria-labelledby="scroll-dialog-title"
+                                    aria-describedby="scroll-dialog-description"
+                                    sx={{
+                                        "& .MuiDialog-container": {
+                                            "& .MuiPaper-root": {
+                                                width: "100vw",
+                                                maxWidth: "lg"
+                                            },
+                                        },
+                                    }}
+                                >
+                                    <DialogTitle id="scroll-dialog-title" fontSize={"16px"} color={"#99a5d6"}>球技大会の進行</DialogTitle>
+                                    <DialogContent dividers={scroll === 'paper'}>
+                                        <DocsOverall/>
+                                    </DialogContent>
+                                    <DialogActions>
+                                        <Stack
+                                            direction={"row"}
+                                            justifyContent={"center"}
+                                            alignItems={"center"}
+                                            spacing={2}
+                                            sx={{width:"100%"}}
+                                        >
+                                            <Button sx={{width:"100%", height:"100%"}} onClick={handleClose}>
+                                                <SvgIcon sx={{mr:1}}>
+                                                    <HiXMark color={"#E8EBF8"}/>
+                                                </SvgIcon>
+                                                <Typography color={"#E8EBF8"}>閉じる</Typography>
+                                            </Button>
+                                        </Stack>
+                                    </DialogActions>
+                                </Dialog>
                                 {(['top'] as const).map((anchor) => (
                                     <React.Fragment key={"top"}>
                                         <IconButton onClick={toggleDrawer(anchor, true)} sx={{backgroundColor: "#2F479D"}}>
