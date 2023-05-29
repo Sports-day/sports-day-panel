@@ -14,6 +14,8 @@ import {useFetchMatches} from "../../matches/hook";
 import {useFetchUsers} from "../../users/hook";
 import {User} from "../../../models/UserModel";
 import {MicrosoftAccountContext} from "../../../../components/context";
+import {useFetchAllInformation} from "../../information/hook";
+import {Information} from "../../../models/InformationModel";
 
 export type SportDataType = {
     refresh: VoidFunction
@@ -29,6 +31,7 @@ export type SportDataType = {
     //  belong to games
     matches: Match[]
     locations: Location[]
+    informationList: Information[]
 }
 
 export const useFetchSportData = (sportId: number) => {
@@ -39,6 +42,7 @@ export const useFetchSportData = (sportId: number) => {
     const {teams, isFetching: isFetchingTeams, refresh: refreshTeams} = useFetchTeams()
     const {games, isFetching: isFetchingGames, refresh: refreshGames} = useFetchGames()
     const {matches, isFetching: isFetchingMatches, refresh: refreshMatches} = useFetchMatches()
+    const {allInformation, isFetching: isFetchingInformation} = useFetchAllInformation()
     //  state
     let filteredGames: Game[] = []
     let filteredTeams: Team[] = []
@@ -72,12 +76,13 @@ export const useFetchSportData = (sportId: number) => {
             refreshGames()
             refreshMatches()
         },
-        isFetching: isFetchingSport || isFetchingImages || isFetchingLocations || isFetchingTeams || isFetchingGames || isFetchingMatches,
+        isFetching: isFetchingSport || isFetchingImages || isFetchingLocations || isFetchingTeams || isFetchingGames || isFetchingMatches || isFetchingInformation,
         locations: locations,
         image: images.find((image: Image) => sport?.iconId === image.id),
         sport: sport,
         games: filteredGames,
         teams: filteredTeams,
         matches: filteredMatches,
+        informationList: allInformation
     } as SportDataType
 }
