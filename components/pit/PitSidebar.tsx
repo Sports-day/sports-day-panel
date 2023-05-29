@@ -13,6 +13,10 @@ export function PitSidebar() {
             {/*    url={"/admin/classes"}*/}
             {/*/>*/}
             <PitSidebarContent
+                name={"インフォメーション"}
+                url={"/admin/information"}
+            />
+            <PitSidebarContent
                 name={"チーム"}
                 url={"/admin/teams"}
             />

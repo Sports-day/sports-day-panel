@@ -50,7 +50,8 @@ const Id: NextPage<Props> = (props: Props) => {
         games,
         teams,
         matches,
-        locations
+        locations,
+        informationList
     } = useFetchSportData(props.sportId)
     const [open, setOpen] = useState(false);
     const [scroll, setScroll] = React.useState<DialogProps['scroll']>('paper');

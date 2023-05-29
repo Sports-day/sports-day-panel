@@ -14,6 +14,8 @@ import {useFetchMatches} from "../../matches/hook";
 import {useFetchUsers} from "../../users/hook";
 import {User} from "../../../models/UserModel";
 import {MicrosoftAccountContext} from "../../../../components/context";
+import {Information} from "../../../models/InformationModel";
+import {useFetchAllInformation} from "../../information/hook";
 
 export type DashboardDataType = {
     isFetching: boolean
@@ -24,6 +26,7 @@ export type DashboardDataType = {
     sports: Sport[]
     games: Game[]
     matches: Match[]
+    informationList: Information[]
     //  for individual section
     mySport: Sport | undefined
     myGame: Game | undefined
@@ -44,6 +47,7 @@ export const useFetchDashboard = () => {
     const {games, isFetching: isFetchingGames} = useFetchGames()
     const {matches, isFetching: isFetchingMatches} = useFetchMatches()
     const {users, isFetching: isFetchingUsers} = useFetchUsers()
+    const {allInformation, isFetching: isFetchingInformation} = useFetchAllInformation()
     //  context
     const {data: microsoftAccount} = useContext(MicrosoftAccountContext)
     //  individual state
@@ -54,7 +58,7 @@ export const useFetchDashboard = () => {
     const [myTeamUsersState, setMyTeamUsers] = useState<User[]>([])
     const [myTeamRankState, setMyTeamRank] = useState<number>(0)
 
-    if(!isFetchingImages && !isFetchingLocations && !isFetchingTeams && !isFetchingSports && !isFetchingGames && !isFetchingMatches && !isFetchingUsers && isFetching) {
+    if(!isFetchingImages && !isFetchingLocations && !isFetchingTeams && !isFetchingSports && !isFetchingGames && !isFetchingMatches && !isFetchingUsers && !isFetchingInformation && isFetching) {
         //  fetch data for individual section
         fetchBlock: {
             /*
@@ -151,6 +155,7 @@ export const useFetchDashboard = () => {
         sports: sports,
         games: games,
         matches: matches,
+        informationList: allInformation,
         //  for individual section
         mySport: mySportState,
         myGame: myGameState,

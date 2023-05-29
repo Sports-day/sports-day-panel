@@ -19,6 +19,7 @@ import {ImagesContext, LocationsContext, TeamsContext} from "../components/conte
 import {useFetchDashboard} from "../src/features/unit/dashboard";
 import {Loading} from "../components/layouts/loading";
 import {motion} from "framer-motion";
+import {Notification} from "../components/layouts/notification";
 
 const DashBoard: NextPage = () => {
     //  Unit Hook
@@ -28,6 +29,7 @@ const DashBoard: NextPage = () => {
         locations,
         teams,
         sports,
+        informationList,
         //  for individual section
         mySport,
         myGame,
@@ -121,6 +123,21 @@ const DashBoard: NextPage = () => {
                                                     animate={{opacity: 1, y: "0px"}}
                                                     transition={{delay:0.4, duration: 1, ease: [0.16, 1, 0.3, 1]}}
                                                 >
+                                                    <Container
+                                                        maxWidth={"xl"}
+                                                        sx={{paddingTop: "50px"}}
+                                                    >
+                                                    {informationList
+                                                        .map((info) => {
+                                                            return (
+                                                                <Notification
+                                                                    key={info.id}
+                                                                    infoName={info.name}
+                                                                    infoContent={info.content}
+                                                                />
+                                                            );
+                                                        })}
+                                                    </Container>
                                                     {mySport && myTeam &&
                                                         <Overview
                                                             mySport={mySport}
