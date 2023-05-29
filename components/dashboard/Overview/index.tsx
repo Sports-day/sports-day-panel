@@ -7,7 +7,7 @@ import {
     SvgIcon,
     Typography,
     SwipeableDrawer,
-    Unstable_Grid2 as Grid, IconButton, Box
+    Unstable_Grid2 as Grid, IconButton, Box, Alert
 } from "@mui/material";
 import {HiArrowRightCircle, HiXMark} from "react-icons/hi2";
 import {RiAwardFill} from "react-icons/ri";
@@ -40,7 +40,7 @@ export const Overview = (props: OverviewProps) => {
     return(
         <Container
             maxWidth={"xl"}
-            sx={{paddingTop: "50px"}}
+            sx={{paddingTop: "20px"}}
         >
             <Grid container spacing={2}>
                 <Grid xs={12} sm={12} lg={12}>
@@ -93,7 +93,14 @@ export const Overview = (props: OverviewProps) => {
                 </Grid>
                 <Grid xs={12} sm={12} lg={12}><Divider/></Grid>
                 <Grid xs={6} sm={6} lg={6}>
-                    <Box  p={1} sx={{width:"100%"}}>
+                    <Box
+                        p={1}
+                        pr={2}
+                        sx={{
+                            width:"100%",
+                            height: "90%",
+                            borderRight: "1px solid #5a68a2"
+                    }}>
                         <Stack
                             direction={"row"}
                             justifyContent={"space-between"}
