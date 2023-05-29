@@ -14,6 +14,12 @@ import {
     Typography,
     Unstable_Grid2 as Grid
 } from "@mui/material";
+import {
+    Menu,
+    MoreHorizontal,
+    X,
+    ScrollText
+} from "lucide-react";
 import {GameProgress} from "../../components/game/game-progress";
 import {GameBest} from "../../components/game/GameBest";
 import {Navigation} from "../../components/layouts/navigation";
@@ -31,6 +37,7 @@ import { DialogProps } from '@mui/material/Dialog';
 import {Rules} from "../../components/rules/Rules";
 import {motion} from "framer-motion";
 import Link from "next/link";
+import {Notification} from "../../components/layouts/notification";
 
 const REFRESH_INTERVAL = 1000 * 60 * 5
 
@@ -154,7 +161,7 @@ const Id: NextPage<Props> = (props: Props) => {
                                                             alignItems={"center"}
                                                             spacing={3}
                                                             sx={{
-                                                                paddingTop: 5,
+                                                                paddingTop: 0,
                                                                 paddingBottom: "0px",
                                                                 marginBottom:"70px",
                                                                 position: "relative",
@@ -170,6 +177,21 @@ const Id: NextPage<Props> = (props: Props) => {
                                                                 animate={{opacity: 1, y: "0px"}}
                                                                 transition={{delay:0.3, duration: 1, ease: [0.16, 1, 0.3, 1]}}
                                                             >
+                                                                <Container
+                                                                    maxWidth={"xl"}
+                                                                    sx={{paddingTop: 8.5}}
+                                                                >
+                                                                    {informationList
+                                                                        .map((info) => {
+                                                                            return (
+                                                                                <Notification
+                                                                                    key={info.id}
+                                                                                    infoName={info.name}
+                                                                                    infoContent={info.content}
+                                                                                />
+                                                                            );
+                                                                        })}
+                                                                </Container>
                                                                 <Stack
                                                                     direction={"row"}
                                                                     justifyContent={"center"}
