@@ -63,12 +63,6 @@ const Id: NextPage<Props> = (props: Props) => {
     const [open, setOpen] = useState(false);
     const [scroll, setScroll] = React.useState<DialogProps['scroll']>('paper');
 
-    useEffect(() => {
-        setInterval(() => {
-            refresh()
-        }, REFRESH_INTERVAL);
-    }, [refresh])
-
     const handleClickOpen = (scrollType: DialogProps['scroll']) => () => {
         setOpen(true);
         setScroll(scrollType);
