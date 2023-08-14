@@ -8,6 +8,8 @@ import {ThemeProvider} from "@mui/material/styles";
 import {createTheme} from "../components/theme";
 import {motion, AnimatePresence} from "framer-motion";
 
+export const runtime = 'experimental-edge';
+
 const Auth: NextPage = () => {
     const theme = createTheme();
     return(

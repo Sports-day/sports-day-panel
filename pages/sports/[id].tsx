@@ -33,6 +33,8 @@ import {motion} from "framer-motion";
 import Link from "next/link";
 import {Notification} from "../../components/layouts/notification";
 
+export const runtime = 'experimental-edge';
+
 const REFRESH_INTERVAL = 1000 * 60 * 5
 
 type Props = {

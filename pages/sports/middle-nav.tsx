@@ -2,6 +2,8 @@ import {Button, Stack, SvgIcon, Typography} from "@mui/material";
 import {HiArrowLeftCircle, HiEllipsisHorizontalCircle} from "react-icons/hi2";
 import * as React from "react";
 
+export const runtime = 'experimental-edge';
+
 export const MiddleNav = (props:any) => {
     const router=props;
     return(
