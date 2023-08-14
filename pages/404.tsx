@@ -7,7 +7,7 @@ import * as React from "react";
 import {ThemeProvider} from "@mui/material/styles";
 import {createTheme} from "../components/theme";
 
-export const runtime = 'experimental-edge';
+// export const runtime = 'experimental-edge';
 
 const Page: NextPage = () => {
     const theme = createTheme();
