@@ -4,7 +4,7 @@ import Dashboard from './dashboard';
 import {useFetchMicrosoftAccount} from "../src/features/microsoft-account/hooks";
 import {MicrosoftAccountContext} from "../components/context";
 
-export const runtime = 'edge';
+export const runtime = 'experimental-edge';
 
 const Index: NextPage = () => {
     const {microsoftAccount, isFetching} = useFetchMicrosoftAccount("me")
