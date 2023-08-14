@@ -1,4 +1,5 @@
 import {sportRepository, SportRepository} from "../repositories/SportRepository";
+import {mockSportRepository} from "../repositories/mock/SportRepository";
 
 export type Sport = {
     id: number,
@@ -13,7 +14,7 @@ export type Sport = {
 }
 
 export const sportFactory = (repo?: SportRepository) => {
-    const repository = repo ?? sportRepository
+    const repository = mockSportRepository
 
     return {
         index: async (): Promise<Sport[]> => {

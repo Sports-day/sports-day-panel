@@ -1,6 +1,7 @@
 import {GameRepository, gameRepository} from "../repositories/GameRepository";
 import {Team} from "./TeamModel";
 import {Match} from "./MatchModel";
+import {mockGameRepository} from "../repositories/mock/GameRepository";
 
 export type Game = {
     id: number,
@@ -48,7 +49,7 @@ export type LeagueTeamResult = {
 }
 
 export const gameFactory = (repo?: GameRepository) => {
-    const repository = repo ?? gameRepository
+    const repository = mockGameRepository
 
     return {
         index: async (): Promise<Game[]> => {

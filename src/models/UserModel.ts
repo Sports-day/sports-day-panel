@@ -1,6 +1,7 @@
 import {userRepository, UserRepository} from "../repositories/UserRepository";
 import {MicrosoftAccount} from "./MicrosoftAccountModel";
 import {Team} from "./TeamModel";
+import {mockUserRepository} from "../repositories/mock/UserRepository";
 
 export type User = {
     id: number,
@@ -16,7 +17,7 @@ export type User = {
 export type Gender = "male" | "female"
 
 export const userFactory = (repo?: UserRepository) => {
-    const repository = repo ?? userRepository
+    const repository = mockUserRepository
 
     return {
         index: async (): Promise<User[]> => {

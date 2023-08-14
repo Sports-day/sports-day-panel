@@ -14,12 +14,6 @@ import {
     Typography,
     Unstable_Grid2 as Grid
 } from "@mui/material";
-import {
-    Menu,
-    MoreHorizontal,
-    X,
-    ScrollText
-} from "lucide-react";
 import {GameProgress} from "../../components/game/game-progress";
 import {GameBest} from "../../components/game/GameBest";
 import {Navigation} from "../../components/layouts/navigation";

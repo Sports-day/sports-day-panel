@@ -1,6 +1,5 @@
 import {Card, CardContent, Stack, Typography}from "@mui/material";
 import {GameBestContent} from "./GameBestContent";
-import {Sport} from "../../../src/models/SportModel";
 import {useFetchSportBest3} from "../../../src/features/sports/hook";
 
 export const GameBest = () => {

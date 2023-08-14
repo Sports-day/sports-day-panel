@@ -1,5 +1,6 @@
 import {teamRepository, TeamRepository} from "../repositories/TeamRepository";
 import {User} from "./UserModel";
+import {mockTeamRepository} from "../repositories/mock/TeamRepository";
 
 export type Team = {
     id: number,
@@ -13,7 +14,7 @@ export type Team = {
 }
 
 export const teamFactory = (repo?: TeamRepository) => {
-    const repository = repo ?? teamRepository
+    const repository = mockTeamRepository
 
     return {
         index: async (): Promise<Team[]> => {

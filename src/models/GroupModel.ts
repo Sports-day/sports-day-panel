@@ -1,4 +1,5 @@
-import {groupRepository, GroupRepository} from "../repositories/GroupRepository";
+import {GroupRepository} from "../repositories/GroupRepository";
+import {mockGroupRepository} from "../repositories/mock/GroupRepository";
 
 export type Group = {
     id: number,
@@ -9,7 +10,7 @@ export type Group = {
 }
 
 export const groupFactory = (repo?: GroupRepository) => {
-    const repository = repo ?? groupRepository
+    const repository = mockGroupRepository
 
     return {
         index: async (): Promise<Group[]> => {

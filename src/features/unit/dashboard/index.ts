@@ -74,14 +74,17 @@ export const useFetchDashboard = () => {
              */
             //  my user
             const myUser = users.find(user => user.id === microsoftAccount?.userId)
+            console.log("myUser", myUser)
             if (!myUser) break fetchBlock
 
             //  my teams
             const myTeams = teams.filter(team => team.userIds.includes(myUser.id))
+            console.log("myTeams", myTeams)
             if (myTeams.length === 0) break fetchBlock
 
             //  my games
             const myGames = games.filter(game => myTeams.some(team => team.enteredGameIds.includes(game.id)))
+            console.log("myGames", myGames)
             if (myGames.length === 0) break fetchBlock
 
             //  my game (sort by weight)
@@ -92,6 +95,7 @@ export const useFetchDashboard = () => {
 
             //  my team
             const myTeam = myTeams.find(team => team.enteredGameIds.includes(myGame.id))
+            console.log("myTeam", myTeam)
             if (!myTeam) break fetchBlock
             //  set state
             setMyTeam(myTeam)
@@ -112,6 +116,7 @@ export const useFetchDashboard = () => {
             const myTeamMatches = myGameMatches.filter(match => {
                 return match.leftTeamId === myTeam.id || match.rightTeamId === myTeam.id
             })
+            console.log("myTeamMatches", myTeamMatches)
             //  set state
             setMyTeamMatches(myTeamMatches)
 

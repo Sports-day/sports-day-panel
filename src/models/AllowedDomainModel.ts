@@ -1,4 +1,5 @@
 import {allowedDomainRepository, AllowedDomainRepository} from "../repositories/AllowedDomainRepository";
+import {mockAllowedDomainRepository} from "../repositories/mock/AllowedDomainRepository";
 
 export type AllowedDomain = {
     id: number,
@@ -8,7 +9,7 @@ export type AllowedDomain = {
 }
 
 export const allowedDomainFactory = (repo?: AllowedDomainRepository) => {
-    const repository = repo ?? allowedDomainRepository
+    const repository = mockAllowedDomainRepository
 
     return {
         index: async (): Promise<AllowedDomain[]> => {

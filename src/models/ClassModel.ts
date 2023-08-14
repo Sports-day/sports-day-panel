@@ -1,5 +1,6 @@
 import {classRepository, ClassRepository} from "../repositories/ClassRepository";
 import {User} from "./UserModel";
+import {mockClassRepository} from "../repositories/mock/ClassRepository";
 
 export type Class = {
     id: number,
@@ -11,7 +12,7 @@ export type Class = {
 }
 
 export const classFactory = (repo?: ClassRepository) => {
-    const repository = repo ?? classRepository
+    const repository = mockClassRepository
 
     return {
         index: async (): Promise<Class[]> => {
