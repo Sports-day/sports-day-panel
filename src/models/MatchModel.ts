@@ -1,4 +1,5 @@
 import {MatchRepository, matchRepository} from "../repositories/MatchRepository";
+import {mockMatchRepository} from "../repositories/mock/MatchRepository";
 
 export type Match = {
     id: number,
@@ -25,7 +26,7 @@ export type MatchResult = "left_win" | "right_win" | "draw"
 export type MatchStatus = "standby" | "in_progress" | "finished" | "cancelled"
 
 export const matchFactory = (repo?: MatchRepository) => {
-    const repository = repo ?? matchRepository
+    const repository = mockMatchRepository
 
     return {
         index: async (): Promise<Match[]> => {

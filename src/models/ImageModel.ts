@@ -1,4 +1,5 @@
 import {ImageRepository, imageRepository} from "../repositories/ImageRepository";
+import {mockImageRepository} from "../repositories/mock/ImageRepository";
 
 export type Image = {
     id: number,
@@ -9,7 +10,7 @@ export type Image = {
 }
 
 export const imageFactory = (repo?: ImageRepository) => {
-    const repository = repo ?? imageRepository
+    const repository = mockImageRepository
 
     return {
         index: async (): Promise<Image[]> => {

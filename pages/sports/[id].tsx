@@ -14,12 +14,6 @@ import {
     Typography,
     Unstable_Grid2 as Grid
 } from "@mui/material";
-import {
-    Menu,
-    MoreHorizontal,
-    X,
-    ScrollText
-} from "lucide-react";
 import {GameProgress} from "../../components/game/game-progress";
 import {GameBest} from "../../components/game/GameBest";
 import {Navigation} from "../../components/layouts/navigation";
@@ -62,12 +56,6 @@ const Id: NextPage<Props> = (props: Props) => {
     } = useFetchSportData(props.sportId)
     const [open, setOpen] = useState(false);
     const [scroll, setScroll] = React.useState<DialogProps['scroll']>('paper');
-
-    useEffect(() => {
-        setInterval(() => {
-            refresh()
-        }, REFRESH_INTERVAL);
-    }, [refresh])
 
     const handleClickOpen = (scrollType: DialogProps['scroll']) => () => {
         setOpen(true);

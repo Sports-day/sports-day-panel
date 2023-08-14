@@ -1,5 +1,4 @@
 import type {NextPage} from 'next'
-import {signIn} from "next-auth/react";
 import Head from 'next/head'
 import {Box, Button, Card, CardContent, Container, Stack, Typography} from "@mui/material";
 import Logo from "public/logo.svg"
@@ -65,7 +64,7 @@ const Auth: NextPage = () => {
                                 <Stack width={"fit-content"}>
                                     <Card>
                                         <Button
-                                            onClick={() => signIn("azure-ad", {callbackUrl: "/"})}
+                                            // onClick={() => signIn("azure-ad", {callbackUrl: "/"})}
                                             sx={{width:"fit-content"}}
                                         >
                                             <CardContent sx={{width:"fit-content"}}>

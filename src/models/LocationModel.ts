@@ -1,4 +1,5 @@
 import {LocationRepository, locationRepository} from "../repositories/LocationRepository";
+import {mockLocationRepository} from "../repositories/mock/LocationRepository";
 
 export type Location = {
     id: number,
@@ -7,7 +8,7 @@ export type Location = {
 
 
 export const locationFactory = (repo?: LocationRepository) => {
-    const repository = repo ?? locationRepository
+    const repository = mockLocationRepository
 
     return {
         index: async (): Promise<Location[]> => {

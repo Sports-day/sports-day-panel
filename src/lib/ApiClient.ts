@@ -1,6 +1,4 @@
 import axios from "axios";
-import {getServerSession, Session} from "next-auth";
-import {getSession} from "next-auth/react";
 
 const baseURL = process.env.NEXT_PUBLIC_API_URL + "/v1";
 
@@ -33,23 +31,8 @@ ApiClient.interceptors.response.use(
 
 // put token into header
 ApiClient.interceptors.request.use(async (request: any) => {
-    let session: Session | null
-    //  server side
-    if(typeof window === 'undefined') {
-        session = await getServerSession()
-    }
-    //  client side
-    else {
-        session = await getSession()
-    }
-
-    //  do not have access token
-    if (!session || !session.accessToken) {
-        return request
-    }
-
     //  token
-    request.headers["Authorization"] = "Bearer " + session.accessToken
+    request.headers["Authorization"] = "Bearer " + "XXX"
 
 
     return request

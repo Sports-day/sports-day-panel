@@ -1,6 +1,6 @@
-# sports-day-panel
+# sports-day-demo
 
-Sports-dayのフロントエンド用レポジトリです。
+Sports-dayのデモンストレーション用レポジトリです。
 
 ## Develop
 

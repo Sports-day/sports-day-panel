@@ -1,4 +1,5 @@
 import {microsoftAccountRepository, MicrosoftAccountRepository} from "../repositories/MicrosoftAccountRepository";
+import {mockMicrosoftAccountRepository} from "../repositories/mock/MicrosoftAccountRepository";
 
 export type MicrosoftAccount = {
     id: number,
@@ -15,7 +16,7 @@ export type MicrosoftAccount = {
 export type Role = "ADMIN" | "USER"
 
 export const microsoftAccountFactory = (repo?: MicrosoftAccountRepository) => {
-    const repository = repo ?? microsoftAccountRepository
+    const repository = mockMicrosoftAccountRepository
 
     return {
         index: async (): Promise<MicrosoftAccount[]> => {

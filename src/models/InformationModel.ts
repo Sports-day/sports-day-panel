@@ -1,4 +1,5 @@
 import {InformationRepository, informationRepository} from "../repositories/InformationRepository";
+import {mockInformationRepository} from "../repositories/mock/InformationRepository";
 
 export type Information = {
     id: number,
@@ -7,7 +8,7 @@ export type Information = {
 }
 
 export const informationFactory = (repo?: InformationRepository) => {
-    const repository = repo ?? informationRepository
+    const repository = mockInformationRepository
 
     return {
         index: async (): Promise<Information[]> => {
