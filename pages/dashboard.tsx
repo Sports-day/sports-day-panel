@@ -21,7 +21,7 @@ import {Loading} from "../components/layouts/loading";
 import {motion} from "framer-motion";
 import {Notification} from "../components/layouts/notification";
 
-export const runtime = 'experimental-edge';
+export const runtime = 'edge';
 
 const DashBoard: NextPage = () => {
     //  Unit Hook

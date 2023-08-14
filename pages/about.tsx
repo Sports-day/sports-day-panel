@@ -30,7 +30,7 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 
-export const runtime = 'experimental-edge';
+export const runtime = 'edge';
 
 const About: NextPage = () => {
     const theme = createTheme();
