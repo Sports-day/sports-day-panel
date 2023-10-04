@@ -1,11 +1,12 @@
 import {gameFactory} from "../../../../src/models/GameModel";
 import React, {FormEvent, useContext, useRef, useState} from "react";
-import {Box, Button, TextFieldProps, Typography} from "@mui/material";
+import {Box, Button, SelectChangeEvent, TextFieldProps, Typography} from "@mui/material";
 import {GameEditFields} from "./GameEditFields";
 import styles from "../../../../styles/Pit.module.scss";
-import {GameContext} from "../../../context";
+import {GameContext, TagContext} from "../../../context";
 import {ConfirmInputDialog} from "../../ConfirmInputDialog";
 import {useRouter} from "next/router";
+import {useFetchTags} from "../../../../src/features/tags/hook";
 
 export function GameProfile() {
     const router = useRouter()
@@ -18,6 +19,13 @@ export function GameProfile() {
     const [typeState, setTypeState] = useState<string>(game?.type ?? '')
     const [calculationTypeState, setCalculationTypeState] = useState<string>(game?.calculationType ?? '')
     const [isDeleteOpen, setIsDeleteOpen] = useState<boolean>(false)
+    const [tagIdState, setTagIdState] = useState<string>(game?.tagId?.toString() ?? '-1')
+
+    const {tags} = useFetchTags()
+
+    const handleTagIdChange = (e: SelectChangeEvent) => {
+        setTagIdState(e.target.value.toString())
+    }
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
@@ -37,6 +45,12 @@ export function GameProfile() {
             return
         }
 
+        //  tagId invalid
+        if (tagIdState !== '-1' && !tags?.some(tag => tag.id === +tagIdState)) {
+            alert('タグが正しく選択されていません。')
+            return
+        }
+
         await gameFactory().update(
             game.id,
             {
@@ -45,7 +59,8 @@ export function GameProfile() {
                 sportId: game.sportId,
                 type: typeState,
                 calculationType: calculationTypeState,
-                weight: wightRef.current?.value as number
+                weight: wightRef.current?.value as number,
+                tagId: tagIdState === '-1' ? null : +tagIdState,
             })
 
         refresh()
@@ -77,8 +92,11 @@ export function GameProfile() {
                             wightRef={wightRef}
                             typeState={typeState}
                             setTypeState={setTypeState}
+                            tagIdState={tagIdState}
                             calculationTypeState={calculationTypeState}
                             setCalculationTypeState={setCalculationTypeState}
+                            handleTagIdChange={handleTagIdChange}
+                            tags={tags}
                             game={game}
                         />
 

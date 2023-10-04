@@ -10,6 +10,7 @@ import {Match} from "../../src/models/MatchModel";
 import {Location} from "../../src/models/LocationModel";
 import {Image} from "../../src/models/ImageModel";
 import {Information} from "../../src/models/InformationModel";
+import {Tag} from "../../src/models/TagModel";
 
 export type GenericContextType<T> = {
     data: T
@@ -98,6 +99,12 @@ export const MicrosoftAccountContext = createContext<MicrosoftAccountContext>({
 
 export type InformationContextType = GenericContextType<Information[]>
 export const InformationContext = createContext<InformationContextType>({
+    data: [],
+    refresh: () => {}
+})
+
+export type TagContextType = GenericContextType<Tag[]>
+export const TagContext = createContext<TagContextType>({
     data: [],
     refresh: () => {}
 })

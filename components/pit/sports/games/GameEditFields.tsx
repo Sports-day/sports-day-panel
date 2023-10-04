@@ -1,15 +1,19 @@
 import React, {RefObject} from "react";
 import {InputLabel, MenuItem, Select, SelectChangeEvent, TextField, TextFieldProps} from "@mui/material";
 import {Game} from "../../../../src/models/GameModel";
+import {Tag} from "../../../../src/models/TagModel";
 
 export type GameEditFieldsProps = {
     nameRef: RefObject<TextFieldProps>
     descriptionRef: RefObject<TextFieldProps>
     wightRef: RefObject<TextFieldProps>
     typeState: string
+    tagIdState: string
+    handleTagIdChange: (e: SelectChangeEvent) => void
     setTypeState: (type: string) => void
     calculationTypeState: string
     setCalculationTypeState: (type: string) => void
+    tags: Tag[]
     game?: Game
 }
 
@@ -113,6 +117,40 @@ export function GameEditFields(props: GameEditFieldsProps) {
                 >
                     得失点
                 </MenuItem>
+            </Select>
+            {/* tag */}
+            <InputLabel id="tag-select">タグ</InputLabel>
+            <Select
+                labelId={"tag-select"}
+                id={"tag"}
+                label={"タグ"}
+                value={props.tagIdState}
+                sx={{
+                    width: "300px",
+                    mb: '20px'
+                }}
+                onChange={props.handleTagIdChange}
+            >
+                <MenuItem
+                    value={"-1"}
+                    sx={{
+                        color: "red"
+                    }}
+                >
+                    未選択
+                </MenuItem>
+                {
+                    props.tags?.map((tag) => {
+                        return (
+                            <MenuItem
+                                value={tag.id}
+                                key={tag.id}
+                            >
+                                {tag.name}
+                            </MenuItem>
+                        )
+                    })
+                }
             </Select>
         </>
     )

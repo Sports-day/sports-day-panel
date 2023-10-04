@@ -10,6 +10,7 @@ export type Game = {
     type: GameType,
     calculationType: GameCalculationType,
     weight: number,
+    tagId: number | null,
     createdAt: string,
     updatedAt: string
 }
