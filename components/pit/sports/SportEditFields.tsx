@@ -2,6 +2,7 @@ import {InputLabel, MenuItem, Select, SelectChangeEvent, TextField, TextFieldPro
 import React, {RefObject} from "react";
 import {Sport} from "../../../src/models/SportModel";
 import {Image} from "../../../src/models/ImageModel";
+import {Tag} from "../../../src/models/TagModel";
 
 export type SportEditFieldsProps = {
     nameRef: RefObject<TextFieldProps>
@@ -9,8 +10,11 @@ export type SportEditFieldsProps = {
     wightRef: RefObject<TextFieldProps>
     ruleIdRef: RefObject<TextFieldProps>
     iconIdState: string
+    tagIdState: string
     handleImageIdChange: (e: SelectChangeEvent) => void
-    images?: Image[]
+    handleTagIdChange: (e: SelectChangeEvent) => void
+    images: Image[]
+    tags: Tag[]
     sport?: Sport
 }
 
@@ -104,6 +108,40 @@ export function SportEditFields(props: SportEditFieldsProps) {
                                 key={image.id}
                             >
                                 {image.name}
+                            </MenuItem>
+                        )
+                    })
+                }
+            </Select>
+            {/* tag */}
+            <InputLabel id="tag-select">タグ</InputLabel>
+            <Select
+                labelId={"tag-select"}
+                id={"tag"}
+                label={"タグ"}
+                value={props.tagIdState}
+                sx={{
+                    width: "300px",
+                    mb: '20px'
+                }}
+                onChange={props.handleTagIdChange}
+            >
+                <MenuItem
+                    value={"-1"}
+                    sx={{
+                        color: "red"
+                    }}
+                >
+                    未選択
+                </MenuItem>
+                {
+                    props.tags?.map((tag) => {
+                        return (
+                            <MenuItem
+                                value={tag.id}
+                                key={tag.id}
+                            >
+                                {tag.name}
                             </MenuItem>
                         )
                     })

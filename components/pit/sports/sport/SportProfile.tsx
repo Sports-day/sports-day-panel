@@ -7,11 +7,12 @@ import {
     SelectChangeEvent,
     TextFieldProps, Typography,
 } from "@mui/material";
-import React, {FormEvent, useRef, useState} from "react";
+import React, {FormEvent, useContext, useRef, useState} from "react";
 import {SportEditFields} from "../SportEditFields";
 import {ConfirmInputDialog} from "../../ConfirmInputDialog";
 import {useRouter} from "next/router";
 import {useFetchImages} from "../../../../src/features/images/hook";
+import {useFetchTags} from "../../../../src/features/tags/hook";
 
 export function SportProfile(props: { sport: Sport, refresh: VoidFunction }) {
     const router = useRouter()
@@ -22,12 +23,19 @@ export function SportProfile(props: { sport: Sport, refresh: VoidFunction }) {
     const ruleIdRef = useRef<TextFieldProps>(null)
     //  state
     const [iconIdState, setIconIdState] = useState<string>(props.sport?.iconId?.toString() ?? '-1')
+    const [tagIdState, setTagIdState] = useState<string>(props.sport?.tagId?.toString() ?? '-1')
     const [isDeleteOpen, setIsDeleteOpen] = useState<boolean>(false)
     //  images
     const {images} = useFetchImages()
+    const {tags } = useFetchTags()
+
 
     const handleImageIdChange = (e: SelectChangeEvent) => {
         setIconIdState(e.target.value.toString())
+    }
+
+    const handleTagIdChange = (e: SelectChangeEvent) => {
+        setTagIdState(e.target.value.toString())
     }
 
     const handleSubmit = async (e: FormEvent) => {
@@ -51,6 +59,11 @@ export function SportProfile(props: { sport: Sport, refresh: VoidFunction }) {
             return
         }
 
+        //  tagId invalid
+        if (tagIdState !== '-1' && !tags?.some(tag => tag.id === +tagIdState)) {
+            alert('タグが正しく選択されていません。')
+            return
+        }
 
         const id = props.sport?.id
         if (!id) return
@@ -63,6 +76,7 @@ export function SportProfile(props: { sport: Sport, refresh: VoidFunction }) {
                 iconId: iconIdState === '-1' ? null : +iconIdState,
                 weight: wightRef.current?.value as number,
                 ruleId: ruleIdRef.current?.value as number,
+                tagId: tagIdState === '-1' ? null : +tagIdState,
             }
         )
 
@@ -106,8 +120,11 @@ export function SportProfile(props: { sport: Sport, refresh: VoidFunction }) {
                                     wightRef={wightRef}
                                     ruleIdRef={ruleIdRef}
                                     iconIdState={iconIdState}
+                                    tagIdState={tagIdState}
                                     handleImageIdChange={handleImageIdChange}
+                                    handleTagIdChange={handleTagIdChange}
                                     images={images}
+                                    tags={tags}
                                     sport={props.sport}
                                 />
 
