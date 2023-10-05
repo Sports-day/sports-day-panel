@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import {HiArrowRightCircle, HiXMark} from "react-icons/hi2";
 import {RiAwardFill} from "react-icons/ri";
+import {ChevronRightIcon} from "lucide-react"
 import {Sport} from "../../../src/models/SportModel";
 import {Team} from "../../../src/models/TeamModel";
 import {User} from "../../../src/models/UserModel";
@@ -85,7 +86,7 @@ export const Overview = (props: OverviewProps) => {
                                     </Stack>
                                 </Stack>
                                 <SvgIcon>
-                                    <HiArrowRightCircle color="#FFF"/>
+                                    <ChevronRightIcon color="#FFF"/>
                                 </SvgIcon>
                             </Stack>
                         </Button>
