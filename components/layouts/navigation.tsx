@@ -30,12 +30,13 @@ import {
 import Logo from "public/logo.svg"
 import Mark from "public/mark.svg"
 import {signOut, useSession} from "next-auth/react";
-import { alpha } from '@mui/material/styles';
+import {alpha} from '@mui/material/styles';
 import Link from "next/link";
 import {useState} from "react";
 import {DialogProps} from "@mui/material/Dialog";
 import {Rules} from "../rules/Rules";
 import {DocsOverall} from "../rules/DocsOverall";
+import Cookies from "js-cookie";
 
 type Anchor = 'top';
 
@@ -62,7 +63,7 @@ export const Navigation = () => {
                     return;
                 }
 
-                setState({ ...state, [anchor]: open });
+                setState({...state, [anchor]: open});
             };
 
     const menu = (anchor: Anchor) => (
@@ -70,7 +71,8 @@ export const Navigation = () => {
             <Box
                 sx={{
                     backgroundColor: '#23398A',
-                    width: '100vw' , height: '100vh', overflow:'scrollable'}}
+                    width: '100vw', height: '100vh', overflow: 'scrollable'
+                }}
                 role="Navigation"
                 onClick={toggleDrawer(anchor, false)}
                 onKeyDown={toggleDrawer(anchor, false)}
@@ -82,7 +84,7 @@ export const Navigation = () => {
                         alignItems={"center"}
                         pl={3}
                         py={3}
-                        sx={{marginRight: "10px", paddingRight:"6px"}}
+                        sx={{marginRight: "10px", paddingRight: "6px"}}
                     >
                         <Box>
                             <Button component={Link} href={"/"} scroll={false}>
@@ -96,108 +98,56 @@ export const Navigation = () => {
                         </IconButton>
                     </Stack>
 
-                <Stack
-                    direction={"column"}
-                    justifyContent={"flex-start"}
-                    spacing={2}
-                    px={2.3}
-                >
-                    <Stack
-                        direction={"row"}
-                        justifyContent={"flex-start"}
-                        alignItems={"center"}
-                        spacing={2}
-                        width={"100%"}
-                        px={1}
-                    >
-                        <Avatar
-                            alt={session?.user?.name ?? "unknown"}
-                            sx={{
-                                height: "3.5em",
-                                width: "3.5em",
-                                backgroundColor: "#5664e3",
-                            }}
-                            src={"/"}
-                        >
-                        </Avatar>
-                        <Typography sx={{color: "#99a5d6", fontSize: "16px"}}>
-                            {session?.user?.name ?? "unknown"}
-                        </Typography>
-                    </Stack>
-
-                    <Divider/>
-
                     <Stack
                         direction={"column"}
                         justifyContent={"flex-start"}
-                        alignItems={"flex-start"}
-                        spacing={1}
-                        px={1}
-                        py={1}
-                        width={"100%"}
+                        spacing={2}
+                        px={2.3}
                     >
-                        <Typography sx={{color: "#99a5d6", fontSize: "24px"}}>
-                            SPORTSDAYとは？
-                        </Typography>
-                        <Typography sx={{color: "#99a5d6", fontSize: "16px", lineHeight:2, wordWrap: "break-word"}}>
-                            このアプリは2人の学生が製作し、今回の球技大会に試験的に導入されています。
-                        </Typography>
-                    </Stack>
-
-                    <Button component={Link} href={"/about"}>
                         <Stack
                             direction={"row"}
                             justifyContent={"flex-start"}
                             alignItems={"center"}
                             spacing={2}
                             width={"100%"}
+                            px={1}
                         >
                             <Avatar
+                                alt={session?.user?.name ?? "unknown"}
                                 sx={{
-                                    height: "3em",
-                                    width: "3em",
-                                    backgroundColor: "#FFF",
+                                    height: "3.5em",
+                                    width: "3.5em",
+                                    backgroundColor: "#5664e3",
                                 }}
+                                src={"/"}
                             >
-                                <SvgIcon>
-                                    <MoreHorizontal color="#23398A"/>
-                                </SvgIcon>
                             </Avatar>
-                            <Typography sx={{color: "#FFF", fontSize: "16px"}}>
-                                詳しく見る
+                            <Typography sx={{color: "#99a5d6", fontSize: "16px"}}>
+                                {session?.user?.name ?? "unknown"}
                             </Typography>
                         </Stack>
-                    </Button>
 
-                    <Divider/>
+                        <Divider/>
 
-                    <Button href={"https://github.com/orgs/Sports-day/repositories"}　target="_blank">
                         <Stack
-                            direction={"row"}
+                            direction={"column"}
                             justifyContent={"flex-start"}
-                            alignItems={"center"}
-                            spacing={2}
+                            alignItems={"flex-start"}
+                            spacing={1}
+                            px={1}
+                            py={1}
                             width={"100%"}
                         >
-                            <Avatar
-                                sx={{
-                                    height: "3em",
-                                    width: "3em",
-                                    backgroundColor: "#FFF",
-                                }}
-                            >
-                                <SvgIcon>
-                                    <AiFillGithub color="#23398A"/>
-                                </SvgIcon>
-                            </Avatar>
-                            <Typography sx={{color: "#FFF", fontSize: "16px"}}>
-                                GitHub : SPORTSDAY
+                            <Typography sx={{color: "#99a5d6", fontSize: "24px"}}>
+                                SPORTSDAYとは？
+                            </Typography>
+                            <Typography
+                                sx={{color: "#99a5d6", fontSize: "16px", lineHeight: 2, wordWrap: "break-word"}}>
+                                このアプリは2人の学生が製作し、今回の球技大会に試験的に導入されています。
                             </Typography>
                         </Stack>
-                    </Button>
 
-                    { session && session.user.role == "admin" &&
-                        <Button component={Link} href={"/admin"} scroll={false}>
+                        <Button component={Link} href={"/about"}>
                             <Stack
                                 direction={"row"}
                                 justifyContent={"flex-start"}
@@ -213,17 +163,76 @@ export const Navigation = () => {
                                     }}
                                 >
                                     <SvgIcon>
-                                        <HiCog6Tooth color="#23398A"/>
+                                        <MoreHorizontal color="#23398A"/>
                                     </SvgIcon>
                                 </Avatar>
                                 <Typography sx={{color: "#FFF", fontSize: "16px"}}>
-                                    管理ページ
+                                    詳しく見る
                                 </Typography>
                             </Stack>
                         </Button>
-                    }
 
-                        <Button onClick={() => signOut()}>
+                        <Divider/>
+
+                        <Button href={"https://github.com/orgs/Sports-day/repositories"} target="_blank">
+                            <Stack
+                                direction={"row"}
+                                justifyContent={"flex-start"}
+                                alignItems={"center"}
+                                spacing={2}
+                                width={"100%"}
+                            >
+                                <Avatar
+                                    sx={{
+                                        height: "3em",
+                                        width: "3em",
+                                        backgroundColor: "#FFF",
+                                    }}
+                                >
+                                    <SvgIcon>
+                                        <AiFillGithub color="#23398A"/>
+                                    </SvgIcon>
+                                </Avatar>
+                                <Typography sx={{color: "#FFF", fontSize: "16px"}}>
+                                    GitHub : SPORTSDAY
+                                </Typography>
+                            </Stack>
+                        </Button>
+
+                        {session && session.user.role == "admin" &&
+                            <Button component={Link} href={"/admin"} scroll={false}>
+                                <Stack
+                                    direction={"row"}
+                                    justifyContent={"flex-start"}
+                                    alignItems={"center"}
+                                    spacing={2}
+                                    width={"100%"}
+                                >
+                                    <Avatar
+                                        sx={{
+                                            height: "3em",
+                                            width: "3em",
+                                            backgroundColor: "#FFF",
+                                        }}
+                                    >
+                                        <SvgIcon>
+                                            <HiCog6Tooth color="#23398A"/>
+                                        </SvgIcon>
+                                    </Avatar>
+                                    <Typography sx={{color: "#FFF", fontSize: "16px"}}>
+                                        管理ページ
+                                    </Typography>
+                                </Stack>
+                            </Button>
+                        }
+
+                        <Button
+                            onClick={async () => {
+                                //  remove cookie
+                                Cookies.remove("sports-day.api-access-token")
+                                await signOut()
+                            }}
+                        >
                             <Stack
                                 direction={"row"}
                                 justifyContent={"flex-start"}
@@ -280,7 +289,7 @@ export const Navigation = () => {
                             sx={{marginRight: "10px", padding: "8px 5px"}}
                         >
                             <Box py={2} px={2}>
-                                <Button component={Link} href={"/"}　scroll={false}>
+                                <Button component={Link} href={"/"} scroll={false}>
                                     <Logo width={20 * 8.45} height={20} fill={'white'}/>
                                 </Button>
                             </Box>
@@ -310,7 +319,8 @@ export const Navigation = () => {
                                         },
                                     }}
                                 >
-                                    <DialogTitle id="scroll-dialog-title" fontSize={"16px"} color={"#99a5d6"}>球技大会の進行</DialogTitle>
+                                    <DialogTitle id="scroll-dialog-title" fontSize={"16px"}
+                                                 color={"#99a5d6"}>球技大会の進行</DialogTitle>
                                     <DialogContent dividers={scroll === 'paper'}>
                                         <DocsOverall/>
                                     </DialogContent>
@@ -320,10 +330,10 @@ export const Navigation = () => {
                                             justifyContent={"center"}
                                             alignItems={"center"}
                                             spacing={2}
-                                            sx={{width:"100%"}}
+                                            sx={{width: "100%"}}
                                         >
-                                            <Button sx={{width:"100%", height:"100%"}} onClick={handleClose}>
-                                                <SvgIcon sx={{mr:1}}>
+                                            <Button sx={{width: "100%", height: "100%"}} onClick={handleClose}>
+                                                <SvgIcon sx={{mr: 1}}>
                                                     <HiXMark color={"#E8EBF8"}/>
                                                 </SvgIcon>
                                                 <Typography color={"#E8EBF8"}>閉じる</Typography>
@@ -333,7 +343,8 @@ export const Navigation = () => {
                                 </Dialog>
                                 {(['top'] as const).map((anchor) => (
                                     <React.Fragment key={"top"}>
-                                        <IconButton onClick={toggleDrawer(anchor, true)} sx={{backgroundColor: "#2F479D"}}>
+                                        <IconButton onClick={toggleDrawer(anchor, true)}
+                                                    sx={{backgroundColor: "#2F479D"}}>
                                             <SvgIcon>
                                                 <Menu color="#FFF"/>
                                             </SvgIcon>
@@ -357,7 +368,7 @@ export const Navigation = () => {
             </>
         );
     } else {
-        return(
+        return (
             <>
             </>
         )
