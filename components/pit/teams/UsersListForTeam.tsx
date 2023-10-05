@@ -48,6 +48,7 @@ export function UsersListForTeam(props: UsersListForTeamProps) {
                 const word = uWord
                     .replace("◎", "")
                     .replace("　", "")
+                    .replace(" ", "")
                 return user.name.includes(word)
                     || user.id.toString().includes(word)
                     || user.studentId.toString().includes(word)
