@@ -20,6 +20,7 @@ import {useFetchDashboard} from "../src/features/unit/dashboard";
 import {Loading} from "../components/layouts/loading";
 import {motion} from "framer-motion";
 import {Notification} from "../components/layouts/notification";
+import {OtherInfo} from "../components/dashboard/Overview/OtherInfo";
 
 const DashBoard: NextPage = () => {
     //  Unit Hook
@@ -156,7 +157,7 @@ const DashBoard: NextPage = () => {
                                                             width={"100%"}
                                                             maxWidth={"xl"}
                                                         >
-                                                            <Alert severity={"info"}>あなたには競技がアサインされていません。各競技の進行状況のみをご覧いだだけます。</Alert>
+                                                            <OtherInfo infoName={""} infoContent={"どの競技にも参加していません。"} infoSubContent={"競技に参加しない方でも、各競技の進行状況を見ることができます。競技に参加する予定にも関わらずこのメッセージが表示されている場合は、お近くのスタッフにお伝えください。"}/>
                                                         </Stack>
                                                     }
                                                 </motion.div>

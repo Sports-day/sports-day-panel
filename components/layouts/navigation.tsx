@@ -5,8 +5,9 @@ import {
     HiCog6Tooth, HiXMark,
 } from "react-icons/hi2";
 import {
-    GoMarkGithub,
-} from "react-icons/go";
+    AiFillGithub,
+    AiOutlineNotification
+} from "react-icons/ai";
 import {
     Menu,
     MoreHorizontal,
@@ -31,7 +32,6 @@ import Mark from "public/mark.svg"
 import {signOut, useSession} from "next-auth/react";
 import { alpha } from '@mui/material/styles';
 import Link from "next/link";
-import {AiOutlineNotification} from "react-icons/all";
 import {useState} from "react";
 import {DialogProps} from "@mui/material/Dialog";
 import {Rules} from "../rules/Rules";
@@ -187,7 +187,7 @@ export const Navigation = () => {
                                 }}
                             >
                                 <SvgIcon>
-                                    <GoMarkGithub color="#23398A"/>
+                                    <AiFillGithub color="#23398A"/>
                                 </SvgIcon>
                             </Avatar>
                             <Typography sx={{color: "#FFF", fontSize: "16px"}}>
