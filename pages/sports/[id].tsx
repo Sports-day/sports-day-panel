@@ -31,8 +31,8 @@ import {DialogProps} from '@mui/material/Dialog';
 import {Rules} from "../../components/rules/Rules";
 import {motion} from "framer-motion";
 import Link from "next/link";
-import {Notification} from "../../components/layouts/notification";
 import {useInterval} from "react-use";
+import {InformationList} from "../../components/InformationList";
 
 const REFRESH_INTERVAL = 1000 * 60 * 5
 
@@ -184,16 +184,7 @@ const Id: NextPage<Props> = (props: Props) => {
                                                                 maxWidth={"xl"}
                                                                 sx={{paddingTop: 8.5}}
                                                             >
-                                                                {informationList
-                                                                    .map((info) => {
-                                                                        return (
-                                                                            <Notification
-                                                                                key={info.id}
-                                                                                infoName={info.name}
-                                                                                infoContent={info.content}
-                                                                            />
-                                                                        );
-                                                                    })}
+                                                                <InformationList />
                                                             </Container>
                                                             <Stack
                                                                 direction={"row"}
