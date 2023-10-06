@@ -374,7 +374,7 @@ const Id: NextPage<Props> = (props: Props) => {
                                                                     ease: [0.16, 1, 0.3, 1]
                                                                 }}
                                                             >
-                                                                <GameProgress/>
+                                                                <GameProgress sportsId={sport.id} />
                                                             </motion.div>
                                                         </Grid>
 
