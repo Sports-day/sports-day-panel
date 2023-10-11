@@ -84,8 +84,15 @@ const makeLeagueMatches = async (id: number, locationId: number | null): Promise
     return data.data
 }
 
-const getLeagueResult = async (id: number): Promise<LeagueResult> => {
-    const {data} = await ApiClient.get(`/games/${id}/league/result`)
+const getLeagueResult = async (id: number, restrict: boolean): Promise<LeagueResult> => {
+    const {data} = await ApiClient.get(
+        `/games/${id}/league/result`,
+        {
+            params: {
+                restrict: restrict
+            }
+        }
+    )
     return data.data
 }
 
@@ -104,7 +111,7 @@ export type GameRepository = {
     updateTournamentTree: (id: number) => Promise<void>,
     getTournamentResult: (id: number) => Promise<TournamentResult>,
     makeLeagueMatches: (id: number, locationId: number | null) => Promise<Match[]>,
-    getLeagueResult: (id: number) => Promise<LeagueResult>,
+    getLeagueResult: (id: number, restrict: boolean) => Promise<LeagueResult>,
 }
 
 export const gameRepository: GameRepository = {
