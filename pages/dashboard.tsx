@@ -29,7 +29,6 @@ const DashBoard: NextPage = () => {
         locations,
         teams,
         sports,
-        informationList,
         //  for individual section
         mySport,
         myGame,
