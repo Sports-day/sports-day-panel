@@ -1,13 +1,14 @@
 import {Box, Container, Stack, Tab, Tabs, Typography} from "@mui/material";
 import * as React from "react";
 import {GameListContent} from "./GameListContent";
-import {useContext, useEffect} from "react";
-import {GamesContext} from "../../context";
+import {useEffect} from "react";
 import {motion} from "framer-motion";
+import {Game} from "../../../src/models/GameModel";
 
 export type GameListProps = {
-    sportId: number
+    games: Game[]
     gameId: number | null
+    setGameId: (gameId: number) => void
 }
 
 interface TabPanelProps {
@@ -48,10 +49,9 @@ function a11yProps(index: number) {
 }
 
 export const GameList = (props: GameListProps) => {
-    const {data: games} = useContext(GamesContext)
     const [value, setValue] = React.useState(0);
 
-    const sortedGame = games.sort((a, b) => b.weight - a.weight)
+    const sortedGame = props.games.sort((a, b) => b.weight - a.weight)
 
     useEffect(() => {
         //  set tab value if game id not undefined
@@ -66,6 +66,11 @@ export const GameList = (props: GameListProps) => {
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
+
+        //  set game id if tab value not undefined
+        if (sortedGame[newValue]) {
+            props.setGameId(sortedGame[newValue].id)
+        }
     };
 
 

@@ -91,25 +91,60 @@ export const useFetchGameResult = (gameId: number) => {
     const {game, isFetching: isFetchingGame} = useFetchGame(gameId);
 
     const state = useAsyncRetry(async () => {
-        if(!isFetchingGame) {
+        if (!isFetchingGame) {
             try {
                 setIsFetching(true);
 
                 if (game?.type === "league") {
                     const data = await gameFactory().getLeagueResult(gameId);
                     setResult(data);
-                }
-                else if (game?.type === "tournament") {
+                } else if (game?.type === "tournament") {
                     const data = await gameFactory().getTournamentResult(gameId);
                     setResult(data);
                 }
-            }catch (e) {
+            } catch (e) {
                 console.log(e);
             } finally {
                 setIsFetching(false);
             }
         }
     }, [isFetchingGame])
+
+    return {
+        result: result,
+        isFetching: isFetching,
+        refresh: state.retry,
+    }
+}
+
+/**
+ * Fetches game result without fetching game
+ * @param game
+ * @param restrict
+ */
+export const useFetchGameResultWithoutFetchGame = (game: Game, restrict: boolean = true) => {
+    const [result, setResult] = useState<TournamentResult | LeagueResult | undefined>()
+    const [isFetching, setIsFetching] = useState(true)
+
+    const state = useAsyncRetry(async () => {
+        try {
+            setIsFetching(true);
+
+            if (game?.type === "league") {
+                const data = await gameFactory().getLeagueResult(game.id, restrict);
+                setResult(data);
+            } else if (game?.type === "tournament") {
+                const data = await gameFactory().getTournamentResult(game.id);
+                setResult(data);
+            }
+        } catch (e) {
+            setResult(undefined);
+            console.log(e);
+        } finally {
+            setIsFetching(false);
+        }
+
+    })
 
     return {
         result: result,
@@ -149,7 +184,7 @@ export const useFetchTeamGames = (teamId: number) => {
 }
 
 export const useFetchGameEntries = (gameId: number) => {
-    const [teams , setTeams] = useState<Team[]>([])
+    const [teams, setTeams] = useState<Team[]>([])
     const [isFetching, setIsFetching] = useState(true)
 
     const state = useAsyncRetry(async () => {

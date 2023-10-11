@@ -137,3 +137,27 @@ export const useFetchSportBest3 = () => {
         isFetching: isFetching,
     }
 }
+
+export const useFetchSportProgress = (sportId: number) => {
+    const [progress, setProgress] = useState<number>(0)
+    const [isFetching, setIsFetching] = useState(true)
+
+    const state = useAsyncRetry(async () => {
+        try {
+            setIsFetching(true);
+
+            const data = await sportFactory().getProgress(sportId);
+            setProgress(data);
+        } catch (e) {
+            console.log(e);
+        } finally {
+            setIsFetching(false);
+        }
+    })
+
+    return {
+        progress: progress,
+        isFetching: isFetching,
+        refresh: state.retry,
+    }
+}
