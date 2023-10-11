@@ -139,12 +139,14 @@ const DashBoard: NextPage = () => {
                                                             })}
                                                     </Container>
                                                     {mySport && myTeam &&
-                                                        <Overview
-                                                            mySport={mySport}
-                                                            myTeam={myTeam}
-                                                            myTeamUsers={myTeamUsers}
-                                                            myTeamRank={myTeamRank}
-                                                        />
+                                                        <Box sx={{pt: 2}}>
+                                                            <Overview
+                                                                mySport={mySport}
+                                                                myTeam={myTeam}
+                                                                myTeamUsers={myTeamUsers}
+                                                                myTeamRank={myTeamRank}
+                                                            />
+                                                        </Box>
                                                     }
                                                     {!mySport && !myTeam &&
                                                         <Stack

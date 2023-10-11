@@ -7,7 +7,7 @@ import {
     Typography,
     Unstable_Grid2 as Grid
 } from "@mui/material";
-import {HiOutlineTableCells, HiOutlineArrowRight} from "react-icons/hi2";
+import {HiTable, HiChevronRight} from "react-icons/hi";
 import * as React from "react";
 import {ScheduleContent} from "./ScheduleContent";
 import {Match} from "../../../src/models/MatchModel";
@@ -24,20 +24,20 @@ export const Schedule = (props: ScheduleProps) => {
 
     return (
         <Card sx={{height: "fit-content"}}>
-            <CardContent>
-                <Stack
-                    spacing={0}
-                >
-                    <Button
-                        component={Link}
-                        sx={{width: "100%"}}
-                        href={`/sports/${props.sportId}?gameId=${props.gameId}`}
+            <Button
+                component={Link}
+                href={`/sports/${props.sportId}?gameId=${props.gameId}`}
+                sx={{margin: 0, padding: 0}}
+            >
+                <CardContent>
+                    <Stack
+                        spacing={0}
                     >
                         <Stack
                             direction={"row"}
                             justifyContent={"space-between"}
                             alignItems={"center"}
-                            sx={{width: "100%"}}
+                            sx={{width: "100%", marginBottom: 2}}
                         >
                             <Typography
                                 color={"textSecondary"}
@@ -46,32 +46,32 @@ export const Schedule = (props: ScheduleProps) => {
                             </Typography>
                             <Box sx={{position: "relative", top: "8px"}}>
                                 <SvgIcon fontSize={"small"} sx={{position: "relative", bottom: "3px"}}>
-                                    <HiOutlineTableCells color="#99a5d6"/>
+                                    <HiTable color="#99a5d6"/>
                                 </SvgIcon>
                                 <SvgIcon fontSize={"small"} sx={{position: "relative", bottom: "3px"}}>
-                                    <HiOutlineArrowRight color="#99a5d6"/>
+                                    <HiChevronRight color="#99a5d6"/>
                                 </SvgIcon>
                             </Box>
                         </Stack>
-                    </Button>
-                    <Grid container spacing={1}>
+                        <Grid container spacing={1}>
 
-                        {props.matches
-                            .sort((a, b) => a.startAt.localeCompare(b.startAt))
-                            .map((match: Match) => {
-                                return (
-                                    <ScheduleContent
-                                        key={match.id}
-                                        match={match}
-                                        myTeamId={props.myTeamId}
-                                    />
+                            {props.matches
+                                .sort((a, b) => a.startAt.localeCompare(b.startAt))
+                                .map((match: Match) => {
+                                    return (
+                                        <ScheduleContent
+                                            key={match.id}
+                                            match={match}
+                                            myTeamId={props.myTeamId}
+                                        />
 
-                                );
-                            })}
+                                    );
+                                })}
 
-                    </Grid>
-                </Stack>
-            </CardContent>
+                        </Grid>
+                    </Stack>
+                </CardContent>
+            </Button>
         </Card>
     );
 };

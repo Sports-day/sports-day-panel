@@ -1,19 +1,20 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import {
-    HiArrowLeftCircle,
-    HiCog6Tooth, HiXMark,
+    HiOutlineLogout,
+    HiCog, HiX,
+    HiMenuAlt4,
+    HiSparkles,
+    HiHome,
+    HiIdentification,
+    HiSearch
+} from "react-icons/hi";
+import {
+    HiCalendar
 } from "react-icons/hi2";
 import {
-    AiFillGithub,
-    AiOutlineNotification
-} from "react-icons/ai";
-import {
-    Menu,
-    MoreHorizontal,
-    X,
-    ScrollText
-} from "lucide-react";
+    FaGithubAlt
+} from "react-icons/fa";
 import {
     AppBar,
     Avatar,
@@ -26,6 +27,8 @@ import {
     Button,
     Divider,
     Typography, DialogTitle, DialogContent, DialogActions, Dialog,
+    BottomNavigation,BottomNavigationAction,
+    Paper
 } from '@mui/material';
 import Logo from "public/logo.svg"
 import Mark from "public/mark.svg"
@@ -40,6 +43,12 @@ import {DocsOverall} from "../rules/DocsOverall";
 type Anchor = 'top';
 
 export const Navigation = () => {
+    const [value, setValue] = React.useState('home');
+
+    const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+        setValue(newValue);
+    };
+
     const [state, setState] = React.useState({top: false, NotifTop: false});
     const [open, setOpen] = useState(false);
     const [scroll, setScroll] = React.useState<DialogProps['scroll']>('paper');
@@ -91,7 +100,7 @@ export const Navigation = () => {
                         </Box>
                         <IconButton onClick={toggleDrawer(anchor, true)}>
                             <SvgIcon color="primary">
-                                <X color="#FFF"/>
+                                <HiX color="#FFF"/>
                             </SvgIcon>
                         </IconButton>
                     </Stack>
@@ -113,8 +122,8 @@ export const Navigation = () => {
                         <Avatar
                             alt={session?.user?.name ?? "unknown"}
                             sx={{
-                                height: "3.5em",
-                                width: "3.5em",
+                                height: "4em",
+                                width: "4em",
                                 backgroundColor: "#5664e3",
                             }}
                             src={"/"}
@@ -127,23 +136,6 @@ export const Navigation = () => {
 
                     <Divider/>
 
-                    <Stack
-                        direction={"column"}
-                        justifyContent={"flex-start"}
-                        alignItems={"flex-start"}
-                        spacing={1}
-                        px={1}
-                        py={1}
-                        width={"100%"}
-                    >
-                        <Typography sx={{color: "#99a5d6", fontSize: "24px"}}>
-                            SPORTSDAYとは？
-                        </Typography>
-                        <Typography sx={{color: "#99a5d6", fontSize: "16px", lineHeight:2, wordWrap: "break-word"}}>
-                            このアプリは2人の学生が製作し、今回の球技大会に試験的に導入されています。
-                        </Typography>
-                    </Stack>
-
                     <Button component={Link} href={"/about"}>
                         <Stack
                             direction={"row"}
@@ -154,17 +146,17 @@ export const Navigation = () => {
                         >
                             <Avatar
                                 sx={{
-                                    height: "3em",
-                                    width: "3em",
+                                    height: "4em",
+                                    width: "4em",
                                     backgroundColor: "#FFF",
                                 }}
                             >
                                 <SvgIcon>
-                                    <MoreHorizontal color="#23398A"/>
+                                    <HiSparkles color="#23398A"/>
                                 </SvgIcon>
                             </Avatar>
                             <Typography sx={{color: "#FFF", fontSize: "16px"}}>
-                                詳しく見る
+                                SPORTSDAYってなに？
                             </Typography>
                         </Stack>
                     </Button>
@@ -181,13 +173,13 @@ export const Navigation = () => {
                         >
                             <Avatar
                                 sx={{
-                                    height: "3em",
-                                    width: "3em",
+                                    height: "4em",
+                                    width: "4em",
                                     backgroundColor: "#FFF",
                                 }}
                             >
                                 <SvgIcon>
-                                    <AiFillGithub color="#23398A"/>
+                                    <FaGithubAlt color="#23398A"/>
                                 </SvgIcon>
                             </Avatar>
                             <Typography sx={{color: "#FFF", fontSize: "16px"}}>
@@ -207,13 +199,13 @@ export const Navigation = () => {
                             >
                                 <Avatar
                                     sx={{
-                                        height: "3em",
-                                        width: "3em",
+                                        height: "4em",
+                                        width: "4em",
                                         backgroundColor: "#FFF",
                                     }}
                                 >
                                     <SvgIcon>
-                                        <HiCog6Tooth color="#23398A"/>
+                                        <HiCog color="#23398A"/>
                                     </SvgIcon>
                                 </Avatar>
                                 <Typography sx={{color: "#FFF", fontSize: "16px"}}>
@@ -234,13 +226,13 @@ export const Navigation = () => {
                             >
                                 <Avatar
                                     sx={{
-                                        height: "3em",
-                                        width: "3em",
+                                        height: "4em",
+                                        width: "4em",
                                         backgroundColor: "#FFF",
                                     }}
                                 >
                                     <SvgIcon>
-                                        <HiArrowLeftCircle color="#23398A"/>
+                                        <HiOutlineLogout color="#23398A"/>
                                     </SvgIcon>
                                 </Avatar>
                                 <Typography sx={{color: "#FFF", fontSize: "16px"}}>
@@ -292,7 +284,7 @@ export const Navigation = () => {
                             >
                                 <IconButton onClick={handleClickOpen('paper')} sx={{backgroundColor: "#2F479D"}}>
                                     <SvgIcon>
-                                        <ScrollText color="#FFF"/>
+                                        <HiCalendar color="#FFF"/>
                                     </SvgIcon>
                                 </IconButton>
                                 <Dialog
@@ -324,7 +316,7 @@ export const Navigation = () => {
                                         >
                                             <Button sx={{width:"100%", height:"100%"}} onClick={handleClose}>
                                                 <SvgIcon sx={{mr:1}}>
-                                                    <HiXMark color={"#E8EBF8"}/>
+                                                    <HiX color={"#E8EBF8"}/>
                                                 </SvgIcon>
                                                 <Typography color={"#E8EBF8"}>閉じる</Typography>
                                             </Button>
@@ -335,7 +327,7 @@ export const Navigation = () => {
                                     <React.Fragment key={"top"}>
                                         <IconButton onClick={toggleDrawer(anchor, true)} sx={{backgroundColor: "#2F479D"}}>
                                             <SvgIcon>
-                                                <Menu color="#FFF"/>
+                                                <HiMenuAlt4 color="#FFF"/>
                                             </SvgIcon>
                                         </IconButton>
                                         <SwipeableDrawer

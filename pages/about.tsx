@@ -20,9 +20,9 @@ import Logo from "public/logo.svg"
 import {Footer} from "../components/layouts/footer";
 import {
     FaQuoteLeft,
-    FaTwitter
+    FaTwitter,
+    FaGithubAlt
 } from "react-icons/fa";
-import {GoMarkGithub} from "react-icons/go";
 import {
     HiCheckCircle,
     HiPaintBrush
@@ -228,7 +228,7 @@ const About: NextPage = () => {
                                                     >
                                                         <IconButton component={Link} href={"https://github.com/testusuke"} target={"_blank"}>
                                                             <SvgIcon>
-                                                                <GoMarkGithub color="#99a5d6"/>
+                                                                <FaGithubAlt color="#99a5d6"/>
                                                             </SvgIcon>
                                                         </IconButton>
                                                     </Stack>
@@ -280,7 +280,7 @@ const About: NextPage = () => {
                                                     >
                                                         <IconButton component={Link} href={"https://github.com/1nayu"} target={"_blank"}>
                                                             <SvgIcon>
-                                                                <GoMarkGithub color="#99a5d6"/>
+                                                                <FaGithubAlt color="#99a5d6"/>
                                                             </SvgIcon>
                                                         </IconButton>
                                                         <IconButton component={Link} href={"https://twitter.com/1nayu"} target={"_blank"}>

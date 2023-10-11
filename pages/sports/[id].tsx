@@ -14,12 +14,6 @@ import {
     Typography,
     Unstable_Grid2 as Grid
 } from "@mui/material";
-import {
-    Menu,
-    MoreHorizontal,
-    X,
-    ScrollText
-} from "lucide-react";
 import {GameProgress} from "../../components/game/game-progress";
 import {GameBest} from "../../components/game/GameBest";
 import {Navigation} from "../../components/layouts/navigation";
@@ -154,67 +148,59 @@ const Id: NextPage<Props> = (props: Props) => {
                                                     <Container
                                                         maxWidth={false}
                                                         disableGutters
+                                                        sx={{
+                                                            paddingTop: 0,
+                                                            paddingBottom: "0px",
+                                                            marginBottom:"70px",
+                                                            position: "relative",
+                                                            zIndex: 1,
+                                                            width: "101vw",
+                                                            height: "fit-content",
+                                                            backgroundColor: "#23398a",
+                                                        }}
                                                     >
-                                                        <Stack
-                                                            direction={"row"}
-                                                            justifyContent={"center"}
-                                                            alignItems={"center"}
-                                                            spacing={3}
-                                                            sx={{
-                                                                paddingTop: 0,
-                                                                paddingBottom: "0px",
-                                                                marginBottom:"70px",
-                                                                position: "relative",
-                                                                zIndex: 1,
-                                                                width: "101vw",
-                                                                height: "fit-content",
-                                                                backgroundColor: "#23398a",
-                                                            }}
+                                                        <motion.div
+                                                            key={"mainvisual-content"}
+                                                            initial={{opacity: 0, y: "50px"}}
+                                                            animate={{opacity: 1, y: "0px"}}
+                                                            transition={{delay:0.3, duration: 1, ease: [0.16, 1, 0.3, 1]}}
                                                         >
-                                                            <motion.div
-                                                                key={"mainvisual-content"}
-                                                                initial={{opacity: 0, y: "50px"}}
-                                                                animate={{opacity: 1, y: "0px"}}
-                                                                transition={{delay:0.3, duration: 1, ease: [0.16, 1, 0.3, 1]}}
+                                                            <Container
+                                                                maxWidth={"xl"}
+                                                                sx={{paddingTop: 8.5}}
                                                             >
-                                                                <Container
-                                                                    maxWidth={"xl"}
-                                                                    sx={{paddingTop: 8.5}}
+                                                                {informationList
+                                                                    .map((info) => {
+                                                                        return (
+                                                                            <Notification
+                                                                                key={info.id}
+                                                                                infoName={info.name}
+                                                                                infoContent={info.content}
+                                                                            />
+                                                                        );
+                                                                    })}
+                                                            </Container>
+                                                            <Stack
+                                                                direction={"row"}
+                                                                justifyContent={"center"}
+                                                                alignItems={"center"}
+                                                                spacing={3}
+                                                                sx={{
+                                                                    pt: 7,
+                                                                    pb: 3
+                                                                }}
+                                                            >
+                                                                <Avatar
+                                                                    alt={sport.name}
+                                                                    sx={{height: "3.5em", width: "3.5em"}}
+                                                                    src={image?.attachment}
                                                                 >
-                                                                    {informationList
-                                                                        .map((info) => {
-                                                                            return (
-                                                                                <Notification
-                                                                                    key={info.id}
-                                                                                    infoName={info.name}
-                                                                                    infoContent={info.content}
-                                                                                />
-                                                                            );
-                                                                        })}
-                                                                </Container>
-                                                                <Stack
-                                                                    direction={"row"}
-                                                                    justifyContent={"center"}
-                                                                    alignItems={"center"}
-                                                                    spacing={3}
-                                                                    sx={{
-                                                                        pt: 7,
-                                                                        pb: 3
-                                                                    }}
-                                                                >
-                                                                    <Avatar
-                                                                        alt={sport.name}
-                                                                        sx={{height: "3.5em", width: "3.5em"}}
-                                                                        src={image?.attachment}
-                                                                    >
-
-                                                                    </Avatar>
-                                                                    <Typography sx={{color: "#FFF", fontSize: "30px", fontWeight: "bold"}}>
-                                                                        {sport.name}
-                                                                    </Typography>
-                                                                </Stack>
-                                                            </motion.div>
-                                                        </Stack>
+                                                                </Avatar>
+                                                                <Typography sx={{color: "#FFF", fontSize: "30px", fontWeight: "bold"}}>
+                                                                    {sport.name}
+                                                                </Typography>
+                                                            </Stack>
+                                                        </motion.div>
                                                     </Container>
                                                     <Container
                                                         maxWidth={false}
@@ -338,19 +324,7 @@ const Id: NextPage<Props> = (props: Props) => {
                                                         direction={"column"}
                                                     >
                                                         <Grid container spacing={1.5}>
-
-                                                            <Grid xs={12} sm={6} lg={6}>
-                                                                <motion.div
-                                                                    key={"gamebest"}
-                                                                    initial={{opacity: 0, y: "50px"}}
-                                                                    animate={{opacity: 1, y: "0px"}}
-                                                                    transition={{delay:0.3, duration: 1, ease: [0.16, 1, 0.3, 1]}}
-                                                                >
-                                                                    <GameBest/>
-                                                                </motion.div>
-                                                            </Grid>
-
-                                                            <Grid xs={12} sm={6} lg={6}>
+                                                            <Grid xs={12} sm={12} lg={12}>
                                                                 <motion.div
                                                                     key={"gameprogress"}
                                                                     initial={{opacity: 0, y: "50px"}}
@@ -360,7 +334,6 @@ const Id: NextPage<Props> = (props: Props) => {
                                                                     <GameProgress/>
                                                                 </motion.div>
                                                             </Grid>
-
                                                         </Grid>
                                                     </Stack>
 

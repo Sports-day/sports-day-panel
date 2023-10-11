@@ -12,21 +12,17 @@ export const GameProgress = () => {
     const result = isNaN(calculatedResult) ? 0 : calculatedResult
 
     const chartSeries = [result, 100-result]
-    const labels = ["完了した競技", "未完了の競技"]
 
     return (
         <Card
             sx={{
-                height: '260px',
-                "@media (min-width: 360px) and (max-width: 400px)": {
-                    height: "220px"
-                }
+                height: '110px'
             }}
         >
             <CardContent>
                 <Typography
                     color={"textSecondary"}
-                    sx={{pb: "25px"}}
+                    sx={{pb: "0px"}}
                 >
                     競技の進行状況
                 </Typography>
@@ -36,7 +32,6 @@ export const GameProgress = () => {
                     alignItems={"center"}
                 >
                     <GameProgressChart
-                        labels={labels}
                         chartSeries={chartSeries}
                     />
                 </Stack>
