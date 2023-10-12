@@ -154,7 +154,7 @@ const DashBoard: NextPage = () => {
                                                             justifyContent={"center"}
                                                             alignItems={"center"}
                                                             spacing={1}
-                                                            pt={8}
+                                                            py={3}
                                                             px={2}
                                                             width={"100%"}
                                                             maxWidth={"xl"}

@@ -17,7 +17,7 @@ import {
 import {GameProgress} from "../../components/game/game-progress";
 import {GameBest} from "../../components/game/GameBest";
 import {Navigation} from "../../components/layouts/navigation";
-import {HiArrowLeftCircle, HiEllipsisHorizontalCircle, HiXMark} from "react-icons/hi2";
+import {HiChevronLeft, HiOutlineClipboardDocumentList, HiXMark} from "react-icons/hi2";
 import * as React from "react";
 import {createTheme} from "../../components/theme";
 import {ThemeProvider} from "@mui/material/styles";
@@ -250,7 +250,7 @@ const Id: NextPage<Props> = (props: Props) => {
                                                                 }}
                                                             >
                                                                 <SvgIcon>
-                                                                    <HiArrowLeftCircle/>
+                                                                    <HiChevronLeft/>
                                                                 </SvgIcon>
                                                                 <Typography>
                                                                     戻る
@@ -277,7 +277,7 @@ const Id: NextPage<Props> = (props: Props) => {
                                                                     ルールを見る
                                                                 </Typography>
                                                                 <SvgIcon>
-                                                                    <HiEllipsisHorizontalCircle/>
+                                                                    <HiOutlineClipboardDocumentList/>
                                                                 </SvgIcon>
                                                             </Stack>
                                                         </Button>

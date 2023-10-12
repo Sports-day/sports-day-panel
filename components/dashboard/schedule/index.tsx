@@ -42,7 +42,7 @@ export const Schedule = (props: ScheduleProps) => {
                             <Typography
                                 color={"textSecondary"}
                             >
-                                あなたの試合
+                                試合スケジュール
                             </Typography>
                             <Box sx={{position: "relative", top: "8px"}}>
                                 <SvgIcon fontSize={"small"} sx={{position: "relative", bottom: "3px"}}>

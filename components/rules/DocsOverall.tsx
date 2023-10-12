@@ -62,7 +62,7 @@ export const DocsOverall = () => {
                             <TimelineConnector />
                         </TimelineSeparator>
                         <TimelineContent>
-                            出席確認・放送による開会式
+                            開会式
                             <Stack direction={"row"}>
                                 <Box pt={0.2}><MapPin size={16} color={"#99a5d6"}/></Box>
                                 <Typography fontSize={"14px"} color={"#99a5d6"}>各教室</Typography>
@@ -78,10 +78,10 @@ export const DocsOverall = () => {
                             <TimelineConnector />
                         </TimelineSeparator>
                         <TimelineContent>
-                            着替えが済んでいない学生は着替える
+                            着替え
                             <Stack direction={"row"}>
                                 <Box pt={0.2}><MapPin size={16} color={"#99a5d6"}/></Box>
-                                <Typography fontSize={"14px"} color={"#99a5d6"}>男: 各教室 | 女: 女子更衣室, 1階物理実験室</Typography>
+                                <Typography fontSize={"14px"} color={"#99a5d6"}>男子は各教室、女子は女子更衣室と1階物理実験室</Typography>
                             </Stack>
                         </TimelineContent>
                     </TimelineItem>
@@ -95,7 +95,7 @@ export const DocsOverall = () => {
                             <TimelineDot />
                             <TimelineConnector />
                         </TimelineSeparator>
-                        <TimelineContent>競技 （昼食は各自）</TimelineContent>
+                        <TimelineContent>競技</TimelineContent>
                     </TimelineItem>
                     <TimelineItem>
                         <TimelineOppositeContent color="text.secondary">
@@ -106,7 +106,7 @@ export const DocsOverall = () => {
                             <TimelineConnector />
                         </TimelineSeparator>
                         <TimelineContent>
-                            放送による閉会式
+                            閉会式
                             <Stack direction={"row"}>
                                 <Box pt={0.2}><MapPin size={16} color={"#99a5d6"}/></Box>
                                 <Typography fontSize={"14px"} color={"#99a5d6"}>各教室</Typography>

@@ -302,7 +302,7 @@ export const Navigation = () => {
                                         },
                                     }}
                                 >
-                                    <DialogTitle id="scroll-dialog-title" fontSize={"16px"} color={"#99a5d6"}>球技大会の進行</DialogTitle>
+                                    <DialogTitle id="scroll-dialog-title" fontSize={"16px"} color={"#99a5d6"}>スケジュール</DialogTitle>
                                     <DialogContent dividers={scroll === 'paper'}>
                                         <DocsOverall/>
                                     </DialogContent>

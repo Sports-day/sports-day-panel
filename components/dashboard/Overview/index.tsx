@@ -76,7 +76,7 @@ export const Overview = (props: OverviewProps) => {
                                         spacing={0.5}
                                     >
                                         <Typography sx={{color: "#99a5d6", fontSize: "14px"}}>
-                                            あなたの競技
+                                            あなたのスポーツ
                                         </Typography>
                                         <Typography sx={{color: "#FFF", fontSize: "18px"}}>
                                             {props.mySport.name}
@@ -112,7 +112,7 @@ export const Overview = (props: OverviewProps) => {
                                 alignItems={"flex-start"}
                             >
                                 <Typography sx={{color: "#99a5d6", fontSize: "14px"}}>
-                                    競技内順位
+                                    リーグ内順位
                                 </Typography>
                                 <Stack
                                     direction={"row"}
@@ -148,7 +148,7 @@ export const Overview = (props: OverviewProps) => {
                                 alignItems={"flex-start"}
                             >
                                 <Typography sx={{color: "#99a5d6", fontSize: "14px"}}>
-                                    あなたのチーム
+                                    チーム
                                 </Typography>
                                 <Typography sx={{color: "#FFF", fontSize: "24px", fontWeight: "bold"}}>
                                     {props.myTeam.name}

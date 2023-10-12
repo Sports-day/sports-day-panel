@@ -24,7 +24,7 @@ export const GameProgress = () => {
                     color={"textSecondary"}
                     sx={{pb: "0px"}}
                 >
-                    競技の進行状況
+                    進行度
                 </Typography>
                 <Stack
                     direction={"column"}
