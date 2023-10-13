@@ -3,8 +3,13 @@ import {ApiClient} from "../lib/ApiClient";
 import {Match} from "../models/MatchModel";
 import {Team} from "../models/TeamModel";
 
-const getGames = async (): Promise<Game[]> => {
-    const {data} = await ApiClient.get("/games")
+const getGames = async (filter: boolean): Promise<Game[]> => {
+    const {data} = await ApiClient.get("/games",
+        {
+            params: {
+                filter: filter
+            }
+        })
     return data.data
 }
 
@@ -97,7 +102,7 @@ const getLeagueResult = async (id: number, restrict: boolean): Promise<LeagueRes
 }
 
 export type GameRepository = {
-    getGames: () => Promise<Game[]>,
+    getGames: (filter: boolean) => Promise<Game[]>,
     getGame: (id: number) => Promise<Game>,
     deleteGame: (id: number) => Promise<void>,
     createGame: (omittedGame: Omit<Game, "id" | "createdAt" | "updatedAt">) => Promise<Game>,

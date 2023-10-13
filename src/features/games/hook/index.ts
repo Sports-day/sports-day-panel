@@ -4,7 +4,7 @@ import {useAsyncRetry} from "react-use";
 import {Match} from "../../../models/MatchModel";
 import {Team, teamFactory} from "../../../models/TeamModel";
 
-export const useFetchGames = () => {
+export const useFetchGames = (filter: boolean = false) => {
     const [games, setGames] = useState<Game[]>([])
     const [isFetching, setIsFetching] = useState(true)
 
@@ -12,7 +12,7 @@ export const useFetchGames = () => {
         try {
             setIsFetching(true);
 
-            const data = await gameFactory().index();
+            const data = await gameFactory().index(filter);
             setGames(data);
         } catch (e) {
             console.log(e);

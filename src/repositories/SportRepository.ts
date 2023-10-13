@@ -1,8 +1,13 @@
 import {Sport} from "../models/SportModel";
 import {ApiClient} from "../lib/ApiClient";
 
-const getSports = async (): Promise<Sport[]> => {
-    const {data} = await ApiClient.get("/sports")
+const getSports = async (filter: boolean): Promise<Sport[]> => {
+    const {data} = await ApiClient.get("/sports",
+        {
+            params: {
+                filter: filter
+            }
+        })
     return data.data
 }
 
@@ -32,7 +37,7 @@ const getProgress = async (id: number): Promise<number> => {
 
 
 export type SportRepository = {
-    getSports: () => Promise<Sport[]>,
+    getSports: (filter: boolean) => Promise<Sport[]>,
     getSport: (id: number) => Promise<Sport>,
     deleteSport: (id: number) => Promise<void>,
     createSport: (omittedSport: Omit<Sport, "id" | "gameIds" | "createdAt" | "updatedAt">) => Promise<Sport>,
