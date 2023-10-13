@@ -45,13 +45,10 @@ export const RulePetanque = () => {
                     <RuleNumCard title={"試合時間"} content={"6分"} sub={"-"}/>
                 </Grid>
                 <Grid xs={6} sm={6} lg={3}>
-                    <RuleNumCard title={"チーム人数"} content={"6 〜 8"} sub={"人"}/>
+                    <RuleNumCard title={"出場人数"} content={"3 or6"} sub={"人"}/>
                 </Grid>
                 <Grid xs={12} sm={12} lg={6}>
                     <RuleNumCard title={"担当審判"} content={"学生会執行部と参加チーム"} sub={"1試合あたり1~2人"}/>
-                </Grid>
-                <Grid xs={12} sm={12} lg={6}>
-                    <RuleNumCard title={"試合形式"} content={"予選リーグ・決勝トーナメント"} sub={""}/>
                 </Grid>
                 <Grid xs={12} sm={12} lg={6}>
                     <RuleNumCard title={"女子ハンデ"} content={"なし"} sub={""}/>
