@@ -39,7 +39,7 @@ const markdown = `
 - 審判の判定に従う。
 `
 
-export const RuleKickbase = () => {
+export const RuleFutsal = () => {
     return(
         <Stack
             direction={"column"}

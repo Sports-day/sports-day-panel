@@ -29,7 +29,7 @@ const markdown = `
 - 審判の判定に従う。
 `
 
-export const RuleBadminton = () => {
+export const RuleBasketball = () => {
     return(
         <Stack
             direction={"column"}
