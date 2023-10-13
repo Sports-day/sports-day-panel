@@ -52,8 +52,8 @@ export const gameFactory = (repo?: GameRepository) => {
     const repository = repo ?? gameRepository
 
     return {
-        index: async (): Promise<Game[]> => {
-            return await repository.getGames()
+        index: async (filter: boolean = false): Promise<Game[]> => {
+            return await repository.getGames(filter)
         },
         show: async (id: number): Promise<Game> => {
             return await repository.getGame(id)

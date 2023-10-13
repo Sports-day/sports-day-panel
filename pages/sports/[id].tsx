@@ -50,7 +50,7 @@ const Id: NextPage<Props> = (props: Props) => {
     const theme = createTheme();
     //  fetch
     const {sport, isFetching: isSportFetching, refresh: refreshSport} = useFetchSport(props.sportId)
-    const {games, isFetching: isGameFetching, refresh: refreshGame} = useFetchSportGames(props.sportId)
+    const {games, isFetching: isGameFetching, refresh: refreshGame} = useFetchSportGames(props.sportId, true)
     const {teams, isFetching: isTeamFetching, refresh: refreshTeam} = useFetchTeams()
     const {locations, isFetching: isLocationsFetching, refresh: refreshLocations} = useFetchLocations()
     const {images, isFetching: isImagesFetching, refresh: refreshImages} = useFetchImages()

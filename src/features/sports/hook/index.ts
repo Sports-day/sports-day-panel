@@ -3,12 +3,12 @@ import {Sport, sportFactory} from "../../../models/SportModel";
 import {useAsync, useAsyncRetry} from "react-use";
 import {Game, gameFactory, LeagueTeamResult} from "../../../models/GameModel";
 import {Team} from "../../../models/TeamModel";
-import {GamesContext, MatchesContext, TeamsContext} from "../../../../components/context";
+import {GamesContext, TeamsContext} from "../../../../components/context";
 
 /**
  * Fetches all sports
  */
-export const useFetchSports = () => {
+export const useFetchSports = (filter: boolean = false) => {
     const [sports, setSports] = useState<Sport[]>([])
     const [isFetching, setIsFetching] = useState(true)
 
@@ -16,7 +16,7 @@ export const useFetchSports = () => {
         try {
             setIsFetching(true);
 
-            const data = await sportFactory().index();
+            const data = await sportFactory().index(filter);
             setSports(data);
         } catch (e) {
             console.log(e);
@@ -63,8 +63,9 @@ export const useFetchSport = (sportId: number) => {
 /**
  * Fetches the games of a sports
  * @param sportId
+ * @param filter
  */
-export const useFetchSportGames = (sportId: number) => {
+export const useFetchSportGames = (sportId: number, filter: boolean = false) => {
     const [games, setGames] = useState<Game[]>([])
     const [isFetching, setIsFetching] = useState(true)
 
@@ -74,7 +75,7 @@ export const useFetchSportGames = (sportId: number) => {
 
             const sport = await sportFactory().show(sportId);
 
-            const result = await gameFactory().index()
+            const result = await gameFactory().index(filter)
                 .then(values =>
                     values.filter(value => sport.gameIds.includes(value.id))
                 )

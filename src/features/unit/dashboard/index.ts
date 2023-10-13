@@ -42,8 +42,8 @@ export const useFetchDashboard = () => {
     const {images, isFetching: isFetchingImages} = useFetchImages()
     const {locations, isFetching: isFetchingLocations} = useFetchLocations()
     const {teams, isFetching: isFetchingTeams} = useFetchTeams()
-    const {sports, isFetching: isFetchingSports} = useFetchSports()
-    const {games, isFetching: isFetchingGames} = useFetchGames()
+    const {sports, isFetching: isFetchingSports} = useFetchSports(true)
+    const {games, isFetching: isFetchingGames} = useFetchGames(true)
     const {matches, isFetching: isFetchingMatches} = useFetchMatches()
     const {users, isFetching: isFetchingUsers} = useFetchUsers()
     //  context
