@@ -169,90 +169,60 @@ const Id: NextPage<Props> = (props: Props) => {
                                         <Container
                                             maxWidth={false}
                                             disableGutters
+                                            sx={{
+                                                paddingTop: 0,
+                                                paddingBottom: "0px",
+                                                marginBottom: "70px",
+                                                position: "relative",
+                                                zIndex: 1,
+                                                width: "101vw",
+                                                height: "fit-content",
+                                                backgroundColor: "#23398a",
+                                            }}
                                         >
-                                            <Stack
-                                                direction={"row"}
-                                                justifyContent={"center"}
-                                                alignItems={"center"}
-                                                spacing={3}
-                                                sx={{
-                                                    paddingTop: 0,
-                                                    paddingBottom: "0px",
-                                                    marginBottom: "70px",
-                                                    position: "relative",
-                                                    zIndex: 1,
-                                                    width: "101vw",
-                                                    height: "fit-content",
-                                                    backgroundColor: "#23398a",
+                                            <motion.div
+                                                key={"mainvisual-content"}
+                                                initial={{opacity: 0, y: "50px"}}
+                                                animate={{opacity: 1, y: "0px"}}
+                                                transition={{
+                                                    delay: 0.3,
+                                                    duration: 1,
+                                                    ease: [0.16, 1, 0.3, 1]
                                                 }}
                                             >
-                                                <motion.div
-                                                    key={"mainvisual-content"}
-                                                    initial={{opacity: 0, y: "50px"}}
-                                                    animate={{opacity: 1, y: "0px"}}
-                                                    transition={{
-                                                        delay: 0.3,
-                                                        duration: 1,
-                                                        ease: [0.16, 1, 0.3, 1]
+
+                                                <Container
+                                                    maxWidth={"xl"}
+                                                    sx={{paddingTop: 8.5}}
+                                                >
+                                                    <InformationList/>
+                                                </Container>
+                                                <Stack
+                                                    direction={"row"}
+                                                    justifyContent={"center"}
+                                                    alignItems={"center"}
+                                                    spacing={3}
+                                                    sx={{
+                                                        pt: 7,
+                                                        pb: 3
                                                     }}
                                                 >
-                                                    <Container
-                                                        maxWidth={false}
-                                                        disableGutters
-                                                        sx={{
-                                                            paddingTop: 0,
-                                                            paddingBottom: "0px",
-                                                            marginBottom:"70px",
-                                                            position: "relative",
-                                                            zIndex: 1,
-                                                            width: "101vw",
-                                                            height: "fit-content",
-                                                            backgroundColor: "#23398a",
-                                                        }}
+                                                    <Avatar
+                                                        alt={sport.name}
+                                                        sx={{height: "3.5em", width: "3.5em"}}
+                                                        src={image?.attachment}
                                                     >
-                                                        <motion.div
-                                                            key={"mainvisual-content"}
-                                                            initial={{opacity: 0, y: "50px"}}
-                                                            animate={{opacity: 1, y: "0px"}}
-                                                            transition={{delay:0.3, duration: 1, ease: [0.16, 1, 0.3, 1]}}
-                                                        >
-                                                            <Container
-                                                                maxWidth={"xl"}
-                                                                sx={{paddingTop: 8.5}}
-                                                            >
-                                                              
-                                                        maxWidth={"xl"}
-                                                        sx={{paddingTop: 8.5}}
-                                                    >
-                                                        <InformationList/>
-                                                    </Container>
-                                                    <Stack
-                                                        direction={"row"}
-                                                        justifyContent={"center"}
-                                                        alignItems={"center"}
-                                                        spacing={3}
-                                                        sx={{
-                                                            pt: 7,
-                                                            pb: 3
-                                                        }}
-                                                    >
-                                                        <Avatar
-                                                            alt={sport.name}
-                                                            sx={{height: "3.5em", width: "3.5em"}}
-                                                            src={image?.attachment}
-                                                        >
 
-                                                        </Avatar>
-                                                        <Typography sx={{
-                                                            color: "#FFF",
-                                                            fontSize: "30px",
-                                                            fontWeight: "bold"
-                                                        }}>
-                                                            {sport.name}
-                                                        </Typography>
-                                                    </Stack>
-                                                </motion.div>
-                                            </Stack>
+                                                    </Avatar>
+                                                    <Typography sx={{
+                                                        color: "#FFF",
+                                                        fontSize: "30px",
+                                                        fontWeight: "bold"
+                                                    }}>
+                                                        {sport.name}
+                                                    </Typography>
+                                                </Stack>
+                                            </motion.div>
                                         </Container>
                                         <Container
                                             maxWidth={false}
@@ -385,7 +355,7 @@ const Id: NextPage<Props> = (props: Props) => {
                                                                     animate={{opacity: 1, y: "0px"}}
                                                                     transition={{delay:0.4, duration: 1, ease: [0.16, 1, 0.3, 1]}}
                                                                 >
-                                                                    <GameProgress sportsId={sports.id}/>
+                                                                    <GameProgress sportsId={sport.id}/>
                                                                 </motion.div>
                                                             </Grid>
                                                         </Grid>
