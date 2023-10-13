@@ -5,9 +5,6 @@ import {
     HiCog, HiX,
     HiMenuAlt4,
     HiSparkles,
-    HiHome,
-    HiIdentification,
-    HiSearch
 } from "react-icons/hi";
 import {
     HiCalendar
@@ -27,17 +24,13 @@ import {
     Button,
     Divider,
     Typography, DialogTitle, DialogContent, DialogActions, Dialog,
-    BottomNavigation,BottomNavigationAction,
-    Paper
 } from '@mui/material';
 import Logo from "public/logo.svg"
-import Mark from "public/mark.svg"
 import {signOut, useSession} from "next-auth/react";
 import {alpha} from '@mui/material/styles';
 import Link from "next/link";
 import {useState} from "react";
 import {DialogProps} from "@mui/material/Dialog";
-import {Rules} from "../rules/Rules";
 import {DocsOverall} from "../rules/DocsOverall";
 import Cookies from "js-cookie";
 
@@ -164,7 +157,7 @@ export const Navigation = () => {
 
                     <Divider/>
 
-                    <Button href={"https://github.com/orgs/Sports-day/repositories"}　target="_blank">
+                    <Button href={"https://github.com/Sports-day"}　target="_blank">
                         <Stack
                             direction={"row"}
                             justifyContent={"flex-start"}
