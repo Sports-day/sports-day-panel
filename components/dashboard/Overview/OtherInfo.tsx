@@ -4,8 +4,8 @@ import {
     IconButton
 } from "@mui/material";
 import {
-    Info
-} from "lucide-react";
+    HiOutlineInformationCircle
+} from "react-icons/hi"
 
 export type OtherInfoProps = {
     infoName: string;
@@ -20,12 +20,11 @@ export const OtherInfo = (props: OtherInfoProps) => {
             justifyContent={"flex-start"}
             alignItems={"center"}
             spacing={3}
-            pl={1.5}
+            pl={2}
             pr={2}
             py={2}
             mt={1.5}
             sx={{
-                border: "1px solid #2c46a9",
                 backgroundColor: "#192d7a",
                 borderRadius: "15px",
                 borderBottomLeftRadius: "3px",
@@ -35,7 +34,7 @@ export const OtherInfo = (props: OtherInfoProps) => {
             <IconButton
                 sx={{backgroundColor: "#5664e3"}}
             >
-                <Info color={"#fff"}/>
+                <HiOutlineInformationCircle color={"#fff"}/>
             </IconButton>
             <Stack
                 direction={"column"}
@@ -45,7 +44,7 @@ export const OtherInfo = (props: OtherInfoProps) => {
             >
                 <Typography
                     color={"#99a5d6"}
-                    sx={{fontSize: "10px"}}
+                    sx={{fontSize: "12px"}}
                     lineHeight={"1.2em"}
                 >
                     {props.infoName}
@@ -59,7 +58,7 @@ export const OtherInfo = (props: OtherInfoProps) => {
                 </Typography>
                 <Typography
                     color={"#99a5d6"}
-                    sx={{fontSize: "10px"}}
+                    sx={{fontSize: "12px"}}
                     lineHeight={"1.2em"}
                 >
                     {props.infoSubContent}

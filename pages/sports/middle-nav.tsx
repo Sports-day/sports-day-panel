@@ -1,5 +1,5 @@
 import {Button, Stack, SvgIcon, Typography} from "@mui/material";
-import {HiArrowLeftCircle, HiEllipsisHorizontalCircle} from "react-icons/hi2";
+import {HiChevronLeft, HiEllipsisHorizontalCircle} from "react-icons/hi2";
 import * as React from "react";
 
 export const MiddleNav = (props:any) => {
@@ -26,7 +26,7 @@ export const MiddleNav = (props:any) => {
                     }}
                 >
                     <SvgIcon>
-                        <HiArrowLeftCircle/>
+                        <HiChevronLeft/>
                     </SvgIcon>
                     <Typography>
                         戻る

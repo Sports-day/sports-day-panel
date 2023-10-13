@@ -1,84 +1,73 @@
-import {Typography}from "@mui/material";
-import {Chart} from "../../chart";
-import {useTheme} from "@mui/material/styles";
+import {
+    Box,
+    Stack,
+    styled,
+    LinearProgress,
+    Typography, SvgIcon
+} from "@mui/material";
+import {linearProgressClasses} from "@mui/material";
+import {ThemeProvider} from "@mui/material/styles";
+import * as React from "react";
+import {HiClock} from "react-icons/hi2";
+import {MdOutlineSportsScore} from "react-icons/md";
+import {useContext} from "react";
+import {TeamsContext} from "../../context";
 
-const useChartOptions = (labels: any) => {
-    const theme = useTheme();
+const PointBar = styled(LinearProgress)(({}) => ({
+    height: 10,
+    borderRadius: 5,
+    [`&.${linearProgressClasses.colorPrimary}`]: {backgroundColor: '#435BBC',},
+    [`& .${linearProgressClasses.bar}`]: {borderRadius: 2, backgroundColor: '#ffffff',},
+}));
 
-    return {
-        chart: {
-            background: 'transparent'
-        },
-        colors: [
-            "#ffffff",
-            "#435bbc"
-        ],
-        dataLabels: {
-            enabled: false
-        },
-        labels,
-        legend: {
-            show: false
-        },
-        plotOptions: {
-            pie: {
-                expandOnClick: false
-            }
-        },
-        states: {
-            active: {
-                filter: {
-                    type: 'none'
-                }
-            },
-            hover: {
-                filter: {
-                    type: 'none'
-                }
-            }
-        },
-        stroke: {
-            width: 0
-        },
-        theme: {
-            mode: theme.palette.mode
-        },
-        tooltip: {
-            fillSeriesColor: false
-        }
-    };
-};
+type Props = {
+    chartSeries: number[]
+}
 
-export const GameProgressChart = (props:any) => {
-    const {chartSeries, labels} = props;
-    const chartOptions = useChartOptions(labels);
+export const GameProgressChart = (props:Props) => {
+    const {data: teams} = useContext(TeamsContext);
 
     return(
         <>
-            <Chart
-                options={chartOptions}
-                series={chartSeries}
-                type="donut"
-                sx={{
-                    width: "220px",
-                    "@media (min-width: 360px) and (max-width: 400px)": {
-                        width: "200px"
-                    }
-                }}
-            />
-            <Typography
-                color={"textPrimary"}
-                sx={{
-                    position: "relative",
-                    top: "-110px",
-                    fontSize: "30px",
-                    "@media (min-width: 360px) and (max-width: 400px)": {
-                        top: "-102px"
-                    }
-                }}
+            <Stack
+                direction={"column"}
+                spacing={1}
+                pb={3}
+                sx={{width: "100%", height:"fit-content"}}
             >
-                {chartSeries[0]}%
-            </Typography>
+                <Stack
+                    direction={"row"}
+                    justifyContent={"center"}
+                    alignItems={"space-between"}
+                    spacing={0}
+                >
+                    <Stack
+                        direction={"column"}
+                        justifyContent={"space-between"}
+                        alignItems={"space-between"}
+                        maxWidth={'xl'}
+                        sx={{ width: '100%' }}
+                        spacing={-1}
+                    >
+                        <Stack
+                            direction={"row"}
+                            justifyContent={"flex-end"}
+                            alignItems={"flex-end"}
+                            spacing={0}
+                        >
+                            <Typography sx={{color: "#FFF", fontSize: "30px", position: "relative", top: "-25px"}}>
+                                {props.chartSeries[0]} %
+                            </Typography>
+                        </Stack>
+                        <Box>
+                            <PointBar
+                                variant={"determinate"}
+                                value={props.chartSeries[0]}
+                            />
+                        </Box>
+                    </Stack>
+                </Stack>
+            </Stack>
         </>
     )
 }

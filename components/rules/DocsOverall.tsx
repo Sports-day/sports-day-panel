@@ -2,7 +2,8 @@ import {
     Box,
     Stack,
     Typography,
-    DialogContentText
+    DialogContentText,
+    List, ListItem, ListItemAvatar, Avatar, SvgIcon, ListItemText, Divider
 } from "@mui/material";
 import {
     Timeline,
@@ -15,8 +16,9 @@ import {
 } from "@mui/lab";
 import { timelineContentClasses } from "@mui/lab/TimelineContent";
 import {
-    MapPin
-} from "lucide-react";
+    HiMapPin,
+    HiUserGroup
+} from "react-icons/hi2"
 import ReactMarkdown from "react-markdown";
 import * as React from "react";
 
@@ -47,84 +49,84 @@ export const DocsOverall = () => {
             sx={{width:"100%"}}
         >
             <Typography color={"#E8EBF8"}>タイムテーブル</Typography>
-                <Timeline sx={{
-                    [`& .${timelineContentClasses.root}`]: {
-                        flex: 30,
-                        width: "100%",
-                    },
-                }}>
-                    <TimelineItem>
-                        <TimelineOppositeContent color="text.secondary">
-                            08:50
-                        </TimelineOppositeContent>
-                        <TimelineSeparator>
-                            <TimelineDot />
-                            <TimelineConnector />
-                        </TimelineSeparator>
-                        <TimelineContent>
-                            出席確認・放送による開会式
-                            <Stack direction={"row"}>
-                                <Box pt={0.2}><MapPin size={16} color={"#99a5d6"}/></Box>
-                                <Typography fontSize={"14px"} color={"#99a5d6"}>各教室</Typography>
-                            </Stack>
-                        </TimelineContent>
-                    </TimelineItem>
-                    <TimelineItem>
-                        <TimelineOppositeContent color="text.secondary">
-                            09:00
-                        </TimelineOppositeContent>
-                        <TimelineSeparator>
-                            <TimelineDot />
-                            <TimelineConnector />
-                        </TimelineSeparator>
-                        <TimelineContent>
-                            着替えが済んでいない学生は着替える
-                            <Stack direction={"row"}>
-                                <Box pt={0.2}><MapPin size={16} color={"#99a5d6"}/></Box>
-                                <Typography fontSize={"14px"} color={"#99a5d6"}>男: 各教室 | 女: 女子更衣室, 1階物理実験室</Typography>
-                            </Stack>
-                        </TimelineContent>
-                    </TimelineItem>
-                    <TimelineItem>
-                        <TimelineOppositeContent color="text.secondary">
-                            09:30
-                            〜
-                            15:20
-                        </TimelineOppositeContent>
-                        <TimelineSeparator>
-                            <TimelineDot />
-                            <TimelineConnector />
-                        </TimelineSeparator>
-                        <TimelineContent>競技 （昼食は各自）</TimelineContent>
-                    </TimelineItem>
-                    <TimelineItem>
-                        <TimelineOppositeContent color="text.secondary">
-                            15:30
-                        </TimelineOppositeContent>
-                        <TimelineSeparator>
-                            <TimelineDot />
-                            <TimelineConnector />
-                        </TimelineSeparator>
-                        <TimelineContent>
-                            放送による閉会式
-                            <Stack direction={"row"}>
-                                <Box pt={0.2}><MapPin size={16} color={"#99a5d6"}/></Box>
-                                <Typography fontSize={"14px"} color={"#99a5d6"}>各教室</Typography>
-                            </Stack>　
-                        </TimelineContent>
-                    </TimelineItem>
-                    <TimelineItem>
-                        <TimelineOppositeContent color="text.secondary">
-                            15:50
-                        </TimelineOppositeContent>
-                        <TimelineSeparator>
-                            <TimelineDot />
-                        </TimelineSeparator>
-                        <TimelineContent>
-                           解散
-                        </TimelineContent>
-                    </TimelineItem>
-                </Timeline>
+            <Timeline sx={{
+                [`& .${timelineContentClasses.root}`]: {
+                    flex: 30,
+                    width: "100%",
+                },
+            }}>
+                <TimelineItem>
+                    <TimelineOppositeContent color="text.secondary">
+                        08:50
+                    </TimelineOppositeContent>
+                    <TimelineSeparator>
+                        <TimelineDot />
+                        <TimelineConnector />
+                    </TimelineSeparator>
+                    <TimelineContent>
+                        開会式
+                        <Stack direction={"row"}>
+                            <Box pt={0.2}><HiMapPin size={16} color={"#99a5d6"}/></Box>
+                            <Typography fontSize={"14px"} color={"#99a5d6"}>各教室</Typography>
+                        </Stack>
+                    </TimelineContent>
+                </TimelineItem>
+                <TimelineItem>
+                    <TimelineOppositeContent color="text.secondary">
+                        09:00
+                    </TimelineOppositeContent>
+                    <TimelineSeparator>
+                        <TimelineDot />
+                        <TimelineConnector />
+                    </TimelineSeparator>
+                    <TimelineContent>
+                        着替え
+                        <Stack direction={"row"}>
+                            <Box pt={0.2}><HiMapPin size={16} color={"#99a5d6"}/></Box>
+                            <Typography fontSize={"14px"} color={"#99a5d6"}>男子は各教室、女子は女子更衣室と1階物理実験室</Typography>
+                        </Stack>
+                    </TimelineContent>
+                </TimelineItem>
+                <TimelineItem>
+                    <TimelineOppositeContent color="text.secondary">
+                        09:30
+                        〜
+                        15:20
+                    </TimelineOppositeContent>
+                    <TimelineSeparator>
+                        <TimelineDot />
+                        <TimelineConnector />
+                    </TimelineSeparator>
+                    <TimelineContent>競技</TimelineContent>
+                </TimelineItem>
+                <TimelineItem>
+                    <TimelineOppositeContent color="text.secondary">
+                        15:30
+                    </TimelineOppositeContent>
+                    <TimelineSeparator>
+                        <TimelineDot />
+                        <TimelineConnector />
+                    </TimelineSeparator>
+                    <TimelineContent>
+                        閉会式
+                        <Stack direction={"row"}>
+                            <Box pt={0.2}><HiMapPin size={16} color={"#99a5d6"}/></Box>
+                            <Typography fontSize={"14px"} color={"#99a5d6"}>各教室</Typography>
+                        </Stack>
+                    </TimelineContent>
+                </TimelineItem>
+                <TimelineItem>
+                    <TimelineOppositeContent color="text.secondary">
+                        15:50
+                    </TimelineOppositeContent>
+                    <TimelineSeparator>
+                        <TimelineDot />
+                    </TimelineSeparator>
+                    <TimelineContent>
+                        解散
+                    </TimelineContent>
+                </TimelineItem>
+            </Timeline>
             <DialogContentText
                 id="scroll-dialog-description"
                 tabIndex={-1}
@@ -133,6 +135,7 @@ export const DocsOverall = () => {
             >
                 <ReactMarkdown>{markdown}</ReactMarkdown>
             </DialogContentText>
+
         </Stack>
     )
 }

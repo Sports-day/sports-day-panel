@@ -19,20 +19,19 @@ export const Notification = (props: NotificationProps) => {
             justifyContent={"flex-start"}
             alignItems={"center"}
             spacing={3}
-            pl={1.5}
+            pl={2}
             pr={2}
             py={2}
             mt={1.5}
             sx={{
-                border: "1px solid #2c46a9",
                 backgroundColor: "#192d7a",
-                borderRadius: "15px",
+                borderRadius: "25px",
                 borderBottomLeftRadius: "3px",
                 height:"fit-content",
             }}
         >
             <IconButton
-                sx={{backgroundColor: "#5664e3"}}
+                sx={{backgroundColor: "#d3962a"}}
             >
                 <Megaphone color={"#fff"}/>
             </IconButton>

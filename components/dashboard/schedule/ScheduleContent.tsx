@@ -1,5 +1,5 @@
 import {Divider, Stack, SvgIcon, Typography, Unstable_Grid2 as Grid} from "@mui/material";
-import {HiClock, HiMapPin} from "react-icons/hi2";
+import {HiClock, HiLocationMarker} from "react-icons/hi";
 import * as React from "react";
 import {useContext} from "react";
 import {LocationsContext, TeamsContext} from "../../context";
@@ -38,7 +38,7 @@ export const ScheduleContent = (props: ScheduleContentProps) => {
                     <Typography color={"textSecondary"} fontSize={"14px"}>
                         VS
                     </Typography>
-                    <Typography fontSize={"24px"} fontWeight={"bold"}>
+                    <Typography fontSize={"24px"} fontWeight={"bold"} color={"white"}>
                         {teamModel?.name}
                     </Typography>
                 </Stack>
@@ -67,7 +67,7 @@ export const ScheduleContent = (props: ScheduleContentProps) => {
                         spacing={1}
                     >
                         <SvgIcon fontSize={"small"} sx={{position:"relative", bottom:"3px"}}>
-                            <HiMapPin color="#99a5d6"/>
+                            <HiLocationMarker color="#99a5d6"/>
                         </SvgIcon>
                         <Typography sx={{color: "#99a5d6", fontSize: "14px", py: "5px"}}>
                             {locationModel?.name}

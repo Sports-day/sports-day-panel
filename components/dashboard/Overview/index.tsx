@@ -7,11 +7,9 @@ import {
     SvgIcon,
     Typography,
     SwipeableDrawer,
-    Unstable_Grid2 as Grid, IconButton, Box, Alert
+    Unstable_Grid2 as Grid, IconButton, Box
 } from "@mui/material";
-import {HiArrowRightCircle, HiXMark} from "react-icons/hi2";
-import {RiAwardFill} from "react-icons/ri";
-import {ChevronRightIcon} from "lucide-react"
+import {HiXMark, HiChevronRight, HiChartBar} from "react-icons/hi2";
 import {Sport} from "../../../src/models/SportModel";
 import {Team} from "../../../src/models/TeamModel";
 import {User} from "../../../src/models/UserModel";
@@ -41,7 +39,7 @@ export const Overview = (props: OverviewProps) => {
     return(
         <Container
             maxWidth={"xl"}
-            sx={{paddingTop: "20px"}}
+            sx={{paddingTop: "0px"}}
         >
             <Grid container spacing={2}>
                 <Grid xs={12} sm={12} lg={12}>
@@ -78,15 +76,15 @@ export const Overview = (props: OverviewProps) => {
                                         spacing={0.5}
                                     >
                                         <Typography sx={{color: "#99a5d6", fontSize: "14px"}}>
-                                            あなたの競技
+                                            あなたのスポーツ
                                         </Typography>
-                                        <Typography sx={{color: "#FFF", fontSize: "16px"}}>
+                                        <Typography sx={{color: "#FFF", fontSize: "18px"}}>
                                             {props.mySport.name}
                                         </Typography>
                                     </Stack>
                                 </Stack>
                                 <SvgIcon>
-                                    <ChevronRightIcon color="#FFF"/>
+                                    <HiChevronRight color="#FFF"/>
                                 </SvgIcon>
                             </Stack>
                         </Button>
@@ -114,11 +112,12 @@ export const Overview = (props: OverviewProps) => {
                                 alignItems={"flex-start"}
                             >
                                 <Typography sx={{color: "#99a5d6", fontSize: "14px"}}>
-                                    競技内順位
+                                    リーグ内順位
                                 </Typography>
                                 <Stack
                                     direction={"row"}
                                     alignItems={"flex-end"}
+                                    marginLeft={0.5}
                                     spacing={1}
                                 >
                                     <Typography sx={{color: "#FFF", fontSize: "24px", fontWeight: "bold"}}>
@@ -130,7 +129,7 @@ export const Overview = (props: OverviewProps) => {
                                 </Stack>
                             </Stack>
                             <SvgIcon>
-                                <RiAwardFill color="#99a5d6"/>
+                                <HiChartBar color="#99a5d6"/>
                             </SvgIcon>
                         </Stack>
                     </Box>
@@ -149,14 +148,14 @@ export const Overview = (props: OverviewProps) => {
                                 alignItems={"flex-start"}
                             >
                                 <Typography sx={{color: "#99a5d6", fontSize: "14px"}}>
-                                    あなたのチーム
+                                    チーム
                                 </Typography>
                                 <Typography sx={{color: "#FFF", fontSize: "24px", fontWeight: "bold"}}>
                                     {props.myTeam.name}
                                 </Typography>
                             </Stack>
                             <SvgIcon>
-                                <HiArrowRightCircle color="#FFF"/>
+                                <HiChevronRight color="#FFF"/>
                             </SvgIcon>
                         </Stack>
                     </Button>
@@ -191,7 +190,7 @@ export const Overview = (props: OverviewProps) => {
                                     color={"#E8EBF8"}
                                     fontWeight={"bold"}
                                 >
-                                    あなたのチームメンバー
+                                    チームメンバー
                                 </Typography>
                                 <IconButton onClick={toggleDrawer(false)}>
                                     <SvgIcon>

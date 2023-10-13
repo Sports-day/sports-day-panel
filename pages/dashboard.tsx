@@ -128,12 +128,14 @@ const DashBoard: NextPage = () => {
                                                         <InformationList />
                                                     </Container>
                                                     {mySport && myTeam &&
-                                                        <Overview
-                                                            mySport={mySport}
-                                                            myTeam={myTeam}
-                                                            myTeamUsers={myTeamUsers}
-                                                            myTeamRank={myTeamRank}
-                                                        />
+                                                        <Box sx={{pt: 2}}>
+                                                            <Overview
+                                                                mySport={mySport}
+                                                                myTeam={myTeam}
+                                                                myTeamUsers={myTeamUsers}
+                                                                myTeamRank={myTeamRank}
+                                                            />
+                                                        </Box>
                                                     }
                                                     {!mySport && !myTeam &&
                                                         <Stack
@@ -141,7 +143,7 @@ const DashBoard: NextPage = () => {
                                                             justifyContent={"center"}
                                                             alignItems={"center"}
                                                             spacing={1}
-                                                            pt={8}
+                                                            py={3}
                                                             px={2}
                                                             width={"100%"}
                                                             maxWidth={"xl"}

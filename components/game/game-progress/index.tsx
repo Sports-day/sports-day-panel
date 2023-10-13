@@ -13,18 +13,15 @@ export const GameProgress = (props: { sportsId: number }) => {
     return (
         <Card
             sx={{
-                height: '260px',
-                "@media (min-width: 360px) and (max-width: 400px)": {
-                    height: "220px"
-                }
+                height: '110px'
             }}
         >
             <CardContent>
                 <Typography
                     color={"textSecondary"}
-                    sx={{pb: "25px"}}
+                    sx={{pb: "0px"}}
                 >
-                    競技の進行状況
+                    進行度
                 </Typography>
                 <Stack
                     direction={"column"}
@@ -32,7 +29,6 @@ export const GameProgress = (props: { sportsId: number }) => {
                     alignItems={"center"}
                 >
                     <GameProgressChart
-                        labels={labels}
                         chartSeries={chartSeries}
                     />
                 </Stack>

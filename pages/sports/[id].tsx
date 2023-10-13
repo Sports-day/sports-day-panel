@@ -17,7 +17,7 @@ import {
 import {GameProgress} from "../../components/game/game-progress";
 import {GameBest} from "../../components/game/GameBest";
 import {Navigation} from "../../components/layouts/navigation";
-import {HiArrowLeftCircle, HiEllipsisHorizontalCircle, HiXMark} from "react-icons/hi2";
+import {HiChevronLeft, HiOutlineClipboardDocumentList, HiXMark} from "react-icons/hi2";
 import * as React from "react";
 import {createTheme} from "../../components/theme";
 import {ThemeProvider} from "@mui/material/styles";
@@ -169,66 +169,60 @@ const Id: NextPage<Props> = (props: Props) => {
                                         <Container
                                             maxWidth={false}
                                             disableGutters
+                                            sx={{
+                                                paddingTop: 0,
+                                                paddingBottom: "0px",
+                                                marginBottom: "70px",
+                                                position: "relative",
+                                                zIndex: 1,
+                                                width: "101vw",
+                                                height: "fit-content",
+                                                backgroundColor: "#23398a",
+                                            }}
                                         >
-                                            <Stack
-                                                direction={"row"}
-                                                justifyContent={"center"}
-                                                alignItems={"center"}
-                                                spacing={3}
-                                                sx={{
-                                                    paddingTop: 0,
-                                                    paddingBottom: "0px",
-                                                    marginBottom: "70px",
-                                                    position: "relative",
-                                                    zIndex: 1,
-                                                    width: "101vw",
-                                                    height: "fit-content",
-                                                    backgroundColor: "#23398a",
+                                            <motion.div
+                                                key={"mainvisual-content"}
+                                                initial={{opacity: 0, y: "50px"}}
+                                                animate={{opacity: 1, y: "0px"}}
+                                                transition={{
+                                                    delay: 0.3,
+                                                    duration: 1,
+                                                    ease: [0.16, 1, 0.3, 1]
                                                 }}
                                             >
-                                                <motion.div
-                                                    key={"mainvisual-content"}
-                                                    initial={{opacity: 0, y: "50px"}}
-                                                    animate={{opacity: 1, y: "0px"}}
-                                                    transition={{
-                                                        delay: 0.3,
-                                                        duration: 1,
-                                                        ease: [0.16, 1, 0.3, 1]
+
+                                                <Container
+                                                    maxWidth={"xl"}
+                                                    sx={{paddingTop: 8.5}}
+                                                >
+                                                    <InformationList/>
+                                                </Container>
+                                                <Stack
+                                                    direction={"row"}
+                                                    justifyContent={"center"}
+                                                    alignItems={"center"}
+                                                    spacing={3}
+                                                    sx={{
+                                                        pt: 7,
+                                                        pb: 3
                                                     }}
                                                 >
-                                                    <Container
-                                                        maxWidth={"xl"}
-                                                        sx={{paddingTop: 8.5}}
+                                                    <Avatar
+                                                        alt={sport.name}
+                                                        sx={{height: "3.5em", width: "3.5em"}}
+                                                        src={image?.attachment}
                                                     >
-                                                        <InformationList/>
-                                                    </Container>
-                                                    <Stack
-                                                        direction={"row"}
-                                                        justifyContent={"center"}
-                                                        alignItems={"center"}
-                                                        spacing={3}
-                                                        sx={{
-                                                            pt: 7,
-                                                            pb: 3
-                                                        }}
-                                                    >
-                                                        <Avatar
-                                                            alt={sport.name}
-                                                            sx={{height: "3.5em", width: "3.5em"}}
-                                                            src={image?.attachment}
-                                                        >
 
-                                                        </Avatar>
-                                                        <Typography sx={{
-                                                            color: "#FFF",
-                                                            fontSize: "30px",
-                                                            fontWeight: "bold"
-                                                        }}>
-                                                            {sport.name}
-                                                        </Typography>
-                                                    </Stack>
-                                                </motion.div>
-                                            </Stack>
+                                                    </Avatar>
+                                                    <Typography sx={{
+                                                        color: "#FFF",
+                                                        fontSize: "30px",
+                                                        fontWeight: "bold"
+                                                    }}>
+                                                        {sport.name}
+                                                    </Typography>
+                                                </Stack>
+                                            </motion.div>
                                         </Container>
                                         <Container
                                             maxWidth={false}
@@ -278,35 +272,35 @@ const Id: NextPage<Props> = (props: Props) => {
                                                     }}
                                                 >
                                                     <SvgIcon>
-                                                        <HiArrowLeftCircle/>
-                                                    </SvgIcon>
-                                                    <Typography>
-                                                        戻る
-                                                    </Typography>
-                                                </Stack>
-                                            </Button>
-                                            <Button onClick={handleClickOpen('paper')}>
-                                                <Stack
-                                                    direction={"row"}
-                                                    justifyContent={"space-between"}
-                                                    alignItems={"flex-start"}
-                                                    spacing={1}
-                                                    sx={{
-                                                        px: 1,
-                                                        pt: 3,
-                                                        pb: 2,
-                                                        color: "#23398A",
-                                                        "@media (prefers-color-scheme: dark)": {
-                                                            color: "#99a5d6"
-                                                        }
-                                                    }}
-                                                >
-                                                    <Typography>
-                                                        ルールを見る
-                                                    </Typography>
-                                                    <SvgIcon>
-                                                        <HiEllipsisHorizontalCircle/>
-                                                    </SvgIcon>
+                                                                    <HiChevronLeft/>
+                                                                </SvgIcon>
+                                                                <Typography>
+                                                                    戻る
+                                                                </Typography>
+                                                            </Stack>
+                                                        </Button>
+                                                        <Button onClick={handleClickOpen('paper')}>
+                                                            <Stack
+                                                                direction={"row"}
+                                                                justifyContent={"space-between"}
+                                                                alignItems={"flex-start"}
+                                                                spacing={1}
+                                                                sx={{
+                                                                    px: 1,
+                                                                    pt: 3,
+                                                                    pb:2,
+                                                                    color: "#23398A",
+                                                                    "@media (prefers-color-scheme: dark)": {
+                                                                        color: "#99a5d6"
+                                                                    }
+                                                                }}
+                                                            >
+                                                                <Typography>
+                                                                    ルールを見る
+                                                                </Typography>
+                                                                <SvgIcon>
+                                                                    <HiOutlineClipboardDocumentList/>
+                                                                </SvgIcon>
                                                 </Stack>
                                             </Button>
                                             <Dialog
@@ -349,47 +343,23 @@ const Id: NextPage<Props> = (props: Props) => {
                                             </Dialog>
                                         </Stack>
 
-                                        {/*GameProgress, BestTeam*/}
-                                        <Stack
-                                            direction={"column"}
-                                        >
-                                            <Grid container spacing={1.5}>
-
-                                                <Grid xs={12} sm={6} lg={6}>
-                                                    <motion.div
-                                                        key={"gamebest"}
-                                                        initial={{opacity: 0, y: "50px"}}
-                                                        animate={{opacity: 1, y: "0px"}}
-                                                        transition={{
-                                                            delay: 0.3,
-                                                            duration: 1,
-                                                            ease: [0.16, 1, 0.3, 1]
-                                                        }}
+                                                    {/*GameProgress, BestTeam*/}
+                                                    <Stack
+                                                        direction={"column"}
                                                     >
-                                                        <GameBest
-                                                            games={games}
-                                                            gameId={focusedGameId}
-                                                        />
-                                                    </motion.div>
-                                                </Grid>
-
-                                                <Grid xs={12} sm={6} lg={6}>
-                                                    <motion.div
-                                                        key={"gameprogress"}
-                                                        initial={{opacity: 0, y: "50px"}}
-                                                        animate={{opacity: 1, y: "0px"}}
-                                                        transition={{
-                                                            delay: 0.4,
-                                                            duration: 1,
-                                                            ease: [0.16, 1, 0.3, 1]
-                                                        }}
-                                                    >
-                                                        <GameProgress sportsId={sport.id}/>
-                                                    </motion.div>
-                                                </Grid>
-
-                                            </Grid>
-                                        </Stack>
+                                                        <Grid container spacing={1.5}>
+                                                            <Grid xs={12} sm={12} lg={12}>
+                                                                <motion.div
+                                                                    key={"gameprogress"}
+                                                                    initial={{opacity: 0, y: "50px"}}
+                                                                    animate={{opacity: 1, y: "0px"}}
+                                                                    transition={{delay:0.4, duration: 1, ease: [0.16, 1, 0.3, 1]}}
+                                                                >
+                                                                    <GameProgress sportsId={sport.id}/>
+                                                                </motion.div>
+                                                            </Grid>
+                                                        </Grid>
+                                                    </Stack>
 
                                     </Container>
 

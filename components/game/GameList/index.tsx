@@ -112,7 +112,7 @@ export const GameList = (props: GameListProps) => {
                         spacing={5}
                     >
                         <Typography sx={{color: "#99a5d6", fontSize: "14px"}}>
-                            対戦一覧
+                           リーグとマッチ
                         </Typography>
                         <Box sx={{
                             width: '100vw',
@@ -166,7 +166,7 @@ export const GameList = (props: GameListProps) => {
 
                     </Stack>
                     <Typography sx={{color: "#99a5d6", fontSize: "14px"}}>
-                        対戦が終了すると項目が追加されます
+                        マッチが終わると項目が追加されます
                     </Typography>
                 </Stack>
             </Stack>
