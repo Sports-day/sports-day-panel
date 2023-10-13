@@ -190,7 +190,7 @@ export const Overview = (props: OverviewProps) => {
                                     color={"#E8EBF8"}
                                     fontWeight={"bold"}
                                 >
-                                    あなたのチームメンバー
+                                    チームメンバー
                                 </Typography>
                                 <IconButton onClick={toggleDrawer(false)}>
                                     <SvgIcon>
