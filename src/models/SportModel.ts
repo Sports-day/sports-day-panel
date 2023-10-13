@@ -17,8 +17,8 @@ export const sportFactory = (repo?: SportRepository) => {
     const repository = repo ?? sportRepository
 
     return {
-        index: async (): Promise<Sport[]> => {
-            return await repository.getSports()
+        index: async (filter: boolean = false): Promise<Sport[]> => {
+            return await repository.getSports(filter)
         },
         show: async (id: number): Promise<Sport> => {
             return await repository.getSport(id)
