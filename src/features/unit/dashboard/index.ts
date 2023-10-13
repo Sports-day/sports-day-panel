@@ -26,7 +26,6 @@ export type DashboardDataType = {
     sports: Sport[]
     games: Game[]
     matches: Match[]
-    informationList: Information[]
     //  for individual section
     mySport: Sport | undefined
     myGame: Game | undefined
@@ -47,7 +46,6 @@ export const useFetchDashboard = () => {
     const {games, isFetching: isFetchingGames} = useFetchGames()
     const {matches, isFetching: isFetchingMatches} = useFetchMatches()
     const {users, isFetching: isFetchingUsers} = useFetchUsers()
-    const {allInformation, isFetching: isFetchingInformation} = useFetchAllInformation()
     //  context
     const {data: microsoftAccount} = useContext(MicrosoftAccountContext)
     //  individual state
@@ -58,7 +56,7 @@ export const useFetchDashboard = () => {
     const [myTeamUsersState, setMyTeamUsers] = useState<User[]>([])
     const [myTeamRankState, setMyTeamRank] = useState<number>(0)
 
-    if(!isFetchingImages && !isFetchingLocations && !isFetchingTeams && !isFetchingSports && !isFetchingGames && !isFetchingMatches && !isFetchingUsers && !isFetchingInformation && isFetching) {
+    if(!isFetchingImages && !isFetchingLocations && !isFetchingTeams && !isFetchingSports && !isFetchingGames && !isFetchingMatches && !isFetchingUsers && isFetching) {
         //  fetch data for individual section
         fetchBlock: {
             /*
@@ -117,7 +115,7 @@ export const useFetchDashboard = () => {
 
             //  fetch rank
             if (myGame.type === "league") {
-                gameFactory().getLeagueResult(myGame.id)
+                gameFactory().getLeagueResult(myGame.id, true)
                     .then(result => {
                         if (!result) return
                         const myTeamResult = result.teams.find(teamResult => teamResult.teamId === myTeam.id)
@@ -127,6 +125,7 @@ export const useFetchDashboard = () => {
                     })
                     .catch(() => {
                         console.log("failed to fetch league result")
+                        setMyTeamRank(-1)
                     })
             } else {
                 gameFactory().getTournamentResult(myGame.id)
@@ -139,6 +138,7 @@ export const useFetchDashboard = () => {
                     })
                     .catch(() => {
                         console.log("failed to fetch tournament result")
+                        setMyTeamRank(-1)
                     })
             }
         }
@@ -155,7 +155,6 @@ export const useFetchDashboard = () => {
         sports: sports,
         games: games,
         matches: matches,
-        informationList: allInformation,
         //  for individual section
         mySport: mySportState,
         myGame: myGameState,

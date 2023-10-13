@@ -11,7 +11,7 @@ import {
     TextFieldProps
 } from "@mui/material";
 import {SportEditFields} from "./SportEditFields";
-import {ImagesContext} from "../../context";
+import {ImagesContext, TagContext} from "../../context";
 
 export type SportFormProps = {
     isOpen: boolean
@@ -28,12 +28,19 @@ export function SportForm(props: SportFormProps) {
     const wightRef = useRef<TextFieldProps>(null)
     const ruleIdRef = useRef<TextFieldProps>(null)
     //  state
-    const [iconIdState, setIconIdState] = useState<string>(props.sport?.iconId?.toString() ?? '')
+    const [iconIdState, setIconIdState] = useState<string>(props.sport?.iconId?.toString() ?? '-1')
+    const [tagIdState, setTagIdState] = useState<string>(props.sport?.tagId?.toString() ?? '-1')
+
     //  images
     const {data: images} = useContext(ImagesContext)
+    const {data: tags } = useContext(TagContext)
 
     const handleImageIdChange = (e: SelectChangeEvent) => {
         setIconIdState(e.target.value.toString())
+    }
+
+    const handleTagIdChange = (e: SelectChangeEvent) => {
+        setTagIdState(e.target.value.toString())
     }
 
     const handleSubmit = async (e: FormEvent) => {
@@ -57,13 +64,20 @@ export function SportForm(props: SportFormProps) {
             return
         }
 
+        //  tagId invalid
+        if (tagIdState !== '-1' && !tags?.some(tag => tag.id === +tagIdState)) {
+            alert('タグが正しく選択されていません。')
+            return
+        }
+
         if (props.formType === "create") {
             await sportFactory().create({
                 name: nameRef.current?.value as string,
                 description: descriptionRef.current?.value as string,
                 iconId: iconIdState === '-1' ? null : +iconIdState,
                 weight: wightRef.current?.value as number,
-                ruleId: ruleIdRef.current?.value as number
+                ruleId: ruleIdRef.current?.value as number,
+                tagId: tagIdState === '-1' ? null : +tagIdState,
             })
         } else {
             const id = props.sport?.id
@@ -76,7 +90,8 @@ export function SportForm(props: SportFormProps) {
                     description: descriptionRef.current?.value as string,
                     iconId: iconIdState === '' ? null : +iconIdState,
                     weight: wightRef.current?.value as number,
-                    ruleId: ruleIdRef.current?.value as number
+                    ruleId: ruleIdRef.current?.value as number,
+                    tagId: tagIdState === '-1' ? null : +tagIdState,
                 }
             )
         }
@@ -108,8 +123,11 @@ export function SportForm(props: SportFormProps) {
                             wightRef={wightRef}
                             ruleIdRef={ruleIdRef}
                             iconIdState={iconIdState}
+                            tagIdState={tagIdState}
                             handleImageIdChange={handleImageIdChange}
+                            handleTagIdChange={handleTagIdChange}
                             images={images}
+                            tags={tags}
                             sport={props.sport}
                         />
 

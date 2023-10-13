@@ -25,6 +25,11 @@ const updateSport = async (id: number, omittedSport: Omit<Sport, "id" | "gameIds
     return data.data
 }
 
+const getProgress = async (id: number): Promise<number> => {
+    const {data} = await ApiClient.get(`/sports/${id}/progress`)
+    return data.data
+}
+
 
 export type SportRepository = {
     getSports: () => Promise<Sport[]>,
@@ -32,6 +37,7 @@ export type SportRepository = {
     deleteSport: (id: number) => Promise<void>,
     createSport: (omittedSport: Omit<Sport, "id" | "gameIds" | "createdAt" | "updatedAt">) => Promise<Sport>,
     updateSport: (id: number, omittedSport: Omit<Sport, "id" | "gameIds" | "createdAt" | "updatedAt">) => Promise<Sport>,
+    getProgress: (id: number) => Promise<number>,
 }
 
 export const sportRepository: SportRepository = {
@@ -40,4 +46,5 @@ export const sportRepository: SportRepository = {
     deleteSport,
     createSport,
     updateSport,
+    getProgress,
 }

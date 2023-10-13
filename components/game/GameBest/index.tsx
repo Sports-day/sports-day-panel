@@ -1,10 +1,22 @@
 import {Card, CardContent, Stack, Typography}from "@mui/material";
-import {GameBestContent} from "./GameBestContent";
-import {Sport} from "../../../src/models/SportModel";
-import {useFetchSportBest3} from "../../../src/features/sports/hook";
+import {Game} from "../../../src/models/GameModel";
+import {GameBestList} from "./GameBestList";
 
-export const GameBest = () => {
-    const { bestTeams, isFetching } = useFetchSportBest3()
+export type GameBestProps = {
+    games: Game[]
+    gameId: number | null
+}
+
+export const GameBest = (props: GameBestProps) => {
+    const components = props.games.map((game) => {
+        return (
+            <GameBestList
+                key={game.id}
+                game={game}
+                visible={game.id === props.gameId}
+            />
+        )
+    })
 
     return(
         <Card sx={{
@@ -27,19 +39,7 @@ export const GameBest = () => {
                         競技内ベスト3
                     </Typography>
 
-                    {bestTeams.map((team) => {
-                        if (!team.team) {
-                            return null
-                        }
-
-                        return (
-                            <GameBestContent
-                                key={team.team.id}
-                                team={team.team.name}
-                                rank={team.rank}
-                            />
-                        );
-                    })}
+                    {components}
 
                 </Stack>
             </CardContent>

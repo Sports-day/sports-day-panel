@@ -1,7 +1,9 @@
 import axios from "axios";
-import {getServerSession, Session} from "next-auth";
+import {getServerSession} from "next-auth";
 import {getSession} from "next-auth/react";
+import Cookies from "js-cookie";
 
+const TOKEN_COOKIE_EXPIRE = 10 // minutes
 const baseURL = process.env.NEXT_PUBLIC_API_URL + "/v1";
 
 const headers = {
@@ -33,24 +35,36 @@ ApiClient.interceptors.response.use(
 
 // put token into header
 ApiClient.interceptors.request.use(async (request: any) => {
-    let session: Session | null
-    //  server side
-    if(typeof window === 'undefined') {
-        session = await getServerSession()
+    let token: string | undefined
+
+    // server side
+    if (typeof window === 'undefined') {
+        const session = await getServerSession()
+        token = session?.accessToken
     }
-    //  client side
+    // client side
     else {
-        session = await getSession()
+        token = Cookies.get("sports-day.api-access-token")
+        if (!token) {
+            const session = await getSession()
+            token = session?.accessToken
+            if (token) {
+                console.log(">>> Update token in cookie <<<")
+                Cookies.set("sports-day.api-access-token", token,
+                    {
+                        expires: 1/24/60 * TOKEN_COOKIE_EXPIRE,
+                    })
+            }
+        }
     }
 
     //  do not have access token
-    if (!session || !session.accessToken) {
+    if (token === undefined) {
         return request
     }
 
     //  token
-    request.headers["Authorization"] = "Bearer " + session.accessToken
-
+    request.headers["Authorization"] = "Bearer " + token
 
     return request
 });

@@ -1,17 +1,14 @@
 import {Card, CardContent,　Stack, Typography}from "@mui/material";
 import {GameProgressChart} from "./GameProgressChart";
-import {useContext} from "react";
-import {MatchesContext} from "../../context";
+import {useFetchSportProgress} from "../../../src/features/sports/hook";
 
-export const GameProgress = () => {
-    const {data: matches} = useContext(MatchesContext)
+export const GameProgress = (props: { sportsId: number }) => {
+    const { progress } = useFetchSportProgress(props.sportsId)
 
-    let total = matches.length
-    let finished = matches.filter(match => match.status == "finished").length
-    const calculatedResult = Math.round((finished / total) * 100)
-    const result = isNaN(calculatedResult) ? 0 : calculatedResult
+    const formattedProgress = Math.trunc(progress * 100)
 
-    const chartSeries = [result, 100-result]
+    const chartSeries = [formattedProgress, 100-formattedProgress]
+    const labels = ["完了した競技", "未完了の競技"]
 
     return (
         <Card

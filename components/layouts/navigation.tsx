@@ -33,12 +33,13 @@ import {
 import Logo from "public/logo.svg"
 import Mark from "public/mark.svg"
 import {signOut, useSession} from "next-auth/react";
-import { alpha } from '@mui/material/styles';
+import {alpha} from '@mui/material/styles';
 import Link from "next/link";
 import {useState} from "react";
 import {DialogProps} from "@mui/material/Dialog";
 import {Rules} from "../rules/Rules";
 import {DocsOverall} from "../rules/DocsOverall";
+import Cookies from "js-cookie";
 
 type Anchor = 'top';
 
@@ -71,7 +72,7 @@ export const Navigation = () => {
                     return;
                 }
 
-                setState({ ...state, [anchor]: open });
+                setState({...state, [anchor]: open});
             };
 
     const menu = (anchor: Anchor) => (
@@ -215,7 +216,13 @@ export const Navigation = () => {
                         </Button>
                     }
 
-                        <Button onClick={() => signOut()}>
+                        <Button
+                            onClick={async () => {
+                                //  remove cookie
+                                Cookies.remove("sports-day.api-access-token")
+                                await signOut()
+                            }}
+                        >
                             <Stack
                                 direction={"row"}
                                 justifyContent={"flex-start"}
@@ -272,7 +279,7 @@ export const Navigation = () => {
                             sx={{marginRight: "10px", padding: "8px 5px"}}
                         >
                             <Box py={2} px={2}>
-                                <Button component={Link} href={"/"}　scroll={false}>
+                                <Button component={Link} href={"/"} scroll={false}>
                                     <Logo width={20 * 8.45} height={20} fill={'white'}/>
                                 </Button>
                             </Box>
@@ -312,7 +319,7 @@ export const Navigation = () => {
                                             justifyContent={"center"}
                                             alignItems={"center"}
                                             spacing={2}
-                                            sx={{width:"100%"}}
+                                            sx={{width: "100%"}}
                                         >
                                             <Button sx={{width:"100%", height:"100%"}} onClick={handleClose}>
                                                 <SvgIcon sx={{mr:1}}>
@@ -325,7 +332,8 @@ export const Navigation = () => {
                                 </Dialog>
                                 {(['top'] as const).map((anchor) => (
                                     <React.Fragment key={"top"}>
-                                        <IconButton onClick={toggleDrawer(anchor, true)} sx={{backgroundColor: "#2F479D"}}>
+                                        <IconButton onClick={toggleDrawer(anchor, true)}
+                                                    sx={{backgroundColor: "#2F479D"}}>
                                             <SvgIcon>
                                                 <HiMenuAlt4 color="#FFF"/>
                                             </SvgIcon>
@@ -349,7 +357,7 @@ export const Navigation = () => {
             </>
         );
     } else {
-        return(
+        return (
             <>
             </>
         )

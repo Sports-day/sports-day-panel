@@ -1,7 +1,6 @@
 import {NextPage} from "next";
 import Head from "next/head";
 import {
-    Alert,
     Box,
     Container,
     Stack,
@@ -19,8 +18,8 @@ import {ImagesContext, LocationsContext, TeamsContext} from "../components/conte
 import {useFetchDashboard} from "../src/features/unit/dashboard";
 import {Loading} from "../components/layouts/loading";
 import {motion} from "framer-motion";
-import {Notification} from "../components/layouts/notification";
 import {OtherInfo} from "../components/dashboard/Overview/OtherInfo";
+import {InformationList} from "../components/InformationList";
 
 const DashBoard: NextPage = () => {
     //  Unit Hook
@@ -30,7 +29,6 @@ const DashBoard: NextPage = () => {
         locations,
         teams,
         sports,
-        informationList,
         //  for individual section
         mySport,
         myGame,
@@ -127,16 +125,7 @@ const DashBoard: NextPage = () => {
                                                         maxWidth={"xl"}
                                                         sx={{paddingTop: 8.5}}
                                                     >
-                                                        {informationList
-                                                            .map((info) => {
-                                                                return (
-                                                                    <Notification
-                                                                        key={info.id}
-                                                                        infoName={info.name}
-                                                                        infoContent={info.content}
-                                                                    />
-                                                                );
-                                                            })}
+                                                        <InformationList />
                                                     </Container>
                                                     {mySport && myTeam &&
                                                         <Box sx={{pt: 2}}>

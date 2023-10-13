@@ -45,7 +45,10 @@ export function UsersListForTeam(props: UsersListForTeamProps) {
             const classModel = classes?.find(classModel => classModel.id === user.classId)
 
             return filterWord.split("\n").some(uWord => {
-                const word = uWord.replace("◎", "")
+                const word = uWord
+                    .replace("◎", "")
+                    .replace("　", "")
+                    .replace(" ", "")
                 return user.name.includes(word)
                     || user.id.toString().includes(word)
                     || user.studentId.toString().includes(word)

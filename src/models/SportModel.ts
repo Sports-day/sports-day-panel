@@ -8,6 +8,7 @@ export type Sport = {
     weight: number,
     ruleId: number,
     gameIds: number[],
+    tagId: number | null,
     createdAt: string,
     updatedAt: string
 }
@@ -30,6 +31,9 @@ export const sportFactory = (repo?: SportRepository) => {
         },
         update: async (id: number, omittedSport: Omit<Sport, "id" | "gameIds" | "createdAt" | "updatedAt">): Promise<Sport> => {
             return await repository.updateSport(id, omittedSport)
+        },
+        getProgress: async (id: number): Promise<number> => {
+            return await repository.getProgress(id)
         }
     }
 }

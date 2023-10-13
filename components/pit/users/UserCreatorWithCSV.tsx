@@ -61,6 +61,7 @@ export function UserCreatorWithCSV(props: Props) {
         const users: UserData[] = []
 
         for (const line of lines) {
+            if (line === "") continue
             const elements = line.split(",")
 
             //  invalid csv
