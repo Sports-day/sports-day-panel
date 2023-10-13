@@ -37,6 +37,7 @@ import {useFetchSport, useFetchSportGames} from "../../src/features/sports/hook"
 import {useFetchTeams} from "../../src/features/teams/hook";
 import {useFetchLocations} from "../../src/features/locations/hook";
 import {useFetchImages} from "../../src/features/images/hook";
+import {useSession} from "next-auth/react";
 
 const REFRESH_INTERVAL = 1000 * 60 * 5
 
@@ -46,6 +47,9 @@ type Props = {
 }
 
 const Id: NextPage<Props> = (props: Props) => {
+    useSession({
+        required: true,
+    })
     //  router
     const theme = createTheme();
     //  fetch

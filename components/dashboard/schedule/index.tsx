@@ -27,9 +27,9 @@ export const Schedule = (props: ScheduleProps) => {
             <Button
                 component={Link}
                 href={`/sports/${props.sportId}?gameId=${props.gameId}`}
-                sx={{margin: 0, padding: 0}}
+                sx={{margin: 0, padding: 0, width: "100%"}}
             >
-                <CardContent>
+                <CardContent sx={{width: "100%"}}>
                     <Stack
                         spacing={0}
                     >
