@@ -19,7 +19,7 @@ export const Footer = () => {
                 spacing={1}
             >
                 <Typography>(C) 2023</Typography>
-                <Box sx={{pt:"2px"}}>
+                <Box sx={{pt:"5px"}}>
                     <Logo width={14*8.45} height={14} fill={'#99a5d6'}/>
                 </Box>
                 <Typography>TEAM</Typography>
