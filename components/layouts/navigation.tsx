@@ -130,6 +130,22 @@ export const Navigation = () => {
 
                     <Divider/>
 
+                    <Button component={Link} href={"/privacy"}>
+                        <Stack
+                            direction={"row"}
+                            justifyContent={"flex-start"}
+                            alignItems={"center"}
+                            spacing={2}
+                            width={"100%"}
+                        >
+                            <Typography sx={{color: "#99a5d6", fontSize: "16px"}}>
+                                プライバシーポリシー
+                            </Typography>
+                        </Stack>
+                    </Button>
+
+                    <Divider/>
+
                     <Button component={Link} href={"/about"}>
                         <Stack
                             direction={"row"}
