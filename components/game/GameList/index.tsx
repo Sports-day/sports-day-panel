@@ -104,6 +104,7 @@ export const GameList = (props: GameListProps) => {
                     alignItems={"center"}
                     spacing={3}
                     width={"100vw"}
+                    pr={1}
                 >
                     <Stack
                         width={"100%"}

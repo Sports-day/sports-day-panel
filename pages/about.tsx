@@ -84,7 +84,7 @@ const About: NextPage = () => {
                                         position: "relative",
                                         zIndex: 1,
                                         width: "101vw",
-                                        height: "85vh",
+                                        height: "100vh",
                                         background: "linear-gradient(#23398A, #3352B5)"
                                     }}
                                 >
