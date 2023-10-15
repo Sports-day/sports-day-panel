@@ -17,6 +17,7 @@ import {Fragment, useContext, useState} from "react";
 import {ImagesContext} from "../../context";
 import * as React from "react";
 import Link from "next/link";
+import Rank from "./Rank"
 
 
 export type OverviewProps = {
@@ -114,19 +115,7 @@ export const Overview = (props: OverviewProps) => {
                                 <Typography sx={{color: "#99a5d6", fontSize: "14px"}}>
                                     リーグ内順位
                                 </Typography>
-                                <Stack
-                                    direction={"row"}
-                                    alignItems={"flex-end"}
-                                    marginLeft={0.5}
-                                    spacing={1}
-                                >
-                                    <Typography sx={{color: "#FFF", fontSize: "24px", fontWeight: "bold"}}>
-                                        {props.myTeamRank}
-                                    </Typography>
-                                    <Typography sx={{color: "#99a5d6", fontSize: "14px", py: "5px"}}>
-                                        位
-                                    </Typography>
-                                </Stack>
+                                <Rank rank={props.myTeamRank}/>
                             </Stack>
                             <SvgIcon>
                                 <HiChartBar color="#99a5d6"/>

@@ -109,7 +109,7 @@ const Privacy: NextPage = () => {
                                             <Stack direction={"row"}>
                                                 <SvgIcon sx={{margin: 0.7}}><HiEyeSlash color={"#fff"}/></SvgIcon>
                                                 <Typography sx={{color: "#e8ebf8", fontSize: "24px"}}>
-                                                    個人情報保護方針
+                                                    Privacy / License
                                                 </Typography>
                                             </Stack>
                                         </Stack>
@@ -149,7 +149,7 @@ const Privacy: NextPage = () => {
                                 pb={10}
                             >
                                 <Typography fontSize={"30px"} fontWeight={"bold"} pb={8}>
-                                    個人情報保護方針
+                                    プライバシーポリシー
                                 </Typography>
                                 <Typography fontSize={"26px"} fontWeight={"bold"} pb={2}>
                                     Google Analytics
@@ -168,7 +168,35 @@ const Privacy: NextPage = () => {
                                     Cookie
                                 </Typography>
                                 <Typography fontSize={"18px"}>
-                                    SPORTSDAYでは、Cookieを使用しています。クッキーは (あなたが許可した場合に) WebサイトやサービスがWebブラウザーを介してコンピューターに保存する小さなファイルです。使用することでWebサイトがブラウザーを識別し、登録済みのアカウントがある場合関連付けます。
+                                    SPORTSDAYでは、Cookieを使用しています。クッキーは、WebサイトやサービスがWebブラウザーを介してコンピューターに保存する小さなファイルです。使用することでWebサイトがブラウザーを識別し、登録済みのアカウントがある場合関連付けます。
+                                </Typography>
+                            </Stack>
+                            <Stack
+                                direction={"column"}
+                                justifyContent={"flex-start"}
+                                alignItems={"flex-start"}
+                                spacing={2}
+                                pt={15}
+                                pb={10}
+                            >
+                                <Typography fontSize={"30px"} fontWeight={"bold"} pb={8}>
+                                    License
+                                </Typography>
+                                <Typography fontSize={"26px"} fontWeight={"bold"} pb={2}>
+                                    Heroicons
+                                </Typography>
+                                <Typography fontSize={"18px"}>
+                                    MIT License
+
+                                    Copyright (c) 2020 Refactoring UI Inc.
+                                </Typography>
+                                <Typography fontSize={"26px"} fontWeight={"bold"} pt={4} pb={2}>
+                                    Lucide
+                                </Typography>
+                                <Typography fontSize={"18px"}>
+                                    ISC License
+
+                                    Copyright (c) for portions of Lucide are held by Cole Bemis 2013-2022 as part of Feather (MIT). All other copyright (c) for Lucide are held by Lucide Contributors 2022.
                                 </Typography>
                             </Stack>
                         </Container>
