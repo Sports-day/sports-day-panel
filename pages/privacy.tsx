@@ -85,7 +85,7 @@ const Privacy: NextPage = () => {
                                         position: "relative",
                                         zIndex: 1,
                                         width: "101vw",
-                                        height: "85vh",
+                                        height: "100vh",
                                         background: "linear-gradient(#23398A, #3352B5)"
                                     }}
                                 >
@@ -180,7 +180,13 @@ const Privacy: NextPage = () => {
                                 pb={10}
                             >
                                 <Typography fontSize={"30px"} fontWeight={"bold"} pb={8}>
-                                    License
+                                    知的財産情報
+                                </Typography>
+                                <Typography fontSize={"18px"}>
+                                    CopyRight 2023 SPORTSDAY TEAM All Rights Reserved, Licensed under Apache-2.0.
+                                </Typography>
+                                <Typography fontSize={"18px"} pb={8}>
+                                    NEXT.JSはVercel, Inc. KotlinはKotlin Foundation Google AnalyticsはGoogle, Inc. MotionはFramerの商標または商品名です。
                                 </Typography>
                                 <Typography fontSize={"26px"} fontWeight={"bold"} pb={2}>
                                     Heroicons
