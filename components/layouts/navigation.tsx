@@ -139,7 +139,7 @@ export const Navigation = () => {
                             width={"100%"}
                         >
                             <Typography sx={{color: "#99a5d6", fontSize: "16px"}}>
-                                プライバシーポリシー
+                                プライバシーポリシーと知的財産情報
                             </Typography>
                         </Stack>
                     </Button>
