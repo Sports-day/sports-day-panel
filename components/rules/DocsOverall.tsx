@@ -3,7 +3,6 @@ import {
     Stack,
     Typography,
     DialogContentText,
-    List, ListItem, ListItemAvatar, Avatar, SvgIcon, ListItemText, Divider
 } from "@mui/material";
 import {
     Timeline,
@@ -14,21 +13,20 @@ import {
     TimelineDot,
     TimelineOppositeContent
 } from "@mui/lab";
-import { timelineContentClasses } from "@mui/lab/TimelineContent";
+import {timelineContentClasses} from "@mui/lab/TimelineContent";
 import {
     HiMapPin,
-    HiUserGroup
 } from "react-icons/hi2"
 import ReactMarkdown from "react-markdown";
 import * as React from "react";
 
 const markdown = `
 # 運営体制
-- 運営：
-- 結果集計：
-- 巡回・状況把握：
-- 取材：
-- 緊急対応：
+- 運営： ${process.env.NEXT_PUBLIC_OPERATION_PERSON}
+- 結果集計：${process.env.NEXT_PUBLIC_RESULT_PERSON}
+- 巡回・状況把握： ${process.env.NEXT_PUBLIC_PATROL_PERSON}
+- 取材： ${process.env.NEXT_PUBLIC_INTERVIEW_PERSON}
+- 緊急対応： ${process.env.NEXT_PUBLIC_EMERGENCY_PERSON}
 
 # ⚠️注意事項
 安全で楽しい大会になるよう、下記のことに気をつけましょう。
@@ -46,14 +44,14 @@ const markdown = `
 `
 
 export const DocsOverall = () => {
-    return(
+    return (
         <Stack
             direction={"column"}
             justifyContent={"flex-start"}
             alignItems={"flex-start"}
             spacing={2}
             py={2}
-            sx={{width:"100%"}}
+            sx={{width: "100%"}}
         >
             <Typography color={"#E8EBF8"}>タイムテーブル</Typography>
             <Timeline sx={{
@@ -67,8 +65,8 @@ export const DocsOverall = () => {
                         08:50
                     </TimelineOppositeContent>
                     <TimelineSeparator>
-                        <TimelineDot />
-                        <TimelineConnector />
+                        <TimelineDot/>
+                        <TimelineConnector/>
                     </TimelineSeparator>
                     <TimelineContent>
                         開会式
@@ -83,14 +81,15 @@ export const DocsOverall = () => {
                         09:00
                     </TimelineOppositeContent>
                     <TimelineSeparator>
-                        <TimelineDot />
-                        <TimelineConnector />
+                        <TimelineDot/>
+                        <TimelineConnector/>
                     </TimelineSeparator>
                     <TimelineContent>
                         着替え
                         <Stack direction={"row"}>
                             <Box pt={0.2}><HiMapPin size={16} color={"#99a5d6"}/></Box>
-                            <Typography fontSize={"14px"} color={"#99a5d6"}>男子は各教室、女子は女子更衣室と1階物理実験室</Typography>
+                            <Typography fontSize={"14px"}
+                                        color={"#99a5d6"}>男子は各教室、女子は女子更衣室と1階物理実験室</Typography>
                         </Stack>
                     </TimelineContent>
                 </TimelineItem>
@@ -101,8 +100,8 @@ export const DocsOverall = () => {
                         15:20
                     </TimelineOppositeContent>
                     <TimelineSeparator>
-                        <TimelineDot />
-                        <TimelineConnector />
+                        <TimelineDot/>
+                        <TimelineConnector/>
                     </TimelineSeparator>
                     <TimelineContent>競技</TimelineContent>
                 </TimelineItem>
@@ -111,8 +110,8 @@ export const DocsOverall = () => {
                         15:30
                     </TimelineOppositeContent>
                     <TimelineSeparator>
-                        <TimelineDot />
-                        <TimelineConnector />
+                        <TimelineDot/>
+                        <TimelineConnector/>
                     </TimelineSeparator>
                     <TimelineContent>
                         閉会式
@@ -127,7 +126,7 @@ export const DocsOverall = () => {
                         15:50
                     </TimelineOppositeContent>
                     <TimelineSeparator>
-                        <TimelineDot />
+                        <TimelineDot/>
                     </TimelineSeparator>
                     <TimelineContent>
                         解散
