@@ -579,8 +579,8 @@ const About: NextPage = () => {
                                             <Image
                                                 width={"120"}
                                                 height={"120"}
-                                                src="/vultr.png"
-                                                alt="vultr"
+                                                src="/ga.png"
+                                                alt="Google Analytics"
                                             />
                                         </Stack>
                                     </Grid>
