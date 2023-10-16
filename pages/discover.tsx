@@ -21,13 +21,11 @@ import {useFetchTeamSetsInMyClass} from "../src/features/unit/discover";
 import {Loading} from "../components/layouts/loading";
 import {motion} from "framer-motion";
 import {HiClock, HiLocationMarker, HiSearch} from "react-icons/hi";
-import {HiXMark} from "react-icons/hi2";
-import {OtherInfo} from "../components/dashboard/Overview/OtherInfo";
-import {SportsListElement} from "../components/dashboard/SportsListElement";
-import Link from "next/link";
 import {useFetchLocations} from "../src/features/locations/hook";
 import {useFetchImages} from "../src/features/images/hook";
 import {UsersContext} from "../components/context";
+import {DiscoverTeamContent} from "../components/discover/DiscoverTeamContent";
+import {OtherInfo} from "../components/dashboard/Overview/OtherInfo";
 
 
 const Discover: NextPage = () => {
@@ -42,7 +40,6 @@ const Discover: NextPage = () => {
 
     const {images, isFetching: isFetchingImages} = useFetchImages()
     const {locations, isFetching: isFetchingLocations} = useFetchLocations()
-    const [open, toggleDrawer] = React.useState(false);
     const theme = createTheme();
 
     return (
@@ -76,7 +73,8 @@ const Discover: NextPage = () => {
                             minHeight={"96vh"}
                             sx={{
                                 flexGrow: 1,
-                                overflow: "hidden"
+                                overflow: "hidden",
+                                pb: 9
                             }}
                         >
                             <motion.div
@@ -180,144 +178,29 @@ const Discover: NextPage = () => {
                                         <Typography sx={{px:2}} fontSize={"18px"}>
                                             同じクラスの試合一覧
                                         </Typography>
-                                        <Grid container spacing={1.5}>
-                                            {matchSets
-                                                .map((matchSet, index) => {
-                                                    matchSet.match;
-                                                    matchSet.sport;
-                                                    matchSet.team;
-                                                    const image = images.find((v) => v.id === matchSet.sport.iconId)
-                                                    const location = locations.find((v) => v.id === matchSet.match.locationId)
-                                                    return (
-                                                        <>
-                                                            <Grid xs={12} sm={12} lg={12} key={index}>
-                                                                <Card>
-                                                                    <Button sx={{width:"100%"}} onClick={() => toggleDrawer(true)}>
-                                                                        <Grid xs={12} sm={5} lg={6}>
-                                                                            <Stack
-                                                                                alignItems={"flex-start"}
-                                                                                direction={"column"}
-                                                                                justifyContent={"flex-start"}
-                                                                                spacing={1}
-                                                                                py={1}
-                                                                                px={1}
-                                                                            >
-                                                                                <Typography color={"textSecondary"} fontSize={"14px"}>
-                                                                                    チーム名
-                                                                                </Typography>
-                                                                                <Typography fontSize={"24px"} fontWeight={"bold"} color={"white"}>
-                                                                                    {matchSet.team.name}
-                                                                                </Typography>
-                                                                            </Stack>
-                                                                        </Grid>
-                                                                        <Grid xs={12} sm={7} lg={6}>
-                                                                            <Stack
-                                                                                direction={"column"}
-                                                                                justifyContent={"center"}
-                                                                                alignItems={"flex-start"}
-                                                                            >
-                                                                                <Stack
-                                                                                    direction={"row"}
-                                                                                    alignItems={"flex-end"}
-                                                                                    spacing={1}
-                                                                                >
-                                                                                    <Box sx={{pb:"0.3em"}}>
-                                                                                        <Avatar
-                                                                                            sx={{height: "1.5em", width: "1.5em"}}
-                                                                                            src={image?.attachment}
-                                                                                        >
-                                                                                        </Avatar>
-                                                                                    </Box>
-                                                                                    <Typography sx={{color: "#99a5d6", fontSize: "14px", py: "5px"}}>
-                                                                                        {matchSet.sport.name}
-                                                                                    </Typography>
-                                                                                </Stack>
-                                                                                <Stack
-                                                                                    direction={"row"}
-                                                                                    alignItems={"flex-end"}
-                                                                                    spacing={1}
-                                                                                >
-                                                                                    <SvgIcon fontSize={"small"} sx={{position:"relative", bottom:"3px"}}>
-                                                                                        <HiLocationMarker color="#99a5d6"/>
-                                                                                    </SvgIcon>
-                                                                                    <Typography sx={{color: "#99a5d6", fontSize: "14px", py: "5px"}}>
-                                                                                        {location?.name}
-                                                                                    </Typography>
-                                                                                </Stack>
-                                                                            </Stack>
-                                                                        </Grid>
-                                                                    </Button>
-                                                                </Card>
-                                                            </Grid>
+                                        {isSuccessful && (
+                                            <Grid container spacing={1.5}>
+                                                {matchSets
+                                                    .map((matchSet, index) => {
+                                                        return (
                                                             <>
-                                                                <SwipeableDrawer
-                                                                    anchor="bottom"
-                                                                    open={open}
-                                                                    onClose={() => toggleDrawer(false)}
-                                                                    onOpen={() => toggleDrawer(true)}
-                                                                    swipeAreaWidth={5}
-                                                                    disableSwipeToOpen={true}
-                                                                    ModalProps={{
-                                                                        keepMounted: true,
-                                                                    }}
-                                                                >
-                                                                    <Container
-                                                                        maxWidth={"xl"}
-                                                                        sx={{
-                                                                            pt: 1,
-                                                                            pb: 5,
-                                                                            px: 3,
-                                                                            overflow: "scrollable"
-                                                                        }}
-                                                                    >
-                                                                        <Stack
-                                                                            direction={"row"}
-                                                                            justifyContent={"space-between"}
-                                                                            alignItems={"center"}
-                                                                            sx={{width: "100%"}}
-                                                                            py={1}
-                                                                        >
-                                                                            <Typography
-                                                                                color={"#E8EBF8"}
-                                                                                fontWeight={"bold"}
-                                                                            >
-                                                                                チームメンバー
-                                                                            </Typography>
-                                                                            <IconButton onClick={() => toggleDrawer(false)}>
-                                                                                <SvgIcon>
-                                                                                    <HiXMark color={"#E8EBF8"}/>
-                                                                                </SvgIcon>
-                                                                            </IconButton>
-                                                                        </Stack>
-                                                                        <Stack
-                                                                            direction={"column"}
-                                                                            justifyContent={"flex-start"}
-                                                                            alignItems={"flex-start"}
-                                                                            spacing={2}
-                                                                            pt={2}
-                                                                        >
-                                                                            {users
-                                                                                .filter(user => user.teamIds.includes(matchSet.team.id))
-                                                                                .map(user => {
-                                                                                    return (
-                                                                                        <Fragment key={user.id}>
-                                                                                            <Box sx={{width: "100%"}}>
-                                                                                                <Divider/>
-                                                                                            </Box>
-                                                                                            <Typography color={"#99a5d6"} fontSize={"16px"}>
-                                                                                                {user.name}
-                                                                                            </Typography>
-                                                                                        </Fragment>
-                                                                                    );
-                                                                                })}
-                                                                        </Stack>
-                                                                    </Container>
-                                                                </SwipeableDrawer>
+                                                                <DiscoverTeamContent
+                                                                    matchSet={matchSet}
+                                                                    images={images}
+                                                                    locations={locations}
+                                                                    users={users}
+                                                                    key={index}
+                                                                />
                                                             </>
-                                                        </>
-                                                    );
-                                                })}
-                                        </Grid>
+                                                        );
+                                                    })}
+                                            </Grid>
+                                        )}
+                                        {!isSuccessful && (
+                                            <OtherInfo infoName={""}
+                                                       infoContent={"ブラウズ機能はご利用いただけません。"}
+                                                       infoSubContent={"どの競技にも参加していないため、同じクラスの試合はご覧いただけません。競技に参加する予定にも関わらずこのメッセージが表示されている場合は、お近くのスタッフにお伝えください。"}/>
+                                        )}
                                     </Stack>
                                 </Container>
                             </motion.div>
