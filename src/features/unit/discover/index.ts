@@ -1,4 +1,4 @@
-import {useFetchMyUser} from "../../users/hook";
+import {useFetchMyUser, useFetchUsers} from "../../users/hook";
 import {useFetchTeams} from "../../teams/hook";
 import {useFetchGames} from "../../games/hook";
 import {useFetchSports} from "../../sports/hook";
@@ -8,9 +8,14 @@ import {Sport} from "../../../models/SportModel";
 import {Game} from "../../../models/GameModel";
 import {useState} from "react";
 import {useFetchClasses} from "../../classes/hooks";
+import {User} from "../../../models/UserModel";
+import {Match} from "../../../models/MatchModel";
+import {useFetchMatches} from "../../matches/hook";
 
-export type TeamGameSet = {
+export type MatchSet = {
+    match: Match,
     team: Team,
+    members: User[],
     sport: Sport,
     game: Game,
 }
@@ -19,51 +24,73 @@ export type TeamSetsInMyClassResponse = {
     isFetching: boolean
     isSuccessful: boolean
     myClass: Class | undefined
-    teamGameSets: TeamGameSet[]
+    matchSets: MatchSet[]
 }
 
 export const useFetchTeamSetsInMyClass = () => {
+    const {users, isFetching: isFetchingUsers} = useFetchUsers()
     const {teams, isFetching: isFetchingTeams} = useFetchTeams()
     const {games, isFetching: isFetchingGames} = useFetchGames()
     const {sports, isFetching: isFetchingSports} = useFetchSports()
+    const {matches, isFetching: isFetchingMatches} = useFetchMatches()
     const {classes, isFetching: isFetchingClasses} = useFetchClasses()
     const {user, isFetching: isFetchingMyUser} = useFetchMyUser()
 
     //  state
     const [isFetching, setIsFetching] = useState<boolean>(true)
-    const [isSuccessful, setIsSuccessful] = useState<boolean>(false)
-    const [myClass, setMyClass] = useState<Class | undefined>(undefined)
-    const [teamGameSets, setTeamGameSets] = useState<TeamGameSet[]>([])
+    const [isSuccessfulState, setIsSuccessfulState] = useState<boolean>(false)
+    const [myClassState, setMyClassState] = useState<Class | undefined>(undefined)
+    const [matchSetListState, setMatchSetListState] = useState<MatchSet[]>([])
 
-    if (!isFetchingTeams && !isFetchingGames && !isFetchingSports && !isFetchingClasses && !isFetchingMyUser && isFetching) {
+    if (!isFetchingUsers && !isFetchingTeams && !isFetchingGames && !isFetchingSports && !isFetchingMatches && !isFetchingClasses && !isFetchingMyUser && isFetching) {
         fetchBlock: {
             if (!user) break fetchBlock
             const findMyClass = classes.find((c) => c.id === user?.classId)
             if (!findMyClass) break fetchBlock
-            setMyClass(findMyClass)
+            setMyClassState(findMyClass)
 
             //  find teams belong to same class
             const findTeams = teams.filter((t) => t.classId === findMyClass.id)
 
-            //  find games belong to each team
-            const findTeamGameSets: TeamGameSet[] = []
+            const matchSetList: MatchSet[] = []
+
             for (const team of findTeams) {
-                const sets = team.enteredGameIds.map((gId) => {
-                    const game = games.find((g) => g.id === gId)
-                    const sport = sports.find((s) => s.id === game?.sportId)
+                //  find members
+                const findMembers = users.filter((u) => team.userIds.includes(u.id))
+                //  find matches
+                const findMatches = matches
+                    .filter((m) => m.leftTeamId === team.id || m.rightTeamId === team.id)
+                    .filter((m) => m.status !== "finished")
 
-                    return {
-                        team: team,
-                        sport: sport,
-                        game: game,
-                    }
-                }) as TeamGameSet[]
+                //  construct match set
+                for (const match of findMatches) {
+                    //  find sport and game
+                    const findSport = sports.find((s) => s.id === match.sportId)
+                    const findGame = games.find((g) => g.id === match.gameId)
 
-                findTeamGameSets.push(...sets)
+                    //  construct match set
+                    const matchSet = {
+                        match,
+                        team,
+                        members: findMembers,
+                        sport: findSport,
+                        game: findGame,
+                    } as MatchSet
+
+                    //  push
+                    matchSetList.push(matchSet)
+                }
             }
 
-            setTeamGameSets(findTeamGameSets)
-            setIsSuccessful(true)
+            //  sort by match start time
+            const sortedMatchSetList = matchSetList.sort((a, b) => {
+                return a.match.startAt.localeCompare(b.match.startAt)
+            })
+
+            //  set state
+            setMatchSetListState(sortedMatchSetList)
+
+            setIsSuccessfulState(true)
         }
 
         setIsFetching(false)
@@ -71,8 +98,8 @@ export const useFetchTeamSetsInMyClass = () => {
 
     return {
         isFetching,
-        isSuccessful,
-        myClass,
-        teamGameSets,
+        isSuccessful: isSuccessfulState,
+        myClass: myClassState,
+        matchSets: matchSetListState,
     } as TeamSetsInMyClassResponse
 }
