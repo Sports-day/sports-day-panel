@@ -61,10 +61,6 @@ export const Schedule = (props: ScheduleProps) => {
                         {props.matches
                             .sort((a, b) => a.startAt.localeCompare(b.startAt))
                             .map((match: Match) => {
-                                //  get opponent team
-                                const opponentTeamId = match.leftTeamId === props.myTeamId ? match.rightTeamId : match.leftTeamId
-                                const opponentTeam = teams.find(team => team.id === opponentTeamId)
-
                                 return (
                                     <>
                                         <ScheduleContent

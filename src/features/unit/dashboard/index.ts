@@ -23,6 +23,7 @@ export type DashboardDataType = {
     images: Image[]
     locations: Location[]
     teams: Team[]
+    users: User[]
     sports: Sport[]
     games: Game[]
     matches: Match[]
@@ -152,6 +153,7 @@ export const useFetchDashboard = () => {
         images: images,
         locations: locations,
         teams: teams,
+        users: users,
         sports: sports,
         games: games,
         matches: matches,
