@@ -24,6 +24,7 @@ export type TeamSetsInMyClassResponse = {
     isFetching: boolean
     isSuccessful: boolean
     myClass: Class | undefined
+    users: User[]
     matchSets: MatchSet[]
 }
 
@@ -100,6 +101,7 @@ export const useFetchTeamSetsInMyClass = () => {
         isFetching,
         isSuccessful: isSuccessfulState,
         myClass: myClassState,
+        users: users,
         matchSets: matchSetListState,
     } as TeamSetsInMyClassResponse
 }

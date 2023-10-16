@@ -84,7 +84,7 @@ const About: NextPage = () => {
                                         zIndex: 1,
                                         width: "101vw",
                                         height: "90vh",
-                                        background: "linear-gradient(#23398A, #3352B5)"
+                                        background: "linear-gradient(#23398A, #08174B)"
                                     }}
                                 >
                                     <motion.div
@@ -120,7 +120,7 @@ const About: NextPage = () => {
                                     top:"-150px",
                                     zIndex: "0",
                                     position:"relative",
-                                    backgroundColor: "#3352b5",
+                                    backgroundColor: "#08174B",
                                     borderTopLeftRadius:"10px",
                                     borderTopRightRadius:"10px",
                                     borderBottomLeftRadius: "50% 50%",
