@@ -1,9 +1,9 @@
 import {
     Box,
     Button, Card,
-    CardContent,
+    CardContent, Container, Divider, IconButton,
     Stack,
-    SvgIcon,
+    SvgIcon, SwipeableDrawer,
     Typography,
     Unstable_Grid2 as Grid
 } from "@mui/material";
@@ -12,6 +12,8 @@ import * as React from "react";
 import {ScheduleContent} from "./ScheduleContent";
 import {Match} from "../../../src/models/MatchModel";
 import Link from "next/link";
+import {HiXMark} from "react-icons/hi2";
+import {Fragment} from "react";
 
 export type ScheduleProps = {
     sportId: number
@@ -24,14 +26,14 @@ export const Schedule = (props: ScheduleProps) => {
 
     return (
         <Card sx={{height: "fit-content"}}>
-            <Button
-                component={Link}
-                href={`/sports/${props.sportId}?gameId=${props.gameId}`}
-                sx={{margin: 0, padding: 0, width: "100%"}}
-            >
-                <CardContent sx={{width: "100%"}}>
-                    <Stack
-                        spacing={0}
+            <CardContent sx={{width: "100%"}}>
+                <Stack
+                    spacing={0}
+                >
+                    <Button
+                        component={Link}
+                        href={`/sports/${props.sportId}?gameId=${props.gameId}`}
+                        sx={{margin: 0, padding: 0, width: "100%"}}
                     >
                         <Stack
                             direction={"row"}
@@ -53,25 +55,27 @@ export const Schedule = (props: ScheduleProps) => {
                                 </SvgIcon>
                             </Box>
                         </Stack>
-                        <Grid container spacing={1}>
+                    </Button>
+                    <Grid container spacing={1}>
 
-                            {props.matches
-                                .sort((a, b) => a.startAt.localeCompare(b.startAt))
-                                .map((match: Match) => {
-                                    return (
+                        {props.matches
+                            .sort((a, b) => a.startAt.localeCompare(b.startAt))
+                            .map((match: Match) => {
+                                return (
+                                    <>
                                         <ScheduleContent
                                             key={match.id}
                                             match={match}
                                             myTeamId={props.myTeamId}
                                         />
 
-                                    );
-                                })}
+                                    </>
+                                );
+                            })}
 
-                        </Grid>
-                    </Stack>
-                </CardContent>
-            </Button>
+                    </Grid>
+                </Stack>
+            </CardContent>
         </Card>
     );
 };
