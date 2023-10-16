@@ -109,7 +109,7 @@ export const GameList = (props: GameListProps) => {
                     <Stack
                         width={"100%"}
                         maxWidth={"xl"}
-                        sx={{px: 2, pb: 3, pt: 4}}
+                        sx={{px: 2, pb: 20, pt: 4}}
                         spacing={5}
                     >
                         <Typography sx={{color: "#99a5d6", fontSize: "14px"}}>
@@ -164,11 +164,10 @@ export const GameList = (props: GameListProps) => {
                                 )
                             })
                         }
-
+                        <Typography sx={{alignSelf: "center",color: "#99a5d6", fontSize: "14px"}}>
+                            マッチが終わると項目が追加されます
+                        </Typography>
                     </Stack>
-                    <Typography sx={{color: "#99a5d6", fontSize: "14px"}}>
-                        マッチが終わると項目が追加されます
-                    </Typography>
                 </Stack>
             </Stack>
         </Container>

@@ -17,7 +17,6 @@ import * as React from "react";
 import {createTheme} from "../components/theme";
 import {ThemeProvider} from "@mui/material/styles";
 import Logo from "public/logo.svg"
-import {Footer} from "../components/layouts/footer";
 import {
     FaQuoteLeft,
     FaTwitter,
@@ -84,7 +83,7 @@ const About: NextPage = () => {
                                         position: "relative",
                                         zIndex: 1,
                                         width: "101vw",
-                                        height: "100vh",
+                                        height: "90vh",
                                         background: "linear-gradient(#23398A, #3352B5)"
                                     }}
                                 >
@@ -101,7 +100,7 @@ const About: NextPage = () => {
                                             spacing={1}
                                             sx={{
                                                 pt: 7,
-                                                pb: 3
+                                                pb: 25
                                             }}
                                         >
                                             <Logo width={24 * 8.45} height={24} fill={'#E8EBF8'}/>
@@ -473,7 +472,7 @@ const About: NextPage = () => {
                                 whileInView={{opacity: 1, scale: 1}}
                                 transition={{delay: 0.2, duration: 1, ease: [0.16, 1, 0.3, 1]}}
                             >
-                                <Grid container spacing={1.5}>
+                                <Grid container spacing={1.5} sx={{mb:9}}>
 
                                     <Grid xs={12} sm={6} lg={3}>
                                         <Stack
@@ -656,7 +655,6 @@ const About: NextPage = () => {
 
                         </Container>
                     </Box>
-                    <Footer/>
                 </motion.div>
             </ThemeProvider>
         </>

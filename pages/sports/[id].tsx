@@ -20,7 +20,6 @@ import {HiChevronLeft, HiOutlineClipboardDocumentList, HiXMark} from "react-icon
 import * as React from "react";
 import {createTheme} from "../../components/theme";
 import {ThemeProvider} from "@mui/material/styles";
-import {Footer} from "../../components/layouts/footer";
 import {GameList} from "../../components/game/GameList"
 import {GamesContext, LocationsContext, MatchesContext, TeamsContext} from "../../components/context";
 import {Loading} from "../../components/layouts/loading";
@@ -393,7 +392,6 @@ const Id: NextPage<Props> = (props: Props) => {
                                         </motion.div>
 
                                     </Box>
-                                    <Footer/>
                                 </motion.div>
                             </ThemeProvider>
                         </LocationsContext.Provider>

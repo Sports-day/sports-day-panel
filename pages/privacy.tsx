@@ -85,7 +85,7 @@ const Privacy: NextPage = () => {
                                         position: "relative",
                                         zIndex: 1,
                                         width: "101vw",
-                                        height: "100vh",
+                                        height: "90vh",
                                         background: "linear-gradient(#23398A, #3352B5)"
                                     }}
                                 >
@@ -102,7 +102,7 @@ const Privacy: NextPage = () => {
                                             spacing={1}
                                             sx={{
                                                 pt: 7,
-                                                pb: 3
+                                                pb:25
                                             }}
                                         >
                                             <Logo width={24 * 8.45} height={24} fill={'#E8EBF8'}/>
@@ -177,7 +177,7 @@ const Privacy: NextPage = () => {
                                 alignItems={"flex-start"}
                                 spacing={2}
                                 pt={15}
-                                pb={10}
+                                pb={18}
                             >
                                 <Typography fontSize={"30px"} fontWeight={"bold"} pb={8}>
                                     知的財産情報
@@ -207,7 +207,6 @@ const Privacy: NextPage = () => {
                             </Stack>
                         </Container>
                     </Box>
-                    <Footer/>
                 </motion.div>
             </ThemeProvider>
         </>
