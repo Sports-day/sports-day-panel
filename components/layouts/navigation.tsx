@@ -5,6 +5,8 @@ import {
     HiCog, HiX,
     HiMenuAlt4,
     HiSparkles,
+    HiHome,
+    HiSearch
 } from "react-icons/hi";
 import {
     HiCalendar
@@ -24,6 +26,7 @@ import {
     Button,
     Divider,
     Typography, DialogTitle, DialogContent, DialogActions, Dialog,
+    BottomNavigation, BottomNavigationAction
 } from '@mui/material';
 import Logo from "public/logo.svg"
 import {signOut, useSession} from "next-auth/react";
@@ -34,7 +37,7 @@ import {DialogProps} from "@mui/material/Dialog";
 import {DocsOverall} from "../rules/DocsOverall";
 import Cookies from "js-cookie";
 
-type Anchor = 'top';
+type Anchor = 'bottom';
 
 export const Navigation = () => {
     const [value, setValue] = React.useState('home');
@@ -43,7 +46,7 @@ export const Navigation = () => {
         setValue(newValue);
     };
 
-    const [state, setState] = React.useState({top: false, NotifTop: false});
+    const [state, setState] = React.useState({bottom: false, NotifBottom: false});
     const [open, setOpen] = useState(false);
     const [scroll, setScroll] = React.useState<DialogProps['scroll']>('paper');
     const handleClickOpen = (scrollType: DialogProps['scroll']) => () => {
@@ -73,31 +76,12 @@ export const Navigation = () => {
             <Box
                 sx={{
                     backgroundColor: '#23398A',
-                    width: '100vw' , height: '100vh', overflow:'scrollable'}}
+                    width: '100vw' , height: 'auto', overflow:'scrollable', mt:4, mb:0.5}}
                 role="Navigation"
                 onClick={toggleDrawer(anchor, false)}
                 onKeyDown={toggleDrawer(anchor, false)}
             >
                 <Container maxWidth={"xl"} disableGutters>
-                    <Stack
-                        direction={"row"}
-                        justifyContent={"space-between"}
-                        alignItems={"center"}
-                        pl={3}
-                        py={3}
-                        sx={{marginRight: "10px", paddingRight:"6px"}}
-                    >
-                        <Box>
-                            <Button component={Link} href={"/"} scroll={false}>
-                                <Logo width={20 * 8.45} height={20} fill={'white'}/>
-                            </Button>
-                        </Box>
-                        <IconButton onClick={toggleDrawer(anchor, true)}>
-                            <SvgIcon color="primary">
-                                <HiX color="#FFF"/>
-                            </SvgIcon>
-                        </IconButton>
-                    </Stack>
 
                 <Stack
                     direction={"column"}
@@ -127,8 +111,6 @@ export const Navigation = () => {
                             {session?.user?.name ?? "unknown"}
                         </Typography>
                     </Stack>
-
-                    <Divider/>
 
                     <Button component={Link} href={"/privacy"}>
                         <Stack
@@ -258,6 +240,25 @@ export const Navigation = () => {
                         </Button>
 
                     </Stack>
+                    <Stack
+                        direction={"row"}
+                        justifyContent={"space-between"}
+                        alignItems={"center"}
+                        pl={3}
+                        py={3}
+                        sx={{marginRight: "28px", paddingRight:"6px"}}
+                    >
+                        <Box>
+                            <Button component={Link} href={"/"} scroll={false}>
+                                <Logo width={20 * 8.45} height={20} fill={'white'}/>
+                            </Button>
+                        </Box>
+                        <IconButton onClick={toggleDrawer(anchor, true)}>
+                            <SvgIcon color="primary">
+                                <HiX color="#FFF"/>
+                            </SvgIcon>
+                        </IconButton>
+                    </Stack>
                 </Container>
             </Box>
         </>
@@ -268,13 +269,12 @@ export const Navigation = () => {
     if (session) {
         return (
             <>
-                <AppBar
+                <Box
                     component="nav"
-                    elevation={0}
                     sx={{
-                        height: "80px",
+                        height: "50px",
                         backdropFilter: 'blur(6px)',
-                        backgroundColor: alpha('#23398A', 0.7),
+                        backgroundColor: '#23398A'
                     }}
                 >
                     <Container
@@ -283,13 +283,13 @@ export const Navigation = () => {
                     >
                         <Stack
                             direction={"row"}
-                            justifyContent={"space-between"}
+                            justifyContent={"center"}
                             alignItems={"center"}
                             sx={{marginRight: "10px", padding: "8px 5px"}}
                         >
-                            <Box py={2} px={2}>
+                            <Box py={1} px={4}>
                                 <Button component={Link} href={"/"} scroll={false}>
-                                    <Logo width={20 * 8.45} height={20} fill={'white'}/>
+                                    <Logo width={20 * 8.45} height={20} fill={'#5669b0'}/>
                                 </Button>
                             </Box>
                             <Stack
@@ -298,11 +298,6 @@ export const Navigation = () => {
                                 alignItems={"center"}
                                 spacing={2}
                             >
-                                <IconButton onClick={handleClickOpen('paper')} sx={{backgroundColor: "#2F479D"}}>
-                                    <SvgIcon>
-                                        <HiCalendar color="#FFF"/>
-                                    </SvgIcon>
-                                </IconButton>
                                 <Dialog
                                     open={open}
                                     onClose={handleClose}
@@ -339,30 +334,44 @@ export const Navigation = () => {
                                         </Stack>
                                     </DialogActions>
                                 </Dialog>
-                                {(['top'] as const).map((anchor) => (
-                                    <React.Fragment key={"top"}>
-                                        <IconButton onClick={toggleDrawer(anchor, true)}
-                                                    sx={{backgroundColor: "#2F479D"}}>
-                                            <SvgIcon>
-                                                <HiMenuAlt4 color="#FFF"/>
-                                            </SvgIcon>
-                                        </IconButton>
-                                        <SwipeableDrawer
-                                            anchor={anchor}
-                                            open={state[anchor]}
-                                            onClose={toggleDrawer(anchor, false)}
-                                            onOpen={toggleDrawer(anchor, true)}
-                                        >
-                                            {menu(anchor)}
-                                        </SwipeableDrawer>
-                                    </React.Fragment>
-                                ))}
                             </Stack>
 
                         </Stack>
 
                     </Container>
-                </AppBar>
+                </Box>
+                <Box
+                    sx={{
+                        position: "fixed",
+                        bottom:0, left:0, right:0,
+                        zIndex:"128",
+                    }}
+                >
+                    <BottomNavigation
+                        sx={{
+                            height: "80px",
+                            backdropFilter: 'blur(6px)',
+                            backgroundColor: alpha('#23398A', 0.8),
+                        }}
+                    >
+                        <BottomNavigationAction component={Link} label={"ホーム"} icon={<HiHome/>} sx={{fontSize:"25px", color:"#fff"}} href={"/"}/>
+                        <BottomNavigationAction label={"見つける"} icon={<HiSearch/>} sx={{fontSize:"25px", color:"#fff"}}/>
+                        <BottomNavigationAction label={"スケジュール"} icon={<HiCalendar/>} sx={{fontSize:"25px", color:"#fff"}} onClick={handleClickOpen('paper')}/>
+                        {(['bottom'] as const).map((anchor) => (
+                            <React.Fragment key={"top"}>
+                                <BottomNavigationAction label={"スケジュール"} icon={<HiMenuAlt4/>} sx={{fontSize:"25px", color:"#fff"}} onClick={toggleDrawer(anchor, true)}/>
+                                <SwipeableDrawer
+                                    anchor={anchor}
+                                    open={state[anchor]}
+                                    onClose={toggleDrawer(anchor, false)}
+                                    onOpen={toggleDrawer(anchor, true)}
+                                >
+                                    {menu(anchor)}
+                                </SwipeableDrawer>
+                            </React.Fragment>
+                        ))}
+                    </BottomNavigation>
+                </Box>
             </>
         );
     } else {

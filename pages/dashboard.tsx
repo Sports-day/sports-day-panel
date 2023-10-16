@@ -123,7 +123,7 @@ const DashBoard: NextPage = () => {
                                                 >
                                                     <Container
                                                         maxWidth={"xl"}
-                                                        sx={{paddingTop: 8.5}}
+                                                        sx={{paddingTop: 0.1}}
                                                     >
                                                         <InformationList />
                                                     </Container>
