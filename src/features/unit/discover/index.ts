@@ -31,8 +31,8 @@ export type TeamSetsInMyClassResponse = {
 export const useFetchTeamSetsInMyClass = () => {
     const {users, isFetching: isFetchingUsers} = useFetchUsers()
     const {teams, isFetching: isFetchingTeams} = useFetchTeams()
-    const {games, isFetching: isFetchingGames} = useFetchGames()
-    const {sports, isFetching: isFetchingSports} = useFetchSports()
+    const {games, isFetching: isFetchingGames} = useFetchGames(true)
+    const {sports, isFetching: isFetchingSports} = useFetchSports(true)
     const {matches, isFetching: isFetchingMatches} = useFetchMatches()
     const {classes, isFetching: isFetchingClasses} = useFetchClasses()
     const {user, isFetching: isFetchingMyUser} = useFetchMyUser()
@@ -68,6 +68,10 @@ export const useFetchTeamSetsInMyClass = () => {
                     //  find sport and game
                     const findSport = sports.find((s) => s.id === match.sportId)
                     const findGame = games.find((g) => g.id === match.gameId)
+
+                    if (!findSport || !findGame) {
+                        continue
+                    }
 
                     //  construct match set
                     const matchSet = {
