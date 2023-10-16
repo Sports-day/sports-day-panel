@@ -13,7 +13,6 @@ import {SportsListElement} from "../components/dashboard/SportsListElement";
 import {Navigation} from "../components/layouts/navigation";
 import {ThemeProvider} from "@mui/material/styles";
 import {createTheme} from "../components/theme";
-import {Footer} from "../components/layouts/footer";
 import {ImagesContext, LocationsContext, TeamsContext, UsersContext} from "../components/context";
 import {useFetchDashboard} from "../src/features/unit/dashboard";
 import {Loading} from "../components/layouts/loading";
@@ -101,7 +100,8 @@ const DashBoard: NextPage = () => {
                                             minHeight={"96vh"}
                                             sx={{
                                                 flexGrow: 1,
-                                                overflow: "hidden"
+                                                overflow: "hidden",
+                                                pb: 9
                                             }}
                                         >
                                             <motion.div
@@ -132,7 +132,7 @@ const DashBoard: NextPage = () => {
                                                     >
                                                         <Container
                                                             maxWidth={"xl"}
-                                                            sx={{paddingTop: 8.5}}
+                                                            sx={{paddingTop: 0.1}}
                                                         >
                                                             <InformationList/>
                                                         </Container>
@@ -227,7 +227,6 @@ const DashBoard: NextPage = () => {
                                                 </Container>
                                             </motion.div>
                                         </Box>
-                                        <Footer/>
                                     </motion.div>
                                 </ThemeProvider>
                             </UsersContext.Provider>
