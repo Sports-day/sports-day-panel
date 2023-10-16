@@ -18,11 +18,11 @@ export type TeamGameSet = {
 export type TeamSetsInMyClassResponse = {
     isFetching: boolean
     isSuccessful: boolean
-    myClass: Class | null
+    myClass: Class | undefined
     teamGameSets: TeamGameSet[]
 }
 
-export function useFetchTeamSetsInMyClass(): TeamSetsInMyClassResponse {
+export const useFetchTeamSetsInMyClass = () => {
     const {teams, isFetching: isFetchingTeams} = useFetchTeams()
     const {games, isFetching: isFetchingGames} = useFetchGames()
     const {sports, isFetching: isFetchingSports} = useFetchSports()
@@ -30,13 +30,12 @@ export function useFetchTeamSetsInMyClass(): TeamSetsInMyClassResponse {
     const {user, isFetching: isFetchingMyUser} = useFetchMyUser()
 
     //  state
-    const [isSuccessful, setIsSuccessful] = useState<boolean>(true)
-    const [myClass, setMyClass] = useState<Class | null>(null)
+    const [isFetching, setIsFetching] = useState<boolean>(true)
+    const [isSuccessful, setIsSuccessful] = useState<boolean>(false)
+    const [myClass, setMyClass] = useState<Class | undefined>(undefined)
     const [teamGameSets, setTeamGameSets] = useState<TeamGameSet[]>([])
 
-    const isFetching = isFetchingTeams || isFetchingGames || isFetchingSports || isFetchingClasses || isFetchingMyUser
-
-    if (!isFetching) {
+    if (!isFetchingTeams && !isFetchingGames && !isFetchingSports && !isFetchingClasses && !isFetchingMyUser && isFetching) {
         fetchBlock: {
             if (!user) break fetchBlock
             const findMyClass = classes.find((c) => c.id === user?.classId)
@@ -47,22 +46,27 @@ export function useFetchTeamSetsInMyClass(): TeamSetsInMyClassResponse {
             const findTeams = teams.filter((t) => t.classId === findMyClass.id)
 
             //  find games belong to each team
-            const findTeamGameSets = findTeams.map((t) => {
-                return t.enteredGameIds.map((gId) => {
+            const findTeamGameSets: TeamGameSet[] = []
+            for (const team of findTeams) {
+                const sets = team.enteredGameIds.map((gId) => {
                     const game = games.find((g) => g.id === gId)
                     const sport = sports.find((s) => s.id === game?.sportId)
 
                     return {
-                        team: t,
+                        team: team,
                         sport: sport,
                         game: game,
                     }
                 }) as TeamGameSet[]
-            })
 
-            setTeamGameSets(findTeamGameSets.flat())
+                findTeamGameSets.push(...sets)
+            }
+
+            setTeamGameSets(findTeamGameSets)
             setIsSuccessful(true)
         }
+
+        setIsFetching(false)
     }
 
     return {
@@ -70,5 +74,5 @@ export function useFetchTeamSetsInMyClass(): TeamSetsInMyClassResponse {
         isSuccessful,
         myClass,
         teamGameSets,
-    }
+    } as TeamSetsInMyClassResponse
 }
