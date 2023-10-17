@@ -374,8 +374,7 @@ export const Navigation = () => {
                                 justifyContent: "center",
                                 alignContent: "center",
                                 backdropFilter: 'blur(6px)',
-                                borderRadius: "15px",
-                                borderBottomLeftRadius:4,
+                                borderRadius: "35px",
                                 backgroundColor: alpha('#23398A', 0.9),
                                 boxShadow: "0px 0px 50px #112057"
                             }}
