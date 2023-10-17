@@ -56,13 +56,13 @@ export const GameProgressChart = (props:Props) => {
                             spacing={0}
                         >
                             <Typography sx={{color: "#FFF", fontSize: "30px", position: "relative", top: "-25px"}}>
-                                {props.chartSeries[0]} %
+                                {100} %
                             </Typography>
                         </Stack>
                         <Box>
                             <PointBar
                                 variant={"determinate"}
-                                value={props.chartSeries[0]}
+                                value={100}
                             />
                         </Box>
                     </Stack>
