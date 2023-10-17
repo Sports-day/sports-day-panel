@@ -5,7 +5,7 @@ import {useFetchSportProgress} from "../../../src/features/sports/hook";
 export const GameProgress = (props: { sportsId: number }) => {
     const { progress } = useFetchSportProgress(props.sportsId)
 
-    const formattedProgress = Math.trunc(progress * 200)
+    const formattedProgress = Math.trunc(progress * 100)
 
     const chartSeries = [formattedProgress, 100-formattedProgress]
     const labels = ["完了した競技", "未完了の競技"]
