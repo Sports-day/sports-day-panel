@@ -41,19 +41,6 @@ export const RuleBeachball = () => {
             py={2}
             sx={{width:"100%"}}
         >
-            <Typography color={"#E8EBF8"}>フィールド図</Typography>
-            <Stack
-                direction={"column"}
-                justifyContent={"center"}
-                alignItems={"center"}
-                spacing={2}
-                pb={2}
-                sx={{width:"100%"}}
-            >
-                <Box sx={{width:"100%", maxWidth:"350px"}}>
-                    <Coat width={"98%"} fill={'#99a5d6'}/>
-                </Box>
-            </Stack>
             <Grid container>
                 <Grid xs={12} sm={12} lg={12}>
                     <RuleNumCard title={"会場"} content={"第一体育館"} sub={" "}/>
