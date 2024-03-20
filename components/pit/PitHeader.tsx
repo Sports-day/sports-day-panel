@@ -1,19 +1,45 @@
 import Link from "next/link";
 import Image from "next/image";
 import styles from "../../styles/Pit.module.scss";
+import {AppBar, IconButton, Toolbar, Typography} from "@mui/material";
+import {MenuIcon} from "lucide-react";
 
-export function PitHeader() {
+export type PitHeaderProps = {
+    openSidebarFunction: () => void,
+}
+
+export function PitHeader(props: PitHeaderProps) {
 
     return (
-        <header>
-            <Link href={"/admin"} className={styles.logo}>
-                <Image
-                    src={"/pit.svg"}
-                    alt={"Pit Logo"}
-                    width={91}
-                    height={30}
-                />
-            </Link>
-        </header>
+
+        <AppBar position={"static"}>
+            <Toolbar>
+                <IconButton
+                    size="large"
+                    edge="start"
+                    color="inherit"
+                    aria-label="menu"
+                    sx={{ mr: 2 }}
+                    onClick={() => {
+                        props.openSidebarFunction()
+                    }}
+                >
+                    <MenuIcon />
+                </IconButton>
+
+                <Link
+                    href={"/"}
+                >
+                    <Typography
+                        variant="h6"
+                        component="div"
+                        sx={{ px: 1, py: 1 }}
+                    >
+                        Pit
+                    </Typography>
+                </Link>
+
+            </Toolbar>
+        </AppBar>
     )
 }
