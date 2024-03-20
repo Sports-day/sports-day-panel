@@ -1,53 +1,76 @@
-import styles from "../../styles/Pit.module.scss";
-import {PitSidebarContent} from "./PitSidebarContent";
+import {Drawer, List, ListItem, ListItemButton, ListItemText} from "@mui/material";
 
-export function PitSidebar() {
+export type PitSidebarProps = {
+    isOpenSidebar: boolean,
+    closeSidebarFunction: () => void,
+}
+
+type ContentType = {
+    name: string,
+    url: string,
+}
+
+export function PitSidebar(props: PitSidebarProps) {
+
+    const contents: ContentType[] = [
+        {
+            name: "インフォメーション",
+            url: "/admin/information",
+        },
+        {
+            name: "チーム",
+            url: "/admin/teams",
+        },
+        {
+            name: "ユーザー",
+            url: "/admin/users",
+        },
+        {
+            name: "競技",
+            url: "/admin/sports",
+        },
+        {
+            name: "マッチ",
+            url: "/admin/matches",
+        },
+        {
+            name: "ロケーション",
+            url: "/admin/locations",
+        },
+        {
+            name: "画像",
+            url: "/admin/images",
+        },
+        {
+            name: "タグ",
+            url: "/admin/tags",
+        },
+        {
+            name: "Microsoftアカウント",
+            url: "/admin/microsoft-accounts",
+        },
+    ]
+
     return (
-        <div className={styles.sidebar}>
-            {/*<PitSidebarContent*/}
-            {/*    name={"グループ"}*/}
-            {/*    url={"/admin/groups"}*/}
-            {/*/>*/}
-            {/*<PitSidebarContent*/}
-            {/*    name={"クラス"}*/}
-            {/*    url={"/admin/classes"}*/}
-            {/*/>*/}
-            <PitSidebarContent
-                name={"インフォメーション"}
-                url={"/admin/information"}
-            />
-            <PitSidebarContent
-                name={"チーム"}
-                url={"/admin/teams"}
-            />
-            <PitSidebarContent
-                name={"ユーザー"}
-                url={"/admin/users"}
-            />
-            <PitSidebarContent
-                name={"競技"}
-                url={"/admin/sports"}
-            />
-            <PitSidebarContent
-                name={"マッチ"}
-                url={"/admin/matches"}
-            />
-            <PitSidebarContent
-                name={"ロケーション"}
-                url={"/admin/locations"}
-            />
-            <PitSidebarContent
-                name={"画像"}
-                url={"/admin/images"}
-            />
-            <PitSidebarContent
-                name={"タグ"}
-                url={"/admin/tags"}
-            />
-            <PitSidebarContent
-                name={"Microsoftアカウント"}
-                url={"/admin/microsoft-accounts"}
-            />
-        </div>
+        <Drawer
+            open={props.isOpenSidebar}
+            onClose={() => {
+                props.closeSidebarFunction()
+            }}
+        >
+            <List>
+                {
+                    contents.map((content, index) => {
+                        return (
+                            <ListItem key={index} disablePadding>
+                                <ListItemButton href={content.url}>
+                                    <ListItemText primary={content.name}/>
+                                </ListItemButton>
+                            </ListItem>
+                        )
+                    })
+                }
+            </List>
+        </Drawer>
     )
 }
