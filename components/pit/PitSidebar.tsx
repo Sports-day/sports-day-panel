@@ -1,6 +1,5 @@
 import {Drawer, List, ListItem, ListItemButton, ListItemText} from "@mui/material";
 
-
 export type PitSidebarProps = {
     isOpenSidebar: boolean,
     closeSidebarFunction: () => void,

@@ -1,6 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
-import styles from "../../styles/Pit.module.scss";
 import {AppBar, IconButton, Toolbar, Typography} from "@mui/material";
 import {MenuIcon} from "lucide-react";
 
@@ -19,12 +17,12 @@ export function PitHeader(props: PitHeaderProps) {
                     edge="start"
                     color="inherit"
                     aria-label="menu"
-                    sx={{ mr: 2 }}
+                    sx={{mr: 2}}
                     onClick={() => {
                         props.openSidebarFunction()
                     }}
                 >
-                    <MenuIcon />
+                    <MenuIcon/>
                 </IconButton>
 
                 <Link
@@ -33,7 +31,7 @@ export function PitHeader(props: PitHeaderProps) {
                     <Typography
                         variant="h6"
                         component="div"
-                        sx={{ px: 1, py: 1 }}
+                        sx={{px: 1, py: 1}}
                     >
                         Pit
                     </Typography>

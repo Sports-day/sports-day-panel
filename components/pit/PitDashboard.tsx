@@ -1,9 +1,8 @@
 import {PitHeader} from "./PitHeader";
 import {PitSidebar} from "./PitSidebar";
-import styles from "../../styles/Pit.module.scss";
 import {ReactNode, useState} from "react";
 import Head from "next/head";
-import {Box, createTheme, CssBaseline, Paper} from "@mui/material";
+import {Box, createTheme, CssBaseline} from "@mui/material";
 import {ThemeProvider} from "@mui/material/styles";
 
 export function PitDashboard(props: { children: ReactNode }) {
