@@ -1,5 +1,4 @@
-![banner_panel](https://github.com/Sports-day/sports-day-panel/assets/58895178/c60efac8-b964-47d3-ae9b-0a207d8fcf27)
-
+![panel_banner](https://github.com/Sports-day/sports-day-panel/assets/58895178/817eb8e1-25d1-4dd6-bbca-684ff3b8dcc2)
 # sports-day-panel
 
 Sports-dayのフロントエンド用レポジトリです。
