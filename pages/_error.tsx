@@ -4,26 +4,24 @@ import {Box, Button, Container, Stack, Typography, SvgIcon} from "@mui/material"
 import Mark from "public/mark.svg"
 import {BiErrorAlt} from "react-icons/bi"
 import * as React from "react";
-import {ThemeProvider} from "@mui/material/styles";
-import {createTheme} from "../components/theme";
 
 const Page: NextPage = () => {
-    const theme = createTheme();
-    return(
-        <ThemeProvider theme={theme}>
+    return (
+        <>
             <Head>
                 <title>SPORTSDAY : Error</title>
-                <meta name="description" content="SPORTSDAY Login page" />
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <link rel="icon" href="/favicon.ico" />
+                <meta name="description" content="SPORTSDAY Login page"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1"/>
+                <link rel="icon" href="/favicon.ico"/>
             </Head>
             <Box
                 maxHeight={"100vh"}
                 sx={{
                     backgroundColor: "#23398A",
-                    width: '100vw' ,
+                    width: '100vw',
                     height: '100vh',
-                    overflow: 'hidden'}}
+                    overflow: 'hidden'
+                }}
             >
                 <Container
                     maxWidth={"md"}
@@ -69,7 +67,7 @@ const Page: NextPage = () => {
                                     fill={"#99a5d6"}
                                 />
                             </Box>
-                            <Typography fontSize= {"16px"} color= {"#99a5d6"}>エラーが発生しました</Typography>
+                            <Typography fontSize={"16px"} color={"#99a5d6"}>エラーが発生しました</Typography>
                             <Stack
                                 spacing={1}
                                 direction={"row"}
@@ -77,7 +75,8 @@ const Page: NextPage = () => {
                                 <SvgIcon>
                                     <BiErrorAlt color={"#99a5d6"}/>
                                 </SvgIcon>
-                                <Typography fontSize= {"16px"} color= {"#99a5d6"}>status code : see the console</Typography>
+                                <Typography fontSize={"16px"} color={"#99a5d6"}>status code : see the
+                                    console</Typography>
                             </Stack>
                         </Stack>
                         <Button
@@ -89,7 +88,8 @@ const Page: NextPage = () => {
                                 backgroundColor: "#fff",
                                 border: "1px solid #fff",
                                 borderRadius: "15px",
-                                borderBottomLeftRadius: "3px"}}
+                                borderBottomLeftRadius: "3px"
+                            }}
                         >
                             <Stack
                                 direction={"row"}
@@ -98,14 +98,14 @@ const Page: NextPage = () => {
                                 spacing={2}
                             >
                                 <Typography sx={{color: "#5664e3", fontSize: "16px"}}>
-                                   トップに戻る
+                                    トップに戻る
                                 </Typography>
                             </Stack>
                         </Button>
                     </Stack>
                 </Container>
             </Box>
-        </ThemeProvider>
+        </>
     )
 }
 

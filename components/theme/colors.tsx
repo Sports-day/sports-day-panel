@@ -13,22 +13,22 @@ const withAlphas = (color: any) => {
 
 export const neutral = {
     50: '#F8F9FA',
-    100: '#E8EBF8',
-    200: '#E8EBF8',
-    300: '#99A5D6',
-    400: '#99A5D6',
-    500: '#99A5D6',
-    600: '#435BBC',
-    700: '#53629f',
-    800: '#23398A',
-    900: '#23398A'
+    100: '#EFF0F8',
+    200: '#EFF0F8',
+    300: '#7F8CD6',
+    400: '#7F8CD6',
+    500: '#5F6DC2',
+    600: '#4A5ABB',
+    700: '#4A5ABB',
+    800: '#4A5ABB',
+    900: '#3E4EB3'
 };
 
 export const indigo = withAlphas({
     lightest: '#F5F7FF',
     light: '#EBEEFE',
-    main: '#506acb',
-    dark: '#23398a',
+    main: '#5F6DC2',
+    dark: '#3E4EB3',
     darkest: '#23398a',
     contrastText: '#FFFFFF'
 });
