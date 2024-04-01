@@ -6,24 +6,15 @@ import {
     Container,
     Stack, SvgIcon, Typography,
     Unstable_Grid2 as Grid,
-    Card, CardContent,
-    Button,
-    SwipeableDrawer,
-    IconButton, Divider
 } from "@mui/material";
 import * as React from "react";
-import {Fragment, useContext} from "react";
 import {Navigation} from "../components/layouts/navigation";
-import {ThemeProvider} from "@mui/material/styles";
-import {createTheme} from "../components/theme";
-import {useFetchDashboard} from "../src/features/unit/dashboard";
 import {useFetchTeamSetsInMyClass} from "../src/features/unit/discover";
 import {Loading} from "../components/layouts/loading";
 import {motion} from "framer-motion";
-import {HiClock, HiLocationMarker, HiSearch} from "react-icons/hi";
+import {HiSearch} from "react-icons/hi";
 import {useFetchLocations} from "../src/features/locations/hook";
 import {useFetchImages} from "../src/features/images/hook";
-import {UsersContext} from "../components/context";
 import {DiscoverTeamContent} from "../components/discover/DiscoverTeamContent";
 import {OtherInfo} from "../components/dashboard/Overview/OtherInfo";
 
@@ -33,14 +24,12 @@ const Discover: NextPage = () => {
     const {
         isFetching,
         isSuccessful,
-        myClass,
         users,
         matchSets
     } = useFetchTeamSetsInMyClass()
 
     const {images, isFetching: isFetchingImages} = useFetchImages()
     const {locations, isFetching: isFetchingLocations} = useFetchLocations()
-    const theme = createTheme();
 
     return (
         <>
@@ -56,7 +45,7 @@ const Discover: NextPage = () => {
                 </motion.div>
             )}
             {!(isFetching || isFetchingLocations || isFetchingImages) && (
-                <ThemeProvider theme={theme}>
+                <>
                     <Head>
                         <title>SPORTSDAY : Discover</title>
                     </Head>
@@ -206,7 +195,7 @@ const Discover: NextPage = () => {
                             </motion.div>
                         </Box>
                     </motion.div>
-                </ThemeProvider>
+                </>
             )}
         </>
     )
