@@ -1,70 +1,71 @@
-import axios from "axios";
-import {getServerSession} from "next-auth";
-import {getSession} from "next-auth/react";
-import Cookies from "js-cookie";
-
-const TOKEN_COOKIE_EXPIRE = 10 // minutes
-const baseURL = process.env.NEXT_PUBLIC_API_URL + "/v1";
+const ApiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 const headers = {
     "Content-Type": "application/json",
 };
 
-export const ApiClient = axios.create({ baseURL, headers, timeout: 1000*20 });
-
-// error handling
-ApiClient.interceptors.response.use(
-    (response) => {
-        return response;
-    },
-    (error) => {
-        console.log(error);
-        switch (error?.response?.status) {
-            case 401:
-                break;
-            case 404:
-                break;
-            default:
-                console.log("== internal server error");
-        }
-
-        const errorMessage = (error.response?.data?.message || "").split(",");
-        throw new Error(errorMessage);
-    }
-)
-
-// put token into header
-ApiClient.interceptors.request.use(async (request: any) => {
-    let token: string | undefined
-
-    // server side
+async function fetchWithToken(url: string, options: RequestInit | undefined = {}) {
+    //  get token
+    let token
     if (typeof window === 'undefined') {
-        const session = await getServerSession()
-        token = session?.accessToken
+        const {cookies} = require("next/headers");
+        token = cookies().get("access_token")?.value
     }
-    // client side
-    else {
-        token = Cookies.get("sports-day.api-access-token")
-        if (!token) {
-            const session = await getSession()
-            token = session?.accessToken
-            if (token) {
-                console.log(">>> Update token in cookie <<<")
-                Cookies.set("sports-day.api-access-token", token,
-                    {
-                        expires: 1/24/60 * TOKEN_COOKIE_EXPIRE,
-                    })
+
+    const mergedOptions: RequestInit = {
+        cache: "no-cache",
+        credentials: "include",
+        ...options,
+        headers: {
+            ...headers,
+            ...options.headers,
+            Cookie: `access_token=${token}`
+        },
+    }
+
+    try {
+        const fullUrl = `${ApiUrl}${url}`
+        const response = await fetch(fullUrl, mergedOptions);
+
+        // Check if the response was ok (status in the range 200-299)
+        if (!response.ok) {
+            switch (response.status) {
+                case 401:
+                    break
+                case 404:
+                    break
+                default:
+                    console.log("== internal server error")
             }
         }
+
+        return await response.json()
+    } catch (error) {
+        // Handle errors (e.g., network issues)
+        console.error("Fetch error: ", error);
+        throw error;
     }
+}
 
-    //  do not have access token
-    if (token === undefined) {
-        return request
+export type ApiClientType = {
+    get: (url: string) => Promise<any>,
+    getWithParams: (url: string, params: any) => Promise<any>,
+    getWithOption: (url: string, option: RequestInit | undefined) => Promise<any>,
+    post: (url: string, data: any) => Promise<any>,
+    put: (url: string, data: any) => Promise<any>,
+    delete: (url: string) => Promise<any>,
+}
+
+export const ApiClient = (): ApiClientType => {
+    return {
+        get: (url: string) => fetchWithToken(url, {method: "GET"}),
+        getWithParams: (url: string, params: any) => {
+            const query = new URLSearchParams(params).toString()
+            return fetchWithToken(`${url}?${query}`, {method: "GET"})
+        },
+        getWithOption: (url: string, option: RequestInit | undefined = {}) => fetchWithToken(url, {method: "GET", ...option}),
+        post: (url: string, data: any) => fetchWithToken(url, {method: "POST", body: JSON.stringify(data)}),
+        put: (url: string, data: any) => fetchWithToken(url, {method: "PUT", body: JSON.stringify(data)}),
+        delete: (url: string) => fetchWithToken(url, {method: "DELETE"}),
     }
-
-    //  token
-    request.headers["Authorization"] = "Bearer " + token
-
-    return request
-});
+}

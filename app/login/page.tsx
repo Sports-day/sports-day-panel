@@ -1,13 +1,16 @@
-import type {NextPage} from 'next'
-import {signIn} from "next-auth/react";
-import Head from 'next/head'
-import {Box, Button, Card, CardContent, Container, Stack, Typography} from "@mui/material";
-import Logo from "public/logo.svg"
-import MSLogo from "public/ms.svg"
+'use client'
+import {Box, Card, CardContent, Container, Stack, Typography} from "@mui/material";
+// import Logo from "public/logo.svg"
+// import MSLogo from "public/ms.svg"
 import * as React from "react";
 import {motion, AnimatePresence} from "framer-motion";
+import LoginButton from "@/components/auth/LoginButton";
 
-const Auth: NextPage = () => {
+// export const metadata: Metadata = {
+//     title: 'SPORTSDAY : Login',
+// }
+
+export default function Page() {
     return (
         <AnimatePresence mode={"wait"}>
             <motion.div
@@ -17,12 +20,6 @@ const Auth: NextPage = () => {
                 exit={{opacity: 0}}
                 transition={{delay: 0.2, duration: 0.5, ease: 'easeInOut'}}
             >
-                <Head>
-                    <title>SPORTSDAY : Login</title>
-                    <meta name="description" content="SPORTSDAY Login page"/>
-                    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-                    <link rel="icon" href="/favicon.ico"/>
-                </Head>
                 <Box
                     maxHeight={"100vh"}
                     sx={{backgroundColor: "#e8ebf8", width: '100vw', height: '100vh', overflow: 'hidden'}}
@@ -54,17 +51,14 @@ const Auth: NextPage = () => {
                                     direction={"row"}
                                     spacing={0.5}
                                 >
-                                    <Logo width={22 * 8.45} height={22} fill={"black"}/>
+                                    {/*<Logo width={22 * 8.45} height={22} fill={"black"}/>*/}
                                     <Typography fontSize={"24px"} fontWeight={"bold"} color={"#000"}
                                                 sx={{position: "relative", bottom: "9px"}}>。</Typography>
                                 </Stack>
                             </Stack>
                             <Stack width={"fit-content"}>
                                 <Card>
-                                    <Button
-                                        onClick={() => signIn("azure-ad", {callbackUrl: "/"})}
-                                        sx={{width: "fit-content"}}
-                                    >
+                                    <LoginButton>
                                         <CardContent sx={{width: "fit-content"}}>
                                             <Stack
                                                 direction={"row"}
@@ -72,13 +66,13 @@ const Auth: NextPage = () => {
                                                 alignItems={"center"}
                                                 spacing={2}
                                             >
-                                                <MSLogo width={16} height={16}/>
+                                                {/*<MSLogo width={16} height={16}/>*/}
                                                 <Typography sx={{color: "#FFF", fontSize: "16px"}}>
                                                     KOSENアカウントではじめよう
                                                 </Typography>
                                             </Stack>
                                         </CardContent>
-                                    </Button>
+                                    </LoginButton>
                                 </Card>
                             </Stack>
                         </Stack>
@@ -88,5 +82,3 @@ const Auth: NextPage = () => {
         </AnimatePresence>
     )
 }
-
-export default Auth

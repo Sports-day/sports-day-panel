@@ -14,10 +14,10 @@ import {HiXMark, HiClock} from "react-icons/hi2";
 import {Fragment} from "react";
 import * as React from "react";
 
-import {Image} from "../../src/models/ImageModel"
-import {Location} from "../../src/models/LocationModel"
-import {User} from "../../src/models/UserModel"
-import {MatchSet} from "../../src/features/unit/discover";
+import {Image} from "@/src/models/ImageModel"
+import {Location} from "@/src/models/LocationModel"
+import {User} from "@/src/models/UserModel"
+import {MatchSet} from "@/src/features/unit/discover";
 
 
 export type DiscoverTeamContentProps = {
@@ -71,7 +71,7 @@ export const DiscoverTeamContent = (props:DiscoverTeamContentProps) => {
                                     <Box sx={{pb:"0.3em"}}>
                                         <Avatar
                                             sx={{height: "1.5em", width: "1.5em"}}
-                                            src={image?.attachment}
+                                            src={image?.data}
                                         >
                                         </Avatar>
                                     </Box>

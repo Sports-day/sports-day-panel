@@ -1,4 +1,4 @@
-import {GetServerSidePropsContext, NextPage} from "next";
+'use client'
 import Head from "next/head";
 import {
     Avatar,
@@ -14,41 +14,32 @@ import {
     Typography,
     Unstable_Grid2 as Grid
 } from "@mui/material";
-import {GameProgress} from "../../components/game/game-progress";
-import {Navigation} from "../../components/layouts/navigation";
+import {GameProgress} from "@/components/game/game-progress";
+import {Navigation} from "@/components/layouts/navigation";
 import {HiChevronLeft, HiOutlineClipboardDocumentList, HiXMark} from "react-icons/hi2";
 import * as React from "react";
-import {GameList} from "../../components/game/GameList"
-import {GamesContext, LocationsContext, MatchesContext, TeamsContext} from "../../components/context";
-import {Loading} from "../../components/layouts/loading";
+import {GameList} from "@/components/game/GameList"
+import {GamesContext, LocationsContext, MatchesContext, TeamsContext} from "@/components/context";
+import {Loading} from "@/components/layouts/loading";
 import {useState} from "react";
 import {DialogProps} from '@mui/material/Dialog';
-import {Rules} from "../../components/rules/Rules";
+import {Rules} from "@/components/rules/Rules";
 import {motion} from "framer-motion";
 import Link from "next/link";
 import {useInterval} from "react-use";
-import {InformationList} from "../../components/InformationList";
-import {useFetchSport, useFetchSportGames} from "../../src/features/sports/hook";
-import {useFetchTeams} from "../../src/features/teams/hook";
-import {useFetchLocations} from "../../src/features/locations/hook";
-import {useFetchImages} from "../../src/features/images/hook";
-import {useSession} from "next-auth/react";
-import {useFetchMatches} from "../../src/features/matches/hook";
+import {InformationList} from "@/components/InformationList";
+import {useFetchSport, useFetchSportGames} from "@/src/features/sports/hook";
+import {useFetchTeams} from "@/src/features/teams/hook";
+import {useFetchLocations} from "@/src/features/locations/hook";
+import {useFetchImages} from "@/src/features/images/hook";
+import {useFetchMatches} from "@/src/features/matches/hook";
 
 const REFRESH_INTERVAL = 1000 * 60 * 5
 
-type Props = {
-    sportId: number
-    gameId: number | null
-}
-
-const Id: NextPage<Props> = (props: Props) => {
-    useSession({
-        required: true,
-    })
+export default function Page({ params }: { params: { id: string } }) {
     //  fetch
-    const {sport, isFetching: isSportFetching, refresh: refreshSport} = useFetchSport(props.sportId)
-    const {games, isFetching: isGameFetching, refresh: refreshGame} = useFetchSportGames(props.sportId, true)
+    const {sport, isFetching: isSportFetching, refresh: refreshSport} = useFetchSport(+params.id)
+    const {games, isFetching: isGameFetching, refresh: refreshGame} = useFetchSportGames(+params.id, true)
     const {matches, isFetching: isMatchesFetching, refresh: refreshMatches} = useFetchMatches()
     const {teams, isFetching: isTeamFetching, refresh: refreshTeam} = useFetchTeams()
     const {locations, isFetching: isLocationsFetching, refresh: refreshLocations} = useFetchLocations()
@@ -58,7 +49,7 @@ const Id: NextPage<Props> = (props: Props) => {
     //  state
     const [open, setOpen] = useState(false);
     const [scroll, setScroll] = React.useState<DialogProps['scroll']>('paper');
-    const [focusedGameId, setFocusedGameId] = useState<number | null>(props.gameId ?? null)
+    const [focusedGameId, setFocusedGameId] = useState<number | null>(null)
 
     const isFetching = isSportFetching || isGameFetching || isTeamFetching || isLocationsFetching || isImagesFetching || isMatchesFetching
     const refresh = () => {
@@ -144,6 +135,7 @@ const Id: NextPage<Props> = (props: Props) => {
                         >
 
                             <Head>
+                                {/* TODO use metadata api instead of Head component*/}
                                 <title>{`SPORTSDAY : ${sport.name}`}</title>
                             </Head>
                             <motion.div
@@ -216,7 +208,7 @@ const Id: NextPage<Props> = (props: Props) => {
                                                     <Avatar
                                                         alt={sport.name}
                                                         sx={{height: "3.5em", width: "3.5em"}}
-                                                        src={image?.attachment}
+                                                        src={image?.data}
                                                     >
 
                                                     </Avatar>
@@ -395,34 +387,3 @@ const Id: NextPage<Props> = (props: Props) => {
         </>
     )
 }
-
-export const getServerSideProps = async (context: GetServerSidePropsContext) => {
-    if (!context.query.id) {
-        return {
-            notFound: true,
-        }
-    }
-    const id = +context.query.id
-
-    if (isNaN(id)) {
-        return {
-            notFound: true,
-        }
-    }
-
-    let game = null
-    if (context.query.gameId) {
-        if (!isNaN(parseInt(context.query.gameId as string))) {
-            game = parseInt(context.query.gameId as string)
-        }
-    }
-
-    return {
-        props: {
-            sportId: id,
-            gameId: game
-        }
-    }
-}
-
-export default Id

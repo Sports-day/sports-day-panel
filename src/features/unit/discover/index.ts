@@ -1,16 +1,17 @@
-import {useFetchMyUser, useFetchUsers} from "../../users/hook";
-import {useFetchTeams} from "../../teams/hook";
-import {useFetchGames} from "../../games/hook";
-import {useFetchSports} from "../../sports/hook";
-import {Class} from "../../../models/ClassModel";
-import {Team} from "../../../models/TeamModel";
-import {Sport} from "../../../models/SportModel";
-import {Game} from "../../../models/GameModel";
+import {useFetchUsers} from "@/src/features/users/hook";
+import {useFetchTeams} from "@/src/features/teams/hook";
+import {useFetchGames} from "@/src/features/games/hook";
+import {useFetchSports} from "@/src/features/sports/hook";
+import {Class} from "@/src/models/ClassModel";
+import {Team} from "@/src/models/TeamModel";
+import {Sport} from "@/src/models/SportModel";
+import {Game} from "@/src/models/GameModel";
 import {useState} from "react";
-import {useFetchClasses} from "../../classes/hooks";
-import {User} from "../../../models/UserModel";
-import {Match} from "../../../models/MatchModel";
-import {useFetchMatches} from "../../matches/hook";
+import {useFetchClasses} from "@/src/features/classes/hooks";
+import {User} from "@/src/models/UserModel";
+import {Match} from "@/src/models/MatchModel";
+import {useFetchMatches} from "@/src/features/matches/hook";
+import {useFetchUserinfo} from "@/src/features/userinfo/hook";
 
 export type MatchSet = {
     match: Match,
@@ -35,7 +36,7 @@ export const useFetchTeamSetsInMyClass = () => {
     const {sports, isFetching: isFetchingSports} = useFetchSports(true)
     const {matches, isFetching: isFetchingMatches} = useFetchMatches()
     const {classes, isFetching: isFetchingClasses} = useFetchClasses()
-    const {user, isFetching: isFetchingMyUser} = useFetchMyUser()
+    const {user, isFetching: isFetchingMyUser} = useFetchUserinfo()
 
     //  state
     const [isFetching, setIsFetching] = useState<boolean>(true)

@@ -1,19 +1,28 @@
-import type {NextPage} from 'next'
-import Head from 'next/head'
+'use client'
 import {Box, Button, Container, Stack, Typography, SvgIcon} from "@mui/material";
-import Mark from "public/mark.svg"
+// import Mark from "public/mark.svg"
 import {BiErrorAlt} from "react-icons/bi"
 import * as React from "react";
+import {useEffect} from "react";
+import {Metadata} from "next";
 
-const Page: NextPage = () => {
+export const metadata: Metadata = {
+    title: 'SPORTSDAY : Error',
+}
+
+export default function Error({
+                                  error
+                              }: {
+    error: Error & { digest?: string }
+    reset: () => void
+}) {
+    useEffect(() => {
+        // Log the error to an error reporting service
+        console.error(error)
+    }, [error])
+
     return (
         <>
-            <Head>
-                <title>SPORTSDAY : Error</title>
-                <meta name="description" content="SPORTSDAY Login page"/>
-                <meta name="viewport" content="width=device-width, initial-scale=1"/>
-                <link rel="icon" href="/favicon.ico"/>
-            </Head>
             <Box
                 maxHeight={"100vh"}
                 sx={{
@@ -61,11 +70,11 @@ const Page: NextPage = () => {
                             <Box
                                 pb={0.5}
                             >
-                                <Mark
-                                    width={20}
-                                    height={20}
-                                    fill={"#99a5d6"}
-                                />
+                                {/*<Mark*/}
+                                {/*    width={20}*/}
+                                {/*    height={20}*/}
+                                {/*    fill={"#99a5d6"}*/}
+                                {/*/>*/}
                             </Box>
                             <Typography fontSize={"16px"} color={"#99a5d6"}>エラーが発生しました</Typography>
                             <Stack
@@ -108,5 +117,3 @@ const Page: NextPage = () => {
         </>
     )
 }
-
-export default Page

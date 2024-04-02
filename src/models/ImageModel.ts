@@ -2,10 +2,8 @@ import {ImageRepository, imageRepository} from "../repositories/ImageRepository"
 
 export type Image = {
     id: number,
-    name: string,
-    attachment: string,
+    data: string,
     createdAt: string,
-    createdBy: number,
 }
 
 export const imageFactory = (repo?: ImageRepository) => {
@@ -21,7 +19,7 @@ export const imageFactory = (repo?: ImageRepository) => {
         delete: async (id: number): Promise<void> => {
             return await repository.deleteImage(id)
         },
-        create: async (omittedImage: Omit<Image, "id" | "createdAt" | "createdBy">): Promise<Image> => {
+        create: async (omittedImage: Omit<Image, "id" | "createdAt">): Promise<Image> => {
             return await repository.createImage(omittedImage)
         }
     }

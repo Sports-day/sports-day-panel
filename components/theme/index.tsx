@@ -1,10 +1,13 @@
+'use client'
 import { createTheme as createMuiTheme } from '@mui/material';
 import { createPalette } from './create-palette';
 import { createComponents } from './create-components';
 import { createShadows } from './create-shadows';
 import { createTypography } from './create-typography';
 
-export function createTheme() {
+export const theme = createTheme();
+
+function createTheme() {
     const palette: any = createPalette();
     const components: any = createComponents({ palette });
     const shadows: any = createShadows();
