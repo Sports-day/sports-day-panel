@@ -4,6 +4,7 @@ import {Box, Button, Card, CardContent, Container, Stack, Typography} from "@mui
 // import MSLogo from "public/ms.svg"
 import * as React from "react";
 import {motion, AnimatePresence} from "framer-motion";
+import LoginButton from "@/components/auth/LoginButton";
 
 // export const metadata: Metadata = {
 //     title: 'SPORTSDAY : Login',
@@ -57,12 +58,7 @@ export default function Page() {
                             </Stack>
                             <Stack width={"fit-content"}>
                                 <Card>
-                                    <Button
-                                        onClick={() => {
-                                            console.log("TODO: replace with login function")
-                                        }}
-                                        sx={{width: "fit-content"}}
-                                    >
+                                    <LoginButton>
                                         <CardContent sx={{width: "fit-content"}}>
                                             <Stack
                                                 direction={"row"}
@@ -76,7 +72,7 @@ export default function Page() {
                                                 </Typography>
                                             </Stack>
                                         </CardContent>
-                                    </Button>
+                                    </LoginButton>
                                 </Card>
                             </Stack>
                         </Stack>

@@ -1,3 +1,4 @@
+'use client'
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -34,10 +35,13 @@ import Link from "next/link";
 import {useState} from "react";
 import {DialogProps} from "@mui/material/Dialog";
 import {DocsOverall} from "../rules/DocsOverall";
+import Cookies from "js-cookie";
+import {useRouter} from "next/navigation";
 
 type Anchor = 'bottom';
 
 export const Navigation = () => {
+    const router = useRouter()
     const [value, setValue] = React.useState('home');
 
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
@@ -113,8 +117,11 @@ export const Navigation = () => {
                         </Stack>
 
                         <Button
-                            onClick={async () => {
-                                //  todo remove cookie
+                            onClick={() => {
+                                //  remove cookie
+                                Cookies.remove("access_token")
+                                //  redirect with next
+                                router.push("/login")
                             }}
                         >
                             <Stack
