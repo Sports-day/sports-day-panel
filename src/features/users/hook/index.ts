@@ -1,7 +1,6 @@
 import {User, userFactory} from "../../../models/UserModel";
 import {useState} from "react";
 import {useAsync, useAsyncRetry} from "react-use";
-import {microsoftAccountFactory} from "../../../models/MicrosoftAccountModel";
 
 export const useFetchUsers = () => {
     const [users, setUsers] = useState<User[]>([]);
@@ -53,29 +52,4 @@ export const useFetchUser = (userId: number) => {
         isFetching: isFetching,
         refresh: state.retry,
     };
-}
-
-export const useFetchMyUser = () => {
-    const [user, setUser] = useState<User>();
-    const [isFetching, setIsFetching] = useState(true);
-
-    useAsync(async () => {
-        try {
-            const {userId} = await microsoftAccountFactory().show("me");
-            // @ts-ignore
-            const data = await userFactory().show(userId);
-            setUser(data);
-        }
-        catch (e) {
-            console.log(e);
-        }
-        finally {
-            setIsFetching(false);
-        }
-    })
-
-    return {
-        user: user,
-        isFetching: isFetching,
-    }
 }

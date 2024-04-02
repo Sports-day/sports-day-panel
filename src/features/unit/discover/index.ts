@@ -1,4 +1,4 @@
-import {useFetchMyUser, useFetchUsers} from "../../users/hook";
+import {useFetchUsers} from "../../users/hook";
 import {useFetchTeams} from "../../teams/hook";
 import {useFetchGames} from "../../games/hook";
 import {useFetchSports} from "../../sports/hook";
@@ -11,6 +11,7 @@ import {useFetchClasses} from "../../classes/hooks";
 import {User} from "../../../models/UserModel";
 import {Match} from "../../../models/MatchModel";
 import {useFetchMatches} from "../../matches/hook";
+import {useFetchUserinfo} from "@/src/features/userinfo/hook";
 
 export type MatchSet = {
     match: Match,
@@ -35,7 +36,7 @@ export const useFetchTeamSetsInMyClass = () => {
     const {sports, isFetching: isFetchingSports} = useFetchSports(true)
     const {matches, isFetching: isFetchingMatches} = useFetchMatches()
     const {classes, isFetching: isFetchingClasses} = useFetchClasses()
-    const {user, isFetching: isFetchingMyUser} = useFetchMyUser()
+    const {user, isFetching: isFetchingMyUser} = useFetchUserinfo()
 
     //  state
     const [isFetching, setIsFetching] = useState<boolean>(true)

@@ -2,36 +2,35 @@ import {Sport} from "../models/SportModel";
 import {ApiClient} from "../lib/ApiClient";
 
 const getSports = async (filter: boolean): Promise<Sport[]> => {
-    const {data} = await ApiClient.get("/sports",
+    const data = await ApiClient().getWithParams("/sports",
         {
-            params: {
-                filter: filter
-            }
-        })
+            filter: filter
+        }
+    )
     return data.data
 }
 
 const getSport = async (id: number): Promise<Sport> => {
-    const {data} = await ApiClient.get(`/sports/${id}`)
+    const data = await ApiClient().get(`/sports/${id}`)
     return data.data
 }
 
 const deleteSport = async (id: number): Promise<void> => {
-    await ApiClient.delete(`/sports/${id}`)
+    await ApiClient().delete(`/sports/${id}`)
 }
 
 const createSport = async (omittedSport: Omit<Sport, "id" | "gameIds" | "createdAt" | "updatedAt">): Promise<Sport> => {
-    const {data} = await ApiClient.post(`/sports`, omittedSport)
+    const data = await ApiClient().post(`/sports`, omittedSport)
     return data.data
 }
 
 const updateSport = async (id: number, omittedSport: Omit<Sport, "id" | "gameIds" | "createdAt" | "updatedAt">): Promise<Sport> => {
-    const {data} = await ApiClient.put(`/sports/${id}`, omittedSport)
+    const data = await ApiClient().put(`/sports/${id}`, omittedSport)
     return data.data
 }
 
 const getProgress = async (id: number): Promise<number> => {
-    const {data} = await ApiClient.get(`/sports/${id}/progress`)
+    const data = await ApiClient().get(`/sports/${id}/progress`)
     return data.data
 }
 

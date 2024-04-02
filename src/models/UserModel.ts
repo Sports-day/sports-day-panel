@@ -1,12 +1,12 @@
 import {userRepository, UserRepository} from "../repositories/UserRepository";
-import {MicrosoftAccount} from "./MicrosoftAccountModel";
 import {Team} from "./TeamModel";
 
 export type User = {
     id: number,
     name: string,
-    studentId: string,
+    email: string,
     gender: Gender,
+    pictureId: number | null,
     classId: number,
     teamIds: number[],
     createdAt: string,
@@ -33,9 +33,6 @@ export const userFactory = (repo?: UserRepository) => {
         },
         update: async (id: number, omittedUser: Omit<User, "id" | "teamIds" | "createdAt" | "updatedAt">): Promise<User> => {
             return await repository.updateUser(id, omittedUser)
-        },
-        getLinkedMicrosoftAccounts: async (id: number): Promise<MicrosoftAccount[]> => {
-            return await repository.getLinkedMicrosoftAccounts(id)
         },
         getTeams: async (id: number): Promise<Team[]> => {
             return await repository.getTeams(id)

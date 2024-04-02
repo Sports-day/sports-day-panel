@@ -66,7 +66,7 @@ export const Overview = (props: OverviewProps) => {
                                     <Avatar
                                         alt={props.mySport.name}
                                         sx={{height: "3.5em", width: "3.5em"}}
-                                        src={icon?.attachment}
+                                        src={icon?.data}
                                     >
 
                                     </Avatar>

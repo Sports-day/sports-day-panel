@@ -3,32 +3,32 @@ import {Class} from "../models/ClassModel";
 import {User} from "../models/UserModel";
 
 const getClasses = async (): Promise<Class[]> => {
-    const {data} = await ApiClient.get("/classes")
+    const data = await ApiClient().get("/classes")
     return data.data
 }
 
 const getClass = async (id: number): Promise<Class> => {
-    const {data} = await ApiClient.get(`/classes/${id}`)
+    const data = await ApiClient().get(`/classes/${id}`)
     return data.data
 }
 
 
 const deleteClass = async (id: number): Promise<void> => {
-    await ApiClient.delete(`/classes/${id}`)
+    await ApiClient().delete(`/classes/${id}`)
 }
 
 const createClass = async (omittedClass: Omit<Class, "id" | "createdAt" | "updatedAt">): Promise<Class> => {
-    const {data} = await ApiClient.post(`/classes`, omittedClass)
+    const data = await ApiClient().post(`/classes`, omittedClass)
     return data.data
 }
 
 const updateClass = async (id: number, omittedClass: Omit<Class, "id" | "createdAt" | "updatedAt">): Promise<Class> => {
-    const {data} = await ApiClient.put(`/classes/${id}`, omittedClass)
+    const data = await ApiClient().put(`/classes/${id}`, omittedClass)
     return data.data
 }
 
 const getClassUsers = async (id: number): Promise<User[]> => {
-    const {data} = await ApiClient.get(`/classes/${id}/users`)
+    const data = await ApiClient().get(`/classes/${id}/users`)
     return data.data
 }
 

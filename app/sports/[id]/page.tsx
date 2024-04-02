@@ -208,7 +208,7 @@ export default function Page({ params }: { params: { id: string } }) {
                                                     <Avatar
                                                         alt={sport.name}
                                                         sx={{height: "3.5em", width: "3.5em"}}
-                                                        src={image?.attachment}
+                                                        src={image?.data}
                                                     >
 
                                                     </Avatar>

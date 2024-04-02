@@ -3,36 +3,36 @@ import {ApiClient} from "../lib/ApiClient";
 import {User} from "../models/UserModel";
 
 const getTeams = async (): Promise<Team[]> => {
-    const {data} = await ApiClient.get("/teams")
+    const data = await ApiClient().get("/teams")
     return data.data
 }
 
 const getTeam = async (id: number): Promise<Team> => {
-    const {data} = await ApiClient.get(`/teams/${id}`)
+    const data = await ApiClient().get(`/teams/${id}`)
     return data.data
 }
 
 const deleteTeam = async (id: number): Promise<void> => {
-    await ApiClient.delete(`/teams/${id}`)
+    await ApiClient().delete(`/teams/${id}`)
 }
 
 const createTeam = async (omittedTeam: Omit<Team, "id" | "userIds" | "enteredGameIds" | "createdAt" | "updatedAt">): Promise<Team> => {
-    const {data} = await ApiClient.post(`/teams`, omittedTeam)
+    const data = await ApiClient().post(`/teams`, omittedTeam)
     return data.data
 }
 
 const updateTeam = async (id: number, omittedTeam: Omit<Team, "id" | "userIds" | "enteredGameIds" | "createdAt" | "updatedAt">): Promise<Team> => {
-    const {data} = await ApiClient.put(`/teams/${id}`, omittedTeam)
+    const data = await ApiClient().put(`/teams/${id}`, omittedTeam)
     return data.data
 }
 
 const getTeamUsers = async (id: number): Promise<User[]> => {
-    const {data} = await ApiClient.get(`/teams/${id}/users`)
+    const data = await ApiClient().get(`/teams/${id}/users`)
     return data.data
 }
 
 const addTeamUsers = async (id: number, userIds: number[]): Promise<Team> => {
-    const {data} = await ApiClient.post(
+    const data = await ApiClient().post(
         `/teams/${id}/users`,
         {
             users: userIds
@@ -42,7 +42,7 @@ const addTeamUsers = async (id: number, userIds: number[]): Promise<Team> => {
 }
 
 const removeTeamUser = async (id: number, userId: number): Promise<Team> => {
-    const {data} = await ApiClient.delete(`/teams/${id}/users/${userId}`)
+    const data = await ApiClient().delete(`/teams/${id}/users/${userId}`)
     return data.data
 }
 

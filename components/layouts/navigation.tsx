@@ -37,12 +37,14 @@ import {DialogProps} from "@mui/material/Dialog";
 import {DocsOverall} from "../rules/DocsOverall";
 import Cookies from "js-cookie";
 import {useRouter} from "next/navigation";
+import {useFetchUserinfo} from "@/src/features/userinfo/hook";
 
 type Anchor = 'bottom';
 
 export const Navigation = () => {
     const router = useRouter()
     const [value, setValue] = React.useState('home');
+    const {user, isFetching} = useFetchUserinfo()
 
     const handleChange = (event: React.SyntheticEvent, newValue: string) => {
         setValue(newValue);
@@ -107,12 +109,11 @@ export const Navigation = () => {
                                     width: "4em",
                                     backgroundColor: "#5664e3",
                                 }}
-                                src={"/"}
+                                src={`${process.env.NEXT_PUBLIC_API_URL}/images/${user?.pictureId}/file`}
                             >
                             </Avatar>
                             <Typography sx={{color: "#99a5d6", fontSize: "16px"}}>
-                                {/* TODO replace with username */}
-                                ここ変えてください！
+                                {user?.name ?? "unknown"}
                             </Typography>
                         </Stack>
 

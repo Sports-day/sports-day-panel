@@ -2,26 +2,26 @@ import {Information} from "../models/InformationModel";
 import {ApiClient} from "../lib/ApiClient";
 
 const getAllInformation = async (): Promise<Information[]> => {
-    const {data} = await ApiClient.get("/information")
+    const data = await ApiClient().get("/information")
     return data.data
 }
 
 const getInformation = async (id: number): Promise<Information> => {
-    const {data} = await ApiClient.get(`/information/${id}`)
+    const data = await ApiClient().get(`/information/${id}`)
     return data.data
 }
 
 const deleteInformation = async (id: number): Promise<void> => {
-    await ApiClient.delete(`/information/${id}`)
+    await ApiClient().delete(`/information/${id}`)
 }
 
 const createInformation = async (omittedInformation: Omit<Information, "id">): Promise<Information> => {
-    const {data} = await ApiClient.post(`/information`, omittedInformation)
+    const data = await ApiClient().post(`/information`, omittedInformation)
     return data.data
 }
 
 const updateInformation = async (id: number, omittedInformation: Omit<Information, "id">): Promise<Information> => {
-    const {data} = await ApiClient.put(`/information/${id}`, omittedInformation)
+    const data = await ApiClient().put(`/information/${id}`, omittedInformation)
     return data.data
 }
 

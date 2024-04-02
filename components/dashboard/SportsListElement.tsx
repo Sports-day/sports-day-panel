@@ -26,7 +26,7 @@ export const SportsListElement = (props: SportsListElementProps) => {
                         <Avatar
                             alt={props.sport.name}
                             sx={{height: "3.5em", width: "3.5em"}}
-                            src={image?.attachment}
+                            src={image?.data}
                         >
 
                         </Avatar>
