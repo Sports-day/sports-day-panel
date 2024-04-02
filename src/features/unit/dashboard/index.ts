@@ -4,7 +4,7 @@ import {Match} from "@/src/models/MatchModel";
 import {Game, gameFactory} from "@/src/models/GameModel";
 import {Image} from "@/src/models/ImageModel";
 import {Location} from "@/src/models/LocationModel";
-import {useContext, useState} from "react";
+import {useState} from "react";
 import {useFetchImages} from "@/src/features/images/hook";
 import {useFetchLocations} from "@/src/features/locations/hook";
 import {useFetchTeams} from "@/src/features/teams/hook";

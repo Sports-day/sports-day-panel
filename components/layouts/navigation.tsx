@@ -43,12 +43,7 @@ type Anchor = 'bottom';
 
 export const Navigation = () => {
     const router = useRouter()
-    const [value, setValue] = React.useState('home');
-    const {user, isFetching} = useFetchUserinfo()
-
-    const handleChange = (event: React.SyntheticEvent, newValue: string) => {
-        setValue(newValue);
-    };
+    const {user} = useFetchUserinfo()
 
     const [state, setState] = React.useState({bottom: false, NotifBottom: false});
     const [open, setOpen] = useState(false);

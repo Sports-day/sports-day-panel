@@ -1,6 +1,6 @@
-import {User, userFactory} from "../../../models/UserModel";
+import {User, userFactory} from "@/src/models/UserModel";
 import {useState} from "react";
-import {useAsync, useAsyncRetry} from "react-use";
+import {useAsyncRetry} from "react-use";
 
 export const useFetchUsers = () => {
     const [users, setUsers] = useState<User[]>([]);

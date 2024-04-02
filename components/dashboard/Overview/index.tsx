@@ -10,9 +10,9 @@ import {
     Unstable_Grid2 as Grid, IconButton, Box
 } from "@mui/material";
 import {HiXMark, HiChevronRight, HiChartBar} from "react-icons/hi2";
-import {Sport} from "../../../src/models/SportModel";
-import {Team} from "../../../src/models/TeamModel";
-import {User} from "../../../src/models/UserModel";
+import {Sport} from "@/src/models/SportModel";
+import {Team} from "@/src/models/TeamModel";
+import {User} from "@/src/models/UserModel";
 import {Fragment, useContext, useState} from "react";
 import {ImagesContext} from "../../context";
 import * as React from "react";

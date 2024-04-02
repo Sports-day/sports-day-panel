@@ -1,7 +1,7 @@
 import {Avatar, Button, Card, CardContent, Stack, Typography} from "@mui/material";
 import {useContext} from "react";
 import {ImagesContext} from "../context";
-import {Sport} from "../../src/models/SportModel";
+import {Sport} from "@/src/models/SportModel";
 import Link from "next/link";
 
 

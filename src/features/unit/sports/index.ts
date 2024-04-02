@@ -41,7 +41,7 @@ export const useFetchSportData = (sportId: number) => {
     const {allInformation, isFetching: isFetchingInformation} = useFetchAllInformation()
     //  state
     let filteredGames: Game[] = []
-    let filteredTeams: Team[] = []
+    let filteredTeams: Team[]
     let filteredMatches: Match[] = []
 
     //  games
