@@ -1,7 +1,6 @@
-import {NextPage} from "next";
+'use client'
 import {motion} from "framer-motion";
-import Head from "next/head";
-import {Navigation} from "../components/layouts/navigation";
+import {Navigation} from "@/components/layouts/navigation";
 import {
     Box,
     Container,
@@ -15,7 +14,11 @@ import {
     HiEyeSlash
 } from "react-icons/hi2";
 
-const Privacy: NextPage = () => {
+// export const metadata: Metadata = {
+//     title: 'SPORTSDAY : Page',
+// }
+
+export default function PrivacyPage() {
     return (
         <>
             <motion.div
@@ -25,9 +28,6 @@ const Privacy: NextPage = () => {
                 exit={{opacity: 0}}
                 transition={{delay: 0.5, duration: 0.5, ease: 'easeOut'}}
             >
-                <Head>
-                    <title>{`SPORTSDAY : About`}</title>
-                </Head>
                 <Navigation/>
                 <Box
                     component={"main"}
@@ -194,5 +194,3 @@ const Privacy: NextPage = () => {
         </>
     )
 }
-
-export default Privacy

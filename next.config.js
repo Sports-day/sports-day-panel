@@ -8,7 +8,10 @@ const nextConfig = {
       use: ["@svgr/webpack"]
     });
     return config;
-  }
+  },
+  experimental: {
+    missingSuspenseWithCSRBailout: false,
+  },
 }
 
 const withPWA = require("next-pwa");

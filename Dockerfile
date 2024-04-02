@@ -15,7 +15,7 @@ COPY --from=Builder /app/package.json ./
 COPY --from=Builder /app/node_modules/ ./node_modules/
 
 # copy files for build
-COPY pages/ ./pages/
+COPY app/ ./pages/
 COPY components/ ./components/
 COPY src/ ./src/
 COPY public/ ./public/

@@ -1,7 +1,6 @@
-import {NextPage} from "next";
+'use client'
 import {motion} from "framer-motion";
-import Head from "next/head";
-import {Navigation} from "../components/layouts/navigation";
+import {Navigation} from "@/components/layouts/navigation";
 import {
     Box,
     Card,
@@ -27,7 +26,11 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 
-const About: NextPage = () => {
+// export const metadata: Metadata = {
+//     title: 'SPORTSDAY : About',
+// }
+
+export default function Page() {
     return (
         <>
             <motion.div
@@ -37,9 +40,6 @@ const About: NextPage = () => {
                 exit={{opacity: 0}}
                 transition={{delay: 0.5, duration: 0.5, ease: 'easeOut'}}
             >
-                <Head>
-                    <title>{`SPORTSDAY : About`}</title>
-                </Head>
                 <Navigation/>
                 <Box
                     component={"main"}
@@ -664,5 +664,3 @@ const About: NextPage = () => {
         </>
     )
 }
-
-export default About

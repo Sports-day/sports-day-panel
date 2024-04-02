@@ -1,11 +1,15 @@
-import type {NextPage} from 'next'
+import type {Metadata} from 'next'
 import Head from 'next/head'
 import {Box, Button, Container, Stack, Typography, SvgIcon} from "@mui/material";
 // import Mark from "public/mark.svg"
 import {BiErrorAlt} from "react-icons/bi"
 import * as React from "react";
 
-const Page: NextPage = () => {
+export const metadata: Metadata = {
+    title: 'SPORTSDAY : 404'
+}
+
+export default function NotFound() {
     return (
         <>
             <Head>
@@ -67,7 +71,7 @@ const Page: NextPage = () => {
                                 {/*    fill={"#99a5d6"}*/}
                                 {/*/>*/}
                             </Box>
-                            <Typography fontSize={"16px"} color={"#99a5d6"}>エラーが発生しました</Typography>
+                            <Typography fontSize={"16px"} color={"#99a5d6"}>ページが見つかりません</Typography>
                             <Stack
                                 spacing={1}
                                 direction={"row"}
@@ -75,8 +79,7 @@ const Page: NextPage = () => {
                                 <SvgIcon>
                                     <BiErrorAlt color={"#99a5d6"}/>
                                 </SvgIcon>
-                                <Typography fontSize={"16px"} color={"#99a5d6"}>status code : see the
-                                    console</Typography>
+                                <Typography fontSize={"16px"} color={"#99a5d6"}>status code : 404</Typography>
                             </Stack>
                         </Stack>
                         <Button
@@ -108,5 +111,3 @@ const Page: NextPage = () => {
         </>
     )
 }
-
-export default Page

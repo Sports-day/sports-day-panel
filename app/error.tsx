@@ -1,19 +1,29 @@
-import type {NextPage} from 'next'
-import Head from 'next/head'
+'use client'
 import {Box, Button, Container, Stack, Typography, SvgIcon} from "@mui/material";
 // import Mark from "public/mark.svg"
 import {BiErrorAlt} from "react-icons/bi"
 import * as React from "react";
+import {useEffect} from "react";
+import {Metadata} from "next";
 
-const Page: NextPage = () => {
+export const metadata: Metadata = {
+    title: 'SPORTSDAY : Error',
+}
+
+export default function Error({
+                                  error,
+                                  reset,
+                              }: {
+    error: Error & { digest?: string }
+    reset: () => void
+}) {
+    useEffect(() => {
+        // Log the error to an error reporting service
+        console.error(error)
+    }, [error])
+
     return (
         <>
-            <Head>
-                <title>SPORTSDAY : Error</title>
-                <meta name="description" content="SPORTSDAY Login page"/>
-                <meta name="viewport" content="width=device-width, initial-scale=1"/>
-                <link rel="icon" href="/favicon.ico"/>
-            </Head>
             <Box
                 maxHeight={"100vh"}
                 sx={{
@@ -67,7 +77,7 @@ const Page: NextPage = () => {
                                 {/*    fill={"#99a5d6"}*/}
                                 {/*/>*/}
                             </Box>
-                            <Typography fontSize={"16px"} color={"#99a5d6"}>ページが見つかりません</Typography>
+                            <Typography fontSize={"16px"} color={"#99a5d6"}>エラーが発生しました</Typography>
                             <Stack
                                 spacing={1}
                                 direction={"row"}
@@ -75,7 +85,8 @@ const Page: NextPage = () => {
                                 <SvgIcon>
                                     <BiErrorAlt color={"#99a5d6"}/>
                                 </SvgIcon>
-                                <Typography fontSize={"16px"} color={"#99a5d6"}>status code : 404</Typography>
+                                <Typography fontSize={"16px"} color={"#99a5d6"}>status code : see the
+                                    console</Typography>
                             </Stack>
                         </Stack>
                         <Button
@@ -107,5 +118,3 @@ const Page: NextPage = () => {
         </>
     )
 }
-
-export default Page

@@ -1,12 +1,15 @@
-import type {NextPage} from 'next'
-import Head from 'next/head'
+'use client'
 import {Box, Button, Card, CardContent, Container, Stack, Typography} from "@mui/material";
 // import Logo from "public/logo.svg"
 // import MSLogo from "public/ms.svg"
 import * as React from "react";
 import {motion, AnimatePresence} from "framer-motion";
 
-const Auth: NextPage = () => {
+// export const metadata: Metadata = {
+//     title: 'SPORTSDAY : Login',
+// }
+
+export default function Page() {
     return (
         <AnimatePresence mode={"wait"}>
             <motion.div
@@ -16,12 +19,6 @@ const Auth: NextPage = () => {
                 exit={{opacity: 0}}
                 transition={{delay: 0.2, duration: 0.5, ease: 'easeInOut'}}
             >
-                <Head>
-                    <title>SPORTSDAY : Login</title>
-                    <meta name="description" content="SPORTSDAY Login page"/>
-                    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-                    <link rel="icon" href="/favicon.ico"/>
-                </Head>
                 <Box
                     maxHeight={"100vh"}
                     sx={{backgroundColor: "#e8ebf8", width: '100vw', height: '100vh', overflow: 'hidden'}}
@@ -89,5 +86,3 @@ const Auth: NextPage = () => {
         </AnimatePresence>
     )
 }
-
-export default Auth
