@@ -14,7 +14,7 @@ import {
     Unstable_Grid2 as Grid
 } from "@mui/material";
 import * as React from "react";
-import Logo from "public/logo.svg"
+// import Logo from "public/logo.svg"
 import {
     FaQuoteLeft,
     FaTwitter,
@@ -95,7 +95,7 @@ const About: NextPage = () => {
                                             pb: 25
                                         }}
                                     >
-                                        <Logo width={24 * 8.45} height={24} fill={'#E8EBF8'}/>
+                                        {/*<Logo width={24 * 8.45} height={24} fill={'#E8EBF8'}/>*/}
                                         <Typography sx={{color: "#e8ebf8", fontSize: "24px"}}>
                                             TEAM
                                         </Typography>

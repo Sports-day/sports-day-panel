@@ -10,7 +10,7 @@ import {
     Typography,
 } from "@mui/material";
 import * as React from "react";
-import Logo from "public/logo.svg"
+// import Logo from "public/logo.svg"
 import {
     HiEyeSlash
 } from "react-icons/hi2";
@@ -83,7 +83,7 @@ const Privacy: NextPage = () => {
                                             pb: 25
                                         }}
                                     >
-                                        <Logo width={24 * 8.45} height={24} fill={'#E8EBF8'}/>
+                                        {/*<Logo width={24 * 8.45} height={24} fill={'#E8EBF8'}/>*/}
                                         <Stack direction={"row"}>
                                             <SvgIcon sx={{margin: 0.7}}><HiEyeSlash color={"#fff"}/></SvgIcon>
                                             <Typography sx={{color: "#e8ebf8", fontSize: "24px"}}>
