@@ -26,12 +26,8 @@ import {
 } from "react-icons/hi2";
 import Link from "next/link";
 import Image from "next/image";
-import {useSession} from "next-auth/react";
 
 const About: NextPage = () => {
-    useSession({
-        required: true,
-    })
     return (
         <>
             <motion.div

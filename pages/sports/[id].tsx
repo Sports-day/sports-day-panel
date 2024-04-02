@@ -32,7 +32,6 @@ import {useFetchSport, useFetchSportGames} from "../../src/features/sports/hook"
 import {useFetchTeams} from "../../src/features/teams/hook";
 import {useFetchLocations} from "../../src/features/locations/hook";
 import {useFetchImages} from "../../src/features/images/hook";
-import {useSession} from "next-auth/react";
 import {useFetchMatches} from "../../src/features/matches/hook";
 
 const REFRESH_INTERVAL = 1000 * 60 * 5
@@ -43,9 +42,6 @@ type Props = {
 }
 
 const Id: NextPage<Props> = (props: Props) => {
-    useSession({
-        required: true,
-    })
     //  fetch
     const {sport, isFetching: isSportFetching, refresh: refreshSport} = useFetchSport(props.sportId)
     const {games, isFetching: isGameFetching, refresh: refreshGame} = useFetchSportGames(props.sportId, true)

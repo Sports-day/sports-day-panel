@@ -14,12 +14,8 @@ import Logo from "public/logo.svg"
 import {
     HiEyeSlash
 } from "react-icons/hi2";
-import {useSession} from "next-auth/react";
 
 const Privacy: NextPage = () => {
-    useSession({
-        required: true,
-    })
     return (
         <>
             <motion.div

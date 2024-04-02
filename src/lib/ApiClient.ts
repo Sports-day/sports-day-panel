@@ -1,6 +1,4 @@
 import axios from "axios";
-import {getServerSession} from "next-auth";
-import {getSession} from "next-auth/react";
 import Cookies from "js-cookie";
 
 const TOKEN_COOKIE_EXPIRE = 10 // minutes
@@ -37,26 +35,7 @@ ApiClient.interceptors.response.use(
 ApiClient.interceptors.request.use(async (request: any) => {
     let token: string | undefined
 
-    // server side
-    if (typeof window === 'undefined') {
-        const session = await getServerSession()
-        token = session?.accessToken
-    }
-    // client side
-    else {
-        token = Cookies.get("sports-day.api-access-token")
-        if (!token) {
-            const session = await getSession()
-            token = session?.accessToken
-            if (token) {
-                console.log(">>> Update token in cookie <<<")
-                Cookies.set("sports-day.api-access-token", token,
-                    {
-                        expires: 1/24/60 * TOKEN_COOKIE_EXPIRE,
-                    })
-            }
-        }
-    }
+    //  todo: get token from cookie
 
     //  do not have access token
     if (token === undefined) {
