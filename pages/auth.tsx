@@ -2,8 +2,8 @@ import type {NextPage} from 'next'
 import {signIn} from "next-auth/react";
 import Head from 'next/head'
 import {Box, Button, Card, CardContent, Container, Stack, Typography} from "@mui/material";
-import Logo from "public/logo.svg"
-import MSLogo from "public/ms.svg"
+// import Logo from "public/logo.svg"
+// import MSLogo from "public/ms.svg"
 import * as React from "react";
 import {motion, AnimatePresence} from "framer-motion";
 
@@ -54,7 +54,7 @@ const Auth: NextPage = () => {
                                     direction={"row"}
                                     spacing={0.5}
                                 >
-                                    <Logo width={22 * 8.45} height={22} fill={"black"}/>
+                                    {/*<Logo width={22 * 8.45} height={22} fill={"black"}/>*/}
                                     <Typography fontSize={"24px"} fontWeight={"bold"} color={"#000"}
                                                 sx={{position: "relative", bottom: "9px"}}>。</Typography>
                                 </Stack>
@@ -72,7 +72,7 @@ const Auth: NextPage = () => {
                                                 alignItems={"center"}
                                                 spacing={2}
                                             >
-                                                <MSLogo width={16} height={16}/>
+                                                {/*<MSLogo width={16} height={16}/>*/}
                                                 <Typography sx={{color: "#FFF", fontSize: "16px"}}>
                                                     KOSENアカウントではじめよう
                                                 </Typography>
