@@ -1,11 +1,11 @@
+'use client'
 import {createContext} from "react";
-import { User } from "../../src/models/UserModel";
-import {MicrosoftAccount} from "../../src/models/MicrosoftAccountModel";
-import {Team} from "../../src/models/TeamModel";
-import {Game} from "../../src/models/GameModel";
-import {Match} from "../../src/models/MatchModel";
-import {Location} from "../../src/models/LocationModel";
-import {Image} from "../../src/models/ImageModel";
+import { User } from "@/src/models/UserModel";
+import {Team} from "@/src/models/TeamModel";
+import {Game} from "@/src/models/GameModel";
+import {Match} from "@/src/models/MatchModel";
+import {Location} from "@/src/models/LocationModel";
+import {Image} from "@/src/models/ImageModel";
 
 export type GenericContextType<T> = {
     data: T
@@ -46,11 +46,5 @@ export const LocationsContext = createContext<LocationsContextType>({
 export type ImagesContextType = GenericContextType<Image[]>
 export const ImagesContext = createContext<ImagesContextType>({
     data: [],
-    refresh: () => {}
-})
-
-export type MicrosoftAccountContext = GenericContextType<MicrosoftAccount>
-export const MicrosoftAccountContext = createContext<MicrosoftAccountContext>({
-    data: {} as MicrosoftAccount,
     refresh: () => {}
 })

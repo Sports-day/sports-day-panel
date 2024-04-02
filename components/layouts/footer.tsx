@@ -1,7 +1,7 @@
 import {
     BottomNavigation, Typography, Box, Stack, Button
 } from '@mui/material';
-import Logo from "public/logo.svg"
+// import Logo from "public/logo.svg"
 import * as React from "react";
 import Link from "next/link";
 
@@ -20,7 +20,7 @@ export const Footer = () => {
                 >
                     <Typography>(C) 2023</Typography>
                     <Box sx={{pt:"5px"}}>
-                        <Logo width={14*8.45} height={14} fill={'#99a5d6'}/>
+                        {/*<Logo width={14*8.45} height={14} fill={'#99a5d6'}/>*/}
                     </Box>
                     <Typography>TEAM</Typography>
                 </Stack>

@@ -5,7 +5,6 @@ export type Class = {
     id: number,
     name: string,
     description: string,
-    groupId: number,
     createdAt: string,
     updatedAt: string
 }

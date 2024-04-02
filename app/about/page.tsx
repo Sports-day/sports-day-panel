@@ -1,7 +1,6 @@
-import {NextPage} from "next";
+'use client'
 import {motion} from "framer-motion";
-import Head from "next/head";
-import {Navigation} from "../components/layouts/navigation";
+import {Navigation} from "@/components/layouts/navigation";
 import {
     Box,
     Card,
@@ -14,7 +13,7 @@ import {
     Unstable_Grid2 as Grid
 } from "@mui/material";
 import * as React from "react";
-import Logo from "public/logo.svg"
+// import Logo from "public/logo.svg"
 import {
     FaQuoteLeft,
     FaTwitter,
@@ -26,12 +25,12 @@ import {
 } from "react-icons/hi2";
 import Link from "next/link";
 import Image from "next/image";
-import {useSession} from "next-auth/react";
 
-const About: NextPage = () => {
-    useSession({
-        required: true,
-    })
+// export const metadata: Metadata = {
+//     title: 'SPORTSDAY : About',
+// }
+
+export default function Page() {
     return (
         <>
             <motion.div
@@ -41,9 +40,6 @@ const About: NextPage = () => {
                 exit={{opacity: 0}}
                 transition={{delay: 0.5, duration: 0.5, ease: 'easeOut'}}
             >
-                <Head>
-                    <title>{`SPORTSDAY : About`}</title>
-                </Head>
                 <Navigation/>
                 <Box
                     component={"main"}
@@ -99,7 +95,7 @@ const About: NextPage = () => {
                                             pb: 25
                                         }}
                                     >
-                                        <Logo width={24 * 8.45} height={24} fill={'#E8EBF8'}/>
+                                        {/*<Logo width={24 * 8.45} height={24} fill={'#E8EBF8'}/>*/}
                                         <Typography sx={{color: "#e8ebf8", fontSize: "24px"}}>
                                             TEAM
                                         </Typography>
@@ -668,5 +664,3 @@ const About: NextPage = () => {
         </>
     )
 }
-
-export default About

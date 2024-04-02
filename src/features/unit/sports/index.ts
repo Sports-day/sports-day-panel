@@ -1,21 +1,17 @@
-import {Sport} from "../../../models/SportModel";
-import {Team} from "../../../models/TeamModel";
-import {Match} from "../../../models/MatchModel";
-import {Game, gameFactory} from "../../../models/GameModel";
-import {Image} from "../../../models/ImageModel";
-import {Location} from "../../../models/LocationModel";
-import {useContext, useState} from "react";
-import {useFetchImages} from "../../images/hook";
-import {useFetchLocations} from "../../locations/hook";
-import {useFetchTeams} from "../../teams/hook";
-import {useFetchSport, useFetchSports} from "../../sports/hook";
-import {useFetchGames} from "../../games/hook";
-import {useFetchMatches} from "../../matches/hook";
-import {useFetchUsers} from "../../users/hook";
-import {User} from "../../../models/UserModel";
-import {MicrosoftAccountContext} from "../../../../components/context";
-import {useFetchAllInformation} from "../../information/hook";
-import {Information} from "../../../models/InformationModel";
+import {Sport} from "@/src/models/SportModel";
+import {Team} from "@/src/models/TeamModel";
+import {Match} from "@/src/models/MatchModel";
+import {Game} from "@/src/models/GameModel";
+import {Image} from "@/src/models/ImageModel";
+import {Location} from "@/src/models/LocationModel";
+import {useFetchImages} from "@/src/features/images/hook";
+import {useFetchLocations} from "@/src/features/locations/hook";
+import {useFetchTeams} from "@/src/features/teams/hook";
+import {useFetchSport} from "@/src/features/sports/hook";
+import {useFetchGames} from "@/src/features/games/hook";
+import {useFetchMatches} from "@/src/features/matches/hook";
+import {useFetchAllInformation} from "@/src/features/information/hook";
+import {Information} from "@/src/models/InformationModel";
 
 export type SportDataType = {
     refresh: VoidFunction
@@ -45,7 +41,7 @@ export const useFetchSportData = (sportId: number) => {
     const {allInformation, isFetching: isFetchingInformation} = useFetchAllInformation()
     //  state
     let filteredGames: Game[] = []
-    let filteredTeams: Team[] = []
+    let filteredTeams: Team[]
     let filteredMatches: Match[] = []
 
     //  games

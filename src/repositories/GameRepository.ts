@@ -4,50 +4,48 @@ import {Match} from "../models/MatchModel";
 import {Team} from "../models/TeamModel";
 
 const getGames = async (filter: boolean): Promise<Game[]> => {
-    const {data} = await ApiClient.get("/games",
+    const data = await ApiClient().getWithParams("/games",
         {
-            params: {
-                filter: filter
-            }
+            filter: filter
         })
     return data.data
 }
 
 const getGame = async (id: number): Promise<Game> => {
-    const {data} = await ApiClient.get(`/games/${id}`)
+    const data = await ApiClient().get(`/games/${id}`)
     return data.data
 }
 
 const deleteGame = async (id: number): Promise<void> => {
-    await ApiClient.delete(`/games/${id}`)
+    await ApiClient().delete(`/games/${id}`)
 }
 
 const createGame = async (omittedGame: Omit<Game, "id" | "createdAt" | "updatedAt">): Promise<Game> => {
-    const {data} = await ApiClient.post(`/games`, omittedGame)
+    const data = await ApiClient().post(`/games`, omittedGame)
     return data.data
 }
 
 const updateGame = async (id: number, omittedGame: Omit<Game, "id" | "createdAt" | "updatedAt">): Promise<Game> => {
-    const {data} = await ApiClient.put(`/games/${id}`, omittedGame)
+    const data = await ApiClient().put(`/games/${id}`, omittedGame)
     return data.data
 }
 
 const getGameMatches = async (id: number): Promise<Match[]> => {
-    const {data} = await ApiClient.get(`/games/${id}/matches`)
+    const data = await ApiClient().get(`/games/${id}/matches`)
     return data.data
 }
 
 const deleteGameMatches = async (id: number): Promise<void> => {
-    await ApiClient.delete(`/games/${id}/matches`)
+    await ApiClient().delete(`/games/${id}/matches`)
 }
 
 const getGameEntries = async (id: number): Promise<Team[]> => {
-    const {data} = await ApiClient.get(`/games/${id}/entries`)
+    const data = await ApiClient().get(`/games/${id}/entries`)
     return data.data
 }
 
 const addGameEntries = async (id: number, teamIds: number[]): Promise<Team[]> => {
-    const {data} = await ApiClient.post(
+    const data = await ApiClient().post(
         `/games/${id}/entries`,
         {
             teamIds: teamIds
@@ -57,11 +55,11 @@ const addGameEntries = async (id: number, teamIds: number[]): Promise<Team[]> =>
 }
 
 const removeGameEntry = async (id: number, teamId: number): Promise<void> => {
-    await ApiClient.delete(`/games/${id}/entries/${teamId}`)
+    await ApiClient().delete(`/games/${id}/entries/${teamId}`)
 }
 
 const makeTournamentTree = async (id: number, parentMatchId: number | null): Promise<Match> => {
-    const {data} = await ApiClient.post(
+    const data = await ApiClient().post(
         `/games/${id}/tournament`,
         {
             parentId: parentMatchId
@@ -71,16 +69,16 @@ const makeTournamentTree = async (id: number, parentMatchId: number | null): Pro
 }
 
 const updateTournamentTree = async (id: number): Promise<void> => {
-    await ApiClient.post(`/games/${id}/tournament/update-tree`)
+    await ApiClient().post(`/games/${id}/tournament/update-tree`, {})
 }
 
 const getTournamentResult = async (id: number): Promise<TournamentResult> => {
-    const {data} = await ApiClient.get(`/games/${id}/tournament/result`)
+    const data = await ApiClient().get(`/games/${id}/tournament/result`)
     return data.data
 }
 
 const makeLeagueMatches = async (id: number, locationId: number | null): Promise<Match[]> => {
-    const {data} = await ApiClient.post(
+    const data = await ApiClient().post(
         `/games/${id}/league`,
         {
             locationId: locationId
@@ -90,12 +88,10 @@ const makeLeagueMatches = async (id: number, locationId: number | null): Promise
 }
 
 const getLeagueResult = async (id: number, restrict: boolean): Promise<LeagueResult> => {
-    const {data} = await ApiClient.get(
+    const data = await ApiClient().getWithParams(
         `/games/${id}/league/result`,
         {
-            params: {
-                restrict: restrict
-            }
+            restrict: restrict
         }
     )
     return data.data

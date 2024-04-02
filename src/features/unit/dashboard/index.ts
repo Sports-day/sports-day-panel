@@ -1,21 +1,19 @@
-import {Sport} from "../../../models/SportModel";
-import {Team} from "../../../models/TeamModel";
-import {Match} from "../../../models/MatchModel";
-import {Game, gameFactory} from "../../../models/GameModel";
-import {Image} from "../../../models/ImageModel";
-import {Location} from "../../../models/LocationModel";
-import {useContext, useState} from "react";
-import {useFetchImages} from "../../images/hook";
-import {useFetchLocations} from "../../locations/hook";
-import {useFetchTeams} from "../../teams/hook";
-import { useFetchSports } from "../../sports/hook";
-import {useFetchGames} from "../../games/hook";
-import {useFetchMatches} from "../../matches/hook";
-import {useFetchUsers} from "../../users/hook";
-import {User} from "../../../models/UserModel";
-import {MicrosoftAccountContext} from "../../../../components/context";
-import {Information} from "../../../models/InformationModel";
-import {useFetchAllInformation} from "../../information/hook";
+import {Sport} from "@/src/models/SportModel";
+import {Team} from "@/src/models/TeamModel";
+import {Match} from "@/src/models/MatchModel";
+import {Game, gameFactory} from "@/src/models/GameModel";
+import {Image} from "@/src/models/ImageModel";
+import {Location} from "@/src/models/LocationModel";
+import {useState} from "react";
+import {useFetchImages} from "@/src/features/images/hook";
+import {useFetchLocations} from "@/src/features/locations/hook";
+import {useFetchTeams} from "@/src/features/teams/hook";
+import { useFetchSports } from "@/src/features/sports/hook";
+import {useFetchGames} from "@/src/features/games/hook";
+import {useFetchMatches} from "@/src/features/matches/hook";
+import {useFetchUsers} from "@/src/features/users/hook";
+import {User} from "@/src/models/UserModel";
+import {useFetchUserinfo} from "@/src/features/userinfo/hook";
 
 export type DashboardDataType = {
     isFetching: boolean
@@ -47,8 +45,7 @@ export const useFetchDashboard = () => {
     const {games, isFetching: isFetchingGames} = useFetchGames(true)
     const {matches, isFetching: isFetchingMatches} = useFetchMatches()
     const {users, isFetching: isFetchingUsers} = useFetchUsers()
-    //  context
-    const {data: microsoftAccount} = useContext(MicrosoftAccountContext)
+    const {user, isFetching: isFetchingUserinfo} = useFetchUserinfo()
     //  individual state
     const [mySportState, setMySport] = useState<Sport | undefined>(undefined)
     const [myGameState, setMyGame] = useState<Game | undefined>(undefined)
@@ -57,7 +54,7 @@ export const useFetchDashboard = () => {
     const [myTeamUsersState, setMyTeamUsers] = useState<User[]>([])
     const [myTeamRankState, setMyTeamRank] = useState<number>(0)
 
-    if(!isFetchingImages && !isFetchingLocations && !isFetchingTeams && !isFetchingSports && !isFetchingGames && !isFetchingMatches && !isFetchingUsers && isFetching) {
+    if(!isFetchingImages && !isFetchingLocations && !isFetchingTeams && !isFetchingSports && !isFetchingGames && !isFetchingMatches && !isFetchingUsers && !isFetchingUserinfo && isFetching) {
         //  fetch data for individual section
         fetchBlock: {
             /*
@@ -71,12 +68,10 @@ export const useFetchDashboard = () => {
             myTeam決定でmyTeamUsers決定 OK
             myGameの順位を決定
              */
-            //  my user
-            const myUser = users.find(user => user.id === microsoftAccount?.userId)
-            if (!myUser) break fetchBlock
+            if (!user) break fetchBlock
 
             //  my teams
-            const myTeams = teams.filter(team => team.userIds.includes(myUser.id))
+            const myTeams = teams.filter(team => team.userIds.includes(user.id))
             if (myTeams.length === 0) break fetchBlock
 
             //  my games

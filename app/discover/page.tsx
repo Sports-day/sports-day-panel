@@ -1,5 +1,4 @@
-import {NextPage} from "next";
-import Head from "next/head";
+'use client'
 import {
     Avatar,
     Box,
@@ -8,18 +7,22 @@ import {
     Unstable_Grid2 as Grid,
 } from "@mui/material";
 import * as React from "react";
-import {Navigation} from "../components/layouts/navigation";
-import {useFetchTeamSetsInMyClass} from "../src/features/unit/discover";
-import {Loading} from "../components/layouts/loading";
+import {Navigation} from "@/components/layouts/navigation";
+import {useFetchTeamSetsInMyClass} from "@/src/features/unit/discover";
+import {Loading} from "@/components/layouts/loading";
 import {motion} from "framer-motion";
 import {HiSearch} from "react-icons/hi";
-import {useFetchLocations} from "../src/features/locations/hook";
-import {useFetchImages} from "../src/features/images/hook";
-import {DiscoverTeamContent} from "../components/discover/DiscoverTeamContent";
-import {OtherInfo} from "../components/dashboard/Overview/OtherInfo";
+import {useFetchLocations} from "@/src/features/locations/hook";
+import {useFetchImages} from "@/src/features/images/hook";
+import {DiscoverTeamContent} from "@/components/discover/DiscoverTeamContent";
+import {OtherInfo} from "@/components/dashboard/Overview/OtherInfo";
+// import {Metadata} from "next";
 
+// export const metadata: Metadata = {
+//     title: 'SPORTSDAY : Discover',
+// }
 
-const Discover: NextPage = () => {
+export default function Page() {
     //  Unit Hook
     const {
         isFetching,
@@ -46,9 +49,6 @@ const Discover: NextPage = () => {
             )}
             {!(isFetching || isFetchingLocations || isFetchingImages) && (
                 <>
-                    <Head>
-                        <title>SPORTSDAY : Discover</title>
-                    </Head>
                     <motion.div
                         key={"discover"}
                         initial={{opacity: 0}}
@@ -200,5 +200,3 @@ const Discover: NextPage = () => {
         </>
     )
 }
-
-export default Discover

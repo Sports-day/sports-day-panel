@@ -1,4 +1,4 @@
-FROM node:18.12.0 AS Builder
+FROM node:18.20.0 AS Builder
 
 WORKDIR /app
 
@@ -15,7 +15,7 @@ COPY --from=Builder /app/package.json ./
 COPY --from=Builder /app/node_modules/ ./node_modules/
 
 # copy files for build
-COPY pages/ ./pages/
+COPY app/ ./pages/
 COPY components/ ./components/
 COPY src/ ./src/
 COPY public/ ./public/

@@ -1,5 +1,4 @@
-import {NextPage} from "next";
-import Head from "next/head";
+'use client'
 import {
     Box,
     Container,
@@ -7,18 +6,22 @@ import {
     Unstable_Grid2 as Grid,
 } from "@mui/material";
 import * as React from "react";
-import Overview from "../components/dashboard/Overview";
-import Schedule from "../components/dashboard/schedule";
-import {SportsListElement} from "../components/dashboard/SportsListElement";
-import {Navigation} from "../components/layouts/navigation";
-import {ImagesContext, LocationsContext, TeamsContext, UsersContext} from "../components/context";
-import {useFetchDashboard} from "../src/features/unit/dashboard";
-import {Loading} from "../components/layouts/loading";
+import Overview from "@/components/dashboard/Overview";
+import Schedule from "@/components/dashboard/schedule";
+import {SportsListElement} from "@/components/dashboard/SportsListElement";
+import {Navigation} from "@/components/layouts/navigation";
+import {ImagesContext, LocationsContext, TeamsContext, UsersContext} from "@/components/context";
+import {useFetchDashboard} from "@/src/features/unit/dashboard";
+import {Loading} from "@/components/layouts/loading";
 import {motion} from "framer-motion";
-import {OtherInfo} from "../components/dashboard/Overview/OtherInfo";
-import {InformationList} from "../components/InformationList";
+import {OtherInfo} from "@/components/dashboard/Overview/OtherInfo";
+import {InformationList} from "@/components/InformationList";
 
-const DashBoard: NextPage = () => {
+// export const metadata: Metadata = {
+//     title: 'SPORTSDAY : Dashboard',
+// }
+
+export default function Page() {
     //  Unit Hook
     const {
         isFetching,
@@ -79,9 +82,6 @@ const DashBoard: NextPage = () => {
                                     }
                                 }}
                             >
-                                <Head>
-                                    <title>SPORTSDAY : Dashboard</title>
-                                </Head>
                                 <motion.div
                                     key={"dashboard"}
                                     initial={{opacity: 0}}
@@ -231,5 +231,3 @@ const DashBoard: NextPage = () => {
         </>
     )
 }
-
-export default DashBoard

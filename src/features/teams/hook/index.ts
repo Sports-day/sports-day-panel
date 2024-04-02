@@ -1,8 +1,7 @@
-import {useAsync, useAsyncRetry} from "react-use";
+import {useAsyncRetry} from "react-use";
 import {useState} from "react";
-import {Team, teamFactory} from "../../../models/TeamModel";
-import {useFetchMyUser} from "../../users/hook";
-import {User} from "../../../models/UserModel";
+import {Team, teamFactory} from "@/src/models/TeamModel";
+import {User} from "@/src/models/UserModel";
 
 export const useFetchTeams = () => {
     const [teams, setTeams] = useState<Team[]>([]);
