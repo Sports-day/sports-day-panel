@@ -1,7 +1,7 @@
 import type {Metadata} from 'next'
 import Head from 'next/head'
 import {Box, Button, Container, Stack, Typography, SvgIcon} from "@mui/material";
-// import Mark from "public/mark.svg"
+import Mark from "@/public/mark.svg"
 import {BiErrorAlt} from "react-icons/bi"
 import * as React from "react";
 
@@ -65,11 +65,11 @@ export default function NotFound() {
                             <Box
                                 pb={0.5}
                             >
-                                {/*<Mark*/}
-                                {/*    width={20}*/}
-                                {/*    height={20}*/}
-                                {/*    fill={"#99a5d6"}*/}
-                                {/*/>*/}
+                                <Mark
+                                    width={20}
+                                    height={20}
+                                    fill={"#99a5d6"}
+                                />
                             </Box>
                             <Typography fontSize={"16px"} color={"#99a5d6"}>ページが見つかりません</Typography>
                             <Stack
