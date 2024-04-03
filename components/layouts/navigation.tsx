@@ -29,7 +29,7 @@ import {
     Typography, DialogTitle, DialogContent, DialogActions, Dialog,
     BottomNavigation,
 } from '@mui/material';
-// import Logo from "public/logo.svg"
+import Logo from "@/public/logo.svg"
 import {alpha} from '@mui/material/styles';
 import Link from "next/link";
 import {useState} from "react";
@@ -240,7 +240,7 @@ export const Navigation = () => {
                         >
                             <Typography sx={{pr: "5px"}}>(C) 2023</Typography>
                             <Box sx={{pt: 0.3}}>
-                                {/*<Logo width={14*8.45} height={14} fill={'#99a5d6'}/>*/}
+                                <Logo width={14*8.45} height={14} fill={'#99a5d6'}/>
                             </Box>
                             <Typography>TEAM</Typography>
                         </Stack>
@@ -278,7 +278,7 @@ export const Navigation = () => {
                     >
                         <Box py={2} px={2}>
                             <Button component={Link} href={"/"} scroll={false}>
-                                {/*<Logo width={20 * 8.45} height={20} fill={'#ffffff'}/>*/}
+                                <Logo width={20 * 8.45} height={20} fill={'#ffffff'}/>
                             </Button>
                         </Box>
                     </Stack>
