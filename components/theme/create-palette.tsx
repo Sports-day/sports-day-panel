@@ -26,7 +26,7 @@ export function createPalette() {
         success,
         text: {
             primary: neutral[50],
-            secondary: neutral[500],
+            secondary: neutral[100],
             disabled: alpha(neutral[600], 0.38)
         },
         warning

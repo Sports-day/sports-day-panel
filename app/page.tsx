@@ -116,7 +116,7 @@ export default function Page() {
                                                     zIndex: 1,
                                                     width: "101vw",
                                                     height: "fit-content",
-                                                    backgroundColor: "#23398a",
+                                                    backgroundColor: "#3E4EB3",
                                                 }}
                                             >
                                                 <motion.div
@@ -168,7 +168,7 @@ export default function Page() {
                                                     top: "-100px",
                                                     zIndex: "0",
                                                     position: "relative",
-                                                    backgroundColor: "#23398a",
+                                                    backgroundColor: "#3E4EB3",
                                                     borderTopLeftRadius: "10px",
                                                     borderTopRightRadius: "10px",
                                                     borderBottomLeftRadius: "50% 50%",

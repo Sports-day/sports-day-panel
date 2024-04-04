@@ -74,7 +74,7 @@ export const Navigation = () => {
         <>
             <Box
                 sx={{
-                    backgroundColor: '#23398A',
+                    backgroundColor: '#3E4EB3',
                     width: '100vw', height: 'auto', overflow: 'scrollable', mt: 4, mb: 0.5
                 }}
                 role="Navigation"
@@ -102,7 +102,7 @@ export const Navigation = () => {
                                 sx={{
                                     height: "4em",
                                     width: "4em",
-                                    backgroundColor: "#5664e3",
+                                    backgroundColor: "#3E4EB3",
                                 }}
                                 src={`${process.env.NEXT_PUBLIC_API_URL}/images/${user?.pictureId}/file`}
                             >
@@ -263,7 +263,7 @@ export const Navigation = () => {
                 sx={{
                     height: "70px",
                     backdropFilter: 'blur(6px)',
-                    backgroundColor: '#23398A'
+                    backgroundColor: '#3E4EB3'
                 }}
             >
                 <Container
