@@ -9,6 +9,9 @@ export async function POST(request: NextRequest) {
     //  pass code to the backend
     const loginEndpoint = process.env.NEXT_PUBLIC_API_URL + '/login'
 
+    //  redirect uri
+    const redirectUri = process.env.NEXT_PUBLIC_OIDC_REDIRECT_URL
+
     //  post code to the backend using fetch
     const response = await fetch(loginEndpoint, {
         method: 'POST',
@@ -17,6 +20,7 @@ export async function POST(request: NextRequest) {
         },
         body: JSON.stringify({
             code: code,
+            redirect_uri: redirectUri
         }),
     })
 
