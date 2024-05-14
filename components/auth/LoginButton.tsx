@@ -1,5 +1,5 @@
 'use client'
-import {Box, Button, Stack, Typography} from "@mui/material";
+import {Button, Stack, Typography} from "@mui/material";
 import crypto from 'crypto';
 import * as querystring from "querystring";
 import {useEffect, useState} from "react";
@@ -47,12 +47,12 @@ export default function LoginButton() {
                 direction={"row"}
                 justifyContent={"center"}
                 alignItems={"center"}
-                spacing={1}
+                spacing={2}
             >
                 <MSLogo width={16} height={16}/>
-                <Box>
+                <Typography fontSize={"14px"}>
                     {buttonDisplayName}
-                </Box>
+                </Typography>
             </Stack>
         </Button>
     );

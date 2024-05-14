@@ -3,8 +3,13 @@ import {Container, Button, AppBar, Box, SwipeableDrawer, } from "@mui/material";
 import React from 'react';
 import {HiXMark} from "react-icons/hi2";
 import PrivacyPolicy from "@/components/layouts/privacyPolicy";
+import {ReactNode} from "react";
 
-const PrivacyPolicyDrawer = () => {
+export type PrivacyPolicyDrawerProps = {
+    children?: ReactNode
+}
+
+export default function PrivacyPolicyDrawer(props: PrivacyPolicyDrawerProps) {
     const [open, setOpen] = React.useState(false);
 
     const toggleDrawer = (newOpen: boolean) => () => {
@@ -50,11 +55,11 @@ const PrivacyPolicyDrawer = () => {
             <Button
                 variant="contained"
                 color="primary"
-                sx={{py:2, width:"100%"}}
+                sx={{width:"100%"}}
                 disableElevation
                 onClick={toggleDrawer(true)}
             >
-                プライバシーポリシー
+                {props.children}
             </Button>
             <SwipeableDrawer
                 open={open}
@@ -67,5 +72,3 @@ const PrivacyPolicyDrawer = () => {
         </>
     );
 };
-
-export default PrivacyPolicyDrawer;
