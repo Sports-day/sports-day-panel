@@ -1,15 +1,12 @@
 'use client'
-import {Button} from "@mui/material";
+import {Box, Button, Stack, Typography} from "@mui/material";
 import crypto from 'crypto';
 import * as querystring from "querystring";
-import {ReactNode, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
+import MSLogo from "@/public/ms.svg";
+import * as React from "react";
 
-
-export type LoginButtonProps = {
-    children: ReactNode
-}
-
-export default function LoginButton(props: LoginButtonProps) {
+export default function LoginButton() {
     const [authorizationUrl, setAuthorizationUrl] = useState<string>('')
 
     useEffect(() => {
@@ -36,12 +33,27 @@ export default function LoginButton(props: LoginButtonProps) {
         setAuthorizationUrl(`${authorizationBaseUrl}?${searchParams}`)
     }, [])
 
+    const buttonDisplayName = process.env.NEXT_PUBLIC_OIDC_DISPLAY_NAME ?? "ログインできません"
+
     return (
         <Button
+            variant="contained"
+            color="secondary"
             href={authorizationUrl}
-            sx={{width: "fit-content"}}
+            sx={{px:3, py:2, width:"100%"}}
+            disableElevation
         >
-            {props.children}
+            <Stack
+                direction={"row"}
+                justifyContent={"center"}
+                alignItems={"center"}
+                spacing={1}
+            >
+                <MSLogo width={16} height={16}/>
+                <Box>
+                    {buttonDisplayName}
+                </Box>
+            </Stack>
         </Button>
     );
 }

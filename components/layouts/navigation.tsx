@@ -29,7 +29,7 @@ import {
     Typography, DialogTitle, DialogContent, DialogActions, Dialog,
     BottomNavigation,
 } from '@mui/material';
-import Logo from "@/public/logo.svg"
+import Logo from "@/public/logo/logo.svg"
 import {alpha} from '@mui/material/styles';
 import Link from "next/link";
 import {useState} from "react";
