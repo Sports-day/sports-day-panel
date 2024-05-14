@@ -4,7 +4,7 @@ import {AppRouterCacheProvider} from '@mui/material-nextjs/v14-appRouter';
 import {CssBaseline, ThemeProvider} from "@mui/material";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 // import {AnimatePresence} from "framer-motion";
-import {theme} from "@/components/theme";
+import {theme} from "@/components/theme/theme";
 import Head from "next/head";
 
 
