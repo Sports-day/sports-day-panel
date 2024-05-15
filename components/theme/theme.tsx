@@ -40,7 +40,7 @@ export const theme = createTheme({
             contrastText: 'rgba(253,252,252,0.87)',
         },
         info: {
-            main: '#4a5abb',
+            main: '#5F6DC2',
         },
         divider: '#7f8cd6',
     },

@@ -39,23 +39,24 @@ export default function RootLayout({
                 name="msapplication-square310x310logo"
                 content="/site-tile-310x310.png"
             />
-            <meta name="msapplication-TileColor" content="#000" />
+            <meta name="msapplication-TileColor" content="#000"/>
             {/* safari */}
-            <meta name="apple-mobile-web-app-capable" content="yes" />
-            <meta name="apple-mobile-web-app-status-bar-style" content="#000" />
-            <meta name="apple-mobile-web-app-title" content="myapp" />
+            <meta name="apple-mobile-web-app-capable" content="yes"/>
+            <meta name="apple-mobile-web-app-status-bar-style" content="#000"/>
+            <meta name="apple-mobile-web-app-title" content="myapp"/>
             <link
                 rel="apple-touch-icon"
                 sizes="192x192"
                 href="/icon-192x192.png"
             />
             {/* 一般 */}
-            <meta name="application-name" content="myapp" />
-            <meta name="theme-color" content="#000" />
-            <meta name="description" content="this is myapp" />
-            <link rel="icon" sizes="192x192" href="/icon-192x192.png" />
-            <link rel="icon" href="/favicon.ico" />
-            <link rel="manifest" href="/manifest.json" />
+            <meta name="application-name" content="myapp"/>
+            <meta name="theme-color" content="#000"/>
+            <meta name="description" content="this is myapp"/>
+            <link rel="icon" sizes="192x192" href="/icon-192x192.png"/>
+            <link rel="icon" href="/favicon.ico"/>
+            <link rel="manifest" href="/manifest.json"/>
+            <meta name="theme-color" content="#5f6dc2"/>
         </Head>
         <body className={inter.className}>
         <AppRouterCacheProvider>

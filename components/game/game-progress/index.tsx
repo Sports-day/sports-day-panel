@@ -1,4 +1,4 @@
-import {Card, CardContent,　Stack, Typography}from "@mui/material";
+import {Box, Stack, Typography}from "@mui/material";
 import {GameProgressChart} from "./GameProgressChart";
 import {useFetchSportProgress} from "../../../src/features/sports/hook";
 
@@ -8,20 +8,23 @@ export const GameProgress = (props: { sportsId: number }) => {
     const formattedProgress = Math.trunc(progress * 100)
 
     const chartSeries = [formattedProgress, 100-formattedProgress]
-    const labels = ["完了した競技", "未完了の競技"]
 
     return (
-        <Card
+        <Box
+            px={2}
+            py={1.5}
+            pr={2}
             sx={{
-                height: '110px'
-            }}
-        >
-            <CardContent>
+                width:"100%",
+                height: "86px",
+                backgroundColor: "#5f6dc2",
+                borderRadius: "12px"
+            }}>
                 <Typography
-                    color={"textSecondary"}
+                    color={"#eff0f8"}
                     sx={{pb: "0px"}}
                 >
-                    進行度
+                    競技の進行状況
                 </Typography>
                 <Stack
                     direction={"column"}
@@ -32,7 +35,6 @@ export const GameProgress = (props: { sportsId: number }) => {
                         chartSeries={chartSeries}
                     />
                 </Stack>
-            </CardContent>
-        </Card>
+        </Box>
     );
 };

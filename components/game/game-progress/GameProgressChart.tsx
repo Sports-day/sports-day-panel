@@ -3,21 +3,18 @@ import {
     Stack,
     styled,
     LinearProgress,
-    Typography, SvgIcon
+    Typography
 } from "@mui/material";
 import {linearProgressClasses} from "@mui/material";
-import {ThemeProvider} from "@mui/material/styles";
 import * as React from "react";
-import {HiClock} from "react-icons/hi2";
-import {MdOutlineSportsScore} from "react-icons/md";
 import {useContext} from "react";
 import {TeamsContext} from "../../context";
 
 const PointBar = styled(LinearProgress)(({}) => ({
-    height: 10,
-    borderRadius: 5,
-    [`&.${linearProgressClasses.colorPrimary}`]: {backgroundColor: '#435BBC',},
-    [`& .${linearProgressClasses.bar}`]: {borderRadius: 2, backgroundColor: '#ffffff',},
+    height: 7,
+    borderRadius: 3,
+    [`&.${linearProgressClasses.colorPrimary}`]: {backgroundColor: '#4a5abb',},
+    [`& .${linearProgressClasses.bar}`]: {borderRadius: 2, backgroundColor: '#FFCB00',},
 }));
 
 type Props = {
@@ -32,8 +29,8 @@ export const GameProgressChart = (props:Props) => {
             <Stack
                 direction={"column"}
                 spacing={1}
-                pb={3}
                 sx={{width: "100%", height:"fit-content"}}
+
             >
                 <Stack
                     direction={"row"}
@@ -47,7 +44,7 @@ export const GameProgressChart = (props:Props) => {
                         alignItems={"space-between"}
                         maxWidth={'xl'}
                         sx={{ width: '100%' }}
-                        spacing={-1}
+                        spacing={0}
                     >
                         <Stack
                             direction={"row"}
@@ -55,11 +52,11 @@ export const GameProgressChart = (props:Props) => {
                             alignItems={"flex-end"}
                             spacing={0}
                         >
-                            <Typography sx={{color: "#FFF", fontSize: "30px", position: "relative", top: "-25px"}}>
+                            <Typography color={"secondary"} sx={{fontSize: "20px", position: "relative", top: "-5px"}}>
                                 {props.chartSeries[0]} %
                             </Typography>
                         </Stack>
-                        <Box>
+                        <Box sx={{position: "relative", top: "0px"}}>
                             <PointBar
                                 variant={"determinate"}
                                 value={props.chartSeries[0]}

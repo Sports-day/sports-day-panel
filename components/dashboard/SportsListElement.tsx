@@ -1,4 +1,4 @@
-import {Avatar, Button, Card, CardContent, Stack, Typography} from "@mui/material";
+import {Avatar, Box, Button, Stack, Typography} from "@mui/material";
 import {useContext} from "react";
 import {ImagesContext} from "../context";
 import {Sport} from "@/src/models/SportModel";
@@ -14,9 +14,16 @@ export const SportsListElement = (props: SportsListElementProps) => {
     const image = images?.find(image => image.id === props.sport.iconId)
 
     return (
-        <Card>
-            <Button component={Link} sx={{width:"100%"}} href={`/sports/${props.sport.id}`} scroll={false}>
-                <CardContent sx={{width:"100%"}}>
+            <Button
+                disableElevation
+                variant={"contained"}
+                color={"secondary"}
+                sx={{width:"100%", borderBottomLeftRadius:"2px"}}
+                scroll={false}
+                component={Link}
+                href={`/sports/${props.sport.id}`}
+            >
+                <Box sx={{width:"100%"}} py={1}>
                     <Stack
                         direction={"row"}
                         justifyContent={"flex-start"}
@@ -25,17 +32,16 @@ export const SportsListElement = (props: SportsListElementProps) => {
                     >
                         <Avatar
                             alt={props.sport.name}
-                            sx={{height: "3.5em", width: "3.5em"}}
+                            sx={{height: "1.8em", width: "1.8em"}}
                             src={image?.data}
                         >
 
                         </Avatar>
-                        <Typography sx={{color: "#FFF", fontSize: "16px", fontWeight: "bold"}}>
+                        <Typography>
                             {props.sport.name}
                         </Typography>
                     </Stack>
-                </CardContent>
+                </Box>
             </Button>
-        </Card>
     )
 }

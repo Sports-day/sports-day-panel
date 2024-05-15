@@ -36,6 +36,7 @@ export const Navigation = () => {
     const router = useRouter()
     const {user} = useFetchUserinfo()
 
+
     const [state, setState] = React.useState({bottom: false, NotifBottom: false});
     const [open, setOpen] = useState(false);
     const [scroll, setScroll] = React.useState<DialogProps['scroll']>('paper');
@@ -71,10 +72,12 @@ export const Navigation = () => {
                     overflow: 'scrollable',
                     background:"rgba(62,78,179,0.8)",
                     backdropFilter: 'blur(30px)',
-                    borderRadius: "10px",
+                    borderRadius: "15px",
+                    borderBottomLeftRadius: "0px",
+                    borderBottomRightRadius: "0px",
                     color: '#E8EBF8',
                     pb:5,
-                    pt:4
+                    pt:1.5
                 }}
                 role="Navigation"
                 onClick={toggleDrawer(anchor, false)}
@@ -82,7 +85,13 @@ export const Navigation = () => {
             >
                 <Container maxWidth={"xl"}>
                     <Stack spacing={1}>
-                        <Stack direction={"row"} spacing={1} pb={2} justifyContent={"center"}>
+                        <Stack direction={"column"} spacing={2} pb={2} justifyContent={"center"} alignItems={"center"}>
+                            <Box sx={{
+                                width:50,
+                                height:6,
+                                borderRadius:3,
+                                backgroundColor:"#7f8cd6"
+                            }}></Box>
                             <Logo width={16 * 8.45} height={16} fill={"#eff0f8"}/>
                         </Stack>
                         <Card sx={{backgroundColor: "#5360b2",}}>
@@ -253,7 +262,7 @@ export const Navigation = () => {
                         },
                     }}
                 >
-                    <DialogTitle id="scroll-dialog-title" fontSize={"16px"} color={"#99a5d6"}>スケジュール</DialogTitle>
+                    <DialogTitle id="scroll-dialog-title" fontSize={"16px"} color={"primary.dark"}>スケジュール</DialogTitle>
                     <DialogContent dividers={scroll === 'paper'}>
                         <DocsOverall/>
                     </DialogContent>
@@ -267,9 +276,9 @@ export const Navigation = () => {
                         >
                             <Button sx={{width: "100%", height: "100%"}} onClick={handleClose}>
                                 <SvgIcon sx={{mr: 1}}>
-                                    <HiXMark color={"#E8EBF8"}/>
+                                    <HiXMark color={"#5f6dc2"}/>
                                 </SvgIcon>
-                                <Typography color={"#E8EBF8"}>閉じる</Typography>
+                                <Typography color={"primary.main"}>閉じる</Typography>
                             </Button>
                         </Stack>
                     </DialogActions>
@@ -287,6 +296,7 @@ export const Navigation = () => {
                     sx={{
                         height: "80px",
                         width: "100%",
+                        pb:2,
                         justifyContent: "center",
                         alignContent: "center",
                         borderRadius: "10px",

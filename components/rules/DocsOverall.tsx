@@ -53,7 +53,7 @@ export const DocsOverall = () => {
             py={2}
             sx={{width: "100%"}}
         >
-            <Typography color={"#E8EBF8"}>タイムテーブル</Typography>
+            <Typography color={"primary.main"}>タイムテーブル</Typography>
             <Timeline sx={{
                 [`& .${timelineContentClasses.root}`]: {
                     flex: 30,
@@ -71,8 +71,8 @@ export const DocsOverall = () => {
                     <TimelineContent>
                         開会式
                         <Stack direction={"row"}>
-                            <Box pt={0.2}><HiMapPin size={16} color={"#99a5d6"}/></Box>
-                            <Typography fontSize={"14px"} color={"#99a5d6"}>各教室</Typography>
+                            <Box pt={0.2}><HiMapPin size={16} color={"#5f6dc2"}/></Box>
+                            <Typography fontSize={"14px"} color={"#5f6dc2"}>各教室</Typography>
                         </Stack>
                     </TimelineContent>
                 </TimelineItem>
@@ -87,9 +87,9 @@ export const DocsOverall = () => {
                     <TimelineContent>
                         着替え
                         <Stack direction={"row"}>
-                            <Box pt={0.2}><HiMapPin size={16} color={"#99a5d6"}/></Box>
+                            <Box pt={0.2}><HiMapPin size={16} color={"#5f6dc2"}/></Box>
                             <Typography fontSize={"14px"}
-                                        color={"#99a5d6"}>男子は各教室、女子は女子更衣室と1階物理実験室</Typography>
+                                        color={"#5f6dc2"}>男子は各教室、女子は女子更衣室と1階物理実験室</Typography>
                         </Stack>
                     </TimelineContent>
                 </TimelineItem>
@@ -116,8 +116,8 @@ export const DocsOverall = () => {
                     <TimelineContent>
                         閉会式
                         <Stack direction={"row"}>
-                            <Box pt={0.2}><HiMapPin size={16} color={"#99a5d6"}/></Box>
-                            <Typography fontSize={"14px"} color={"#99a5d6"}>各教室</Typography>
+                            <Box pt={0.2}><HiMapPin size={16} color={"#5f6dc2"}/></Box>
+                            <Typography fontSize={"14px"} color={"#5f6dc2"}>各教室</Typography>
                         </Stack>
                     </TimelineContent>
                 </TimelineItem>
@@ -136,7 +136,7 @@ export const DocsOverall = () => {
             <DialogContentText
                 id="scroll-dialog-description"
                 tabIndex={-1}
-                color={"#E8EBF8"}
+                color={"#2f3c8c"}
                 lineHeight={"27px"}
             >
                 <ReactMarkdown>{markdown}</ReactMarkdown>
