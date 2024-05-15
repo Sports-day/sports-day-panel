@@ -3,7 +3,7 @@ import {Button, Stack, Typography} from "@mui/material";
 import crypto from 'crypto';
 import * as querystring from "querystring";
 import {useEffect, useState} from "react";
-import MSLogo from "@/public/ms.svg";
+import MSLogo from "@/public/images/ms.svg";
 import * as React from "react";
 
 export default function LoginButton() {

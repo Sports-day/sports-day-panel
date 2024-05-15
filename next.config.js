@@ -14,7 +14,21 @@ const nextConfig = {
   },
 }
 
-const withPWA = require("next-pwa");
+const withPWA = require('next-pwa')({
+  cacheOnFrontEndNav: true,
+  aggressiveFrontEndNavCaching: true,
+  reloadOnOnline: true,
+  swcMinify: true,
+  dest: 'public',
+  register: true,
+  skipWaiting: true,
+  fallbacks: {
+    document: "/offline",
+  },
+  workboxOptions: {
+    disableDevLogs: true,
+  },
+})
 
 module.exports = withPWA({
   pwa: {
