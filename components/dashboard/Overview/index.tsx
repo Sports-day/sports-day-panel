@@ -40,67 +40,19 @@ export const Overview = (props: OverviewProps) => {
     return(
         <Container
             maxWidth={"xl"}
-            sx={{paddingTop: "0px"}}
         >
-            <Grid container spacing={2}>
-                <Grid xs={12} sm={12} lg={12}>
-                    <Stack
-                        direction={"row"}
-                        justifyContent={"space-between"}
-                        alignItems={"center"}
-                        spacing={3}
-                    >
-                        <Button
-                            component={Link}
-                            sx={{width:"100%"}}
-                            href={`/sports/${props.mySport.id}`}
-                            scroll={false}
-                        >
-                            <Stack
-                                direction={"row"}
-                                justifyContent={"space-between"}
-                                alignItems={"center"}
-                                sx={{py:1, width:"100%"}}
-                            >
-                                <Stack direction={"row"} spacing={3}>
-                                    <Avatar
-                                        alt={props.mySport.name}
-                                        sx={{height: "3.5em", width: "3.5em"}}
-                                        src={icon?.data}
-                                    >
-
-                                    </Avatar>
-                                    <Stack
-                                        direction={"column"}
-                                        justifyContent={"flex-start"}
-                                        alignItems={"flex-start"}
-                                        spacing={0.5}
-                                    >
-                                        <Typography sx={{color: "#99a5d6", fontSize: "14px"}}>
-                                            あなたのスポーツ
-                                        </Typography>
-                                        <Typography sx={{color: "#FFF", fontSize: "18px"}}>
-                                            {props.mySport.name}
-                                        </Typography>
-                                    </Stack>
-                                </Stack>
-                                <SvgIcon>
-                                    <HiChevronRight color="#FFF"/>
-                                </SvgIcon>
-                            </Stack>
-                        </Button>
-                    </Stack>
-                </Grid>
-                <Grid xs={12} sm={12} lg={12}><Divider/></Grid>
+            <Grid container spacing={1}>
                 <Grid xs={6} sm={6} lg={6}>
                     <Box
-                        p={1}
+                        px={2}
+                        py={1.5}
                         pr={2}
                         sx={{
                             width:"100%",
-                            height: "90%",
-                            borderRight: "1px solid #5a68a2"
-                    }}>
+                            height: "70px",
+                            backgroundColor: "#5f6dc2",
+                            borderRadius: "12px"
+                        }}>
                         <Stack
                             direction={"row"}
                             justifyContent={"space-between"}
@@ -124,7 +76,7 @@ export const Overview = (props: OverviewProps) => {
                     </Box>
                 </Grid>
                 <Grid xs={6} sm={6} lg={6}>
-                    <Button onClick={toggleDrawer(true)} sx={{width:"100%"}}>
+                    <Button disableElevation variant={"contained"} onClick={toggleDrawer(true)} sx={{width:"100%", height:"70px"}}>
                         <Stack
                             direction={"row"}
                             justifyContent={"space-between"}
@@ -139,13 +91,10 @@ export const Overview = (props: OverviewProps) => {
                                 <Typography sx={{color: "#99a5d6", fontSize: "14px"}}>
                                     チーム
                                 </Typography>
-                                <Typography sx={{color: "#FFF", fontSize: "24px", fontWeight: "bold"}}>
+                                <Typography sx={{color: "#FFF", fontSize: "18px", fontWeight: "bold"}}>
                                     {props.myTeam.name}
                                 </Typography>
                             </Stack>
-                            <SvgIcon>
-                                <HiChevronRight color="#FFF"/>
-                            </SvgIcon>
                         </Stack>
                     </Button>
                     <SwipeableDrawer
@@ -209,6 +158,54 @@ export const Overview = (props: OverviewProps) => {
                             </Stack>
                         </Container>
                     </SwipeableDrawer>
+                </Grid>
+                <Grid xs={12} sm={12} lg={12}>
+                    <Stack
+                        direction={"row"}
+                        justifyContent={"space-between"}
+                        alignItems={"center"}
+                        spacing={3}
+                    >
+                        <Button
+                            disableElevation
+                            variant={"contained"}
+                            component={Link}
+                            sx={{width:"100%", height:"70px"}}
+                            href={`/sports/${props.mySport.id}`}
+                            scroll={false}
+                        >
+                            <Stack
+                                direction={"row"}
+                                justifyContent={"space-between"}
+                                alignItems={"center"}
+                                sx={{py:1, width:"100%"}}
+                            >
+                                <Stack direction={"row"} spacing={3} sx={{width:"100%"}}>
+                                    <Stack
+                                        direction={"column"}
+                                        justifyContent={"flex-start"}
+                                        alignItems={"flex-start"}
+                                        spacing={0}
+                                    >
+                                        <Typography fontSize={"14px"} sx={{color: "#99a5d6"}}>
+                                            あなたの競技
+                                        </Typography>
+                                        <Typography fontSize={"14px"} sx={{color: "#eff0f8"}} fontWeight={"600"}>
+                                            {props.mySport.name}
+                                        </Typography>
+                                    </Stack>
+                                    <Stack sx={{flexGrow:1}} justifyContent={"center"} alignItems={"flex-end"}>
+                                        <Avatar
+                                            alt={props.mySport.name}
+                                            sx={{height: "2em", width: "2em"}}
+                                            src={icon?.data}
+                                        >
+                                        </Avatar>
+                                    </Stack>
+                                </Stack>
+                            </Stack>
+                        </Button>
+                    </Stack>
                 </Grid>
             </Grid>
         </Container>

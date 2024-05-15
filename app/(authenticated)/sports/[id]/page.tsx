@@ -33,6 +33,7 @@ import {useFetchTeams} from "@/src/features/teams/hook";
 import {useFetchLocations} from "@/src/features/locations/hook";
 import {useFetchImages} from "@/src/features/images/hook";
 import {useFetchMatches} from "@/src/features/matches/hook";
+import CircleContainer from "@/components/layouts/circleContainer";
 
 const REFRESH_INTERVAL = 1000 * 60 * 5
 
@@ -83,21 +84,21 @@ export default function Page({ params }: { params: { id: string } }) {
         setOpen(false);
     };
 
-    if (isFetching) {
-        return (
-            <>
-                <motion.div
-                    key={"loading"}
-                    initial={{opacity: 0}}
-                    animate={{opacity: 0.2}}
-                    exit={{opacity: 0}}
-                    transition={{duration: 0.2, ease: [0, 0.5, 0, 1]}}
-                >
-                    <Loading/>
-                </motion.div>
-            </>
-        )
-    }
+    // if (isFetching) {
+    //     return (
+    //         <>
+    //             <motion.div
+    //                 key={"loading"}
+    //                 initial={{opacity: 0}}
+    //                 animate={{opacity: 0.2}}
+    //                 exit={{opacity: 0}}
+    //                 transition={{duration: 0.2, ease: [0, 0.5, 0, 1]}}
+    //             >
+    //                 <Loading/>
+    //             </motion.div>
+    //         </>
+    //     )
+    // }
 
     if (!sport) {
         return null
@@ -138,14 +139,6 @@ export default function Page({ params }: { params: { id: string } }) {
                                 {/* TODO use metadata api instead of Head component*/}
                                 <title>{`SPORTSDAY : ${sport.name}`}</title>
                             </Head>
-                            <motion.div
-                                key={"sport"}
-                                initial={{opacity: 0}}
-                                animate={{opacity: 1}}
-                                exit={{opacity: 0}}
-                                transition={{duration: 0.8, ease: [0.83, 0, 0.17, 1]}}
-                            >
-                                <Navigation/>
                                 <Box
                                     component={"main"}
                                     minHeight={"96vh"}
@@ -157,94 +150,73 @@ export default function Page({ params }: { params: { id: string } }) {
                                 >
 
                                     {/*MainVisual*/}
-                                    <motion.div
-                                        key={"main-visual"}
-                                        initial={{y: "-100px"}}
-                                        animate={{y: "0px"}}
-                                        exit={{opacity: 0, y: "-100px"}}
-                                        transition={{duration: 0.7, ease: [0.54, -0.01, 0, 1]}}
-                                    >
+                                    <CircleContainer>
                                         <Container
-                                            maxWidth={false}
-                                            disableGutters
-                                            sx={{
-                                                paddingTop: 0,
-                                                paddingBottom: "0px",
-                                                marginBottom: "70px",
-                                                position: "relative",
-                                                zIndex: 1,
-                                                width: "101vw",
-                                                height: "fit-content",
-                                                backgroundColor: "#23398a",
-                                            }}
+                                            maxWidth={"xl"}
                                         >
-                                            <motion.div
-                                                key={"mainvisual-content"}
-                                                initial={{opacity: 0, y: "50px"}}
-                                                animate={{opacity: 1, y: "0px"}}
-                                                transition={{
-                                                    delay: 0.3,
-                                                    duration: 1,
-                                                    ease: [0.16, 1, 0.3, 1]
-                                                }}
-                                            >
+                                            <Grid container spacing={1}>
+                                                <Grid xs={6} sm={6} lg={6}>
+                                                    <Box
+                                                        px={2}
+                                                        py={3}
+                                                        mb={1}
+                                                        sx={{
+                                                            width:"100%",
+                                                            height:"180px",
+                                                            backgroundColor: "#5f6dc2",
+                                                            borderRadius: "10px"
+                                                        }}>
+                                                        <Stack
+                                                            direction={"column"}
+                                                            justifyContent={"space-between"}
+                                                            alignItems={"flex-start"}
+                                                            spacing={3}
+                                                            sx={{
+                                                                height:"100%"
+                                                            }}
+                                                        >
+                                                            <Avatar
+                                                                alt={sport.name}
+                                                                sx={{height: "2.5em", width: "2.5em"}}
+                                                                src={image?.data}
+                                                            >
 
-                                                <Container
-                                                    maxWidth={"xl"}
-                                                    sx={{paddingTop: 0.1}}
-                                                >
-                                                    <InformationList/>
-                                                </Container>
-                                                <Stack
-                                                    direction={"row"}
-                                                    justifyContent={"center"}
-                                                    alignItems={"center"}
-                                                    spacing={3}
-                                                    sx={{
-                                                        pt: 7,
-                                                        pb: 3
-                                                    }}
-                                                >
-                                                    <Avatar
-                                                        alt={sport.name}
-                                                        sx={{height: "3.5em", width: "3.5em"}}
-                                                        src={image?.data}
-                                                    >
-
-                                                    </Avatar>
-                                                    <Typography sx={{
-                                                        color: "#FFF",
-                                                        fontSize: "30px",
-                                                        fontWeight: "bold"
-                                                    }}>
-                                                        {sport.name}
-                                                    </Typography>
-                                                </Stack>
-                                            </motion.div>
+                                                            </Avatar>
+                                                            <Typography sx={{
+                                                                color: "#FFF",
+                                                                fontSize: "14px",
+                                                                fontWeight: "bold"
+                                                            }}>
+                                                                {sport.name}
+                                                            </Typography>
+                                                        </Stack>
+                                                    </Box>
+                                                </Grid>
+                                                <Grid xs={6} sm={6} lg={6}>
+                                                    <Box pb={"8px"}>
+                                                        <GameProgress sportsId={sport.id}/>
+                                                    </Box>
+                                                    <Button startIcon={<HiOutlineClipboardDocumentList/>} disableElevation variant={"contained"}  sx={{width:"100%", height:"86px"}}>
+                                                        <Stack
+                                                            direction={"row"}
+                                                            justifyContent={"space-between"}
+                                                            alignItems={"center"}
+                                                            sx={{py:1, width:"100%"}}
+                                                        >
+                                                            <Typography>
+                                                                ルールを見る
+                                                            </Typography>
+                                                        </Stack>
+                                                    </Button>
+                                                </Grid>
+                                            </Grid>
                                         </Container>
-                                        <Container
-                                            maxWidth={false}
-                                            sx={{
-                                                width: "140vw",
-                                                height: "100px",
-                                                left: "-20vw",
-                                                top: "-150px",
-                                                zIndex: "0",
-                                                position: "relative",
-                                                backgroundColor: "#23398a",
-                                                borderTopLeftRadius: "10px",
-                                                borderTopRightRadius: "10px",
-                                                borderBottomLeftRadius: "50% 50%",
-                                                borderBottomRightRadius: "50% 50%",
-                                            }}
-                                        >
-                                        </Container>
-                                    </motion.div>
+                                    </CircleContainer>
 
                                     <Container
                                         maxWidth={"xl"}
                                         disableGutters
-                                        sx={{px: 1, pb: 0, mt: "-150px"}}
+                                        sx={{px: 1, pb: 0, mt: "-105px"}}
                                     >
 
                                         {/*MiddleNavigation*/}
@@ -342,34 +314,15 @@ export default function Page({ params }: { params: { id: string } }) {
                                         </Stack>
 
                                         {/*GameProgress, BestTeam*/}
-                                        <Stack
-                                            direction={"column"}
-                                        >
-                                            <Grid container spacing={1.5}>
-                                                <Grid xs={12} sm={12} lg={12}>
-                                                    <motion.div
-                                                        key={"gameprogress"}
-                                                        initial={{opacity: 0, y: "50px"}}
-                                                        animate={{opacity: 1, y: "0px"}}
-                                                        transition={{
-                                                            delay: 0.4,
-                                                            duration: 1,
-                                                            ease: [0.16, 1, 0.3, 1]
-                                                        }}
-                                                    >
-                                                        <GameProgress sportsId={sport.id}/>
-                                                    </motion.div>
-                                                </Grid>
-                                            </Grid>
-                                        </Stack>
+
 
                                     </Container>
 
                                     <motion.div
                                         key={"gamelist"}
-                                        initial={{opacity: 0, y: "50px"}}
-                                        animate={{opacity: 1, y: "0px"}}
-                                        transition={{delay: 0.5, duration: 1, ease: [0.16, 1, 0.3, 1]}}
+                                        initial={{opacity: 0}}
+                                        animate={{opacity: 1}}
+                                        transition={{delay: 0, duration: 1, ease: [0.16, 1, 0.3, 1]}}
                                     >
                                         <GameList
                                             games={games}
@@ -379,7 +332,6 @@ export default function Page({ params }: { params: { id: string } }) {
                                     </motion.div>
 
                                 </Box>
-                            </motion.div>
                         </LocationsContext.Provider>
                     </TeamsContext.Provider>
                 </MatchesContext.Provider>
