@@ -4,7 +4,8 @@ import {AppRouterCacheProvider} from '@mui/material-nextjs/v14-appRouter';
 import {CssBaseline, ThemeProvider} from "@mui/material";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 // import {AnimatePresence} from "framer-motion";
-import {theme} from "@/components/theme/theme";
+import {lightPalette} from "@/components/theme/lightPalette";
+import ColorModeProvider from "@/components/theme/colorModeProvider";
 import Head from "next/head";
 
 
@@ -60,13 +61,13 @@ export default function RootLayout({
         </Head>
         <body className={inter.className}>
         <AppRouterCacheProvider>
-            <ThemeProvider theme={theme}>
+            <ColorModeProvider>
                 {/*<AnimatePresence mode={"wait"}>*/}
                     <CssBaseline/>
                     {children}
                     <GoogleAnalytics/>
                 {/*</AnimatePresence>*/}
-            </ThemeProvider>
+            </ColorModeProvider>
         </AppRouterCacheProvider>
         </body>
         </html>
