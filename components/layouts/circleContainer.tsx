@@ -7,12 +7,15 @@ import * as React from "react";
 import ReactMarkdown from "react-markdown";
 import children = ReactMarkdown.propTypes.children;
 import {motion} from "framer-motion";
+import { useTheme } from '@mui/material/styles';
+
 
 export type CircleContainerProps = {
     children?: React.ReactNode
 }
 
 export default function CircleContainer(props: CircleContainerProps) {
+    const theme = useTheme();
     return (
         <>
             <motion.div
@@ -31,11 +34,11 @@ export default function CircleContainer(props: CircleContainerProps) {
                     zIndex: 1,
                     width: "101vw",
                     height: "fit-content",
-                    background:"linear-gradient(#5B6AC1, #3E4EB3)"
+                    background:`linear-gradient(${theme.palette.secondary.main}, ${theme.palette.secondary.dark})`
                 }}
             >
-                <Box px={3} pt={4} pb={1}>
-                    <Logo width={18 * 8.45} height={18} fill={"white"}/>
+                <Box px={3.5} pt={4} pb={1}>
+                    <Logo width={18 * 8.45} height={18} fill={theme.palette.text.primary}/>
                 </Box>
 
                 <Container
@@ -54,12 +57,12 @@ export default function CircleContainer(props: CircleContainerProps) {
                     top: "-100px",
                     zIndex: "0",
                     position: "relative",
-                    background:"#3E4EB3",
+                    backgroundColor:theme.palette.secondary.dark,
                     borderTopLeftRadius: "10px",
                     borderTopRightRadius: "10px",
                     borderBottomLeftRadius: "50% 50%",
                     borderBottomRightRadius: "50% 50%",
-                    boxShadow: "0px 0px 20px 0px rgba(62,78,179,0.5)"
+                    boxShadow: `0px 0px 15px ${theme.palette.primary.dark}80`
                 }}
             >
             </Container>

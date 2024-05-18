@@ -5,8 +5,10 @@ import * as querystring from "querystring";
 import {useEffect, useState} from "react";
 import MSLogo from "@/public/images/ms.svg";
 import * as React from "react";
+import {useTheme} from "@mui/material/styles";
 
 export default function LoginButton() {
+    const theme = useTheme();
     const [authorizationUrl, setAuthorizationUrl] = useState<string>('')
 
     useEffect(() => {
@@ -38,9 +40,9 @@ export default function LoginButton() {
     return (
         <Button
             variant="contained"
-            color="secondary"
+            color={"secondary"}
             href={authorizationUrl}
-            sx={{px:3, py:2, width:"100%"}}
+            sx={{px:3, py:2, width:"100%", backgroundColor:`${theme.palette.text.primary}`}}
             disableElevation
         >
             <Stack
@@ -50,7 +52,7 @@ export default function LoginButton() {
                 spacing={2}
             >
                 <MSLogo width={16} height={16}/>
-                <Typography fontSize={"14px"}>
+                <Typography fontSize={"14px"} color={theme.palette.background.paper}>
                     {buttonDisplayName}
                 </Typography>
             </Stack>

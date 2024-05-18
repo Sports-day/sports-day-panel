@@ -16,6 +16,7 @@ import {Fragment, useContext} from "react";
 import {LocationsContext, TeamsContext, UsersContext} from "../../context";
 import {Match} from "../../../src/models/MatchModel";
 import {HiXMark} from "react-icons/hi2";
+import {useTheme} from "@mui/material/styles";
 
 export type ScheduleContentProps = {
     match: Match;
@@ -23,6 +24,7 @@ export type ScheduleContentProps = {
 }
 
 export const ScheduleContent = (props: ScheduleContentProps) => {
+    const theme = useTheme();
     //  context
     const {data: locations} = useContext(LocationsContext)
     const {data: teams} = useContext(TeamsContext)
@@ -44,55 +46,56 @@ export const ScheduleContent = (props: ScheduleContentProps) => {
 
     return (
         <>
-            <Grid xs={12} sm={12} lg={12}><Divider/></Grid>
-            <Button onClick={() => toggleDrawer(true)} sx={{width: "100%"}}>
-                <Grid xs={12} sm={5} lg={6}>
-                    <Stack
-                        alignItems={"center"}
-                        direction={"row"}
-                        justifyContent={"flex-start"}
-                        spacing={1}
-                        py={1.5}
-                    >
-                        <Typography color={"textSecondary"} fontSize={"14px"}>
-                            VS
-                        </Typography>
-                        <Typography fontSize={"24px"} fontWeight={"bold"} color={"white"}>
-                            {teamModel?.name}
-                        </Typography>
-                    </Stack>
-                </Grid>
-                <Grid xs={12} sm={7} lg={6}>
-                    <Stack
-                        direction={"column"}
-                        justifyContent={"center"}
-                        alignItems={"flex-start"}
-                    >
+            <Button variant={"contained"} color={"secondary"} disableElevation onClick={() => toggleDrawer(true)} sx={{width: "100%"}}>
+                <Grid container spacing={0}>
+                    <Grid xs={6} sm={6} lg={6}>
                         <Stack
+                            alignItems={"center"}
                             direction={"row"}
-                            alignItems={"flex-end"}
+                            justifyContent={"flex-start"}
                             spacing={1}
+                            py={1.5}
                         >
-                            <SvgIcon fontSize={"small"} sx={{position: "relative", bottom: "3px"}}>
-                                <HiClock color="#99a5d6"/>
-                            </SvgIcon>
-                            <Typography sx={{color: "#99a5d6", fontSize: "14px", py: "5px"}}>
-                                {formattedTime}
+                            <Typography color={"textSecondary"} fontSize={"14px"}>
+                                VS
+                            </Typography>
+                            <Typography fontSize={"24px"} fontWeight={"bold"} color={theme.palette.text.primary}>
+                                {teamModel?.name}
                             </Typography>
                         </Stack>
+                    </Grid>
+                    <Grid xs={6} sm={7} lg={6}>
                         <Stack
-                            direction={"row"}
-                            alignItems={"flex-end"}
-                            spacing={1}
+                            direction={"column"}
+                            justifyContent={"center"}
+                            alignItems={"flex-start"}
                         >
-                            <SvgIcon fontSize={"small"} sx={{position: "relative", bottom: "3px"}}>
-                                <HiLocationMarker color="#99a5d6"/>
-                            </SvgIcon>
-                            <Typography sx={{color: "#99a5d6", fontSize: "14px", py: "5px"}}>
-                                {locationModel?.name}
-                            </Typography>
+                            <Stack
+                                direction={"row"}
+                                alignItems={"flex-end"}
+                                spacing={1}
+                            >
+                                <SvgIcon fontSize={"small"} sx={{position: "relative", bottom: "3px"}}>
+                                    <HiClock color="#99a5d6"/>
+                                </SvgIcon>
+                                <Typography sx={{color: "#99a5d6", fontSize: "14px", py: "5px"}}>
+                                    {formattedTime}
+                                </Typography>
+                            </Stack>
+                            <Stack
+                                direction={"row"}
+                                alignItems={"flex-end"}
+                                spacing={1}
+                            >
+                                <SvgIcon fontSize={"small"} sx={{position: "relative", bottom: "3px"}}>
+                                    <HiLocationMarker color="#99a5d6"/>
+                                </SvgIcon>
+                                <Typography sx={{color: "#99a5d6", fontSize: "14px", py: "5px"}}>
+                                    {locationModel?.name}
+                                </Typography>
+                            </Stack>
                         </Stack>
-                    </Stack>
+                    </Grid>
                 </Grid>
             </Button>
             <>

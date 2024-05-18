@@ -30,9 +30,12 @@ import {useRouter} from "next/navigation";
 import {useFetchUserinfo} from "@/src/features/userinfo/hook";
 import PrivacyPolicyDrawer from "@/components/layouts/privacyPolicyDrawer";
 import {HiLibrary} from "react-icons/hi";
+import {useTheme} from "@mui/material/styles";
+
 type Anchor = 'bottom';
 
 export const Navigation = () => {
+    const theme = useTheme()
     const router = useRouter()
     const {user} = useFetchUserinfo()
 
@@ -70,7 +73,7 @@ export const Navigation = () => {
                     width: '100vw',
                     height: 'auto',
                     overflow: 'scrollable',
-                    background:"rgba(62,78,179,0.8)",
+                    background:`${theme.palette.secondary.main}FC`,
                     backdropFilter: 'blur(30px)',
                     borderRadius: "15px",
                     borderBottomLeftRadius: "0px",
@@ -92,11 +95,11 @@ export const Navigation = () => {
                                 borderRadius:3,
                                 backgroundColor:"#7f8cd6"
                             }}></Box>
-                            <Logo width={16 * 8.45} height={16} fill={"#eff0f8"}/>
+                            <Logo width={16 * 8.45} height={16} fill={theme.palette.text.primary}/>
                         </Stack>
-                        <Card sx={{backgroundColor: "#5360b2",}}>
+                        <Card sx={{backgroundColor: `${theme.palette.secondary.dark}80`,}}>
                             <CardContent>
-                                <Stack direction={"row"} spacing={1} ml={0.4} alignItems={"center"}>
+                                <Stack direction={"row"} spacing={3} ml={0.4} alignItems={"center"}>
                                     <Avatar
                                         alt={"unknown"}
                                         sx={{
@@ -107,13 +110,15 @@ export const Navigation = () => {
                                         src={`${process.env.NEXT_PUBLIC_API_URL}/images/${user?.pictureId}/file`}
                                     >
                                     </Avatar>
-                                    <Typography sx={{color: "#eff0f8", fontSize: "16px"}}>
+                                    <Typography sx={{color: theme.palette.text.secondary, fontSize: "16px"}}>
                                         {user?.name ?? "unknown"} さん
                                     </Typography>
                                 </Stack>
                             </CardContent>
                         </Card>
                         <Button
+                            color={"secondary"}
+                            sx={{background:theme.palette.secondary.dark}}
                             fullWidth disableElevation
                             variant={"contained"}
                             onClick={() => {
@@ -139,10 +144,10 @@ export const Navigation = () => {
                                     }}
                                 >
                                     <SvgIcon>
-                                        <HiArrowRightOnRectangle color="#eff0f8"/>
+                                        <HiArrowRightOnRectangle color={`${theme.palette.text.primary}99`}/>
                                     </SvgIcon>
                                 </Avatar>
-                                <Typography sx={{color: "#FFF", fontSize: "14px"}}>
+                                <Typography sx={{color: theme.palette.text.primary, fontSize: "14px"}}>
                                     ログアウト
                                 </Typography>
                             </Stack>
@@ -164,15 +169,17 @@ export const Navigation = () => {
                                     }}
                                 >
                                     <SvgIcon>
-                                        <HiLibrary color="#eff0f8"/>
+                                        <HiLibrary color={`${theme.palette.text.primary}99`}/>
                                     </SvgIcon>
                                 </Avatar>
-                                <Typography sx={{color: "#FFF", fontSize: "14px"}}>
+                                <Typography sx={{color: theme.palette.text.primary, fontSize: "14px"}}>
                                     プライバシーポリシー
                                 </Typography>
                             </Stack>
                         </PrivacyPolicyDrawer>
                         <Button
+                            color={"secondary"}
+                            sx={{background:theme.palette.secondary.dark}}
                             fullWidth disableElevation
                             variant={"contained"}
                             href={"https://github.com/Sports-day"}
@@ -194,15 +201,17 @@ export const Navigation = () => {
                                     }}
                                 >
                                     <SvgIcon>
-                                        <FaGithubAlt color="#eff0f8"/>
+                                        <FaGithubAlt color={`${theme.palette.text.primary}99`}/>
                                     </SvgIcon>
                                 </Avatar>
-                                <Typography sx={{color: "#FFF", fontSize: "14px"}}>
+                                <Typography sx={{color: theme.palette.text.primary, fontSize: "14px"}}>
                                     GitHub
                                 </Typography>
                             </Stack>
                         </Button>
                         <Button
+                            color={"secondary"}
+                            sx={{background:theme.palette.secondary.dark}}
                             fullWidth disableElevation
                             variant={"contained"}
                             component={Link}
@@ -224,10 +233,10 @@ export const Navigation = () => {
                                     }}
                                 >
                                     <SvgIcon>
-                                        <HiSparkles color="#eff0f8"/>
+                                        <HiSparkles color={`${theme.palette.text.primary}99`}/>
                                     </SvgIcon>
                                 </Avatar>
-                                <Typography sx={{color: "#FFF", fontSize: "14px"}}>
+                                <Typography sx={{color: theme.palette.text.primary, fontSize: "14px"}}>
                                     SPORTSDAYについて知る
                                 </Typography>
                             </Stack>
@@ -302,9 +311,9 @@ export const Navigation = () => {
                         borderRadius: "10px",
                         borderBottomRightRadius: "0px",
                         borderBottomLeftRadius: "0px",
-                        background:"rgba(62,78,179,0.9)",
+                        background:`linear-gradient(to right, ${theme.palette.secondary.main}, ${theme.palette.secondary.dark})`,
                         backdropFilter: 'blur(6px)',
-                        boxShadow: "0px 0px 10px #7f8cd6"
+                        boxShadow: `0px 0px 15px ${theme.palette.primary.dark}80`
                     }}
                 >
                     <Box
@@ -317,17 +326,17 @@ export const Navigation = () => {
                     >
                         <Button component={Link} sx={{width: "100%"}} href={"/"}>
                             <SvgIcon sx={{mr: 1}}>
-                                <HiHome color={"#E8EBF8"}/>
+                                <HiHome color={theme.palette.text.primary}/>
                             </SvgIcon>
                         </Button>
                         <Button component={Link} sx={{width: "100%"}} href={"/discover"}>
                             <SvgIcon sx={{mr: 1}}>
-                                <HiMagnifyingGlass color={"#E8EBF8"}/>
+                                <HiMagnifyingGlass color={theme.palette.text.primary}/>
                             </SvgIcon>
                         </Button>
                         <Button sx={{width: "100%"}} onClick={handleClickOpen('paper')}>
                             <SvgIcon sx={{mr: 1}}>
-                                <HiNewspaper color={"#E8EBF8"}/>
+                                <HiNewspaper color={theme.palette.text.primary}/>
                             </SvgIcon>
                         </Button>
                         {(['bottom'] as const).map((anchor) => (

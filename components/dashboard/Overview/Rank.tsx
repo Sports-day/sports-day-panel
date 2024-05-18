@@ -19,7 +19,7 @@ export const Rank = (props: RankProps) => {
                     marginLeft={0.5}
                     spacing={1}
                 >
-                    <Typography sx={{color: "#FFF", fontSize: "14px", fontWeight: "bold"}}>
+                    <Typography sx={{fontSize: "14px"}}>
                         集計中
                     </Typography>
                 </Stack>
@@ -34,7 +34,7 @@ export const Rank = (props: RankProps) => {
                     marginLeft={0.5}
                     spacing={1}
                 >
-                    <Typography sx={{color: "#FFF", fontSize: "18px", fontWeight: "bold"}}>
+                    <Typography sx={{ fontSize: "18px"}}>
                         {props.rank}
                     </Typography>
                     <Typography sx={{color: "#99a5d6", fontSize: "14px", py: "1px"}}>

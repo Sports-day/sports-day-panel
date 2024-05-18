@@ -4,12 +4,15 @@ import React from 'react';
 import {HiXMark} from "react-icons/hi2";
 import PrivacyPolicy from "@/components/layouts/privacyPolicy";
 import {ReactNode} from "react";
+import {useTheme} from "@mui/material/styles";
 
 export type PrivacyPolicyDrawerProps = {
     children?: ReactNode
+    transparent?: boolean
 }
 
 export default function PrivacyPolicyDrawer(props: PrivacyPolicyDrawerProps) {
+    const theme = useTheme();
     const [open, setOpen] = React.useState(false);
 
     const toggleDrawer = (newOpen: boolean) => () => {
@@ -53,9 +56,11 @@ export default function PrivacyPolicyDrawer(props: PrivacyPolicyDrawerProps) {
     return (
         <>
             <Button
+                color={"secondary"}
+                sx={{width:"100%",
+                    background: props.transparent ? `${theme.palette.background.paper}FF` : theme.palette.secondary.dark
+                }}
                 variant="contained"
-                color="primary"
-                sx={{width:"100%"}}
                 disableElevation
                 onClick={toggleDrawer(true)}
             >

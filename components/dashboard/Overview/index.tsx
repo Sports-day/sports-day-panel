@@ -9,7 +9,11 @@ import {
     SwipeableDrawer,
     Unstable_Grid2 as Grid, IconButton, Box
 } from "@mui/material";
-import {HiXMark, HiChevronRight, HiChartBar} from "react-icons/hi2";
+import {
+    HiXMark,
+    HiChartBar,
+    HiOutlineExclamationTriangle
+} from "react-icons/hi2";
 import {Sport} from "@/src/models/SportModel";
 import {Team} from "@/src/models/TeamModel";
 import {User} from "@/src/models/UserModel";
@@ -18,6 +22,7 @@ import {ImagesContext} from "../../context";
 import * as React from "react";
 import Link from "next/link";
 import Rank from "./Rank"
+import {useTheme} from "@mui/material/styles";
 
 
 export type OverviewProps = {
@@ -28,6 +33,8 @@ export type OverviewProps = {
 }
 
 export const Overview = (props: OverviewProps) => {
+    const theme = useTheme();
+
     //  image
     const {data: images} = useContext(ImagesContext)
     const icon = images.find(image => image.id === props.mySport.iconId)
@@ -42,29 +49,73 @@ export const Overview = (props: OverviewProps) => {
             maxWidth={"xl"}
         >
             <Grid container spacing={1}>
-                <Grid xs={6} sm={6} lg={6}>
+                <Grid xs={6.5} sm={6.5} lg={6.5}>
+                        <Button
+                            color={"secondary"}
+                            variant={"contained"}
+                            component={Link}
+                            sx={{width:"100%", height:"180px",
+                                backgroundColor: `${theme.palette.secondary.light}66`,
+                                border: `1px solid ${theme.palette.secondary.dark}66`,
+                            }}
+                            href={`/sports/${props.mySport.id}`}
+                            scroll={false}
+                        >
+                            <Stack
+                                sx={{height:"100%",width:"100%", py:2}}
+                                direction={"column"}
+                                justifyContent={"space-between"}
+                                alignItems={"flex-start"}
+                            >
+                                <Avatar
+                                    alt={props.mySport.name}
+                                    sx={{height: "2.5em", width: "2.5em",
+                                        backgroundColor: `${theme.palette.text.disabled}`,
+                                    }}
+                                    src={icon?.data}
+                                >
+                                    {!icon?.data && <HiOutlineExclamationTriangle fontSize={"30px"}/>}
+                                </Avatar>
+                                <Stack
+                                    direction={"column"}
+                                    justifyContent={"flex-start"}
+                                    alignItems={"flex-start"}
+                                >
+                                    <Typography fontSize={"14px"} sx={{color:theme.palette.text.primary}}>
+                                        あなたの競技
+                                    </Typography>
+                                    <Typography fontSize={"14px"} fontWeight={"600"} sx={{color:theme.palette.text.primary}}>
+                                        {props.mySport.name}
+                                    </Typography>
+                                </Stack>
+                            </Stack>
+                        </Button>
+                </Grid>
+                <Grid xs={5.5} sm={5.5} lg={5.5}>
                     <Box
                         px={2}
                         py={1.5}
+                        mb={"8px"}
                         pr={2}
                         sx={{
                             width:"100%",
-                            height: "70px",
-                            backgroundColor: "#5f6dc2",
-                            borderRadius: "12px"
+                            height: "86px",
+                            borderRadius: "12px",
+                            backgroundColor: `${theme.palette.secondary.light}33`,
+                            border: `1px solid ${theme.palette.secondary.dark}66`,
                         }}>
                         <Stack
                             direction={"row"}
                             justifyContent={"space-between"}
                             alignItems={"center"}
-                            sx={{width:"100%"}}
+                            sx={{width:"100%", height:"100%"}}
                         >
                             <Stack
                                 direction={"column"}
                                 justifyContent={"center"}
                                 alignItems={"flex-start"}
                             >
-                                <Typography sx={{color: "#99a5d6", fontSize: "14px"}}>
+                                <Typography sx={{fontSize: "14px"}}>
                                     リーグ内順位
                                 </Typography>
                                 <Rank rank={props.myTeamRank}/>
@@ -74,9 +125,16 @@ export const Overview = (props: OverviewProps) => {
                             </SvgIcon>
                         </Stack>
                     </Box>
-                </Grid>
-                <Grid xs={6} sm={6} lg={6}>
-                    <Button disableElevation variant={"contained"} onClick={toggleDrawer(true)} sx={{width:"100%", height:"70px"}}>
+                    <Button
+                        color={"secondary"}
+                        variant={"contained"}
+                        onClick={toggleDrawer(true)}
+                        sx={{
+                            width:"100%", height:"86px",
+                            backgroundColor: `${theme.palette.secondary.light}66`,
+                            border: `1px solid ${theme.palette.secondary.dark}66`,
+                        }}
+                    >
                         <Stack
                             direction={"row"}
                             justifyContent={"space-between"}
@@ -88,15 +146,17 @@ export const Overview = (props: OverviewProps) => {
                                 justifyContent={"center"}
                                 alignItems={"flex-start"}
                             >
-                                <Typography sx={{color: "#99a5d6", fontSize: "14px"}}>
+                                <Typography sx={{fontSize: "14px", color:theme.palette.text.primary}}>
                                     チーム
                                 </Typography>
-                                <Typography sx={{color: "#FFF", fontSize: "18px", fontWeight: "bold"}}>
+                                <Typography sx={{fontSize: "18px", color:theme.palette.text.primary}}>
                                     {props.myTeam.name}
                                 </Typography>
                             </Stack>
                         </Stack>
                     </Button>
+                </Grid>
+                <Grid xs={5.5} sm={5.5} lg={5.5}>
                     <SwipeableDrawer
                         anchor="bottom"
                         open={open}
@@ -125,7 +185,7 @@ export const Overview = (props: OverviewProps) => {
                                 py={1}
                             >
                                 <Typography
-                                    color={"#E8EBF8"}
+                                    color={theme.palette.text.primary}
                                     fontWeight={"bold"}
                                 >
                                     チームメンバー
@@ -140,72 +200,32 @@ export const Overview = (props: OverviewProps) => {
                                 direction={"column"}
                                 justifyContent={"flex-start"}
                                 alignItems={"flex-start"}
-                                spacing={2}
+                                spacing={1}
                                 pt={2}
                             >
                                 {props.myTeamUsers.map(user => {
                                     return (
                                         <Fragment key={user.id}>
-                                            <Box sx={{width:"100%"}}>
-                                                <Divider/>
+                                            <Box
+                                                px={2}
+                                                py={1.5}
+                                                pr={2}
+                                                sx={{
+                                                    width:"100%",
+                                                    borderRadius: "12px",
+                                                    backgroundColor: `${theme.palette.secondary.light}33`,
+                                                    border: `1px solid ${theme.palette.secondary.dark}66`,
+                                                }}>
+                                                <Typography color={theme.palette.text.primary} fontSize={"16px"}>
+                                                    {user.name}
+                                                </Typography>
                                             </Box>
-                                            <Typography color={"#99a5d6"} fontSize={"16px"}>
-                                                {user.name}
-                                            </Typography>
                                         </Fragment>
                                     );
                                 })}
                             </Stack>
                         </Container>
                     </SwipeableDrawer>
-                </Grid>
-                <Grid xs={12} sm={12} lg={12}>
-                    <Stack
-                        direction={"row"}
-                        justifyContent={"space-between"}
-                        alignItems={"center"}
-                        spacing={3}
-                    >
-                        <Button
-                            disableElevation
-                            variant={"contained"}
-                            component={Link}
-                            sx={{width:"100%", height:"70px"}}
-                            href={`/sports/${props.mySport.id}`}
-                            scroll={false}
-                        >
-                            <Stack
-                                direction={"row"}
-                                justifyContent={"space-between"}
-                                alignItems={"center"}
-                                sx={{py:1, width:"100%"}}
-                            >
-                                <Stack direction={"row"} spacing={3} sx={{width:"100%"}}>
-                                    <Stack
-                                        direction={"column"}
-                                        justifyContent={"flex-start"}
-                                        alignItems={"flex-start"}
-                                        spacing={0}
-                                    >
-                                        <Typography fontSize={"14px"} sx={{color: "#99a5d6"}}>
-                                            あなたの競技
-                                        </Typography>
-                                        <Typography fontSize={"14px"} sx={{color: "#eff0f8"}} fontWeight={"600"}>
-                                            {props.mySport.name}
-                                        </Typography>
-                                    </Stack>
-                                    <Stack sx={{flexGrow:1}} justifyContent={"center"} alignItems={"flex-end"}>
-                                        <Avatar
-                                            alt={props.mySport.name}
-                                            sx={{height: "2em", width: "2em"}}
-                                            src={icon?.data}
-                                        >
-                                        </Avatar>
-                                    </Stack>
-                                </Stack>
-                            </Stack>
-                        </Button>
-                    </Stack>
                 </Grid>
             </Grid>
         </Container>
