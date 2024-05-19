@@ -203,7 +203,6 @@ export const Overview = (props: OverviewProps) => {
                                 }}></Box>
                                 <Typography
                                     color={theme.palette.text.primary}
-                                    fontWeight={"bold"}
                                     textAlign={"center"}
                                 >
                                     あなたのチームメンバー

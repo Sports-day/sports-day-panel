@@ -72,55 +72,22 @@ export const ScheduleContent = (props: ScheduleContentProps) => {
                     alignItems={"flex-start"}
                     justifyContent={"center"}
                 >
-                    <Stack
-                        direction={"column"}
-                        justifyContent={"center"}
-                        alignItems={"flex-start"}
-                        pr={0.5}
-                        py={0.5}
-                        spacing={0.5}
-                        sx={{height: "100%", flexGrow:1}}
-                    >
-                        <Stack
-                            direction={"row"}
-                            alignItems={"flex-end"}
-                            spacing={1}
-                        >
-                            <SvgIcon fontSize={"small"}>
-                                <HiClock color={theme.palette.text.secondary}/>
-                            </SvgIcon>
-                            <Typography sx={{color: theme.palette.text.primary, fontSize: "16px"}}>
-                                {formattedTime}
-                            </Typography>
-                        </Stack>
-                        <Stack
-                            direction={"row"}
-                            alignItems={"flex-end"}
-                            spacing={1}
-                        >
-                            <SvgIcon fontSize={"small"}>
-                                <HiMapPin color={theme.palette.text.secondary}/>
-                            </SvgIcon>
-                            <Typography sx={{color: theme.palette.text.primary, fontSize: "16px"}}>
-                                {locationModel?.name}
-                            </Typography>
-                        </Stack>
-                    </Stack>
+
                     <Stack
                         direction={"column"}
                         spacing={1}
                         justifyContent={"center"}
-                        alignItems={"end"}
-                        sx={{height: "60px"}}
+                        alignItems={"start"}
+                        sx={{height: "60px", flexGrow:1}}
                     >
-                        <Typography fontSize={"14px"} color={theme.palette.text.primary}>
-                            {leftTeamModel?.name}
-                        </Typography>
                         <Stack
                             direction={"row"}
                             spacing={1}
                             alignItems={"center"}
                         >
+                            <Typography fontSize={"14px"} color={theme.palette.text.primary}>
+                                {rightTeamModel?.name}
+                            </Typography>
                             <Box
                                 sx={{
                                     px: 0.8,
@@ -135,8 +102,43 @@ export const ScheduleContent = (props: ScheduleContentProps) => {
                                     VS
                                 </Typography>
                             </Box>
-                            <Typography fontSize={"14px"} color={theme.palette.text.primary}>
-                                {rightTeamModel?.name}
+                        </Stack>
+                        <Typography fontSize={"14px"} color={theme.palette.text.primary}>
+                            {leftTeamModel?.name}
+                        </Typography>
+                    </Stack>
+
+                    <Stack
+                        direction={"column"}
+                        justifyContent={"center"}
+                        alignItems={"flex-start"}
+                        pr={0.5}
+                        py={0.5}
+                        spacing={1}
+                        sx={{height: "100%"}}
+                    >
+                        <Stack
+                            direction={"row"}
+                            alignItems={"flex-end"}
+                            spacing={1}
+                        >
+                            <SvgIcon fontSize={"small"}>
+                                <HiClock color={theme.palette.text.secondary}/>
+                            </SvgIcon>
+                            <Typography sx={{color: theme.palette.text.primary, fontSize: "14px"}}>
+                                {formattedTime}
+                            </Typography>
+                        </Stack>
+                        <Stack
+                            direction={"row"}
+                            alignItems={"flex-end"}
+                            spacing={1}
+                        >
+                            <SvgIcon fontSize={"small"}>
+                                <HiMapPin color={theme.palette.text.secondary}/>
+                            </SvgIcon>
+                            <Typography sx={{color: theme.palette.text.primary, fontSize: "14px"}}>
+                                {locationModel?.name}
                             </Typography>
                         </Stack>
                     </Stack>
@@ -180,7 +182,6 @@ export const ScheduleContent = (props: ScheduleContentProps) => {
                                 }}></Box>
                                 <Typography
                                     color={theme.palette.text.primary}
-                                    fontWeight={"bold"}
                                     textAlign={"center"}
                                 >
                                     試合の詳細
@@ -245,7 +246,6 @@ export const ScheduleContent = (props: ScheduleContentProps) => {
                             </Card>
                             <Typography
                                 color={theme.palette.text.primary}
-                                fontWeight={"bold"}
                                 textAlign={"center"}
                                 pt={2}
                             >
@@ -281,7 +281,6 @@ export const ScheduleContent = (props: ScheduleContentProps) => {
                                 })}
                             <Typography
                                 color={theme.palette.text.primary}
-                                fontWeight={"bold"}
                                 textAlign={"center"}
                                 pt={2}
                             >

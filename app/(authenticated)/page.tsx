@@ -54,9 +54,11 @@ export default function Page() {
                     transition={{duration: 1, ease: [0, 0.5, 0, 1]}}
                 >
                     <CircleContainer>
-                        <Box py={7} px={2}>
-                            <LinearProgress />
-                        </Box>
+                        <Container maxWidth={"xl"}>
+                            <Box py={7} px={2}>
+                                <LinearProgress />
+                            </Box>
+                        </Container>
                     </CircleContainer>
                 </motion.div>
             )}

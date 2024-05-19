@@ -271,7 +271,7 @@ export const Navigation = () => {
                         },
                     }}
                 >
-                    <DialogTitle id="scroll-dialog-title" fontSize={"16px"} color={"primary.dark"}>スケジュール</DialogTitle>
+                    <DialogTitle id="scroll-dialog-title" fontSize={"16px"} color={theme.palette.text.primary}>スケジュール</DialogTitle>
                     <DialogContent dividers={scroll === 'paper'}>
                         <DocsOverall/>
                     </DialogContent>
@@ -285,9 +285,9 @@ export const Navigation = () => {
                         >
                             <Button sx={{width: "100%", height: "100%"}} onClick={handleClose}>
                                 <SvgIcon sx={{mr: 1}}>
-                                    <HiXMark color={"#5f6dc2"}/>
+                                    <HiXMark color={theme.palette.text.primary}/>
                                 </SvgIcon>
-                                <Typography color={"primary.main"}>閉じる</Typography>
+                                <Typography color={theme.palette.text.primary}>閉じる</Typography>
                             </Button>
                         </Stack>
                     </DialogActions>

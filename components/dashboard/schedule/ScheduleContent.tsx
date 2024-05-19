@@ -62,11 +62,11 @@ export const ScheduleContent = (props: ScheduleContentProps) => {
             <Button
                 variant={"contained"}
                 color={"secondary"}
-                onClick={() => toggleDrawer(true)}
                 sx={{
                     width: "100%",
                     border: `1px solid ${theme.palette.secondary.dark}66`,
                 }}
+                onClick={() => toggleDrawer(true)}
             >
                 <Stack
                     direction={"row"}
@@ -176,7 +176,6 @@ export const ScheduleContent = (props: ScheduleContentProps) => {
                                 }}></Box>
                                 <Typography
                                     color={theme.palette.text.primary}
-                                    fontWeight={"bold"}
                                     textAlign={"center"}
                                 >
                                     試合の詳細
@@ -241,7 +240,6 @@ export const ScheduleContent = (props: ScheduleContentProps) => {
                             </Card>
                             <Typography
                                 color={theme.palette.text.primary}
-                                fontWeight={"bold"}
                                 textAlign={"center"}
                                 pt={2}
                             >
