@@ -44,9 +44,9 @@ export const GameProgressChart = (props:Props) => {
                             sx={{ width: '100%' }}
                         >
                             <Typography fontSize={"14px"}>
-                                競技の進行状況
+                                進行状況
                             </Typography>
-                            <Typography sx={{fontSize: "20px"}}>
+                            <Typography fontSize={"18px"} fontWeight={"600"}>
                                 {props.chartSeries[0]} %
                             </Typography>
                         </Stack>

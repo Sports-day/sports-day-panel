@@ -3,13 +3,12 @@ import Head from "next/head";
 import {
     Avatar,
     Box,
-    Card,
     Button,
     Container,
     Dialog,
     DialogActions,
     DialogContent,
-    DialogTitle,
+    DialogTitle, LinearProgress,
     Stack,
     SvgIcon,
     Typography,
@@ -17,17 +16,13 @@ import {
     useTheme
 } from "@mui/material";
 import {GameProgress} from "@/components/game/game-progress";
-import {Navigation} from "@/components/layouts/navigation";
-import {HiChevronLeft, HiOutlineClipboardDocumentList, HiXMark} from "react-icons/hi2";
+import {HiOutlineClipboardDocumentList, HiXMark} from "react-icons/hi2";
 import * as React from "react";
 import {GameList} from "@/components/game/GameList"
 import {GamesContext, LocationsContext, MatchesContext, TeamsContext} from "@/components/context";
-import {Loading} from "@/components/layouts/loading";
 import {useState} from "react";
 import {DialogProps} from '@mui/material/Dialog';
 import {Rules} from "@/components/rules/Rules";
-import {motion} from "framer-motion";
-import Link from "next/link";
 import {useInterval} from "react-use";
 import {InformationList} from "@/components/InformationList";
 import {useFetchSport, useFetchSportGames} from "@/src/features/sports/hook";
@@ -36,6 +31,7 @@ import {useFetchLocations} from "@/src/features/locations/hook";
 import {useFetchImages} from "@/src/features/images/hook";
 import {useFetchMatches} from "@/src/features/matches/hook";
 import CircleContainer from "@/components/layouts/circleContainer";
+import {motion} from "framer-motion";
 
 const REFRESH_INTERVAL = 1000 * 60 * 5
 
@@ -87,21 +83,23 @@ export default function Page({ params }: { params: { id: string } }) {
         setOpen(false);
     };
 
-    // if (isFetching) {
-    //     return (
-    //         <>
-    //             <motion.div
-    //                 key={"loading"}
-    //                 initial={{opacity: 0}}
-    //                 animate={{opacity: 0.2}}
-    //                 exit={{opacity: 0}}
-    //                 transition={{duration: 0.2, ease: [0, 0.5, 0, 1]}}
-    //             >
-    //                 <Loading/>
-    //             </motion.div>
-    //         </>
-    //     )
-    // }
+    {isFetching && (
+        <motion.div
+            key={"loading"}
+            initial={{opacity: 0, y:-150}}
+            animate={{opacity: 0.5, y:0}}
+            exit={{opacity: 0}}
+            transition={{duration: 1, ease: [0, 0.5, 0, 1]}}
+        >
+            <CircleContainer>
+                <Container maxWidth={"xl"}>
+                    <Box py={7} px={2}>
+                        <LinearProgress />
+                    </Box>
+                </Container>
+            </CircleContainer>
+        </motion.div>
+    )}
 
     if (!sport) {
         return null
@@ -182,139 +180,105 @@ export default function Page({ params }: { params: { id: string } }) {
                                                     {sport.name}
                                                 </Typography>
                                             </Stack>
-                                            <Box
-                                                px={2}
-                                                py={1.5}
-                                                pr={2}
-                                                sx={{
-                                                    width: "100%",
-                                                    height:"75px",
-                                                    borderRadius: "12px",
-                                                    backgroundColor: `${theme.palette.secondary.light}33`,
-                                                    border: `1px solid ${theme.palette.secondary.dark}66`,
-                                                }}>
-                                                <GameProgress sportsId={sport.id}/>
-                                            </Box>
+                                            <Grid container spacing={1}>
+                                                <Grid xs={6.5} sm={6.5} lg={6.5}>
+                                                    <Box
+                                                        px={2}
+                                                        py={1.5}
+                                                        pr={2}
+                                                        sx={{
+                                                            width: "100%",
+                                                            height:"75px",
+                                                            borderRadius: "12px",
+                                                            backgroundColor: `${theme.palette.secondary.light}33`,
+                                                            border: `1px solid ${theme.palette.secondary.dark}66`,
+                                                        }}>
+                                                        <GameProgress sportsId={sport.id}/>
+                                                    </Box>
+                                                </Grid>
+                                                <Grid xs={5.5} sm={5.5} lg={5.5}>
+                                                    <Button
+                                                        variant={"contained"}
+                                                        color={"secondary"}
+                                                        sx={{
+                                                            width: "100%", height: "75px",
+                                                            backgroundColor: `${theme.palette.secondary.light}66`,
+                                                            border: `1px solid ${theme.palette.secondary.dark}66`,
+                                                        }}
+                                                        onClick={handleClickOpen('paper')}
+                                                    >
+                                                        <Stack
+                                                            direction={"row"}
+                                                            justifyContent={"space-between"}
+                                                            alignItems={"center"}
+                                                            spacing={1}
+                                                            sx={{
+                                                                color: theme.palette.text.primary,
+                                                                width:"100%"
+                                                            }}
+                                                        >
+                                                            <Typography fontSize={"14px"}>
+                                                                ルールを見る
+                                                            </Typography>
+                                                            <SvgIcon>
+                                                                <HiOutlineClipboardDocumentList/>
+                                                            </SvgIcon>
+                                                        </Stack>
+                                                    </Button>
+                                                </Grid>
+                                            </Grid>
                                         </Container>
                                     </CircleContainer>
 
+                                    <Dialog
+                                        open={open}
+                                        onClose={handleClose}
+                                        scroll={scroll}
+                                        aria-labelledby="scroll-dialog-title"
+                                        aria-describedby="scroll-dialog-description"
+                                        sx={{
+                                            "& .MuiDialog-container": {
+                                                "& .MuiPaper-root": {
+                                                    width: "100vw",
+                                                    maxWidth: "lg"
+                                                },
+                                            },
+                                        }}
+                                    >
+                                        <DialogTitle id="scroll-dialog-title" fontSize={"16px"}
+                                                     color={theme.palette.text.primary}>{sport.name}のルール</DialogTitle>
+                                        <DialogContent dividers={scroll === 'paper'}>
+                                            <Rules ruleId={sport.ruleId}/>
+                                        </DialogContent>
+                                        <DialogActions>
+                                            <Stack
+                                                direction={"row"}
+                                                justifyContent={"center"}
+                                                alignItems={"center"}
+                                                spacing={2}
+                                                sx={{width: "100%"}}
+                                            >
+                                                <Button sx={{width: "100%", height: "100%"}}
+                                                        onClick={handleClose}>
+                                                    <SvgIcon sx={{mr: 1}}>
+                                                        <HiXMark color={theme.palette.text.primary}/>
+                                                    </SvgIcon>
+                                                    <Typography color={theme.palette.text.primary}>閉じる</Typography>
+                                                </Button>
+                                            </Stack>
+                                        </DialogActions>
+                                    </Dialog>
+
                                     <Container
                                         maxWidth={"xl"}
-                                        disableGutters
-                                        sx={{px: 1, pb: 0, mt: "-105px"}}
-                                    >
-
-                                        {/*MiddleNavigation*/}
-                                        <Stack
-                                            direction={"row"}
-                                            justifyContent={"space-between"}
-                                            alignItems={"center"}
-                                        >
-                                            <Button component={Link} href={"/"} scroll={false}>
-                                                <Stack
-                                                    direction={"row"}
-                                                    justifyContent={"space-between"}
-                                                    alignItems={"flex-start"}
-                                                    spacing={1}
-                                                    sx={{
-                                                        px: 1,
-                                                        pt: 3,
-                                                        pb: 2,
-                                                        color: "#23398A",
-                                                        "@media (prefers-color-scheme: dark)": {
-                                                            color: "#99a5d6"
-                                                        }
-                                                    }}
-                                                >
-                                                    <SvgIcon>
-                                                        <HiChevronLeft/>
-                                                    </SvgIcon>
-                                                    <Typography>
-                                                        戻る
-                                                    </Typography>
-                                                </Stack>
-                                            </Button>
-                                            <Button onClick={handleClickOpen('paper')}>
-                                                <Stack
-                                                    direction={"row"}
-                                                    justifyContent={"space-between"}
-                                                    alignItems={"flex-start"}
-                                                    spacing={1}
-                                                    sx={{
-                                                        px: 1,
-                                                        pt: 3,
-                                                        pb: 2,
-                                                        color: "#23398A",
-                                                        "@media (prefers-color-scheme: dark)": {
-                                                            color: "#99a5d6"
-                                                        }
-                                                    }}
-                                                >
-                                                    <Typography>
-                                                        ルールを見る
-                                                    </Typography>
-                                                    <SvgIcon>
-                                                        <HiOutlineClipboardDocumentList/>
-                                                    </SvgIcon>
-                                                </Stack>
-                                            </Button>
-                                            <Dialog
-                                                open={open}
-                                                onClose={handleClose}
-                                                scroll={scroll}
-                                                aria-labelledby="scroll-dialog-title"
-                                                aria-describedby="scroll-dialog-description"
-                                                sx={{
-                                                    "& .MuiDialog-container": {
-                                                        "& .MuiPaper-root": {
-                                                            width: "100vw",
-                                                            maxWidth: "lg"
-                                                        },
-                                                    },
-                                                }}
-                                            >
-                                                <DialogTitle id="scroll-dialog-title" fontSize={"16px"}
-                                                             color={"#99a5d6"}>{sport.name}のルール</DialogTitle>
-                                                <DialogContent dividers={scroll === 'paper'}>
-                                                    <Rules ruleId={sport.ruleId}/>
-                                                </DialogContent>
-                                                <DialogActions>
-                                                    <Stack
-                                                        direction={"row"}
-                                                        justifyContent={"center"}
-                                                        alignItems={"center"}
-                                                        spacing={2}
-                                                        sx={{width: "100%"}}
-                                                    >
-                                                        <Button sx={{width: "100%", height: "100%"}}
-                                                                onClick={handleClose}>
-                                                            <SvgIcon sx={{mr: 1}}>
-                                                                <HiXMark color={"#E8EBF8"}/>
-                                                            </SvgIcon>
-                                                            <Typography color={"#E8EBF8"}>閉じる</Typography>
-                                                        </Button>
-                                                    </Stack>
-                                                </DialogActions>
-                                            </Dialog>
-                                        </Stack>
-
-                                        {/*GameProgress, BestTeam*/}
-
-
-                                    </Container>
-
-                                    <motion.div
-                                        key={"gamelist"}
-                                        initial={{opacity: 0}}
-                                        animate={{opacity: 1}}
-                                        transition={{delay: 0, duration: 1, ease: [0.16, 1, 0.3, 1]}}
+                                        sx={{px: 2, py: 3, mt: "-100px"}}
                                     >
                                         <GameList
                                             games={games}
                                             gameId={focusedGameId}
                                             setGameId={setFocusedGameId}
                                         />
-                                    </motion.div>
+                                    </Container>
 
                                 </Box>
                         </LocationsContext.Provider>

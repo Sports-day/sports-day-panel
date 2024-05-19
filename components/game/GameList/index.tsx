@@ -1,4 +1,4 @@
-import {Box, Container, Stack, Tab, Tabs, Typography} from "@mui/material";
+import {Box, Container, Divider, Stack, Tab, Tabs, Typography, useTheme} from "@mui/material";
 import * as React from "react";
 import {GameListContent} from "./GameListContent";
 import {useEffect} from "react";
@@ -32,7 +32,7 @@ function TabPanel(props: TabPanelProps) {
                 <Stack
                     direction={"column"}
                     justifyContent={"flex-start"}
-                    spacing={3}
+                    spacing={1}
                 >
                     {children}
                 </Stack>
@@ -49,6 +49,7 @@ function a11yProps(index: number) {
 }
 
 export const GameList = (props: GameListProps) => {
+    const theme = useTheme();
     const [value, setValue] = React.useState(0);
 
     const sortedGame = props.games.sort((a, b) => b.weight - a.weight)
@@ -75,101 +76,59 @@ export const GameList = (props: GameListProps) => {
 
 
     return (
-        <Container
-            maxWidth={false}
-            disableGutters
-            sx={{
-                paddingTop: "0px",
-                height: "fit-content",
-                position: "relative",
-                bottom: "-40px"
-            }}
+        <Stack
+            spacing={2}
+            pb={2}
         >
-            <Stack
-                direction={"column"}
-                justifyContent={"flex-start"}
-                alignItems={"center"}
-                spacing={3}
-                minHeight={"50vh"}
-                sx={{
-                    position: "relative",
-                    width: "101vw",
-                    height: "fit-content",
-                    backgroundColor: "#23398a",
-                }}
-            >
-                <Stack
-                    direction={"column"}
-                    justifyContent={"flex-start"}
-                    alignItems={"center"}
-                    spacing={3}
-                    width={"100vw"}
-                    pr={1}
-                >
-                    <Stack
-                        width={"100%"}
-                        maxWidth={"xl"}
-                        sx={{px: 2, pb: 20, pt: 4}}
-                        spacing={5}
-                    >
-                        <Typography sx={{color: "#99a5d6", fontSize: "14px"}}>
-                           リーグとマッチ
-                        </Typography>
-                        <Box sx={{
-                            width: '100vw',
-                            position: "relative",
-                            pr: 2.5,
-                        }}>
-                            <Tabs
-                                value={value}
-                                onChange={handleChange}
-                                variant={"scrollable"}
-                                scrollButtons={false}
-                                aria-label="basic tabs example"
-                                TabIndicatorProps={{
-                                    style: {
-                                        zIndex: 0,
-                                        backgroundColor: '#FFF',
-                                        borderRadius: '24px',
-                                        height: '49px',
-                                    }
-                                }}
-                            >
-                                {sortedGame.map((game, index) => {
-                                    return (
-                                        <Tab sx={{
-                                            zIndex: 1,
-                                            px: 1.8,
-                                            mr: -2,
-                                            color: "#99a5d6",
-                                            border: "1px solid #FFF",
-                                            borderRadius: "24px"
-                                        }} key={game.id} label={game.name} {...a11yProps(index)} />
-                                    )
-                                })}
-                            </Tabs>
-                        </Box>
-                        {sortedGame.map((game, index) => {
-                                return (
-                                    <TabPanel key={game.id} value={value} index={index}>
-                                        <motion.div
-                                            key={"overview-content"}
-                                            initial={{opacity: 0.3, y: "-20px"}}
-                                            animate={{opacity: 1, y: "0px"}}
-                                            transition={{duration: 0.7, ease: [0.16, 1, 0.3, 1]}}
-                                        >
-                                            <GameListContent game={game}/>
-                                        </motion.div>
-                                    </TabPanel>
-                                )
-                            })
+            <Typography pl={2}>
+                この競技の試合
+            </Typography>
+            <Box sx={{
+                position: "relative",
+            }}>
+                <Tabs
+                    value={value}
+                    onChange={handleChange}
+                    variant={"scrollable"}
+                    scrollButtons={false}
+                    aria-label="basic tabs example"
+                    TabIndicatorProps={{
+                        style: {
+                            zIndex: 0,
+                            backgroundColor: `${theme.palette.text.primary}CC`,
+                            borderRadius: '15px',
+                            height: '49px',
                         }
-                        <Typography sx={{alignSelf: "center",color: "#99a5d6", fontSize: "14px"}}>
-                            マッチが終わると項目が追加されます
-                        </Typography>
-                    </Stack>
-                </Stack>
-            </Stack>
-        </Container>
+                    }}
+                >
+                    {sortedGame.map((game, index) => {
+                        return (
+                            <Tab sx={{
+                                zIndex: 1,
+                                mr: 1,
+                                color: `${theme.palette.text.primary}FF`,
+                                border: `1px solid ${theme.palette.text.primary}4D`,
+                                borderRadius: "15px"
+                            }} key={game.id} label={game.name} {...a11yProps(index)} />
+                        )
+                    })}
+                </Tabs>
+            </Box>
+            {sortedGame.map((game, index) => {
+                return (
+                    <TabPanel key={game.id} value={value} index={index}>
+                        <motion.div
+                            key={"overview-content"}
+                            initial={{opacity: 0}}
+                            animate={{opacity: 1}}
+                            transition={{duration: 1, ease: [0.16, 1, 0.3, 1]}}
+                        >
+                            <GameListContent game={game}/>
+                        </motion.div>
+                    </TabPanel>
+                )
+            })
+            }
+        </Stack>
     )
 }
