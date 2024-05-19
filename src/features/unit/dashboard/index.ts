@@ -32,6 +32,7 @@ export type DashboardDataType = {
     myTeamUsers: User[]
     myTeamMatches: Match[]
     myTeamRank: number
+    myJudgeMatches: Match[]
 }
 
 export const useFetchDashboard = () => {
@@ -53,6 +54,7 @@ export const useFetchDashboard = () => {
     const [myTeamMatchesState, setMyTeamMatches] = useState<Match[]>([])
     const [myTeamUsersState, setMyTeamUsers] = useState<User[]>([])
     const [myTeamRankState, setMyTeamRank] = useState<number>(0)
+    const [myJudgeMatchesState, setMyJudgeMatches] = useState<Match[]>([])
 
     if(!isFetchingImages && !isFetchingLocations && !isFetchingTeams && !isFetchingSports && !isFetchingGames && !isFetchingMatches && !isFetchingUsers && !isFetchingUserinfo && isFetching) {
         //  fetch data for individual section
@@ -137,6 +139,11 @@ export const useFetchDashboard = () => {
                         setMyTeamRank(-1)
                     })
             }
+
+            //  my judge matches
+            const myJudgeMatches = matches.filter(match => match.judgeTeamId === myTeam.id)
+            //  set state
+            setMyJudgeMatches(myJudgeMatches)
         }
 
         setIsFetching(false)
@@ -158,7 +165,8 @@ export const useFetchDashboard = () => {
         myTeam: myTeamState,
         myTeamUsers: myTeamUsersState,
         myTeamMatches: myTeamMatchesState,
-        myTeamRank: myTeamRankState
+        myTeamRank: myTeamRankState,
+        myJudgeMatches: myJudgeMatchesState
     } as DashboardDataType
 
 }

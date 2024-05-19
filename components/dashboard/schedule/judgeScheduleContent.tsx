@@ -41,9 +41,10 @@ export const ScheduleContent = (props: ScheduleContentProps) => {
     if (!props.match.leftTeamId || !props.match.rightTeamId) return null;
     // get my team
     const myTeamModel = teams.find(team => team.id === props.myTeamId)
-    //  get team
-    const opponentTeamId = props.match.leftTeamId === props.myTeamId ? props.match.rightTeamId : props.match.leftTeamId
-    const teamModel = teams.find(team => team.id === opponentTeamId)
+    //  get left team
+    const leftTeamModel = teams.find(team => team.id === props.match.leftTeamId);
+    // get right team
+    const rightTeamModel = teams.find(team => team.id === props.match.rightTeamId);
     // Get judge team
     const judgeTeam = teams.find(team => team.id === props.match.judgeTeamId);
     //  get time and location
@@ -72,40 +73,13 @@ export const ScheduleContent = (props: ScheduleContentProps) => {
                     justifyContent={"center"}
                 >
                     <Stack
-                        direction={"row"}
-                        spacing={1}
-                        justifyContent={"flex-start"}
-                        alignItems={"center"}
-                        sx={{height: "60px", flexGrow: 1,}}
-                    >
-                        <Box
-                            sx={{
-                                py: 0,
-                                px: 0.8,
-                                borderRadius: "5px",
-                                backgroundColor: theme.palette.text.secondary,
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItems: "center"
-                            }}
-                        >
-                            <Typography color={theme.palette.background.default} fontSize={"10px"}>
-                                VS
-                            </Typography>
-                        </Box>
-                        <Typography fontSize={"20px"} color={theme.palette.text.primary}>
-                            {teamModel?.name}
-                        </Typography>
-                    </Stack>
-
-                    <Stack
                         direction={"column"}
                         justifyContent={"center"}
                         alignItems={"flex-start"}
                         pr={0.5}
                         py={0.5}
                         spacing={1}
-                        sx={{height: "100%"}}
+                        sx={{height: "100%", flexGrow:1}}
                     >
                         <Stack
                             direction={"row"}
@@ -131,6 +105,40 @@ export const ScheduleContent = (props: ScheduleContentProps) => {
                                 {locationModel?.name}
                             </Typography>
                         </Stack>
+                    </Stack>
+                    <Stack
+                        direction={"column"}
+                        spacing={1}
+                        justifyContent={"center"}
+                        alignItems={"flex-end"}
+                        sx={{height: "60px"}}
+                    >
+                        <Stack
+                            direction={"row"}
+                            spacing={1}
+                            alignItems={"center"}
+                        >
+                            <Typography fontSize={"14px"} color={theme.palette.text.primary}>
+                                {rightTeamModel?.name}
+                            </Typography>
+                            <Box
+                                sx={{
+                                    px: 0.8,
+                                    height:"16px",
+                                    borderRadius: "5px",
+                                    backgroundColor: theme.palette.text.secondary,
+                                    justifyContent: "center",
+                                    alignItems: "center"
+                                }}
+                            >
+                                <Typography color={theme.palette.background.default} fontSize={"10px"}>
+                                    VS
+                                </Typography>
+                            </Box>
+                        </Stack>
+                        <Typography fontSize={"14px"} color={theme.palette.text.primary}>
+                            {leftTeamModel?.name}
+                        </Typography>
                     </Stack>
                 </Stack>
             </Button>
@@ -180,16 +188,6 @@ export const ScheduleContent = (props: ScheduleContentProps) => {
                             </Stack>
                             <Card sx={{backgroundColor: `${theme.palette.secondary.dark}80`, py:1}}>
                                 <Box sx={{overflow:"auto"}}>
-                                    <Stack sx={{width:"100%"}} direction={"row"} spacing={1} pb={1} pl={2}>
-                                        <Chip
-                                            label={`相手チーム：${teamModel?.name}`}
-                                            avatar={<Avatar><HiUsers/></Avatar>}
-                                        />
-                                        <Chip
-                                            label={`自チーム：${myTeamModel?.name}`}
-                                            avatar={<Avatar><HiUsers/></Avatar>}
-                                        />
-                                    </Stack>
                                     <Stack sx={{width:"100%"}} direction={"row"} spacing={1} pl={2}>
                                         <Chip
                                             label={`審判：${judgeTeam?.name}`}
@@ -212,10 +210,10 @@ export const ScheduleContent = (props: ScheduleContentProps) => {
                                 textAlign={"center"}
                                 pt={2}
                             >
-                                {teamModel?.name}のメンバー
+                                {leftTeamModel?.name}のメンバー
                             </Typography>
                             {users
-                                .filter(user => user.teamIds.includes(opponentTeamId))
+                                .filter(user => user.teamIds.includes(Number(leftTeamModel?.id)))
                                 .map(user => {
                                     const image = `${process.env.NEXT_PUBLIC_API_URL}/images/${user?.pictureId}/file`
                                     return (
@@ -276,8 +274,8 @@ export const ScheduleContent = (props: ScheduleContentProps) => {
                                     </Stack>
                                 </Button>
                             </Box>
-                    </Stack>
-                </Container>
+                        </Stack>
+                    </Container>
                 </Box>
             </SwipeableDrawer>
         </>

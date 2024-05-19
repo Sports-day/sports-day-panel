@@ -18,9 +18,10 @@ export const Schedule = (props: ScheduleProps) => {
     return (
                 <Stack
                     spacing={1}
+                    pb={2}
                 >
                     <Typography pl={2}>
-                        あなたの試合
+                        試合のスケジュール
                     </Typography>
 
                         {props.matches
