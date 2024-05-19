@@ -1,4 +1,4 @@
-import {Card, CardContent, Stack, Typography}from "@mui/material";
+import {Stack, Typography, useTheme}from "@mui/material";
 
 export type RuleNumCardProps = {
     title: string;
@@ -7,6 +7,7 @@ export type RuleNumCardProps = {
 }
 
 export const RuleNumCard = (props: RuleNumCardProps) => {
+    const theme = useTheme();
     const {title, content, sub} = props;
     return (
         <Stack
@@ -19,26 +20,26 @@ export const RuleNumCard = (props: RuleNumCardProps) => {
             mr={1}
             mb={1}
             sx={{
-                border: "1px solid #99a5d6",
+                border: `1px solid ${theme.palette.text.secondary}`,
                 borderRadius: "15px",
                 borderBottomLeftRadius: "3px",
                 height:"fit-content",
             }}
         >
             <Typography
-                color={"textSecondary"}
+                color={theme.palette.text.secondary}
                 sx={{fontSize: "16px"}}
             >
                 {title}
             </Typography>
             <Typography
-                color={"textPrimary"}
+                color={theme.palette.text.primary}
                 fontSize={"24px"}
             >
                 {content}
             </Typography>
             <Typography
-                color={"textSecondary"}
+                color={theme.palette.text.secondary}
             >
                 {sub}
             </Typography>

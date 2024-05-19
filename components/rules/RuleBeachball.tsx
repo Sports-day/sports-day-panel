@@ -1,13 +1,11 @@
 import {
-    Box,
     Grid,
     Stack,
-    Typography,
     DialogContentText,
+    useTheme
 } from "@mui/material";
 import {RuleNumCard} from "./rule-elements/RuleNumCard";
 import ReactMarkdown from "react-markdown";
-import Coat from "../../public/rules/coat-beachball.svg"
 import * as React from "react";
 
 const markdown = `
@@ -32,6 +30,7 @@ const markdown = `
 `
 
 export const RuleBeachball = () => {
+    const theme = useTheme();
     return(
         <Stack
             direction={"column"}
@@ -64,7 +63,7 @@ export const RuleBeachball = () => {
             <DialogContentText
                 id="scroll-dialog-description"
                 tabIndex={-1}
-                color={"#E8EBF8"}
+                color={theme.palette.text.primary}
                 lineHeight={"27px"}
             >
                 <ReactMarkdown>{markdown}</ReactMarkdown>
