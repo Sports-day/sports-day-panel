@@ -10,12 +10,11 @@ import {
     Typography,
     Unstable_Grid2 as Grid
 } from "@mui/material";
-import {HiClock, HiLocationMarker} from "react-icons/hi";
 import * as React from "react";
 import {Fragment, useContext} from "react";
 import {LocationsContext, TeamsContext, UsersContext} from "../../context";
 import {Match} from "../../../src/models/MatchModel";
-import {HiXMark} from "react-icons/hi2";
+import {HiClock, HiMapPin, HiXMark} from "react-icons/hi2";
 import {useTheme} from "@mui/material/styles";
 
 export type ScheduleContentProps = {
@@ -47,56 +46,75 @@ export const ScheduleContent = (props: ScheduleContentProps) => {
     return (
         <>
             <Button variant={"contained"} color={"secondary"} disableElevation onClick={() => toggleDrawer(true)} sx={{width: "100%"}}>
-                <Grid container spacing={0}>
-                    <Grid xs={6} sm={6} lg={6}>
-                        <Stack
-                            alignItems={"center"}
-                            direction={"row"}
-                            justifyContent={"flex-start"}
-                            spacing={1}
-                            py={1.5}
+                <Stack
+                    direction={"row"}
+                    spacing={1}
+                    sx={{width:"100%", height:"100%"}}
+                    alignItems={"flex-start"}
+                    justifyContent={"center"}
+                >
+                    <Stack
+                        direction={"row"}
+                        spacing={1}
+                        justifyContent={"flex-start"}
+                        alignItems={"center"}
+                        sx={{height:"60px", flexGrow:1,}}
+                    >
+                        <Box
+                            sx={{
+                                py:0,
+                                px:0.8,
+                                borderRadius: "5px",
+                                backgroundColor: theme.palette.text.secondary,
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center"
+                            }}
                         >
-                            <Typography color={"textSecondary"} fontSize={"14px"}>
+                            <Typography color={theme.palette.background.default} fontSize={"10px"}>
                                 VS
                             </Typography>
-                            <Typography fontSize={"24px"} fontWeight={"bold"} color={theme.palette.text.primary}>
-                                {teamModel?.name}
+                        </Box>
+                        <Typography fontSize={"20px"} color={theme.palette.text.primary}>
+                            {teamModel?.name}
+                        </Typography>
+                    </Stack>
+
+                    <Stack
+                        direction={"column"}
+                        justifyContent={"center"}
+                        alignItems={"flex-start"}
+                        pr={0.5}
+                        py={0.5}
+                        spacing={1}
+                        sx={{height:"100%"}}
+                    >
+                        <Stack
+                            direction={"row"}
+                            alignItems={"flex-end"}
+                            spacing={1}
+                        >
+                            <SvgIcon fontSize={"small"}>
+                                <HiClock color={theme.palette.text.secondary}/>
+                            </SvgIcon>
+                            <Typography sx={{color: theme.palette.text.secondary, fontSize: "14px"}}>
+                                {formattedTime}
                             </Typography>
                         </Stack>
-                    </Grid>
-                    <Grid xs={6} sm={7} lg={6}>
                         <Stack
-                            direction={"column"}
-                            justifyContent={"center"}
-                            alignItems={"flex-start"}
+                            direction={"row"}
+                            alignItems={"flex-end"}
+                            spacing={1}
                         >
-                            <Stack
-                                direction={"row"}
-                                alignItems={"flex-end"}
-                                spacing={1}
-                            >
-                                <SvgIcon fontSize={"small"} sx={{position: "relative", bottom: "3px"}}>
-                                    <HiClock color="#99a5d6"/>
-                                </SvgIcon>
-                                <Typography sx={{color: "#99a5d6", fontSize: "14px", py: "5px"}}>
-                                    {formattedTime}
-                                </Typography>
-                            </Stack>
-                            <Stack
-                                direction={"row"}
-                                alignItems={"flex-end"}
-                                spacing={1}
-                            >
-                                <SvgIcon fontSize={"small"} sx={{position: "relative", bottom: "3px"}}>
-                                    <HiLocationMarker color="#99a5d6"/>
-                                </SvgIcon>
-                                <Typography sx={{color: "#99a5d6", fontSize: "14px", py: "5px"}}>
-                                    {locationModel?.name}
-                                </Typography>
-                            </Stack>
+                            <SvgIcon fontSize={"small"}>
+                                <HiMapPin color={theme.palette.text.secondary}/>
+                            </SvgIcon>
+                            <Typography sx={{color: theme.palette.text.secondary, fontSize: "14px"}}>
+                                {locationModel?.name}
+                            </Typography>
                         </Stack>
-                    </Grid>
-                </Grid>
+                    </Stack>
+                </Stack>
             </Button>
             <>
                 <SwipeableDrawer
