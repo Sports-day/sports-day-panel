@@ -18,13 +18,15 @@ export const SportsListElement = (props: SportsListElementProps) => {
 
     return (
             <Button
-                disableElevation
                 variant={"contained"}
                 color={"secondary"}
-                sx={{width:"100%"}}
                 scroll={false}
                 component={Link}
                 href={`/sports/${props.sport.id}`}
+                sx={{
+                    width:"100%",
+                    border: `1px solid ${theme.palette.secondary.dark}66`,
+                }}
             >
                 <Box sx={{width:"100%"}} py={1}>
                     <Stack
@@ -36,7 +38,7 @@ export const SportsListElement = (props: SportsListElementProps) => {
                         <Avatar
                             alt={props.sport.name}
                             sx={{height: "2em", width: "2em",
-                                backgroundColor: theme.palette.text.disabled,
+                                backgroundColor: theme.palette.text.secondary,
                             }}
                             src={image?.data}
                         >

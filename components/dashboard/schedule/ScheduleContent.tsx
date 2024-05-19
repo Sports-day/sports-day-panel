@@ -1,21 +1,27 @@
 import {
+    Avatar,
     Box,
-    Button,
+    Button, Card, Chip,
     Container,
-    Divider,
-    IconButton,
     Stack,
     SvgIcon,
     SwipeableDrawer,
     Typography,
-    Unstable_Grid2 as Grid
 } from "@mui/material";
 import * as React from "react";
 import {Fragment, useContext} from "react";
 import {LocationsContext, TeamsContext, UsersContext} from "../../context";
-import {Match} from "../../../src/models/MatchModel";
-import {HiClock, HiMapPin, HiXMark} from "react-icons/hi2";
+import {Match} from "@/src/models/MatchModel";
+import {
+    HiArrowRight,
+    HiClock,
+    HiFlag,
+    HiMapPin,
+    HiUser,
+    HiUsers,
+} from "react-icons/hi2";
 import {useTheme} from "@mui/material/styles";
+import Link from "next/link";
 
 export type ScheduleContentProps = {
     match: Match;
@@ -33,9 +39,13 @@ export const ScheduleContent = (props: ScheduleContentProps) => {
 
     //  team is null
     if (!props.match.leftTeamId || !props.match.rightTeamId) return null;
+    // get my team
+    const myTeamModel = teams.find(team => team.id === props.myTeamId)
     //  get team
     const opponentTeamId = props.match.leftTeamId === props.myTeamId ? props.match.rightTeamId : props.match.leftTeamId
     const teamModel = teams.find(team => team.id === opponentTeamId)
+    // Get judge team
+    const judgeTeam = teams.find(team => team.id === props.match.judgeTeamId);
     //  get time and location
     const formattedTime = new Date(props.match.startAt).toLocaleTimeString("ja-JP", {
         hour: '2-digit',
@@ -45,11 +55,19 @@ export const ScheduleContent = (props: ScheduleContentProps) => {
 
     return (
         <>
-            <Button variant={"contained"} color={"secondary"} disableElevation onClick={() => toggleDrawer(true)} sx={{width: "100%"}}>
+            <Button
+                variant={"contained"}
+                color={"secondary"}
+                onClick={() => toggleDrawer(true)}
+                sx={{
+                    width: "100%",
+                    border: `1px solid ${theme.palette.secondary.dark}66`,
+                }}
+            >
                 <Stack
                     direction={"row"}
                     spacing={1}
-                    sx={{width:"100%", height:"100%"}}
+                    sx={{width: "100%", height: "100%"}}
                     alignItems={"flex-start"}
                     justifyContent={"center"}
                 >
@@ -58,12 +76,12 @@ export const ScheduleContent = (props: ScheduleContentProps) => {
                         spacing={1}
                         justifyContent={"flex-start"}
                         alignItems={"center"}
-                        sx={{height:"60px", flexGrow:1,}}
+                        sx={{height: "60px", flexGrow: 1,}}
                     >
                         <Box
                             sx={{
-                                py:0,
-                                px:0.8,
+                                py: 0,
+                                px: 0.8,
                                 borderRadius: "5px",
                                 backgroundColor: theme.palette.text.secondary,
                                 display: "flex",
@@ -87,7 +105,7 @@ export const ScheduleContent = (props: ScheduleContentProps) => {
                         pr={0.5}
                         py={0.5}
                         spacing={1}
-                        sx={{height:"100%"}}
+                        sx={{height: "100%"}}
                     >
                         <Stack
                             direction={"row"}
@@ -116,71 +134,153 @@ export const ScheduleContent = (props: ScheduleContentProps) => {
                     </Stack>
                 </Stack>
             </Button>
-            <>
-                <SwipeableDrawer
-                    anchor="bottom"
-                    open={open}
-                    onClose={() => toggleDrawer(false)}
-                    onOpen={() => toggleDrawer(true)}
-                    swipeAreaWidth={5}
-                    disableSwipeToOpen={true}
-                    ModalProps={{
-                        keepMounted: true,
+            <SwipeableDrawer
+                anchor="bottom"
+                open={open}
+                onClose={() => toggleDrawer(false)}
+                onOpen={() => toggleDrawer(true)}
+                swipeAreaWidth={5}
+                disableSwipeToOpen={true}
+                ModalProps={{
+                    keepMounted: true,
+                }}
+                PaperProps={{elevation: 0, style: {backgroundColor: "transparent"}}}
+            >
+                <Box
+                    sx={{
+                        width: '100%',
+                        height: 'auto',
+                        background: `${theme.palette.secondary.main}FC`,
+                        backdropFilter: 'blur(30px)',
+                        borderRadius: "15px",
+                        borderBottomLeftRadius: "0px",
+                        borderBottomRightRadius: "0px",
+                        color: '#E8EBF8',
+                        pb: 5,
+                        pt: 1.5
                     }}
                 >
-                    <Container
-                        maxWidth={"xl"}
-                        sx={{
-                            pt: 1,
-                            pb: 5,
-                            px: 3,
-                            overflow: "scrollable"
-                        }}
-                    >
-                        <Stack
-                            direction={"row"}
-                            justifyContent={"space-between"}
-                            alignItems={"center"}
-                            sx={{width: "100%"}}
-                            py={1}
-                        >
+                    <Container maxWidth={"xl"}>
+                        <Stack spacing={1}>
+                            <Stack direction={"column"} spacing={2} pb={2} justifyContent={"center"}
+                                   alignItems={"center"}>
+                                <Box sx={{
+                                    width: 50,
+                                    height: 6,
+                                    borderRadius: 3,
+                                    backgroundColor: `${theme.palette.text.primary}4D`
+                                }}></Box>
+                                <Typography
+                                    color={theme.palette.text.primary}
+                                    fontWeight={"bold"}
+                                    textAlign={"center"}
+                                >
+                                    試合の詳細
+                                </Typography>
+                            </Stack>
+                            <Card sx={{backgroundColor: `${theme.palette.secondary.dark}80`, py:1}}>
+                                <Box sx={{overflow:"auto"}}>
+                                    <Stack sx={{width:"100%"}} direction={"row"} spacing={1} pb={1} pl={2}>
+                                        <Chip
+                                            label={`相手チーム：${teamModel?.name}`}
+                                            avatar={<Avatar><HiUsers/></Avatar>}
+                                        />
+                                        <Chip
+                                            label={`自チーム：${myTeamModel?.name}`}
+                                            avatar={<Avatar><HiUsers/></Avatar>}
+                                        />
+                                    </Stack>
+                                    <Stack sx={{width:"100%"}} direction={"row"} spacing={1} pl={2}>
+                                        <Chip
+                                            label={`審判：${judgeTeam?.name}`}
+                                            avatar={<Avatar><HiFlag/></Avatar>}
+                                        />
+                                        <Chip
+                                            label={`場所：${locationModel?.name}`}
+                                            avatar={<Avatar><HiMapPin/></Avatar>}
+                                        />
+                                        <Chip
+                                            label={`開始時刻：${formattedTime}`}
+                                            avatar={<Avatar><HiClock/></Avatar>}
+                                        />
+                                    </Stack>
+                                </Box>
+                            </Card>
                             <Typography
-                                color={"#E8EBF8"}
+                                color={theme.palette.text.primary}
                                 fontWeight={"bold"}
+                                textAlign={"center"}
+                                pt={2}
                             >
-                                チームメンバー
+                                {teamModel?.name}のメンバー
                             </Typography>
-                            <IconButton onClick={() => toggleDrawer(false)}>
-                                <SvgIcon>
-                                    <HiXMark color={"#E8EBF8"}/>
-                                </SvgIcon>
-                            </IconButton>
-                        </Stack>
-                        <Stack
-                            direction={"column"}
-                            justifyContent={"flex-start"}
-                            alignItems={"flex-start"}
-                            spacing={2}
-                            pt={2}
-                        >
                             {users
                                 .filter(user => user.teamIds.includes(opponentTeamId))
                                 .map(user => {
+                                    const image = `${process.env.NEXT_PUBLIC_API_URL}/images/${user?.pictureId}/file`
                                     return (
                                         <Fragment key={user.id}>
-                                            <Box sx={{width: "100%"}}>
-                                                <Divider/>
-                                            </Box>
-                                            <Typography color={"#99a5d6"} fontSize={"16px"}>
-                                                {user.name}
-                                            </Typography>
+                                            <Card sx={{backgroundColor: `${theme.palette.secondary.dark}80`,}}>
+                                                <Stack direction={"row"} px={2} py={1} spacing={3} ml={0.4}
+                                                       alignItems={"center"}>
+                                                    <Avatar
+                                                        alt={"unknown"}
+                                                        sx={{
+                                                            height: "1.5em",
+                                                            width: "1.5em",
+                                                            backgroundColor: theme.palette.text.secondary,
+                                                        }}
+                                                        src={image}
+                                                    >
+                                                        {user?.pictureId === null && <HiUser/>}
+                                                    </Avatar>
+                                                    <Typography color={theme.palette.text.primary}>
+                                                        {user.name}
+                                                        {props.match.judgeTeamId}
+                                                    </Typography>
+                                                </Stack>
+                                            </Card>
                                         </Fragment>
                                     );
                                 })}
-                        </Stack>
-                    </Container>
-                </SwipeableDrawer>
-            </>
+                            <Box pt={2}>
+                                <Button
+                                    color={"secondary"}
+                                    sx={{background:theme.palette.secondary.dark}}
+                                    fullWidth disableElevation
+                                    variant={"contained"}
+                                    component={Link}
+                                    href={"/about"}
+                                >
+                                    <Stack
+                                        direction={"row"}
+                                        justifyContent={"flex-start"}
+                                        alignItems={"center"}
+                                        spacing={2}
+                                        py={0.5}
+                                        width={"100%"}
+                                    >
+                                        <Avatar
+                                            sx={{
+                                                height: "2em",
+                                                width: "2em",
+                                                backgroundColor: "inherit",
+                                            }}
+                                        >
+                                            <SvgIcon>
+                                                <HiArrowRight color={`${theme.palette.text.primary}99`}/>
+                                            </SvgIcon>
+                                        </Avatar>
+                                        <Typography sx={{color: theme.palette.text.primary, fontSize: "14px"}}>
+                                            競技ページに行く
+                                        </Typography>
+                                    </Stack>
+                                </Button>
+                            </Box>
+                    </Stack>
+                </Container>
+                </Box>
+            </SwipeableDrawer>
         </>
     )
 }

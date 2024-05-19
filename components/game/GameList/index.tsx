@@ -3,7 +3,7 @@ import * as React from "react";
 import {GameListContent} from "./GameListContent";
 import {useEffect} from "react";
 import {motion} from "framer-motion";
-import {Game} from "../../../src/models/GameModel";
+import {Game} from "@/src/models/GameModel";
 
 export type GameListProps = {
     games: Game[]
