@@ -5,7 +5,7 @@ const PrivacyPolicy = () => {
     return (
         <Container maxWidth={"xl"}>
             <Stack spacing={2}>
-                <Typography variant={"h4"}>SPORTSDAYの個人情報取り扱い方針</Typography>
+                <Typography variant={"h6"} fontWeight={"600"} textAlign={"center"}>プライバシーポリシー</Typography>
                 <Divider/>
                 <Typography variant={"h6"}>どのような情報を収集しますか？</Typography>
                 <Typography>当サイトを利用すると、以下の情報が収集されることがあります。</Typography>

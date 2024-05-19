@@ -2,7 +2,7 @@
 import {
     Box,
     Container,
-    Stack,
+    Stack, Typography,
     Unstable_Grid2 as Grid,
 } from "@mui/material";
 import * as React from "react";
@@ -147,6 +147,9 @@ export default function Page() {
                                                                 />
                                                             </Grid>
                                                         }
+                                                        <Typography pl={2} pt={2}>
+                                                            すべての競技
+                                                        </Typography>
                                                         {sports
                                                             .sort((a, b) => b.weight - a.weight)
                                                             .map((sport) => {

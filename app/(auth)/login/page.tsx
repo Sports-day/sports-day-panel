@@ -54,10 +54,10 @@ export default function Page() {
                                 プライバシーポリシー
                             </Typography>
                         </PrivacyPolicyDrawer>
-                        <Typography pb={2} fontSize={"13px"} fontWeight={"400"} color={"#9aa6e5"}>SPORTSDAYを使うにはCookieが必要です</Typography>
+                        <Typography pb={2} fontSize={"13px"} fontWeight={"400"} color={theme.palette.text.disabled}>SPORTSDAYを使うにはCookieが必要です</Typography>
                         <Button>
                             <Stack direction={"row"} spacing={0.5}>
-                                <Typography fontWeight={"600"} color={"#99a5d6"}>(C)2024</Typography>
+                                <Typography fontWeight={"600"} color={theme.palette.text.disabled}>(C)2024</Typography>
                                 <WiderLogo/>
                             </Stack>
                         </Button>

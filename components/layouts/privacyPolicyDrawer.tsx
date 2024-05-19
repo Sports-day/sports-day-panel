@@ -21,7 +21,7 @@ export default function PrivacyPolicyDrawer(props: PrivacyPolicyDrawerProps) {
 
     const DrawerList = (
         <>
-            <AppBar sx={{position:"fixed", zIndex:"999"}}>
+            <AppBar sx={{position:"fixed", zIndex:"999", boxShadow: `0px 0px 15px ${theme.palette.primary.dark}80`}}>
                 <Box
                     sx={{
                         width: '100vw', height: 'auto', overflow: 'scrollable', my:1.5

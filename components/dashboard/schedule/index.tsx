@@ -28,6 +28,9 @@ export const Schedule = (props: ScheduleProps) => {
                 <Stack
                     spacing={1}
                 >
+                    <Typography pl={2}>
+                        あなたの試合
+                    </Typography>
 
                         {props.matches
                             .sort((a, b) => a.startAt.localeCompare(b.startAt))

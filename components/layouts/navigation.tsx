@@ -93,7 +93,7 @@ export const Navigation = () => {
                                 width:50,
                                 height:6,
                                 borderRadius:3,
-                                backgroundColor:"#7f8cd6"
+                                backgroundColor:`${theme.palette.text.primary}4D`
                             }}></Box>
                             <Logo width={16 * 8.45} height={16} fill={theme.palette.text.primary}/>
                         </Stack>
