@@ -78,7 +78,7 @@ export const ScheduleContent = (props: ScheduleContentProps) => {
                         alignItems={"flex-start"}
                         pr={0.5}
                         py={0.5}
-                        spacing={1}
+                        spacing={0.5}
                         sx={{height: "100%", flexGrow:1}}
                     >
                         <Stack
@@ -89,7 +89,7 @@ export const ScheduleContent = (props: ScheduleContentProps) => {
                             <SvgIcon fontSize={"small"}>
                                 <HiClock color={theme.palette.text.secondary}/>
                             </SvgIcon>
-                            <Typography sx={{color: theme.palette.text.primary, fontSize: "14px"}}>
+                            <Typography sx={{color: theme.palette.text.primary, fontSize: "16px"}}>
                                 {formattedTime}
                             </Typography>
                         </Stack>
@@ -101,7 +101,7 @@ export const ScheduleContent = (props: ScheduleContentProps) => {
                             <SvgIcon fontSize={"small"}>
                                 <HiMapPin color={theme.palette.text.secondary}/>
                             </SvgIcon>
-                            <Typography sx={{color: theme.palette.text.primary, fontSize: "14px"}}>
+                            <Typography sx={{color: theme.palette.text.primary, fontSize: "16px"}}>
                                 {locationModel?.name}
                             </Typography>
                         </Stack>
@@ -110,17 +110,17 @@ export const ScheduleContent = (props: ScheduleContentProps) => {
                         direction={"column"}
                         spacing={1}
                         justifyContent={"center"}
-                        alignItems={"flex-end"}
+                        alignItems={"end"}
                         sx={{height: "60px"}}
                     >
+                        <Typography fontSize={"14px"} color={theme.palette.text.primary}>
+                            {leftTeamModel?.name}
+                        </Typography>
                         <Stack
                             direction={"row"}
                             spacing={1}
                             alignItems={"center"}
                         >
-                            <Typography fontSize={"14px"} color={theme.palette.text.primary}>
-                                {rightTeamModel?.name}
-                            </Typography>
                             <Box
                                 sx={{
                                     px: 0.8,
@@ -131,14 +131,14 @@ export const ScheduleContent = (props: ScheduleContentProps) => {
                                     alignItems: "center"
                                 }}
                             >
-                                <Typography color={theme.palette.background.default} fontSize={"10px"}>
+                                <Typography color={theme.palette.background.default} fontSize={"10px"} fontWeight={"600"}>
                                     VS
                                 </Typography>
                             </Box>
+                            <Typography fontSize={"14px"} color={theme.palette.text.primary}>
+                                {rightTeamModel?.name}
+                            </Typography>
                         </Stack>
-                        <Typography fontSize={"14px"} color={theme.palette.text.primary}>
-                            {leftTeamModel?.name}
-                        </Typography>
                     </Stack>
                 </Stack>
             </Button>
@@ -186,20 +186,59 @@ export const ScheduleContent = (props: ScheduleContentProps) => {
                                     試合の詳細
                                 </Typography>
                             </Stack>
-                            <Card sx={{backgroundColor: `${theme.palette.secondary.dark}80`, py:1}}>
-                                <Box sx={{overflow:"auto"}}>
-                                    <Stack sx={{width:"100%"}} direction={"row"} spacing={1} pl={2}>
+                            <Card sx={{backgroundColor: `${theme.palette.secondary.dark}80`, py:1, px:1}}>
+                                <Stack
+                                    direction={"row"}
+                                    spacing={1}
+                                    sx={{width: "100%", height: "100%"}}
+                                    alignItems={"flex-start"}
+                                >
+                                    <Stack
+                                        sx={{width: "100%"}}
+                                        direction={"row"}
+                                        spacing={1}
+                                        justifyContent={"space-around"}
+                                        alignItems={"center"}
+                                    >
+                                        <Typography fontSize={"20px"} color={theme.palette.text.primary}>
+                                            {leftTeamModel?.name}
+                                        </Typography>
+                                        <Box
+                                            sx={{
+                                                pt: 0,
+                                                px: 0.8,
+                                                borderRadius: "5px",
+                                                backgroundColor: theme.palette.text.secondary,
+                                                display: "flex",
+                                                justifyContent: "center",
+                                                alignItems: "center"
+                                            }}
+                                        >
+                                            <Typography color={theme.palette.background.default} fontSize={"10px"} fontWeight={"600"}>
+                                                VS
+                                            </Typography>
+                                        </Box>
+                                        <Typography fontSize={"20px"} color={theme.palette.text.primary}>
+                                            {rightTeamModel?.name}
+                                        </Typography>
+                                    </Stack>
+                                </Stack>
+                                <Box sx={{overflow:"auto", pt:1}}>
+                                    <Stack sx={{width:"100%"}} direction={"row"} spacing={0.2} pl={2}>
                                         <Chip
                                             label={`審判：${judgeTeam?.name}`}
                                             avatar={<Avatar><HiFlag/></Avatar>}
+                                            color={"secondary"}
                                         />
                                         <Chip
                                             label={`場所：${locationModel?.name}`}
                                             avatar={<Avatar><HiMapPin/></Avatar>}
+                                            color={"secondary"}
                                         />
                                         <Chip
                                             label={`開始時刻：${formattedTime}`}
                                             avatar={<Avatar><HiClock/></Avatar>}
+                                            color={"secondary"}
                                         />
                                     </Stack>
                                 </Box>
@@ -214,6 +253,42 @@ export const ScheduleContent = (props: ScheduleContentProps) => {
                             </Typography>
                             {users
                                 .filter(user => user.teamIds.includes(Number(leftTeamModel?.id)))
+                                .map(user => {
+                                    const image = `${process.env.NEXT_PUBLIC_API_URL}/images/${user?.pictureId}/file`
+                                    return (
+                                        <Fragment key={user.id}>
+                                            <Card sx={{backgroundColor: `${theme.palette.secondary.dark}80`,}}>
+                                                <Stack direction={"row"} px={2} py={1} spacing={3} ml={0.4}
+                                                       alignItems={"center"}>
+                                                    <Avatar
+                                                        alt={"unknown"}
+                                                        sx={{
+                                                            height: "1.5em",
+                                                            width: "1.5em",
+                                                            backgroundColor: theme.palette.text.secondary,
+                                                        }}
+                                                        src={image}
+                                                    >
+                                                        {user?.pictureId === null && <HiUser/>}
+                                                    </Avatar>
+                                                    <Typography color={theme.palette.text.primary}>
+                                                        {user.name}
+                                                    </Typography>
+                                                </Stack>
+                                            </Card>
+                                        </Fragment>
+                                    );
+                                })}
+                            <Typography
+                                color={theme.palette.text.primary}
+                                fontWeight={"bold"}
+                                textAlign={"center"}
+                                pt={2}
+                            >
+                                {rightTeamModel?.name}のメンバー
+                            </Typography>
+                            {users
+                                .filter(user => user.teamIds.includes(Number(rightTeamModel?.id)))
                                 .map(user => {
                                     const image = `${process.env.NEXT_PUBLIC_API_URL}/images/${user?.pictureId}/file`
                                     return (

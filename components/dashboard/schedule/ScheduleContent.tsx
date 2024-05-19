@@ -44,6 +44,10 @@ export const ScheduleContent = (props: ScheduleContentProps) => {
     //  get team
     const opponentTeamId = props.match.leftTeamId === props.myTeamId ? props.match.rightTeamId : props.match.leftTeamId
     const teamModel = teams.find(team => team.id === opponentTeamId)
+    //  get left team
+    const leftTeamModel = teams.find(team => team.id === props.match.leftTeamId);
+    // get right team
+    const rightTeamModel = teams.find(team => team.id === props.match.rightTeamId);
     // Get judge team
     const judgeTeam = teams.find(team => team.id === props.match.judgeTeamId);
     //  get time and location
@@ -89,7 +93,7 @@ export const ScheduleContent = (props: ScheduleContentProps) => {
                                 alignItems: "center"
                             }}
                         >
-                            <Typography color={theme.palette.background.default} fontSize={"10px"}>
+                            <Typography color={theme.palette.background.default} fontSize={"10px"} fontWeight={"600"}>
                                 VS
                             </Typography>
                         </Box>
@@ -178,30 +182,59 @@ export const ScheduleContent = (props: ScheduleContentProps) => {
                                     試合の詳細
                                 </Typography>
                             </Stack>
-                            <Card sx={{backgroundColor: `${theme.palette.secondary.dark}80`, py:1}}>
-                                <Box sx={{overflow:"auto"}}>
-                                    <Stack sx={{width:"100%"}} direction={"row"} spacing={1} pb={1} pl={2}>
-                                        <Chip
-                                            label={`相手チーム：${teamModel?.name}`}
-                                            avatar={<Avatar><HiUsers/></Avatar>}
-                                        />
-                                        <Chip
-                                            label={`自チーム：${myTeamModel?.name}`}
-                                            avatar={<Avatar><HiUsers/></Avatar>}
-                                        />
+                            <Card sx={{backgroundColor: `${theme.palette.secondary.dark}80`, py:1, px:1}}>
+                                <Stack
+                                    direction={"row"}
+                                    spacing={1}
+                                    sx={{width: "100%", height: "100%"}}
+                                    alignItems={"flex-start"}
+                                >
+                                    <Stack
+                                        sx={{width: "100%"}}
+                                        direction={"row"}
+                                        spacing={1}
+                                        justifyContent={"space-around"}
+                                        alignItems={"center"}
+                                    >
+                                        <Typography fontSize={"20px"} color={theme.palette.text.primary}>
+                                            {leftTeamModel?.name}
+                                        </Typography>
+                                        <Box
+                                            sx={{
+                                                pt: 0,
+                                                px: 0.8,
+                                                borderRadius: "5px",
+                                                backgroundColor: theme.palette.text.secondary,
+                                                display: "flex",
+                                                justifyContent: "center",
+                                                alignItems: "center"
+                                            }}
+                                        >
+                                            <Typography color={theme.palette.background.default} fontSize={"10px"} fontWeight={"600"}>
+                                                VS
+                                            </Typography>
+                                        </Box>
+                                        <Typography fontSize={"20px"} color={theme.palette.text.primary}>
+                                            {rightTeamModel?.name}
+                                        </Typography>
                                     </Stack>
-                                    <Stack sx={{width:"100%"}} direction={"row"} spacing={1} pl={2}>
+                                </Stack>
+                                <Box sx={{overflow:"auto", pt:1}}>
+                                    <Stack sx={{width:"100%"}} direction={"row"} spacing={0.2} pl={2}>
                                         <Chip
                                             label={`審判：${judgeTeam?.name}`}
                                             avatar={<Avatar><HiFlag/></Avatar>}
+                                            color={"secondary"}
                                         />
                                         <Chip
                                             label={`場所：${locationModel?.name}`}
                                             avatar={<Avatar><HiMapPin/></Avatar>}
+                                            color={"secondary"}
                                         />
                                         <Chip
                                             label={`開始時刻：${formattedTime}`}
                                             avatar={<Avatar><HiClock/></Avatar>}
+                                            color={"secondary"}
                                         />
                                     </Stack>
                                 </Box>

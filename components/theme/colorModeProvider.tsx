@@ -163,7 +163,7 @@ const darkTheme = createTheme({
         },
         secondary: {
             main: '#22284F',
-            contrastText: '#2f3c8c',
+            contrastText: '#eff0f8',
             dark: '#1c2141',
             light: '#373e6e',
         },
