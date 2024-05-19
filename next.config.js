@@ -2,6 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  output: "standalone",
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
@@ -22,6 +23,7 @@ const withPWA = require('next-pwa')({
   dest: 'public',
   register: true,
   skipWaiting: true,
+  disable: process.env.NODE_ENV === "development",
   fallbacks: {
     document: "/offline",
   },
