@@ -312,7 +312,6 @@ export const Navigation = () => {
                         borderBottomRightRadius: "0px",
                         borderBottomLeftRadius: "0px",
                         background:`linear-gradient(to right, ${theme.palette.secondary.main}, ${theme.palette.secondary.dark})`,
-                        backdropFilter: 'blur(6px)',
                         boxShadow: `0px 0px 15px ${theme.palette.primary.dark}80`
                     }}
                 >
@@ -342,9 +341,6 @@ export const Navigation = () => {
                         {(['bottom'] as const).map((anchor) => (
                             <React.Fragment key={"top"}>
                                 <Button sx={{width: "100%"}} onClick={toggleDrawer(anchor, true)}>
-                                    {/*<SvgIcon sx={{mr: 1}}>*/}
-                                    {/*    <HiEllipsisHorizontal color={"#E8EBF8"}/>*/}
-                                    {/*</SvgIcon>*/}
                                     <Avatar
                                         alt={"unknown"}
                                         sx={{

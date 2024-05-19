@@ -231,13 +231,13 @@ export const ScheduleContent = (props: ScheduleContentProps) => {
                                             color={"secondary"}
                                         />
                                         <Chip
-                                            label={`場所：${locationModel?.name}`}
-                                            avatar={<Avatar><HiMapPin/></Avatar>}
+                                            label={`開始：${formattedTime}`}
+                                            avatar={<Avatar><HiClock/></Avatar>}
                                             color={"secondary"}
                                         />
                                         <Chip
-                                            label={`開始時刻：${formattedTime}`}
-                                            avatar={<Avatar><HiClock/></Avatar>}
+                                            label={`場所：${locationModel?.name}`}
+                                            avatar={<Avatar><HiMapPin/></Avatar>}
                                             color={"secondary"}
                                         />
                                     </Stack>

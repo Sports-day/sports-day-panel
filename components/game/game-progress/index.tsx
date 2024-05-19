@@ -11,30 +11,12 @@ export const GameProgress = (props: { sportsId: number }) => {
 
     return (
         <Box
-            px={2}
-            py={1.5}
-            pr={2}
             sx={{
                 width:"100%",
-                height: "86px",
-                backgroundColor: "#5f6dc2",
-                borderRadius: "12px"
             }}>
-                <Typography
-                    color={"#eff0f8"}
-                    sx={{pb: "0px"}}
-                >
-                    競技の進行状況
-                </Typography>
-                <Stack
-                    direction={"column"}
-                    justifyContent={"center"}
-                    alignItems={"center"}
-                >
                     <GameProgressChart
                         chartSeries={chartSeries}
                     />
-                </Stack>
         </Box>
     );
 };

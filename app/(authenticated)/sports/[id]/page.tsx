@@ -3,6 +3,7 @@ import Head from "next/head";
 import {
     Avatar,
     Box,
+    Card,
     Button,
     Container,
     Dialog,
@@ -12,7 +13,8 @@ import {
     Stack,
     SvgIcon,
     Typography,
-    Unstable_Grid2 as Grid
+    Unstable_Grid2 as Grid,
+    useTheme
 } from "@mui/material";
 import {GameProgress} from "@/components/game/game-progress";
 import {Navigation} from "@/components/layouts/navigation";
@@ -38,6 +40,7 @@ import CircleContainer from "@/components/layouts/circleContainer";
 const REFRESH_INTERVAL = 1000 * 60 * 5
 
 export default function Page({ params }: { params: { id: string } }) {
+    const theme = useTheme()
     //  fetch
     const {sport, isFetching: isSportFetching, refresh: refreshSport} = useFetchSport(+params.id)
     const {games, isFetching: isGameFetching, refresh: refreshGame} = useFetchSportGames(+params.id, true)
@@ -154,62 +157,44 @@ export default function Page({ params }: { params: { id: string } }) {
                                         <Container
                                             maxWidth={"xl"}
                                         >
-                                            <Grid container spacing={1}>
-                                                <Grid xs={6} sm={6} lg={6}>
-                                                    <Box
-                                                        px={2}
-                                                        py={3}
-                                                        mb={1}
-                                                        sx={{
-                                                            width:"100%",
-                                                            height:"180px",
-                                                            backgroundColor: "#5f6dc2",
-                                                            borderRadius: "10px"
-                                                        }}>
-                                                        <Stack
-                                                            direction={"column"}
-                                                            justifyContent={"space-between"}
-                                                            alignItems={"flex-start"}
-                                                            spacing={3}
-                                                            sx={{
-                                                                height:"100%"
-                                                            }}
-                                                        >
-                                                            <Avatar
-                                                                alt={sport.name}
-                                                                sx={{height: "2.5em", width: "2.5em"}}
-                                                                src={image?.data}
-                                                            >
+                                            <Stack
+                                                direction={"row"}
+                                                justifyContent={"center"}
+                                                alignItems={"center"}
+                                                spacing={3}
+                                                py={3}
+                                                sx={{
+                                                    height:"100%"
+                                                }}
+                                            >
+                                                <Avatar
+                                                    alt={sport.name}
+                                                    sx={{height: "2.5em", width: "2.5em"}}
+                                                    src={image?.data}
+                                                >
 
-                                                            </Avatar>
-                                                            <Typography sx={{
-                                                                color: "#FFF",
-                                                                fontSize: "14px",
-                                                                fontWeight: "bold"
-                                                            }}>
-                                                                {sport.name}
-                                                            </Typography>
-                                                        </Stack>
-                                                    </Box>
-                                                </Grid>
-                                                <Grid xs={6} sm={6} lg={6}>
-                                                    <Box pb={"8px"}>
-                                                        <GameProgress sportsId={sport.id}/>
-                                                    </Box>
-                                                    <Button startIcon={<HiOutlineClipboardDocumentList/>} disableElevation variant={"contained"}  sx={{width:"100%", height:"86px"}}>
-                                                        <Stack
-                                                            direction={"row"}
-                                                            justifyContent={"space-between"}
-                                                            alignItems={"center"}
-                                                            sx={{py:1, width:"100%"}}
-                                                        >
-                                                            <Typography>
-                                                                ルールを見る
-                                                            </Typography>
-                                                        </Stack>
-                                                    </Button>
-                                                </Grid>
-                                            </Grid>
+                                                </Avatar>
+                                                <Typography sx={{
+                                                    color: theme.palette.text.primary,
+                                                    fontSize: "20px",
+                                                    fontWeight: "bold"
+                                                }}>
+                                                    {sport.name}
+                                                </Typography>
+                                            </Stack>
+                                            <Box
+                                                px={2}
+                                                py={1.5}
+                                                pr={2}
+                                                sx={{
+                                                    width: "100%",
+                                                    height:"75px",
+                                                    borderRadius: "12px",
+                                                    backgroundColor: `${theme.palette.secondary.light}33`,
+                                                    border: `1px solid ${theme.palette.secondary.dark}66`,
+                                                }}>
+                                                <GameProgress sportsId={sport.id}/>
+                                            </Box>
                                         </Container>
                                     </CircleContainer>
 
