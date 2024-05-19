@@ -250,7 +250,7 @@ export const ScheduleContent = (props: ScheduleContentProps) => {
                                     fullWidth disableElevation
                                     variant={"contained"}
                                     component={Link}
-                                    href={"/about"}
+                                    href={`/sports/${props.match.sportId}`}
                                 >
                                     <Stack
                                         direction={"row"}
