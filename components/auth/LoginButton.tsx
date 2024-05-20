@@ -42,7 +42,7 @@ export default function LoginButton() {
             variant="contained"
             color={"secondary"}
             href={authorizationUrl}
-            sx={{px:3, py:2, width:"100%", backgroundColor:`${theme.palette.text.primary}`}}
+            sx={{px:3, py:2,mb:1, width:"100%", backgroundColor:`${theme.palette.text.primary}`}}
             disableElevation
         >
             <Stack

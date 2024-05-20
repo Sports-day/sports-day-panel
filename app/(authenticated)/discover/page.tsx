@@ -5,6 +5,7 @@ import {
     Container,
     Stack, SvgIcon, Typography,
     Unstable_Grid2 as Grid,
+    useTheme
 } from "@mui/material";
 import * as React from "react";
 import {Navigation} from "@/components/layouts/navigation";
@@ -16,13 +17,15 @@ import {useFetchLocations} from "@/src/features/locations/hook";
 import {useFetchImages} from "@/src/features/images/hook";
 import {DiscoverTeamContent} from "@/components/discover/DiscoverTeamContent";
 import {OtherInfo} from "@/components/dashboard/Overview/OtherInfo";
+import CircleContainer from "@/components/layouts/circleContainer";
 // import {Metadata} from "next";
 
 // export const metadata: Metadata = {
 //     title: 'SPORTSDAY : Discover',
 // }
 
-export default function Page() {
+export default function DiscoverPage() {
+    const theme = useTheme()
     //  Unit Hook
     const {
         isFetching,
@@ -49,14 +52,6 @@ export default function Page() {
             )}
             {!(isFetching || isFetchingLocations || isFetchingImages) && (
                 <>
-                    <motion.div
-                        key={"discover"}
-                        initial={{opacity: 0}}
-                        animate={{opacity: 1}}
-                        exit={{opacity: 0}}
-                        transition={{duration: 0.4, ease: [0.83, 0, 0.17, 1]}}
-                    >
-                        <Navigation/>
                         <Box
                             component={"main"}
                             minHeight={"96vh"}
@@ -66,87 +61,19 @@ export default function Page() {
                                 pb: 9
                             }}
                         >
-                            <motion.div
-                                key={"title-background"}
-                                initial={{y: "-100px"}}
-                                animate={{y: "0px"}}
-                                exit={{opacity: 0, y:"-100px"}}
-                                transition={{duration: 0.6, ease: [0.54, -0.01, 0, 1]}}
-                            >
-                                <Container
-                                    maxWidth={false}
-                                    disableGutters
-                                    sx={{
-                                        paddingTop: 0,
-                                        paddingBottom: "0px",
-                                        marginBottom: "70px",
-                                        position: "relative",
-                                        zIndex: 1,
-                                        width: "101vw",
-                                        height: "fit-content",
-                                        backgroundColor: "#23398a",
-                                    }}
+                            <CircleContainer>
+                                <Stack
+                                    direction={"row"}
+                                    justifyContent={"center"}
+                                    alignItems={"center"}
+                                    spacing={1}
+                                    sx={{pt: 3}}
                                 >
-                                    <motion.div
-                                        key={"mainvisual-content"}
-                                        initial={{opacity: 0, y: "50px"}}
-                                        animate={{opacity: 1, y: "0px"}}
-                                        transition={{
-                                            delay: 0.3,
-                                            duration: 1,
-                                            ease: [0.16, 1, 0.3, 1]
-                                        }}
-                                    >
-                                        <Stack
-                                            direction={"row"}
-                                            justifyContent={"center"}
-                                            alignItems={"center"}
-                                            spacing={3}
-                                            sx={{
-                                                pt: 5,
-                                                pb: 0,
-                                                pr:　3
-                                            }}
-                                        >
-                                            <Avatar
-                                                sx={{
-                                                    height: "4em",
-                                                    width: "4em",
-                                                    backgroundColor: "#FFF",
-                                                }}
-                                            >
-                                                <SvgIcon>
-                                                    <HiSearch color="#23398A"/>
-                                                </SvgIcon>
-                                            </Avatar>
-                                            <Typography sx={{
-                                                color: "#FFF",
-                                                fontSize: "30px",
-                                                fontWeight: "bold"
-                                            }}>
-                                                探す
-                                            </Typography>
-                                        </Stack>
-                                    </motion.div>
-                                </Container>
-                                <Container
-                                    maxWidth={false}
-                                    sx={{
-                                        width: "140vw",
-                                        height:"100px",
-                                        left:"-20vw",
-                                        top:"-100px",
-                                        zIndex: "0",
-                                        position:"relative",
-                                        backgroundColor: "#23398a",
-                                        borderTopLeftRadius:"10px",
-                                        borderTopRightRadius:"10px",
-                                        borderBottomLeftRadius: "50% 50%",
-                                        borderBottomRightRadius: "50% 50%",
-                                    }}
-                                >
-                                </Container>
-                            </motion.div>
+                                    <Typography variant={"h5"}>
+                                        試合を探す
+                                    </Typography>
+                                </Stack>
+                            </CircleContainer>
 
                             <motion.div
                                 key={"discover-content"}
@@ -194,7 +121,6 @@ export default function Page() {
                                 </Container>
                             </motion.div>
                         </Box>
-                    </motion.div>
                 </>
             )}
         </>
