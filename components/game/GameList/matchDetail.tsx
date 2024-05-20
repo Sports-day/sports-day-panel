@@ -1,9 +1,10 @@
 import {
     Avatar,
     Box,
+    Button,
     Card, Chip,
-    Container,
-    Stack,
+    Container, LinearProgress, linearProgressClasses,
+    Stack, styled,
     Typography,
 } from "@mui/material";
 import * as React from "react";
@@ -15,7 +16,7 @@ import {
     HiMapPin,
     HiUser,
 } from "react-icons/hi2";
-import {useTheme} from "@mui/material/styles";
+import {ThemeProvider, useTheme} from "@mui/material/styles";
 import {useFetchUsers} from "@/src/features/users/hook";
 import {useFetchTeams} from "@/src/features/teams/hook";
 import {useFetchLocations} from "@/src/features/locations/hook";
@@ -45,6 +46,54 @@ export const MatchDetail = (props: MatchDetailProps) => {
         minute: '2-digit'
     });
     const locationModel = locations.find(location => location.id === props.match.locationId)
+    const PointBar = styled(LinearProgress)(({}) => ({
+        height: 4.5,
+        borderRadius: 2,
+        [`&.${linearProgressClasses.colorPrimary}`]: {backgroundColor: `${theme.palette.text.disabled}33`,},
+        [`& .${linearProgressClasses.bar}`]: {borderRadius: 2, backgroundColor: theme.palette.text.primary,},
+    }));
+    const maxLeftScore = props.match.leftScore
+    const maxRightScore = props.match.rightScore
+    const maxScore = maxLeftScore > maxRightScore ? maxLeftScore : maxRightScore
+    const barOffset = (maxScore == 0) ? 1 : (95 / maxScore)
+
+    let matchStatus;
+    switch (props.match.status) {
+        case "standby":
+            matchStatus = "開始前";
+            break;
+        case "in_progress":
+            matchStatus = "進行中";
+            break;
+        case "finished":
+            matchStatus = "完了";
+            break;
+        case "cancelled":
+            matchStatus = "中止";
+            break;
+        default:
+            matchStatus = "状態不明";
+    }
+
+    let statusColor;
+    switch (props.match.status) {
+        case "standby":
+            statusColor = `${theme.palette.text.primary}1A`;
+            break;
+        case "in_progress":
+            statusColor = `${theme.palette.warning.main}33`;
+            break;
+        case "finished":
+            statusColor = `${theme.palette.success.main}33`;
+            break;
+        case "cancelled":
+            statusColor = `${theme.palette.error.main}33`;
+            break;
+        default:
+            statusColor = `${theme.palette.secondary.main}33`;
+    }
+
+
 
     return (
         <>
@@ -79,6 +128,23 @@ export const MatchDetail = (props: MatchDetailProps) => {
                                 試合の詳細
                             </Typography>
                         </Stack>
+                        <Box
+                            sx={{
+                                py: 0,
+                                px: 2,
+                                mx:1,
+                                display:"flex",
+                                borderRadius: "10px",
+                                backgroundColor: statusColor,
+                                justifyContent: "center",
+                                alignItems: "center"
+                            }}
+                        >
+                            <Typography color={theme.palette.text.primary} fontSize={"14px"}
+                                        fontWeight={"600"}>
+                                状態：{matchStatus}
+                            </Typography>
+                        </Box>
                         <Card sx={{backgroundColor: `${theme.palette.secondary.dark}80`, py: 1, px: 1}}>
                             <Stack
                                 direction={"row"}
@@ -93,9 +159,19 @@ export const MatchDetail = (props: MatchDetailProps) => {
                                     justifyContent={"space-around"}
                                     alignItems={"center"}
                                 >
-                                    <Typography fontSize={"20px"} color={theme.palette.text.primary}>
-                                        {leftTeamModel?.name}
-                                    </Typography>
+                                    <Stack
+                                        direction={"row"}
+                                        justifyContent={"start"}
+                                        alignItems={"center"}
+                                        spacing={2}
+                                    >
+                                        <Typography sx={{color: theme.palette.text.primary, fontSize: "20px", fontWeight: "bold"}}>
+                                            {props.match.leftScore}
+                                        </Typography>
+                                        <Typography fontSize={"20px"} color={theme.palette.text.primary}>
+                                            {leftTeamModel?.name}
+                                        </Typography>
+                                    </Stack>
                                     <Box
                                         sx={{
                                             pt: 0,
@@ -112,10 +188,64 @@ export const MatchDetail = (props: MatchDetailProps) => {
                                             VS
                                         </Typography>
                                     </Box>
-                                    <Typography fontSize={"20px"} color={theme.palette.text.primary}>
-                                        {rightTeamModel?.name}
-                                    </Typography>
+                                    <Stack
+                                        direction={"row"}
+                                        justifyContent={"end"}
+                                        alignItems={"center"}
+                                        spacing={2}
+                                    >
+                                        <Typography fontSize={"20px"} color={theme.palette.text.primary}>
+                                            {rightTeamModel?.name}
+                                        </Typography>
+                                        <Typography sx={{color: theme.palette.text.primary, fontSize: "20px", fontWeight: "bold"}}>
+                                            {props.match.rightScore}
+                                        </Typography>
+                                    </Stack>
                                 </Stack>
+                            </Stack>
+                            <Stack>
+                                <Button
+                                    color={"secondary"}
+                                    sx={{
+                                        width: "100%",
+                                        border: `1px solid ${theme.palette.secondary.dark}66`,
+                                    }}
+                                >
+                                    <Stack
+                                        direction={"column"}
+                                        justifyContent={"space-between"}
+                                        alignItems={"space-between"}
+                                        maxWidth={'xl'}
+                                        mr={0.5}
+                                        sx={{ flexGrow:1 }}
+                                        spacing={0}
+                                    >
+                                        <Box>
+                                            <ThemeProvider theme={{direction:"rtl"}}>
+                                                <PointBar
+                                                    variant={"determinate"}
+                                                    value={props.match.leftScore * barOffset}
+                                                />
+                                            </ThemeProvider>
+                                        </Box>
+                                    </Stack>
+                                    <Stack
+                                        direction={"column"}
+                                        justifyContent={"space-between"}
+                                        alignItems={"space-between"}
+                                        maxWidth={'xl'}
+                                        ml={0.5}
+                                        sx={{ flexGrow:1 }}
+                                        spacing={0}
+                                    >
+                                        <Box>
+                                            <PointBar
+                                                variant={"determinate"}
+                                                value={props.match.rightScore * barOffset}
+                                            />
+                                        </Box>
+                                    </Stack>
+                                </Button>
                             </Stack>
                             <Box sx={{overflow: "auto", pt: 1}}>
                                 <Stack sx={{width: "100%"}} direction={"row"} spacing={0.2} pl={2}>
@@ -137,6 +267,7 @@ export const MatchDetail = (props: MatchDetailProps) => {
                                 </Stack>
                             </Box>
                         </Card>
+
                         <Typography
                             color={theme.palette.text.primary}
                             textAlign={"center"}

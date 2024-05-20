@@ -5,6 +5,7 @@ import {
     Container,
     Stack, SvgIcon, Typography,
     Unstable_Grid2 as Grid,
+    TextField,
     useTheme
 } from "@mui/material";
 import * as React from "react";
@@ -18,6 +19,9 @@ import {useFetchImages} from "@/src/features/images/hook";
 import {DiscoverTeamContent} from "@/components/discover/DiscoverTeamContent";
 import {OtherInfo} from "@/components/dashboard/Overview/OtherInfo";
 import CircleContainer from "@/components/layouts/circleContainer";
+import {useFetchUsers} from "@/src/features/users/hook";
+import {useFetchTeams} from "@/src/features/teams/hook";
+import {useFetchGames} from "@/src/features/games/hook";
 // import {Metadata} from "next";
 
 // export const metadata: Metadata = {
@@ -30,12 +34,19 @@ export default function DiscoverPage() {
     const {
         isFetching,
         isSuccessful,
-        users,
         matchSets
     } = useFetchTeamSetsInMyClass()
+    const {users, isFetching: isFetchingUsers} = useFetchUsers()
+    const {teams, isFetching: isFetchingTeams} = useFetchTeams()
+    const {games, isFetching: isFetchingGames} = useFetchGames()
 
     const {images, isFetching: isFetchingImages} = useFetchImages()
     const {locations, isFetching: isFetchingLocations} = useFetchLocations()
+
+    const [searchText, setSearchText] = React.useState("");
+    const filteredUsers = searchText
+        ? users.filter(user => user.name.toLowerCase().includes(searchText.toLowerCase()))
+        : [];
 
     return (
         <>
@@ -69,28 +80,55 @@ export default function DiscoverPage() {
                                     spacing={1}
                                     sx={{pt: 3}}
                                 >
-                                    <Typography variant={"h5"}>
+                                    <Typography fontSize={"20px"} fontWeight={"600"}>
                                         試合を探す
                                     </Typography>
                                 </Stack>
                             </CircleContainer>
 
-                            <motion.div
-                                key={"discover-content"}
-                                initial={{opacity: 0, y: "50px"}}
-                                animate={{opacity: 1, y: "0px"}}
-                                transition={{delay:0.5, duration: 1, ease: [0.16, 1, 0.3, 1]}}
+                            <Container
+                                maxWidth={"xl"}
+                                sx={{px: 2, py: 3,mb:5, mt: "-100px"}}
                             >
-                                <Container
-                                    maxWidth={"xl"}
-                                    disableGutters
-                                    sx={{px: 1, py: 3, mt:"-100px"}}
-                                >
-                                    <Stack
-                                        direction={"column"}
-                                        justifyContent={"space-between"}
-                                        spacing={3}
-                                    >
+
+                                {/* Add a TextField for the search */}
+                                <Box
+                                    px={0}
+                                    py={0}
+                                    mb={"8px"}
+                                    sx={{
+                                        width: "100%",
+                                        borderRadius: "12px",
+                                        backgroundColor: `${theme.palette.secondary.light}33`,
+                                        border: `1px solid ${theme.palette.secondary.dark}66`,
+                                    }}>
+                                    <TextField
+                                        color={"info"}
+                                        fullWidth
+                                        value={searchText}
+                                        onChange={event => setSearchText(event.target.value)}
+                                        placeholder="名前を入力"
+                                    />
+                                </Box>
+
+                                {/* List the names of the filtered users */}
+                                {filteredUsers.map(user => (
+                                    <Box
+                                        key={user.id}
+                                        px={2}
+                                        py={1}
+                                        mb={"8px"}
+                                        sx={{
+                                            width: "100%",
+                                            borderRadius: "12px",
+                                            backgroundColor: `${theme.palette.secondary.light}33`,
+                                            border: `1px solid ${theme.palette.secondary.dark}66`,
+                                        }}>
+                                        <Typography>
+                                            {user.name}
+                                        </Typography>
+                                    </Box>
+                                ))}
                                         <Typography sx={{px:2}} fontSize={"18px"}>
                                             同じクラスの試合一覧
                                         </Typography>
@@ -112,14 +150,12 @@ export default function DiscoverPage() {
                                                     })}
                                             </Grid>
                                         )}
-                                        {!isSuccessful && (
+                                        {isSuccessful && (
                                             <OtherInfo infoName={""}
-                                                       infoContent={"ブラウズ機能はご利用いただけません。"}
-                                                       infoSubContent={"どの競技にも参加していないため、同じクラスの試合はご覧いただけません。競技に参加する予定にも関わらずこのメッセージが表示されている場合は、お近くのスタッフにお伝えください。"}/>
+                                                       infoContent={"探す機能が一部使用できない可能性があります"}
+                                                       infoSubContent={"どの競技にも参加していません。参加予定にも関わらずこのメッセージが表示されている場合は、お近くのスタッフにお伝えください。"}/>
                                         )}
-                                    </Stack>
-                                </Container>
-                            </motion.div>
+                            </Container>
                         </Box>
                 </>
             )}

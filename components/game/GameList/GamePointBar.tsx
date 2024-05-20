@@ -133,21 +133,20 @@ export const GamePointBar = (props: GamePointBarProps) => {
                     </Stack>
 
                     <Stack direction={"column"} alignItems={"center"} mx={1.5} spacing={0.5} pt={0}>
-
+                        <Stack direction={"row"}>
+                            <SvgIcon fontSize={"small"} sx={{position:"relative", top:"2px"}}>
+                                <HiFlag color={`${theme.palette.text.primary}CC`}/>
+                            </SvgIcon>
+                            <Typography sx={{color: `${theme.palette.text.primary}CC`, fontSize: "14px"}}>
+                                {judgeTeam?.name}
+                            </Typography>
+                        </Stack>
                             <Stack direction={"row"}>
                                     <SvgIcon fontSize={"small"} sx={{position:"relative", top:"2px"}}>
                                         <HiClock color={`${theme.palette.text.primary}CC`}/>
                                     </SvgIcon>
                                     <Typography sx={{color: `${theme.palette.text.primary}CC`, fontSize: "14px"}}>
                                         {formattedTime}
-                                    </Typography>
-                            </Stack>
-                            <Stack direction={"row"}>
-                                    <SvgIcon fontSize={"small"} sx={{position:"relative", top:"2px"}}>
-                                        <HiFlag color={`${theme.palette.text.primary}CC`}/>
-                                    </SvgIcon>
-                                    <Typography sx={{color: `${theme.palette.text.primary}CC`, fontSize: "14px"}}>
-                                        {judgeTeam?.name}
                                     </Typography>
                             </Stack>
                     </Stack>
