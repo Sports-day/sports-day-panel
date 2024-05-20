@@ -141,7 +141,7 @@ export default function Page() {
                                                     justifyContent={"space-between"}
                                                     spacing={3}
                                                 >
-                                                    <Grid container spacing={1.5}>
+                                                    <Grid container spacing={1}>
 
                                                         {mySport && myGame && myTeam &&
                                                             <>

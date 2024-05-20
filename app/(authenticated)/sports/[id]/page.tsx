@@ -16,7 +16,7 @@ import {
     useTheme
 } from "@mui/material";
 import {GameProgress} from "@/components/game/game-progress";
-import {HiChartBar, HiOutlineClipboardDocumentList, HiTableCells, HiUsers, HiXMark} from "react-icons/hi2";
+import {HiOutlineClipboardDocumentList, HiTableCells, HiUsers, HiXMark} from "react-icons/hi2";
 import * as React from "react";
 import {GameList} from "@/components/game/GameList"
 import {GamesContext, LocationsContext, MatchesContext, TeamsContext} from "@/components/context";
@@ -24,7 +24,6 @@ import {useState} from "react";
 import {DialogProps} from '@mui/material/Dialog';
 import {Rules} from "@/components/rules/Rules";
 import {useInterval} from "react-use";
-import {InformationList} from "@/components/InformationList";
 import {useFetchSport, useFetchSportGames} from "@/src/features/sports/hook";
 import {useFetchTeams} from "@/src/features/teams/hook";
 import {useFetchLocations} from "@/src/features/locations/hook";
@@ -33,8 +32,6 @@ import {useFetchMatches} from "@/src/features/matches/hook";
 import {useFetchUserinfo} from "@/src/features/userinfo/hook";
 import CircleContainer from "@/components/layouts/circleContainer";
 import {motion} from "framer-motion";
-import Rank from "@/components/dashboard/Overview/Rank";
-import {HiTable} from "react-icons/hi";
 
 const REFRESH_INTERVAL = 1000 * 60 * 5
 

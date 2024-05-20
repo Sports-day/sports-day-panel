@@ -12,7 +12,6 @@ import {linearProgressClasses} from "@mui/material";
 import {ThemeProvider} from "@mui/material/styles";
 import * as React from "react";
 import {HiClock, HiFlag} from "react-icons/hi2";
-import {MdOutlineSportsScore} from "react-icons/md";
 import {useContext} from "react";
 import {TeamsContext} from "../../context";
 import {MatchDetail} from "@/components/game/GameList/matchDetail";
@@ -42,6 +41,7 @@ export const GamePointBar = (props: GamePointBarProps) => {
     const judgeTeam = teams.find(team => team.id === Number(umpireTeam));
     const formattedTime = new Date(time).toLocaleTimeString("ja-JP", {hour: '2-digit', minute:'2-digit'});
     const backgroundColor = isMyTeamPlay ? `${theme.palette.warning.main}33` : isMyTeamUmpire ? `${theme.palette.success.main}33` : `${theme.palette.text.disabled}33`;
+    const beltPadding = isMyTeamPlay ? 2.5 : isMyTeamUmpire ? 2.5 : 1;
     const PointBar = styled(LinearProgress)(({}) => ({
         height: 4.5,
         borderRadius: 2,
@@ -57,16 +57,16 @@ export const GamePointBar = (props: GamePointBarProps) => {
                 <Stack sx={{width:"100%", justifyContent: "center", alignItems: "start",}}>
                     <Box
                         sx={{
-                            py: 0.5,
+                            py: 0.25,
                             px:2,
-                            borderRadius: "5px",
+                            borderRadius: "9px",
                             backgroundColor: backgroundColor,
                             position:"relative",
                             top:"4px",
                         }}
                     >
                         <Typography color={theme.palette.text.primary} fontSize={"10px"} fontWeight={"600"}>
-                            あなたが参加する試合
+                            あなたのチームが参加
                         </Typography>
                     </Box>
                 </Stack>
@@ -75,16 +75,16 @@ export const GamePointBar = (props: GamePointBarProps) => {
                 <Stack sx={{width:"100%", justifyContent: "center", alignItems: "start",}}>
                     <Box
                         sx={{
-                            py: 0.5,
+                            py: 0.25,
                             px:2,
-                            borderRadius: "5px",
+                            borderRadius: "9px",
                             backgroundColor: backgroundColor,
                             position:"relative",
                             top:"4px",
                         }}
                     >
                         <Typography color={theme.palette.text.primary} fontSize={"10px"} fontWeight={"600"}>
-                            あなたが審判の試合
+                            あなたのチームが審判
                         </Typography>
                     </Box>
                 </Stack>
@@ -96,7 +96,8 @@ export const GamePointBar = (props: GamePointBarProps) => {
                     width: "100%",
                     border: `1px solid ${theme.palette.secondary.dark}66`,
                     backgroundColor: backgroundColor,
-                    py:1.5
+                    pt:1.4,
+                    pb:1.8
                 }}
                 onClick={() => toggleDrawer(true)}
             >

@@ -21,7 +21,7 @@ export const JudgeSchedule = (props: JudgeScheduleProps) => {
             pb={2}
         >
             <Typography pl={2}>
-                審判のスケジュール
+                あなたが審判する試合
             </Typography>
 
             {props.matches

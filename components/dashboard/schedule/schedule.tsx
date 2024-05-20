@@ -21,7 +21,7 @@ export const Schedule = (props: ScheduleProps) => {
                     pb={2}
                 >
                     <Typography pl={2}>
-                        試合のスケジュール
+                        あなたが参加する試合
                     </Typography>
 
                         {props.matches
