@@ -26,7 +26,8 @@ export type GamePointBarProps = {
     umpireTeam: string,
     time: string,
     barOffset: number,
-    match: Match
+    match: Match,
+    myTeamId?: number
 }
 
 export const GamePointBar = (props: GamePointBarProps) => {
@@ -36,24 +37,65 @@ export const GamePointBar = (props: GamePointBarProps) => {
     const {leftScore, rightScore, leftTeamId, rightTeamId, umpireTeam, time, barOffset} = props;
     const leftTeam = teams.find(team => team.id === leftTeamId);
     const rightTeam = teams.find(team => team.id === rightTeamId);
+    const isMyTeamPlay = props.myTeamId === leftTeamId || props.myTeamId === rightTeamId;
+    const isMyTeamUmpire = props.myTeamId === Number(umpireTeam);
     const judgeTeam = teams.find(team => team.id === Number(umpireTeam));
     const formattedTime = new Date(time).toLocaleTimeString("ja-JP", {hour: '2-digit', minute:'2-digit'});
+    const backgroundColor = isMyTeamPlay ? `${theme.palette.warning.main}33` : isMyTeamUmpire ? `${theme.palette.success.main}33` : `${theme.palette.text.disabled}33`;
     const PointBar = styled(LinearProgress)(({}) => ({
         height: 4.5,
         borderRadius: 2,
-        [`&.${linearProgressClasses.colorPrimary}`]: {backgroundColor: theme.palette.secondary.dark,},
+        [`&.${linearProgressClasses.colorPrimary}`]: {backgroundColor: backgroundColor,},
         [`& .${linearProgressClasses.bar}`]: {borderRadius: 2, backgroundColor: theme.palette.text.primary,},
     }));
     const [open, toggleDrawer] = React.useState(false);
 
+
     return(
         <>
+            {isMyTeamPlay &&
+                <Stack sx={{width:"100%", justifyContent: "center", alignItems: "start",}}>
+                    <Box
+                        sx={{
+                            py: 0.5,
+                            px:2,
+                            borderRadius: "5px",
+                            backgroundColor: backgroundColor,
+                            position:"relative",
+                            top:"4px",
+                        }}
+                    >
+                        <Typography color={theme.palette.text.primary} fontSize={"10px"} fontWeight={"600"}>
+                            あなたが参加する試合
+                        </Typography>
+                    </Box>
+                </Stack>
+            }
+            {isMyTeamUmpire &&
+                <Stack sx={{width:"100%", justifyContent: "center", alignItems: "start",}}>
+                    <Box
+                        sx={{
+                            py: 0.5,
+                            px:2,
+                            borderRadius: "5px",
+                            backgroundColor: backgroundColor,
+                            position:"relative",
+                            top:"4px",
+                        }}
+                    >
+                        <Typography color={theme.palette.text.primary} fontSize={"10px"} fontWeight={"600"}>
+                            あなたが審判の試合
+                        </Typography>
+                    </Box>
+                </Stack>
+            }
             <Button
                 variant={"contained"}
                 color={"secondary"}
                 sx={{
                     width: "100%",
                     border: `1px solid ${theme.palette.secondary.dark}66`,
+                    backgroundColor: backgroundColor,
                     py:1.5
                 }}
                 onClick={() => toggleDrawer(true)}

@@ -5,7 +5,12 @@ import {Game} from "@/src/models/GameModel";
 import {useContext} from "react";
 import {MatchesContext} from "../../context";
 
-export const GameListContent = (props: { game: Game }) => {
+export type GameListContentProps = {
+    game: Game
+    myTeamId?: number
+}
+
+export const GameListContent = (props: GameListContentProps) => {
     const theme = useTheme()
     const { data: matches } = useContext(MatchesContext)
     const filteredMatches = matches.filter(match => match.gameId == props.game.id)
@@ -31,6 +36,7 @@ export const GameListContent = (props: { game: Game }) => {
                                 time={match.startAt}
                                 barOffset={barOffset}
                                 match={match}
+                                myTeamId={props.myTeamId}
                             />
                     </>
                 )

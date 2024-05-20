@@ -9,6 +9,7 @@ export type GameListProps = {
     games: Game[]
     gameId: number | null
     setGameId: (gameId: number) => void
+    myTeamId?: number
 }
 
 interface TabPanelProps {
@@ -123,7 +124,7 @@ export const GameList = (props: GameListProps) => {
                             animate={{opacity: 1}}
                             transition={{duration: 1, ease: [0.16, 1, 0.3, 1]}}
                         >
-                            <GameListContent game={game}/>
+                            <GameListContent game={game} myTeamId={props.myTeamId}/>
                         </motion.div>
                     </TabPanel>
                 )
