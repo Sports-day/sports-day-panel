@@ -22,6 +22,7 @@ import CircleContainer from "@/components/layouts/circleContainer";
 import {useFetchUsers} from "@/src/features/users/hook";
 import {useFetchTeams} from "@/src/features/teams/hook";
 import {useFetchGames} from "@/src/features/games/hook";
+import {DiscoverUser} from "@/components/discover/discoverUser";
 // import {Metadata} from "next";
 
 // export const metadata: Metadata = {
@@ -111,24 +112,26 @@ export default function DiscoverPage() {
                                     />
                                 </Box>
 
-                                {/* List the names of the filtered users */}
-                                {filteredUsers.map(user => (
+                                {searchText &&
                                     <Box
-                                        key={user.id}
-                                        px={2}
-                                        py={1}
+                                        px={1}
+                                        py={2}
                                         mb={"8px"}
                                         sx={{
                                             width: "100%",
                                             borderRadius: "12px",
-                                            backgroundColor: `${theme.palette.secondary.light}33`,
+                                            backgroundColor: `${theme.palette.secondary.dark}1A`,
                                             border: `1px solid ${theme.palette.secondary.dark}66`,
                                         }}>
-                                        <Typography>
-                                            {user.name}
-                                        </Typography>
+                                        {/* List the names of the filtered users */}
+                                        {filteredUsers.map(user => (
+                                            <DiscoverUser
+                                                key={user.id}
+                                                user={user}
+                                            />
+                                        ))}
                                     </Box>
-                                ))}
+                                }
                                         <Typography sx={{px:2}} fontSize={"18px"}>
                                             同じクラスの試合一覧
                                         </Typography>
