@@ -1,19 +1,16 @@
 'use client'
 import {
-    Avatar,
     Box,
     Container,
-    Stack, SvgIcon, Typography,
+    Stack, Typography,
     Unstable_Grid2 as Grid,
     TextField,
     useTheme
 } from "@mui/material";
 import * as React from "react";
-import {Navigation} from "@/components/layouts/navigation";
 import {useFetchTeamSetsInMyClass} from "@/src/features/unit/discover";
 import {Loading} from "@/components/layouts/loading";
 import {motion} from "framer-motion";
-import {HiSearch} from "react-icons/hi";
 import {useFetchLocations} from "@/src/features/locations/hook";
 import {useFetchImages} from "@/src/features/images/hook";
 import {DiscoverTeamContent} from "@/components/discover/DiscoverTeamContent";
@@ -25,7 +22,6 @@ import {useFetchGames} from "@/src/features/games/hook";
 import {useFetchMatches} from "@/src/features/matches/hook";
 import {DiscoverUser} from "@/components/discover/discoverUser";
 import {MatchesContext, TeamsContext} from "@/components/context";
-import {UserMatchList} from "@/components/match/userMatchList";
 // import {Metadata} from "next";
 
 // export const metadata: Metadata = {

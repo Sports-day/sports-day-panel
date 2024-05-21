@@ -1,4 +1,4 @@
-import {Stack, useTheme} from "@mui/material";
+import {Stack} from "@mui/material";
 import * as React from "react";
 import {GamePointBar} from "./GamePointBar";
 import {Game} from "@/src/models/GameModel";
@@ -11,7 +11,6 @@ export type GameListContentProps = {
 }
 
 export const GameListContent = (props: GameListContentProps) => {
-    const theme = useTheme()
     const { data: matches } = useContext(MatchesContext)
     const filteredMatches = matches.filter(match => match.gameId == props.game.id)
     const maxLeftScore = Math.max.apply(Math, filteredMatches.map(match => match.leftScore))
