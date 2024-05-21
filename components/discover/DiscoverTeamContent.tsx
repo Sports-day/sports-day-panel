@@ -7,7 +7,8 @@ import {
     SvgIcon,
     SwipeableDrawer,
     Typography,
-    Unstable_Grid2 as Grid
+    Unstable_Grid2 as Grid,
+    useTheme
 } from "@mui/material";
 import {HiLocationMarker} from "react-icons/hi";
 import {HiXMark, HiClock} from "react-icons/hi2";
@@ -28,6 +29,7 @@ export type DiscoverTeamContentProps = {
 }
 
 export const DiscoverTeamContent = (props:DiscoverTeamContentProps) => {
+    const theme = useTheme();
     const [open, toggleDrawer] = React.useState(false);
     const image = props.images.find((v) => v.id === props.matchSet.sport.iconId)
     const location = props.locations.find((v) => v.id === props.matchSet.match.locationId)
@@ -40,28 +42,27 @@ export const DiscoverTeamContent = (props:DiscoverTeamContentProps) => {
             <Grid xs={12} sm={12} lg={12}>
                 <Card>
                     <Button sx={{width:"100%"}} onClick={() => toggleDrawer(true)}>
-                        <Grid xs={12} sm={5} lg={6}>
                             <Stack
                                 alignItems={"flex-start"}
                                 direction={"column"}
                                 justifyContent={"flex-start"}
                                 spacing={1}
                                 py={1}
-                                px={1}
+                                pl={2}
+                                sx={{flexGrow:1}}
                             >
-                                <Typography color={"textSecondary"} fontSize={"14px"}>
+                                <Typography color={theme.palette.text.secondary} fontSize={"14px"}>
                                     チーム名
                                 </Typography>
-                                <Typography fontSize={"24px"} fontWeight={"bold"} color={"white"}>
+                                <Typography fontWeight={"bold"} color={theme.palette.text.primary}>
                                     {props.matchSet.team.name}
                                 </Typography>
                             </Stack>
-                        </Grid>
-                        <Grid xs={12} sm={7} lg={6}>
                             <Stack
                                 direction={"column"}
                                 justifyContent={"center"}
                                 alignItems={"flex-start"}
+                                pr={2}
                             >
                                 <Stack
                                     direction={"row"}
@@ -70,12 +71,12 @@ export const DiscoverTeamContent = (props:DiscoverTeamContentProps) => {
                                 >
                                     <Box sx={{pb:"0.3em"}}>
                                         <Avatar
-                                            sx={{height: "1.5em", width: "1.5em"}}
+                                            sx={{height: "1em", width: "1em"}}
                                             src={image?.data}
                                         >
                                         </Avatar>
                                     </Box>
-                                    <Typography sx={{color: "#99a5d6", fontSize: "14px", py: "5px"}}>
+                                    <Typography sx={{color: theme.palette.text.secondary, fontSize: "14px", py: "5px"}}>
                                         {props.matchSet.sport.name}
                                     </Typography>
                                 </Stack>
@@ -85,9 +86,9 @@ export const DiscoverTeamContent = (props:DiscoverTeamContentProps) => {
                                     spacing={1}
                                 >
                                     <SvgIcon fontSize={"small"} sx={{position:"relative", bottom:"3px"}}>
-                                        <HiLocationMarker color="#99a5d6"/>
+                                        <HiLocationMarker color={theme.palette.text.secondary}/>
                                     </SvgIcon>
-                                    <Typography sx={{color: "#99a5d6", fontSize: "14px", py: "5px"}}>
+                                    <Typography sx={{color: theme.palette.text.secondary, fontSize: "14px", py: "5px"}}>
                                         {location?.name}
                                     </Typography>
                                 </Stack>
@@ -97,14 +98,13 @@ export const DiscoverTeamContent = (props:DiscoverTeamContentProps) => {
                                     spacing={1}
                                 >
                                     <SvgIcon fontSize={"small"} sx={{position:"relative", bottom:"3px"}}>
-                                        <HiClock color="#99a5d6"/>
+                                        <HiClock color={theme.palette.text.secondary}/>
                                     </SvgIcon>
-                                    <Typography sx={{color: "#99a5d6", fontSize: "14px", py: "5px"}}>
+                                    <Typography sx={{color: theme.palette.text.secondary, fontSize: "14px", py: "5px"}}>
                                         {formattedTime}
                                     </Typography>
                                 </Stack>
                             </Stack>
-                        </Grid>
                     </Button>
                 </Card>
             </Grid>
@@ -137,14 +137,14 @@ export const DiscoverTeamContent = (props:DiscoverTeamContentProps) => {
                             py={1}
                         >
                             <Typography
-                                color={"#E8EBF8"}
+                                color={theme.palette.text.primary}
                                 fontWeight={"bold"}
                             >
                                 チームメンバー
                             </Typography>
                             <IconButton onClick={() => toggleDrawer(false)}>
                                 <SvgIcon>
-                                    <HiXMark color={"#E8EBF8"}/>
+                                    <HiXMark color={theme.palette.text.primary}/>
                                 </SvgIcon>
                             </IconButton>
                         </Stack>
@@ -163,7 +163,7 @@ export const DiscoverTeamContent = (props:DiscoverTeamContentProps) => {
                                             <Box sx={{width: "100%"}}>
                                                 <Divider/>
                                             </Box>
-                                            <Typography color={"#99a5d6"} fontSize={"16px"}>
+                                            <Typography color={theme.palette.text.primary} fontSize={"16px"}>
                                                 {user.name}
                                             </Typography>
                                         </Fragment>

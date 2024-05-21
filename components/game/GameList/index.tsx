@@ -1,4 +1,4 @@
-import {Box, Container, Divider, Stack, Tab, Tabs, Typography, useTheme} from "@mui/material";
+import {Box, Stack, Tab, Tabs, Typography, useTheme} from "@mui/material";
 import * as React from "react";
 import {GameListContent} from "./GameListContent";
 import {useEffect} from "react";
@@ -12,7 +12,7 @@ export type GameListProps = {
     myTeamId?: number
 }
 
-interface TabPanelProps {
+export type TabPanelProps = {
     children?: React.ReactNode;
     index: number;
     value: number;

@@ -28,6 +28,7 @@ export type GamePointBarProps = {
     match: Match,
     myTeamId?: number,
     otherUser?: boolean,
+    dashboard?: boolean
 }
 
 export const GamePointBar = (props: GamePointBarProps) => {

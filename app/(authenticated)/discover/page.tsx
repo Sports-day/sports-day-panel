@@ -5,7 +5,7 @@ import {
     Stack, Typography,
     Unstable_Grid2 as Grid,
     TextField,
-    useTheme
+    useTheme, Tabs, Tab
 } from "@mui/material";
 import * as React from "react";
 import {useFetchTeamSetsInMyClass} from "@/src/features/unit/discover";
@@ -28,6 +28,43 @@ import {MatchesContext, TeamsContext} from "@/components/context";
 //     title: 'SPORTSDAY : Discover',
 // }
 
+export type TabPanelProps = {
+    children?: React.ReactNode;
+    index: number;
+    value: number;
+}
+
+function TabPanel(props: TabPanelProps) {
+    const {children, value, index, ...other} = props;
+
+    return (
+        <div
+            role="tabpanel"
+            hidden={value !== index}
+            id={`simple-tabpanel-${index}`}
+            aria-labelledby={`simple-tab-${index}`}
+            {...other}
+        >
+            {value === index && (
+                <Stack
+                    direction={"column"}
+                    justifyContent={"flex-start"}
+                    spacing={1}
+                >
+                    {children}
+                </Stack>
+            )}
+        </div>
+    );
+}
+
+function a11yProps(index: number) {
+    return {
+        id: `simple-tab-${index}`,
+        'aria-controls': `simple-tabpanel-${index}`,
+    };
+}
+
 export default function DiscoverPage() {
     const theme = useTheme()
     //  Unit Hook
@@ -48,6 +85,11 @@ export default function DiscoverPage() {
     const filteredUsers = searchText
         ? users.filter(user => user.name.toLowerCase().includes(searchText.toLowerCase()))
         : [];
+
+    const [value, setValue] = React.useState(0);
+    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+        setValue(newValue);
+    };
 
     return (
         <>
@@ -103,57 +145,113 @@ export default function DiscoverPage() {
 
                             <Container
                                 maxWidth={"xl"}
-                                sx={{px: 2, py: 3,mb:5, mt: "-100px"}}
+                                sx={{px: 2, pb: 3,mb:5, mt: "-100px"}}
                             >
-                                {/* Add a TextField for the search */}
-                                <Typography sx={{px:2}}>
-                                    名前から探す
-                                </Typography>
-                                <Box
-                                    px={0}
-                                    py={0}
-                                    mb={"8px"}
-                                    sx={{
-                                        width: "100%",
-                                        borderRadius: "12px",
-                                        backgroundColor: `${theme.palette.secondary.light}33`,
-                                        border: `1px solid ${theme.palette.secondary.dark}66`,
-                                    }}>
-                                    <TextField
-                                        color={"info"}
-                                        fullWidth
-                                        value={searchText}
-                                        onChange={event => setSearchText(event.target.value)}
-                                        placeholder="名前を入力"
-                                    />
+                                {!isSuccessful && (
+                                    <OtherInfo infoName={""}
+                                               infoContent={"探す機能が一部使用できない可能性があります"}
+                                               infoSubContent={"どの競技にも参加していません。参加予定にも関わらずこのメッセージが表示されている場合は、お近くのスタッフにお伝えください。"}/>
+                                )}
+                                <Box sx={{
+                                    position: "relative",
+                                    mb:2,
+                                    mt:2,
+                                }}>
+                                    <Tabs
+                                        value={value}
+                                        onChange={handleChange}
+                                        variant={"scrollable"}
+                                        scrollButtons={false}
+                                        aria-label="basic tabs example"
+                                        TabIndicatorProps={{
+                                            style: {
+                                                zIndex: 0,
+                                                backgroundColor: `${theme.palette.text.primary}CC`,
+                                                borderRadius: '15px',
+                                                height: '49px',
+                                            }
+                                        }}
+                                    >
+                                        <Tab sx={{
+                                            zIndex: 1,
+                                            mr: 1,
+                                            color: `${theme.palette.text.primary}FF`,
+                                            border: `1px solid ${theme.palette.text.primary}4D`,
+                                            borderRadius: "15px"
+                                        }} label={"名前で検索"} {...a11yProps(1)} />
+                                        <Tab sx={{
+                                            zIndex: 1,
+                                            mr: 1,
+                                            color: `${theme.palette.text.primary}FF`,
+                                            border: `1px solid ${theme.palette.text.primary}4D`,
+                                            borderRadius: "15px"
+                                        }} label={"同じクラス"} {...a11yProps(2)} />
+                                    </Tabs>
                                 </Box>
-
-                                {searchText &&
-                                    <Box
-                                        px={1}
-                                        py={2}
-                                        mb={"8px"}
-                                        sx={{
-                                            width: "100%",
-                                            borderRadius: "12px",
-                                            backgroundColor: `${theme.palette.secondary.dark}1A`,
-                                            border: `1px solid ${theme.palette.secondary.dark}66`,
-                                        }}>
-                                        {/* List the names of the filtered users */}
-                                        {filteredUsers.map(user => (
-                                            <DiscoverUser
-                                                key={user.id}
-                                                user={user}
-                                                games={games}
-                                                teams={teams}
-                                                matches={matches}
+                                <TabPanel value={value} index={0}>
+                                    <motion.div
+                                        key={"overview-content"}
+                                        initial={{opacity: 0}}
+                                        animate={{opacity: 1}}
+                                        transition={{duration: 1, ease: [0.16, 1, 0.3, 1]}}
+                                    >
+                                        <Box
+                                            px={0}
+                                            py={0}
+                                            mb={"8px"}
+                                            sx={{
+                                                width: "100%",
+                                                borderRadius: "12px",
+                                                backgroundColor: `${theme.palette.secondary.light}33`,
+                                                border: `1px solid ${theme.palette.text.primary}1A`,
+                                            }}>
+                                            <TextField
+                                                color={"info"}
+                                                fullWidth
+                                                value={searchText}
+                                                onChange={event => setSearchText(event.target.value)}
+                                                placeholder="名前を入力"
                                             />
-                                        ))}
-                                    </Box>
-                                }
-                                        <Typography sx={{px:2}} fontSize={"18px"}>
-                                            同じクラスの試合一覧
-                                        </Typography>
+                                        </Box>
+
+                                        {searchText &&
+                                            <Box
+                                                px={1}
+                                                py={2}
+                                                mb={"8px"}
+                                                sx={{
+                                                    width: "100%",
+                                                    borderRadius: "12px",
+                                                    backgroundColor: `${theme.palette.secondary.dark}FF`,
+                                                    border: `1px solid ${theme.palette.text.primary}1A`,
+                                                }}>
+                                                {/* List the names of the filtered users */}
+                                                {filteredUsers.map(user => (
+                                                    <DiscoverUser
+                                                        key={user.id}
+                                                        user={user}
+                                                        games={games}
+                                                        teams={teams}
+                                                        matches={matches}
+                                                    />
+                                                ))}
+                                                {filteredUsers.length === 0 &&
+                                                    <Typography color={theme.palette.text.primary} sx={{px:2}}>
+                                                        該当するユーザーが見つかりませんでした
+                                                    </Typography>
+                                                }
+                                            </Box>
+                                        }
+                                    </motion.div>
+                                </TabPanel>
+
+                                <TabPanel value={value} index={1}>
+                                    <motion.div
+                                        key={"overview-content"}
+                                        initial={{opacity: 0}}
+                                        animate={{opacity: 1}}
+                                        transition={{duration: 1, ease: [0.16, 1, 0.3, 1]}}
+                                    >
                                         {isSuccessful && (
                                             <Grid container spacing={1.5}>
                                                 {matchSets
@@ -172,11 +270,9 @@ export default function DiscoverPage() {
                                                     })}
                                             </Grid>
                                         )}
-                                        {isSuccessful && (
-                                            <OtherInfo infoName={""}
-                                                       infoContent={"探す機能が一部使用できない可能性があります"}
-                                                       infoSubContent={"どの競技にも参加していません。参加予定にも関わらずこのメッセージが表示されている場合は、お近くのスタッフにお伝えください。"}/>
-                                        )}
+                                    </motion.div>
+                                </TabPanel>
+
                             </Container>
                         </Box>
                         </TeamsContext.Provider>

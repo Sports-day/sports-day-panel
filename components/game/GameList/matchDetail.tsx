@@ -3,7 +3,7 @@ import {
     Box,
     Button,
     Card, Chip,
-    Container, LinearProgress, linearProgressClasses,
+    Container, IconButton, LinearProgress, linearProgressClasses,
     Stack, styled, SvgIcon,
     Typography,
 } from "@mui/material";
@@ -15,7 +15,7 @@ import {
     HiClock,
     HiFlag,
     HiMapPin,
-    HiUser,
+    HiUser, HiXMark,
 } from "react-icons/hi2";
 import {ThemeProvider, useTheme} from "@mui/material/styles";
 import {useFetchUsers} from "@/src/features/users/hook";
