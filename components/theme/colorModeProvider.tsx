@@ -15,7 +15,7 @@ const shadows = createShadows();
 const lightTheme = createTheme({
     breakpoints: {
         values: {
-            xs: 0,
+            xs: 600,
             sm: 790,
             md: 1000,
             lg: 1200,

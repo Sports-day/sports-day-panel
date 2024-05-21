@@ -26,7 +26,8 @@ export type GamePointBarProps = {
     time: string,
     barOffset: number,
     match: Match,
-    myTeamId?: number
+    myTeamId?: number,
+    otherUser?: boolean,
 }
 
 export const GamePointBar = (props: GamePointBarProps) => {
@@ -40,15 +41,15 @@ export const GamePointBar = (props: GamePointBarProps) => {
     const isMyTeamUmpire = props.myTeamId === Number(umpireTeam);
     const judgeTeam = teams.find(team => team.id === Number(umpireTeam));
     const formattedTime = new Date(time).toLocaleTimeString("ja-JP", {hour: '2-digit', minute:'2-digit'});
-    const backgroundColor = isMyTeamPlay ? `${theme.palette.warning.main}33` : isMyTeamUmpire ? `${theme.palette.success.main}33` : `${theme.palette.text.disabled}33`;
-    const beltPadding = isMyTeamPlay ? 2.5 : isMyTeamUmpire ? 2.5 : 1;
+    const backgroundColor = isMyTeamPlay ? `${theme.palette.warning.main}66` : isMyTeamUmpire ? `${theme.palette.success.main}66` : `${theme.palette.text.disabled}33`;
     const PointBar = styled(LinearProgress)(({}) => ({
         height: 4.5,
         borderRadius: 2,
-        [`&.${linearProgressClasses.colorPrimary}`]: {backgroundColor: backgroundColor,},
+        [`&.${linearProgressClasses.colorPrimary}`]: {backgroundColor: `${theme.palette.text.disabled}33`,},
         [`& .${linearProgressClasses.bar}`]: {borderRadius: 2, backgroundColor: theme.palette.text.primary,},
     }));
     const [open, toggleDrawer] = React.useState(false);
+    const userDisplay = props.otherUser ? "この人" : "あなた";
 
 
     return(
@@ -66,7 +67,7 @@ export const GamePointBar = (props: GamePointBarProps) => {
                         }}
                     >
                         <Typography color={theme.palette.text.primary} fontSize={"10px"} fontWeight={"600"}>
-                            あなたのチームが参加
+                            {userDisplay}のチームが参加
                         </Typography>
                     </Box>
                 </Stack>
@@ -84,7 +85,7 @@ export const GamePointBar = (props: GamePointBarProps) => {
                         }}
                     >
                         <Typography color={theme.palette.text.primary} fontSize={"10px"} fontWeight={"600"}>
-                            あなたのチームが審判
+                            {userDisplay}のチームが審判
                         </Typography>
                     </Box>
                 </Stack>
@@ -94,8 +95,8 @@ export const GamePointBar = (props: GamePointBarProps) => {
                 color={"secondary"}
                 sx={{
                     width: "100%",
-                    border: `1px solid ${theme.palette.secondary.dark}66`,
-                    backgroundColor: backgroundColor,
+                    border: `1px solid ${backgroundColor}`,
+                    backgroundColor: `${theme.palette.text.disabled}33`,
                     pt:1.4,
                     pb:1.8
                 }}

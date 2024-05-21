@@ -21,11 +21,11 @@ import {useFetchUsers} from "@/src/features/users/hook";
 import {useFetchTeams} from "@/src/features/teams/hook";
 import {useFetchLocations} from "@/src/features/locations/hook";
 
-export type MatchDetailProps = {
+export type UserDetailProps = {
     match: Match;
 }
 
-export const MatchDetail = (props: MatchDetailProps) => {
+export const UserDetail = (props: UserDetailProps) => {
     const theme = useTheme();
     //  context
     const {locations, isFetching: isFetchingLocations} = useFetchLocations()
@@ -113,7 +113,7 @@ export const MatchDetail = (props: MatchDetailProps) => {
             >
                 <Container maxWidth={"xl"}>
                     <Stack spacing={1}>
-                        <Stack direction={"column"} spacing={2} justifyContent={"center"}
+                        <Stack direction={"column"} spacing={2} pb={2} justifyContent={"center"}
                                alignItems={"center"}>
                             <Box sx={{
                                 width: 50,
@@ -130,21 +130,14 @@ export const MatchDetail = (props: MatchDetailProps) => {
                         </Stack>
                         <Box
                             sx={{
-                                pb: 2,
+                                py: 0,
                                 px: 2,
                                 mx:1,
-                                pt:0.5,
                                 display:"flex",
-                                borderRadius: "12px",
-                                borderBottomLeftRadius: "0px",
-                                borderBottomRightRadius: "0px",
-                                border:`1px solid ${statusColor}`,
+                                borderRadius: "10px",
                                 backgroundColor: statusColor,
                                 justifyContent: "center",
-                                alignItems: "center",
-                                position:"relative",
-                                top:"20px",
-                                zIndex: -1
+                                alignItems: "center"
                             }}
                         >
                             <Typography color={theme.palette.text.primary} fontSize={"14px"}
@@ -152,10 +145,7 @@ export const MatchDetail = (props: MatchDetailProps) => {
                                 状態：{matchStatus}
                             </Typography>
                         </Box>
-                        <Card
-                            sx={{backgroundColor: `${theme.palette.secondary.dark}FF`,
-                                boxShadow: `0px 0px 15px ${theme.palette.info.main}4D`,
-                                pt:1, pb:1.5, px: 1}}>
+                        <Card sx={{backgroundColor: `${theme.palette.secondary.dark}80`, py: 1, px: 1}}>
                             <Stack
                                 direction={"row"}
                                 spacing={1}
@@ -258,7 +248,7 @@ export const MatchDetail = (props: MatchDetailProps) => {
                                 </Button>
                             </Stack>
                             <Box sx={{overflow: "auto", pt: 1}}>
-                                <Stack sx={{width: "100%"}} direction={"row"} spacing={0.2} pl={0}>
+                                <Stack sx={{width: "100%"}} direction={"row"} spacing={0.2} pl={2}>
                                     <Chip
                                         label={`審判：${judgeTeam?.name}`}
                                         avatar={<Avatar><HiFlag/></Avatar>}

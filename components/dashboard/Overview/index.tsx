@@ -3,16 +3,13 @@ import {
     Button,
     Container,
     Card,
-    CardContent,
-    Divider,
     Stack,
     SvgIcon,
     Typography,
     SwipeableDrawer,
-    Unstable_Grid2 as Grid, IconButton, Box
+    Unstable_Grid2 as Grid, Box
 } from "@mui/material";
 import {
-    HiXMark,
     HiChartBar,
     HiOutlineExclamationTriangle, HiUser
 } from "react-icons/hi2";
@@ -25,7 +22,6 @@ import * as React from "react";
 import Link from "next/link";
 import Rank from "./Rank"
 import {useTheme} from "@mui/material/styles";
-import Logo from "@/public/logo/logo.svg";
 
 
 export type OverviewProps = {
@@ -54,6 +50,7 @@ export const Overview = (props: OverviewProps) => {
             <Grid container spacing={1}>
                 <Grid xs={6.5} sm={6.5} lg={6.5}>
                     <Button
+                        disableElevation
                         color={"secondary"}
                         variant={"contained"}
                         component={Link}
@@ -61,6 +58,7 @@ export const Overview = (props: OverviewProps) => {
                             width: "100%", height: "180px",
                             backgroundColor: `${theme.palette.secondary.light}66`,
                             border: `1px solid ${theme.palette.secondary.dark}66`,
+                            boxShadow: `0px 0px 5px ${theme.palette.primary.dark}33`,
                         }}
                         href={`/sports/${props.mySport.id}`}
                         scroll={false}
@@ -132,6 +130,7 @@ export const Overview = (props: OverviewProps) => {
                         </Stack>
                     </Box>
                     <Button
+                        disableElevation
                         color={"secondary"}
                         variant={"contained"}
                         onClick={toggleDrawer(true)}
@@ -139,6 +138,7 @@ export const Overview = (props: OverviewProps) => {
                             width: "100%", height: "86px",
                             backgroundColor: `${theme.palette.secondary.light}66`,
                             border: `1px solid ${theme.palette.secondary.dark}66`,
+                            boxShadow: `0px 0px 5px ${theme.palette.primary.dark}33`,
                         }}
                     >
                         <Stack

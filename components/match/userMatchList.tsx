@@ -1,19 +1,18 @@
-import {Stack, useTheme} from "@mui/material";
-import * as React from "react";
-import {GamePointBar} from "./GamePointBar";
-import {Game} from "@/src/models/GameModel";
 import {useContext} from "react";
-import {MatchesContext} from "../../context";
+import {MatchesContext} from "../context";
+import {GamePointBar} from "@/components/game/GameList/GamePointBar";
+import {Stack} from "@mui/material";
+import {useFetchTeams} from "@/src/features/teams/hook";
 
-export type GameListContentProps = {
-    game: Game
-    myTeamId?: number
+export type UserMatchListProps = {
+    userId: number
 }
 
-export const GameListContent = (props: GameListContentProps) => {
-    const theme = useTheme()
+export const UserMatchList = (props: UserMatchListProps) => {
     const { data: matches } = useContext(MatchesContext)
-    const filteredMatches = matches.filter(match => match.gameId == props.game.id)
+    const {teams, isFetching: isTeamFetching, refresh: refreshTeam} = useFetchTeams()
+    const userTeam = teams.find(team => team.userIds.includes(props.userId))
+    const filteredMatches = matches.filter(match => match.leftTeamId === userTeam?.id || match.rightTeamId === userTeam?.id || match.judgeTeamId === userTeam?.id)
     const maxLeftScore = Math.max.apply(Math, filteredMatches.map(match => match.leftScore))
     const maxRightScore = Math.max.apply(Math, filteredMatches.map(match => match.rightScore))
     const maxScore = maxLeftScore > maxRightScore ? maxLeftScore : maxRightScore
@@ -24,8 +23,8 @@ export const GameListContent = (props: GameListContentProps) => {
             {filteredMatches
                 .sort((a, b) => a.startAt.localeCompare(b.startAt))
                 .map((match) => {
-                return (
-                    <>
+                    return (
+                        <>
                             <GamePointBar
                                 key={match.id}
                                 leftScore={match.leftScore}
@@ -36,12 +35,13 @@ export const GameListContent = (props: GameListContentProps) => {
                                 time={match.startAt}
                                 barOffset={barOffset}
                                 match={match}
-                                myTeamId={props.myTeamId}
-                                otherUser={false}
+                                myTeamId={userTeam?.id}
+                                otherUser={true}
                             />
-                    </>
-                )
-            })}
+                        </>
+                    )
+                }
+            )}
         </Stack>
     )
 }

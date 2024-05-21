@@ -1,5 +1,5 @@
 'use client'
-import {Box, Button, Card, Container, Stack, Typography} from "@mui/material";
+import {Box, Button, Container, Stack, Typography} from "@mui/material";
 import Logo from "@/public/logo/logo.svg"
 import * as React from "react";
 import {motion, AnimatePresence} from "framer-motion";
@@ -7,7 +7,6 @@ import LoginButton from "@/components/auth/LoginButton";
 import WiderLogo from "@/components/layouts/logo/widerlogo";
 import PrivacyPolicyDrawer from "@/components/layouts/privacyPolicyDrawer";
 import {useTheme} from "@mui/material/styles";
-import {MoGraphImage} from "@/components/layouts/moGraphImage";
 
 // export const metadata: Metadata = {
 //     title: 'SPORTSDAY : Login',

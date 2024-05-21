@@ -22,7 +22,10 @@ import CircleContainer from "@/components/layouts/circleContainer";
 import {useFetchUsers} from "@/src/features/users/hook";
 import {useFetchTeams} from "@/src/features/teams/hook";
 import {useFetchGames} from "@/src/features/games/hook";
+import {useFetchMatches} from "@/src/features/matches/hook";
 import {DiscoverUser} from "@/components/discover/discoverUser";
+import {MatchesContext, TeamsContext} from "@/components/context";
+import {UserMatchList} from "@/components/match/userMatchList";
 // import {Metadata} from "next";
 
 // export const metadata: Metadata = {
@@ -40,6 +43,7 @@ export default function DiscoverPage() {
     const {users, isFetching: isFetchingUsers} = useFetchUsers()
     const {teams, isFetching: isFetchingTeams} = useFetchTeams()
     const {games, isFetching: isFetchingGames} = useFetchGames()
+    const {matches, isFetching: isFetchingMatches} = useFetchMatches()
 
     const {images, isFetching: isFetchingImages} = useFetchImages()
     const {locations, isFetching: isFetchingLocations} = useFetchLocations()
@@ -64,6 +68,20 @@ export default function DiscoverPage() {
             )}
             {!(isFetching || isFetchingLocations || isFetchingImages) && (
                 <>
+                    <MatchesContext.Provider
+                        value={{
+                            data: matches,
+                            refresh: () => {
+                            }
+                        }}
+                    >
+                        <TeamsContext.Provider
+                            value={{
+                                data: teams,
+                                refresh: () => {
+                                }
+                            }}
+                        >
                         <Box
                             component={"main"}
                             minHeight={"96vh"}
@@ -91,8 +109,10 @@ export default function DiscoverPage() {
                                 maxWidth={"xl"}
                                 sx={{px: 2, py: 3,mb:5, mt: "-100px"}}
                             >
-
                                 {/* Add a TextField for the search */}
+                                <Typography sx={{px:2}}>
+                                    名前から探す
+                                </Typography>
                                 <Box
                                     px={0}
                                     py={0}
@@ -128,6 +148,9 @@ export default function DiscoverPage() {
                                             <DiscoverUser
                                                 key={user.id}
                                                 user={user}
+                                                games={games}
+                                                teams={teams}
+                                                matches={matches}
                                             />
                                         ))}
                                     </Box>
@@ -160,6 +183,8 @@ export default function DiscoverPage() {
                                         )}
                             </Container>
                         </Box>
+                        </TeamsContext.Provider>
+                    </MatchesContext.Provider>
                 </>
             )}
         </>
