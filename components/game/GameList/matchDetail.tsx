@@ -4,13 +4,14 @@ import {
     Button,
     Card, Chip,
     Container, LinearProgress, linearProgressClasses,
-    Stack, styled,
+    Stack, styled, SvgIcon,
     Typography,
 } from "@mui/material";
 import * as React from "react";
 import {Fragment} from "react";
 import {Match} from "@/src/models/MatchModel";
 import {
+    HiArrowRight,
     HiClock,
     HiFlag,
     HiMapPin,
@@ -20,9 +21,11 @@ import {ThemeProvider, useTheme} from "@mui/material/styles";
 import {useFetchUsers} from "@/src/features/users/hook";
 import {useFetchTeams} from "@/src/features/teams/hook";
 import {useFetchLocations} from "@/src/features/locations/hook";
+import Link from "next/link";
 
 export type MatchDetailProps = {
     match: Match;
+    dashboard?: boolean;
 }
 
 export const MatchDetail = (props: MatchDetailProps) => {
@@ -348,6 +351,40 @@ export const MatchDetail = (props: MatchDetailProps) => {
                                     </Fragment>
                                 );
                             })}
+                        {props.dashboard &&
+                            <Button
+                                color={"secondary"}
+                                sx={{background:theme.palette.secondary.dark}}
+                                fullWidth disableElevation
+                                variant={"contained"}
+                                component={Link}
+                                href={`/sports/${props.match.sportId}`}
+                            >
+                                <Stack
+                                    direction={"row"}
+                                    justifyContent={"flex-start"}
+                                    alignItems={"center"}
+                                    spacing={2}
+                                    py={0.5}
+                                    width={"100%"}
+                                >
+                                    <Avatar
+                                        sx={{
+                                            height: "2em",
+                                            width: "2em",
+                                            backgroundColor: "inherit",
+                                        }}
+                                    >
+                                        <SvgIcon>
+                                            <HiArrowRight color={`${theme.palette.text.primary}99`}/>
+                                        </SvgIcon>
+                                    </Avatar>
+                                    <Typography sx={{color: theme.palette.text.primary, fontSize: "14px"}}>
+                                        競技ページに行く
+                                    </Typography>
+                                </Stack>
+                            </Button>
+                        }
                     </Stack>
                 </Container>
             </Box>
