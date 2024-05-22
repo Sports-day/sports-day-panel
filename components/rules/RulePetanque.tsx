@@ -3,6 +3,7 @@ import {
     Stack,
     Typography,
     DialogContentText, Button,
+    useTheme
 } from "@mui/material";
 import {RuleNumCard} from "./rule-elements/RuleNumCard";
 import ReactMarkdown from "react-markdown";
@@ -24,6 +25,7 @@ const markdown = `
 `
 
 export const RulePetanque = () => {
+    const theme = useTheme();
     return(
         <Stack
             direction={"column"}
@@ -33,7 +35,7 @@ export const RulePetanque = () => {
             py={2}
             sx={{width:"100%"}}
         >
-            <Typography color={"#E8EBF8"}>フィールド図はありません</Typography>
+            <Typography color={theme.palette.text.primary}>フィールド図はありません</Typography>
             <Grid container>
                 <Grid xs={12} sm={12} lg={12}>
                     <RuleNumCard title={"会場"} content={"第一体育館と武道場の間"} sub={"️☀️晴天時"}/>
@@ -72,7 +74,7 @@ export const RulePetanque = () => {
                     alignItems={"center"}
                     spacing={2}
                 >
-                    <Typography sx={{color: "#5664e3", fontSize: "16px"}}>
+                    <Typography sx={{color: theme.palette.text.primary, fontSize: "16px"}}>
                         ルールはこちら
                     </Typography>
                 </Stack>
@@ -80,7 +82,7 @@ export const RulePetanque = () => {
             <DialogContentText
                 id="scroll-dialog-description"
                 tabIndex={-1}
-                color={"#E8EBF8"}
+                color={theme.palette.text.primary}
                 lineHeight={"27px"}
             >
                 <ReactMarkdown>{markdown}</ReactMarkdown>

@@ -1,24 +1,21 @@
 import {
     Box,
+    Button,
     Stack,
     styled,
     LinearProgress,
+    SwipeableDrawer,
     Typography, SvgIcon,
+    useTheme
 } from "@mui/material";
 import {linearProgressClasses} from "@mui/material";
 import {ThemeProvider} from "@mui/material/styles";
 import * as React from "react";
-import {HiClock} from "react-icons/hi2";
-import {MdOutlineSportsScore} from "react-icons/md";
+import {HiClock, HiFlag} from "react-icons/hi2";
 import {useContext} from "react";
 import {TeamsContext} from "../../context";
-
-const PointBar = styled(LinearProgress)(({}) => ({
-    height: 4.5,
-    borderRadius: 2,
-    [`&.${linearProgressClasses.colorPrimary}`]: {backgroundColor: '#435BBC',},
-    [`& .${linearProgressClasses.bar}`]: {borderRadius: 2, backgroundColor: '#ffc900',},
-}));
+import {MatchDetail} from "@/components/game/GameList/matchDetail";
+import {Match} from "@/src/models/MatchModel";
 
 export type GamePointBarProps = {
     leftScore: number,
@@ -28,55 +25,102 @@ export type GamePointBarProps = {
     umpireTeam: string,
     time: string,
     barOffset: number,
+    match: Match,
+    myTeamId?: number,
+    otherUser?: boolean,
+    dashboard?: boolean
 }
 
 export const GamePointBar = (props: GamePointBarProps) => {
+    const theme = useTheme();
     const {data: teams} = useContext(TeamsContext);
 
     const {leftScore, rightScore, leftTeamId, rightTeamId, umpireTeam, time, barOffset} = props;
     const leftTeam = teams.find(team => team.id === leftTeamId);
     const rightTeam = teams.find(team => team.id === rightTeamId);
+    const isMyTeamPlay = props.myTeamId === leftTeamId || props.myTeamId === rightTeamId;
+    const isMyTeamUmpire = props.myTeamId === Number(umpireTeam);
+    const judgeTeam = teams.find(team => team.id === Number(umpireTeam));
     const formattedTime = new Date(time).toLocaleTimeString("ja-JP", {hour: '2-digit', minute:'2-digit'});
+    const backgroundColor = isMyTeamPlay ? `${theme.palette.warning.main}66` : isMyTeamUmpire ? `${theme.palette.success.main}66` : `${theme.palette.text.disabled}33`;
+    const PointBar = styled(LinearProgress)(({}) => ({
+        height: 4.5,
+        borderRadius: 2,
+        [`&.${linearProgressClasses.colorPrimary}`]: {backgroundColor: `${theme.palette.text.disabled}33`,},
+        [`& .${linearProgressClasses.bar}`]: {borderRadius: 2, backgroundColor: theme.palette.text.primary,},
+    }));
+    const [open, toggleDrawer] = React.useState(false);
+    const userDisplay = props.otherUser ? "この人" : "あなた";
+
+
     return(
         <>
-            <Stack
-                direction={"column"}
-                spacing={1}
-                pb={3}
-                sx={{width: "100%", height:"fit-content"}}
+            {isMyTeamPlay &&
+                <Stack sx={{width:"100%", justifyContent: "center", alignItems: "start",}}>
+                    <Box
+                        sx={{
+                            py: 0.25,
+                            px:2,
+                            borderRadius: "9px",
+                            backgroundColor: backgroundColor,
+                            position:"relative",
+                            top:"4px",
+                        }}
+                    >
+                        <Typography color={theme.palette.text.primary} fontSize={"10px"} fontWeight={"600"}>
+                            {userDisplay}のチームが参加
+                        </Typography>
+                    </Box>
+                </Stack>
+            }
+            {isMyTeamUmpire &&
+                <Stack sx={{width:"100%", justifyContent: "center", alignItems: "start",}}>
+                    <Box
+                        sx={{
+                            py: 0.25,
+                            px:2,
+                            borderRadius: "9px",
+                            backgroundColor: backgroundColor,
+                            position:"relative",
+                            top:"4px",
+                        }}
+                    >
+                        <Typography color={theme.palette.text.primary} fontSize={"10px"} fontWeight={"600"}>
+                            {userDisplay}のチームが審判
+                        </Typography>
+                    </Box>
+                </Stack>
+            }
+            <Button
+                variant={"contained"}
+                color={"secondary"}
+                sx={{
+                    width: "100%",
+                    border: `1px solid ${backgroundColor}`,
+                    backgroundColor: `${theme.palette.text.disabled}33`,
+                    pt:1.4,
+                    pb:1.8
+                }}
+                onClick={() => toggleDrawer(true)}
             >
-                <Stack
-                    direction={"row"}
-                    justifyContent={"center"}
-                    alignItems={"space-between"}
-                    spacing={0}
-                >
                     <Stack
                         direction={"column"}
                         justifyContent={"space-between"}
                         alignItems={"space-between"}
                         maxWidth={'xl'}
-                        sx={{ width: '100%' }}
-                        spacing={0.5}
+                        sx={{ flexGrow:1 }}
+                        spacing={1}
                     >
                         <Stack
                             direction={"row"}
-                            justifyContent={"space-between"}
-                            alignItems={"flex-end"}
-                            spacing={0}
+                            justifyContent={"start"}
+                            alignItems={"center"}
+                            spacing={1}
                         >
-                            <Typography sx={{color: "#FFF", fontSize: "16px", fontWeight: "bold"}}>
+                            <Typography sx={{color: theme.palette.text.primary, fontSize: "20px", fontWeight: "bold"}}>
                                 {leftScore}
                             </Typography>
-                            <Stack direction={"row"}>
-                                <SvgIcon fontSize={"small"} sx={{position:"relative", top:"2px"}}>
-                                    <HiClock color="#99a5d6"/>
-                                </SvgIcon>
-                                <Typography sx={{color: "#99a5d6", fontSize: "14px"}}>
-                                    {formattedTime}
-                                </Typography>
-                            </Stack>
-                            <Typography sx={{color: "#FFF", fontSize: "14px"}}>
+                            <Typography sx={{color: theme.palette.text.primary, fontSize: "14px"}}>
                                 {leftTeam?.name}
                             </Typography>
                         </Stack>
@@ -89,33 +133,44 @@ export const GamePointBar = (props: GamePointBarProps) => {
                             </ThemeProvider>
                         </Box>
                     </Stack>
-                    <Typography sx={{color: "#99a5d6", fontSize: "10px", px:0.5, position:"relative", top:"8px"}}>VS</Typography>
+
+                    <Stack direction={"column"} alignItems={"center"} mx={1.5} spacing={0.5} pt={0}>
+                        <Stack direction={"row"}>
+                            <SvgIcon fontSize={"small"} sx={{position:"relative", top:"2px"}}>
+                                <HiFlag color={`${theme.palette.text.primary}CC`}/>
+                            </SvgIcon>
+                            <Typography sx={{color: `${theme.palette.text.primary}CC`, fontSize: "14px"}}>
+                                {judgeTeam?.name}
+                            </Typography>
+                        </Stack>
+                            <Stack direction={"row"}>
+                                    <SvgIcon fontSize={"small"} sx={{position:"relative", top:"2px"}}>
+                                        <HiClock color={`${theme.palette.text.primary}CC`}/>
+                                    </SvgIcon>
+                                    <Typography sx={{color: `${theme.palette.text.primary}CC`, fontSize: "14px"}}>
+                                        {formattedTime}
+                                    </Typography>
+                            </Stack>
+                    </Stack>
+
                     <Stack
                         direction={"column"}
                         justifyContent={"space-between"}
                         alignItems={"space-between"}
                         maxWidth={'xl'}
-                        sx={{ width: '100%' }}
-                        spacing={0.5}
+                        sx={{ flexGrow:1 }}
+                        spacing={1}
                     >
                         <Stack
                             direction={"row"}
-                            justifyContent={"space-between"}
-                            alignItems={"flex-end"}
-                            spacing={0}
+                            justifyContent={"end"}
+                            alignItems={"center"}
+                            spacing={1}
                         >
-                            <Typography sx={{color: "#FFF", fontSize: "14px"}}>
+                            <Typography sx={{color: `${theme.palette.text.primary}CC`, fontSize: "14px"}}>
                                 {rightTeam?.name}
                             </Typography>
-                            <Stack direction={"row"}>
-                                <SvgIcon fontSize={"small"} sx={{position:"relative", top:"2px"}}>
-                                    <MdOutlineSportsScore color="#99a5d6"/>
-                                </SvgIcon>
-                                <Typography sx={{color: "#99a5d6", fontSize: "14px"}}>
-                                    {umpireTeam}
-                                </Typography>
-                            </Stack>
-                            <Typography sx={{color: "#FFF", fontSize: "16px", fontWeight: "bold"}}>
+                            <Typography sx={{color: theme.palette.text.primary, fontSize: "20px", fontWeight: "bold"}}>
                                 {rightScore}
                             </Typography>
                         </Stack>
@@ -126,8 +181,21 @@ export const GamePointBar = (props: GamePointBarProps) => {
                             />
                         </Box>
                     </Stack>
-                </Stack>
-            </Stack>
+            </Button>
+            <SwipeableDrawer
+                anchor="bottom"
+                open={open}
+                onClose={() => toggleDrawer(false)}
+                onOpen={() => toggleDrawer(true)}
+                swipeAreaWidth={5}
+                disableSwipeToOpen={true}
+                ModalProps={{
+                    keepMounted: true,
+                }}
+                PaperProps={{elevation: 0, style: {backgroundColor: "transparent"}}}
+            >
+                <MatchDetail match={props.match}/>
+            </SwipeableDrawer>
         </>
     )
 }

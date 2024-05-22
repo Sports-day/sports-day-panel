@@ -2,16 +2,8 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import {
-    HiOutlineLogout,
-    HiX,
-    HiMenuAlt4,
-    HiSparkles,
-    HiHome,
-    HiSearch
-} from "react-icons/hi";
-import {
-    HiCalendar,
-    HiClipboardDocument
+    HiArrowRightOnRectangle,
+    HiHome, HiMagnifyingGlass, HiNewspaper, HiSparkles, HiXMark
 } from "react-icons/hi2";
 import {
     FaGithubAlt
@@ -19,18 +11,16 @@ import {
 import {
     Avatar,
     Box,
+    CardContent,
     Container,
-    IconButton,
     Stack,
     SvgIcon,
     SwipeableDrawer,
     Button,
-    Divider,
     Typography, DialogTitle, DialogContent, DialogActions, Dialog,
-    BottomNavigation,
+    BottomNavigation, Card,
 } from '@mui/material';
-import Logo from "@/public/logo.svg"
-import {alpha} from '@mui/material/styles';
+import Logo from "@/public/logo/logo.svg"
 import Link from "next/link";
 import {useState} from "react";
 import {DialogProps} from "@mui/material/Dialog";
@@ -38,12 +28,17 @@ import {DocsOverall} from "../rules/DocsOverall";
 import Cookies from "js-cookie";
 import {useRouter} from "next/navigation";
 import {useFetchUserinfo} from "@/src/features/userinfo/hook";
+import PrivacyPolicyDrawer from "@/components/layouts/privacyPolicyDrawer";
+import {HiLibrary} from "react-icons/hi";
+import {useTheme} from "@mui/material/styles";
 
 type Anchor = 'bottom';
 
 export const Navigation = () => {
+    const theme = useTheme()
     const router = useRouter()
     const {user} = useFetchUserinfo()
+
 
     const [state, setState] = React.useState({bottom: false, NotifBottom: false});
     const [open, setOpen] = useState(false);
@@ -70,49 +65,62 @@ export const Navigation = () => {
                 setState({...state, [anchor]: open});
             };
 
+
     const menu = (anchor: Anchor) => (
         <>
             <Box
                 sx={{
-                    backgroundColor: '#23398A',
-                    width: '100vw', height: 'auto', overflow: 'scrollable', mt: 4, mb: 0.5
+                    width: '100vw',
+                    height: 'auto',
+                    overflow: 'scrollable',
+                    background:`${theme.palette.secondary.main}FC`,
+                    backdropFilter: 'blur(30px)',
+                    borderRadius: "15px",
+                    borderBottomLeftRadius: "0px",
+                    borderBottomRightRadius: "0px",
+                    color: '#E8EBF8',
+                    pb:5,
+                    pt:1.5
                 }}
                 role="Navigation"
                 onClick={toggleDrawer(anchor, false)}
                 onKeyDown={toggleDrawer(anchor, false)}
             >
-                <Container maxWidth={"xl"} disableGutters>
-
-                    <Stack
-                        direction={"column"}
-                        justifyContent={"flex-start"}
-                        spacing={2}
-                        px={2.3}
-                    >
-                        <Stack
-                            direction={"row"}
-                            justifyContent={"flex-start"}
-                            alignItems={"center"}
-                            spacing={2}
-                            width={"100%"}
-                            px={0.5}
-                        >
-                            <Avatar
-                                alt={"unknown"}
-                                sx={{
-                                    height: "4em",
-                                    width: "4em",
-                                    backgroundColor: "#5664e3",
-                                }}
-                                src={`${process.env.NEXT_PUBLIC_API_URL}/images/${user?.pictureId}/file`}
-                            >
-                            </Avatar>
-                            <Typography sx={{color: "#99a5d6", fontSize: "16px"}}>
-                                {user?.name ?? "unknown"}
-                            </Typography>
+                <Container maxWidth={"xl"}>
+                    <Stack spacing={1}>
+                        <Stack direction={"column"} spacing={2} pb={2} justifyContent={"center"} alignItems={"center"}>
+                            <Box sx={{
+                                width:50,
+                                height:6,
+                                borderRadius:3,
+                                backgroundColor:`${theme.palette.text.primary}4D`
+                            }}></Box>
+                            <Logo width={16 * 8.45} height={16} fill={theme.palette.text.primary}/>
                         </Stack>
-
+                        <Card sx={{backgroundColor: `${theme.palette.secondary.dark}80`,}}>
+                            <CardContent>
+                                <Stack direction={"row"} spacing={3} ml={0.4} alignItems={"center"}>
+                                    <Avatar
+                                        alt={"unknown"}
+                                        sx={{
+                                            height: "1.5em",
+                                            width: "1.5em",
+                                            backgroundColor: "#5664e3",
+                                        }}
+                                        src={`${process.env.NEXT_PUBLIC_API_URL}/images/${user?.pictureId}/file`}
+                                    >
+                                    </Avatar>
+                                    <Typography sx={{color: theme.palette.text.secondary, fontSize: "16px"}}>
+                                        {user?.name ?? "unknown"} さん
+                                    </Typography>
+                                </Stack>
+                            </CardContent>
+                        </Card>
                         <Button
+                            color={"secondary"}
+                            sx={{background:theme.palette.secondary.dark}}
+                            fullWidth disableElevation
+                            variant={"contained"}
                             onClick={() => {
                                 //  remove cookie
                                 Cookies.remove("access_token")
@@ -125,130 +133,114 @@ export const Navigation = () => {
                                 justifyContent={"flex-start"}
                                 alignItems={"center"}
                                 spacing={2}
-                                pb={2}
+                                py={0.5}
                                 width={"100%"}
                             >
                                 <Avatar
                                     sx={{
-                                        height: "4em",
-                                        width: "4em",
-                                        backgroundColor: "#FFF",
+                                        height: "2em",
+                                        width: "2em",
+                                        backgroundColor: "inherit",
                                     }}
                                 >
                                     <SvgIcon>
-                                        <HiOutlineLogout color="#23398A"/>
+                                        <HiArrowRightOnRectangle color={`${theme.palette.text.primary}99`}/>
                                     </SvgIcon>
                                 </Avatar>
-                                <Typography sx={{color: "#FFF", fontSize: "16px"}}>
+                                <Typography sx={{color: theme.palette.text.primary, fontSize: "14px"}}>
                                     ログアウト
                                 </Typography>
                             </Stack>
                         </Button>
-
-                        <Divider/>
-
-                        <Button component={Link} href={"/privacy"}>
+                        <PrivacyPolicyDrawer>
                             <Stack
                                 direction={"row"}
                                 justifyContent={"flex-start"}
                                 alignItems={"center"}
                                 spacing={2}
+                                py={0.5}
                                 width={"100%"}
                             >
                                 <Avatar
                                     sx={{
-                                        height: "4em",
-                                        width: "4em",
-                                        backgroundColor: "#99a5d6",
+                                        height: "2em",
+                                        width: "2em",
+                                        backgroundColor: "inherit",
                                     }}
                                 >
                                     <SvgIcon>
-                                        <HiClipboardDocument color="#23398A"/>
+                                        <HiLibrary color={`${theme.palette.text.primary}99`}/>
                                     </SvgIcon>
                                 </Avatar>
-                                <Typography sx={{color: "#99a5d6", fontSize: "16px"}}>
-                                    プライバシーポリシーと知的財産情報
+                                <Typography sx={{color: theme.palette.text.primary, fontSize: "14px"}}>
+                                    プライバシーポリシー
                                 </Typography>
                             </Stack>
-                        </Button>
-
-                        <Button href={"https://github.com/Sports-day"} target="_blank">
-                            <Stack
-                                direction={"row"}
-                                justifyContent={"flex-start"}
-                                alignItems={"center"}
-                                spacing={2}
-                                width={"100%"}
-                            >
-                                <Avatar
-                                    sx={{
-                                        height: "4em",
-                                        width: "4em",
-                                        backgroundColor: "#FFF",
-                                    }}
-                                >
-                                    <SvgIcon>
-                                        <FaGithubAlt color="#23398A"/>
-                                    </SvgIcon>
-                                </Avatar>
-                                <Typography sx={{color: "#FFF", fontSize: "16px"}}>
-                                    GitHub : SPORTSDAY
-                                </Typography>
-                            </Stack>
-                        </Button>
-
-                        <Button component={Link} href={"/about"}>
-                            <Stack
-                                direction={"row"}
-                                justifyContent={"flex-start"}
-                                alignItems={"center"}
-                                spacing={2}
-                                width={"100%"}
-                            >
-                                <Avatar
-                                    sx={{
-                                        height: "4em",
-                                        width: "4em",
-                                        backgroundColor: "#FFF",
-                                    }}
-                                >
-                                    <SvgIcon>
-                                        <HiSparkles color="#23398A"/>
-                                    </SvgIcon>
-                                </Avatar>
-                                <Typography sx={{color: "#FFF", fontSize: "16px"}}>
-                                    SPORTSDAYってなに？
-                                </Typography>
-                            </Stack>
-                        </Button>
-
-                    </Stack>
-                    <Stack
-                        direction={"row"}
-                        justifyContent={"space-between"}
-                        alignItems={"center"}
-                        pl={3}
-                        py={3}
-                        sx={{marginRight: "28px", paddingRight: "6px"}}
-                    >
-                        <Stack
-                            direction={"row"}
-                            justifyContent={"space-between"}
-                            alignItems={"center"}
-                            sx={{color: "#99a5d6"}}
-                            spacing={1}
+                        </PrivacyPolicyDrawer>
+                        <Button
+                            color={"secondary"}
+                            sx={{background:theme.palette.secondary.dark}}
+                            fullWidth disableElevation
+                            variant={"contained"}
+                            href={"https://github.com/Sports-day"}
+                            target="_blank"
                         >
-                            <Typography sx={{pr: "5px"}}>(C) 2023</Typography>
-                            <Box sx={{pt: 0.3}}>
-                                <Logo width={14*8.45} height={14} fill={'#99a5d6'}/>
-                            </Box>
-                            <Typography>TEAM</Typography>
-                        </Stack>
-                        <IconButton onClick={toggleDrawer(anchor, true)}>
-                            <SvgIcon color="primary">
-                                <HiX color="#FFF"/>
-                            </SvgIcon>
-                        </IconButton>
+                            <Stack
+                                direction={"row"}
+                                justifyContent={"flex-start"}
+                                alignItems={"center"}
+                                spacing={2}
+                                py={0.5}
+                                width={"100%"}
+                            >
+                                <Avatar
+                                    sx={{
+                                        height: "2em",
+                                        width: "2em",
+                                        backgroundColor: "inherit",
+                                    }}
+                                >
+                                    <SvgIcon>
+                                        <FaGithubAlt color={`${theme.palette.text.primary}99`}/>
+                                    </SvgIcon>
+                                </Avatar>
+                                <Typography sx={{color: theme.palette.text.primary, fontSize: "14px"}}>
+                                    GitHub
+                                </Typography>
+                            </Stack>
+                        </Button>
+                        <Button
+                            color={"secondary"}
+                            sx={{background:theme.palette.secondary.dark}}
+                            fullWidth disableElevation
+                            variant={"contained"}
+                            component={Link}
+                            href={"/about"}
+                        >
+                            <Stack
+                                direction={"row"}
+                                justifyContent={"flex-start"}
+                                alignItems={"center"}
+                                spacing={2}
+                                py={0.5}
+                                width={"100%"}
+                            >
+                                <Avatar
+                                    sx={{
+                                        height: "2em",
+                                        width: "2em",
+                                        backgroundColor: "inherit",
+                                    }}
+                                >
+                                    <SvgIcon>
+                                        <HiSparkles color={`${theme.palette.text.primary}99`}/>
+                                    </SvgIcon>
+                                </Avatar>
+                                <Typography sx={{color: theme.palette.text.primary, fontSize: "14px"}}>
+                                    SPORTSDAYについて知る
+                                </Typography>
+                            </Stack>
+                        </Button>
                     </Stack>
                 </Container>
             </Box>
@@ -258,33 +250,6 @@ export const Navigation = () => {
 
     return (
         <>
-            <Box
-                component="nav"
-                sx={{
-                    height: "70px",
-                    backdropFilter: 'blur(6px)',
-                    backgroundColor: '#23398A'
-                }}
-            >
-                <Container
-                    maxWidth={"xl"}
-                    disableGutters
-                >
-                    <Stack
-                        direction={"row"}
-                        justifyContent={"flex-start"}
-                        alignItems={"center"}
-                        sx={{marginRight: "10px", padding: "8px 5px"}}
-                    >
-                        <Box py={2} px={2}>
-                            <Button component={Link} href={"/"} scroll={false}>
-                                <Logo width={20 * 8.45} height={20} fill={'#ffffff'}/>
-                            </Button>
-                        </Box>
-                    </Stack>
-                </Container>
-            </Box>
-
             <Stack
                 direction={"row"}
                 justifyContent={"flex-end"}
@@ -306,7 +271,7 @@ export const Navigation = () => {
                         },
                     }}
                 >
-                    <DialogTitle id="scroll-dialog-title" fontSize={"16px"} color={"#99a5d6"}>スケジュール</DialogTitle>
+                    <DialogTitle id="scroll-dialog-title" fontSize={"16px"} color={theme.palette.text.primary}>スケジュール</DialogTitle>
                     <DialogContent dividers={scroll === 'paper'}>
                         <DocsOverall/>
                     </DialogContent>
@@ -320,9 +285,9 @@ export const Navigation = () => {
                         >
                             <Button sx={{width: "100%", height: "100%"}} onClick={handleClose}>
                                 <SvgIcon sx={{mr: 1}}>
-                                    <HiX color={"#E8EBF8"}/>
+                                    <HiXMark color={theme.palette.text.primary}/>
                                 </SvgIcon>
-                                <Typography color={"#E8EBF8"}>閉じる</Typography>
+                                <Typography color={theme.palette.text.primary}>閉じる</Typography>
                             </Button>
                         </Stack>
                     </DialogActions>
@@ -333,20 +298,21 @@ export const Navigation = () => {
                 sx={{
                     position: "fixed",
                     bottom: 0, left: 0, right: 0,
-                    zIndex: "128",
-                    m: 1,
+                    zIndex: "128"
                 }}
             >
                 <BottomNavigation
                     sx={{
                         height: "80px",
                         width: "100%",
+                        pb:2,
                         justifyContent: "center",
                         alignContent: "center",
-                        backdropFilter: 'blur(6px)',
-                        borderRadius: "35px",
-                        backgroundColor: alpha('#23398A', 0.9),
-                        boxShadow: "0px 0px 50px #112057"
+                        borderRadius: "10px",
+                        borderBottomRightRadius: "0px",
+                        borderBottomLeftRadius: "0px",
+                        background:`linear-gradient(to right, ${theme.palette.secondary.main}, ${theme.palette.secondary.dark})`,
+                        boxShadow: `0px 0px 15px ${theme.palette.primary.dark}80`
                     }}
                 >
                     <Box
@@ -359,31 +325,40 @@ export const Navigation = () => {
                     >
                         <Button component={Link} sx={{width: "100%"}} href={"/"}>
                             <SvgIcon sx={{mr: 1}}>
-                                <HiHome color={"#E8EBF8"}/>
+                                <HiHome color={theme.palette.text.primary}/>
                             </SvgIcon>
                         </Button>
                         <Button component={Link} sx={{width: "100%"}} href={"/discover"}>
                             <SvgIcon sx={{mr: 1}}>
-                                <HiSearch color={"#E8EBF8"}/>
+                                <HiMagnifyingGlass color={theme.palette.text.primary}/>
                             </SvgIcon>
                         </Button>
                         <Button sx={{width: "100%"}} onClick={handleClickOpen('paper')}>
                             <SvgIcon sx={{mr: 1}}>
-                                <HiCalendar color={"#E8EBF8"}/>
+                                <HiNewspaper color={theme.palette.text.primary}/>
                             </SvgIcon>
                         </Button>
                         {(['bottom'] as const).map((anchor) => (
                             <React.Fragment key={"top"}>
                                 <Button sx={{width: "100%"}} onClick={toggleDrawer(anchor, true)}>
-                                    <SvgIcon sx={{mr: 1}}>
-                                        <HiMenuAlt4 color={"#E8EBF8"}/>
-                                    </SvgIcon>
+                                    <Avatar
+                                        alt={"unknown"}
+                                        sx={{
+                                            height: "1.3em",
+                                            width: "1.3em",
+                                            backgroundColor: "#5664e3",
+                                            boxShadow: "0px 0px 4px #7f8cd6"
+                                        }}
+                                        src={`${process.env.NEXT_PUBLIC_API_URL}/images/${user?.pictureId}/file`}
+                                    >
+                                    </Avatar>
                                 </Button>
                                 <SwipeableDrawer
                                     anchor={anchor}
                                     open={state[anchor]}
                                     onClose={toggleDrawer(anchor, false)}
                                     onOpen={toggleDrawer(anchor, true)}
+                                    PaperProps={{ elevation: 0, style: { backgroundColor: "transparent" } }}
                                 >
                                     {menu(anchor)}
                                 </SwipeableDrawer>

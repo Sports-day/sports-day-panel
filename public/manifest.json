@@ -1,11 +1,12 @@
 {
-    "theme_color": "#23398A",
-    "background_color": "#23398A",
+    "id": "1",
     "display": "standalone",
     "scope": "/",
     "start_url": "/",
     "name": "Sportsday",
     "short_name": "Sportsday",
+    "description": "SPORTSDAY Management App",
+    "orientation": "portrait",
     "icons": [
         {
             "src": "/icon-192x192.png",
