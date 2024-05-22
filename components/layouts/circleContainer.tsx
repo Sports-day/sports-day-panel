@@ -12,6 +12,7 @@ import { useTheme } from '@mui/material/styles';
 
 export type CircleContainerProps = {
     children?: React.ReactNode
+    noLogo?: boolean
 }
 
 export default function CircleContainer(props: CircleContainerProps) {
@@ -37,9 +38,11 @@ export default function CircleContainer(props: CircleContainerProps) {
                     background:`linear-gradient(${theme.palette.secondary.main}, ${theme.palette.secondary.dark})`
                 }}
             >
-                <Box px={3.5} pt={4} pb={1}>
-                    <Logo width={18 * 8.45} height={18} fill={theme.palette.text.primary}/>
-                </Box>
+                {!props.noLogo &&
+                    <Box px={3.5} pt={4} pb={1}>
+                        <Logo width={18 * 8.45} height={18} fill={theme.palette.text.primary}/>
+                    </Box>
+                }
 
                 <Container
                     maxWidth={"xl"}

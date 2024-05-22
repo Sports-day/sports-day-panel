@@ -122,7 +122,7 @@ export default function DiscoverPage() {
                         >
                         <Box
                             component={"main"}
-                            minHeight={"96vh"}
+                            minHeight={"100vh"}
                             sx={{
                                 flexGrow: 1,
                                 overflow: "hidden",
