@@ -23,6 +23,7 @@ COPY styles/ ./styles/
 COPY types/ ./types/
 COPY tsconfig.json .
 COPY next.config.js .
+COPY middleware.ts .
 
 EXPOSE 3000
 
