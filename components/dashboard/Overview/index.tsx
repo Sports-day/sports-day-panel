@@ -16,8 +16,7 @@ import {
 import {Sport} from "@/src/models/SportModel";
 import {Team} from "@/src/models/TeamModel";
 import {User} from "@/src/models/UserModel";
-import {Fragment, useContext, useState} from "react";
-import {ImagesContext} from "../../context";
+import {Fragment, useState} from "react";
 import * as React from "react";
 import Link from "next/link";
 import Rank from "./Rank"
@@ -33,10 +32,6 @@ export type OverviewProps = {
 
 export const Overview = (props: OverviewProps) => {
     const theme = useTheme();
-
-    //  image
-    const {data: images} = useContext(ImagesContext)
-    const icon = images.find(image => image.id === props.mySport.iconId)
 
     const [open, setOpen] = useState(false);
     const toggleDrawer = (newOpen: boolean) => () => {
@@ -75,9 +70,9 @@ export const Overview = (props: OverviewProps) => {
                                     height: "2.5em", width: "2.5em",
                                     backgroundColor: `${theme.palette.text.secondary}`,
                                 }}
-                                src={icon?.data}
+                                src={`${process.env.NEXT_PUBLIC_API_URL}/images/${props.mySport.iconId}/file`}
                             >
-                                {!icon?.data && <HiOutlineExclamationTriangle fontSize={"30px"}/>}
+                                {!props.mySport.iconId && <HiOutlineExclamationTriangle fontSize={"30px"}/>}
                             </Avatar>
                             <Stack
                                 direction={"column"}

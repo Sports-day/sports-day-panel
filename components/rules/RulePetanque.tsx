@@ -40,9 +40,6 @@ export const RulePetanque = () => {
                 <Grid xs={12} sm={12} lg={12}>
                     <RuleNumCard title={"会場"} content={"第一体育館と武道場の間"} sub={"️☀️晴天時"}/>
                 </Grid>
-                <Grid xs={12} sm={12} lg={12}>
-                    <RuleNumCard title={"会場"} content={"オープンラボ2"} sub={"️☔️雨天時"}/>
-                </Grid>
                 <Grid xs={6} sm={6} lg={3}>
                     <RuleNumCard title={"試合時間"} content={"6分"} sub={"-"}/>
                 </Grid>
