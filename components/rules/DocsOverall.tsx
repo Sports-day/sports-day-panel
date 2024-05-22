@@ -23,11 +23,7 @@ import * as React from "react";
 
 const markdown = `
 # 運営体制
-- 運営： ${process.env.NEXT_PUBLIC_OPERATION_PERSON}
-- 結果集計：${process.env.NEXT_PUBLIC_RESULT_PERSON}
-- 巡回・状況把握： ${process.env.NEXT_PUBLIC_PATROL_PERSON}
-- 取材： ${process.env.NEXT_PUBLIC_INTERVIEW_PERSON}
-- 緊急対応： ${process.env.NEXT_PUBLIC_EMERGENCY_PERSON}
+要項から確認してください。
 
 # ⚠️注意事項
 安全で楽しい大会になるよう、下記のことに気をつけましょう。
