@@ -9,14 +9,10 @@ import * as React from "react";
 import Overview from "@/components/dashboard/Overview";
 import Schedule from "@/components/dashboard/schedule/schedule";
 import {SportsListElement} from "@/components/dashboard/SportsListElement";
-import {Navigation} from "@/components/layouts/navigation";
 import {ImagesContext, LocationsContext, TeamsContext, UsersContext} from "@/components/context";
 import {useFetchDashboard} from "@/src/features/unit/dashboard";
-import {Loading} from "@/components/layouts/loading";
 import {motion} from "framer-motion";
 import {OtherInfo} from "@/components/dashboard/Overview/OtherInfo";
-import {InformationList} from "@/components/InformationList";
-import Logo from "@/public/logo/logo.svg";
 import CircleContainer from "@/components/layouts/circleContainer";
 import JudgeSchedule from "@/components/dashboard/schedule/judgeSchedule";
 
@@ -42,6 +38,7 @@ export default function Page() {
         myTeamRank,
         myJudgeMatches
     } = useFetchDashboard()
+    const gridValue = myJudgeMatches.length > 0 ? 6 : 12;
 
     return (
         <>
@@ -145,7 +142,7 @@ export default function Page() {
 
                                                         {mySport && myGame && myTeam &&
                                                             <>
-                                                                <Grid xs={12} sm={6} lg={6}>
+                                                                <Grid xs={12} sm={gridValue} lg={gridValue}>
                                                                     <Schedule
                                                                         sportId={mySport.id}
                                                                         gameId={myGame.id}
@@ -153,15 +150,17 @@ export default function Page() {
                                                                         myTeamId={myTeam.id}
                                                                     />
                                                                 </Grid>
-                                                                <Grid xs={12} sm={6} lg={6}>
-                                                                    <JudgeSchedule
-                                                                        sportId={mySport.id}
-                                                                        gameId={myGame.id}
-                                                                        matches={myJudgeMatches}
-                                                                        myTeamId={myTeam.id}
-                                                                    />
-                                                                </Grid>
                                                             </>
+                                                        }
+                                                        {mySport && myGame && myTeam && myJudgeMatches.length > 0 &&
+                                                            <Grid xs={12} sm={gridValue} lg={gridValue}>
+                                                                <JudgeSchedule
+                                                                    sportId={mySport.id}
+                                                                    gameId={myGame.id}
+                                                                    matches={myJudgeMatches}
+                                                                    myTeamId={myTeam.id}
+                                                                />
+                                                            </Grid>
                                                         }
                                                         <Typography pl={2} pt={2}>
                                                             すべての競技
