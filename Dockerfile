@@ -7,7 +7,7 @@ COPY package*.json ./
 COPY yarn.lock ./
 RUN yarn
 
-FROM node:18.12.0-alpine AS Runner
+FROM node:18.20.0-alpine AS Runner
 
 WORKDIR /app
 
