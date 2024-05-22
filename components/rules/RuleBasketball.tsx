@@ -40,7 +40,10 @@ export const RuleBasketball = () => {
                     <RuleNumCard title={"会場"} content={"第二体育館"} sub={" "}/>
                 </Grid>
                 <Grid xs={6} sm={6} lg={3}>
-                    <RuleNumCard title={"試合時間"} content={"10分"} sub={"☀️☔️共通"}/>
+                    <RuleNumCard title={"試合時間"} content={"晴天時:10分"} sub={"ハーフタイム1分"}/>
+                </Grid>
+                <Grid xs={6} sm={6} lg={3}>
+                    <RuleNumCard title={"試合時間"} content={"雨天時:8分"} sub={"ハーフタイム1分"}/>
                 </Grid>
                 <Grid xs={6} sm={6} lg={3}>
                     <RuleNumCard title={"チーム人数"} content={"5 〜 7"} sub={"人"}/>
@@ -49,10 +52,10 @@ export const RuleBasketball = () => {
                     <RuleNumCard title={"担当審判"} content={"バスケ部"} sub={"-"}/>
                 </Grid>
                 <Grid xs={12} sm={6} lg={3}>
-                    <RuleNumCard title={"部員ハンデ"} content={"バスケ部員はコート内2人まで"} sub={"ビブスを着用する"}/>
+                    <RuleNumCard title={"部員ハンデ"} content={"バスケ部員はコート内2人まで"} sub={"ビブスを着用する。通常のシュート１点, スリーポイントシュート2点とする。"}/>
                 </Grid>
                 <Grid xs={12} sm={12} lg={12}>
-                    <RuleNumCard title={"女子ハンデ"} content={"女子1人あたり2点"} sub={"(試合開始時に加点、上限6点)"}/>
+                    <RuleNumCard title={"女子ハンデ"} content={"女子1人あたり1点"} sub={"(試合開始時に加点、上限5点) 通常のシュートは3点, スリーポイントシュート4点とする。女子のバスケ経験者は、通常のシュート2点, スリーポイントシュート3点とする。"}/>
                 </Grid>
             </Grid>
             <DialogContentText
