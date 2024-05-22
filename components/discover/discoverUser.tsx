@@ -142,9 +142,9 @@ export const DiscoverUser = (props: DiscoverUserProps) => {
                                             height: "2em", width: "2em",
                                             backgroundColor: `${theme.palette.text.secondary}`,
                                         }}
-                                        src={`${process.env.NEXT_PUBLIC_API_URL}/images/${userMatchSport.iconId}/file`}
+                                        src={`${process.env.NEXT_PUBLIC_API_URL}/images/${userMatchSport?.iconId}/file`}
                                     >
-                                        {!userMatchSport.iconId && <HiOutlineExclamationTriangle fontSize={"30px"}/>}
+                                        {!userMatchSport?.iconId && <HiOutlineExclamationTriangle fontSize={"30px"}/>}
                                     </Avatar>
                                     <Stack>
                                         <Typography fontSize={"14px"} sx={{color: theme.palette.text.primary}}>

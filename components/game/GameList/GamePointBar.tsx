@@ -41,6 +41,7 @@ export const GamePointBar = (props: GamePointBarProps) => {
     const isMyTeamPlay = props.myTeamId === leftTeamId || props.myTeamId === rightTeamId;
     const isMyTeamUmpire = props.myTeamId === Number(umpireTeam);
     const judgeTeam = teams.find(team => team.id === Number(umpireTeam));
+    const judgeTeamName = judgeTeam?.name
     const formattedTime = new Date(time).toLocaleTimeString("ja-JP", {hour: '2-digit', minute:'2-digit'});
     const backgroundColor = isMyTeamPlay ? `${theme.palette.warning.main}66` : isMyTeamUmpire ? `${theme.palette.success.main}66` : `${theme.palette.text.disabled}33`;
     const PointBar = styled(LinearProgress)(({}) => ({
@@ -140,7 +141,7 @@ export const GamePointBar = (props: GamePointBarProps) => {
                                 <HiFlag color={`${theme.palette.text.primary}CC`}/>
                             </SvgIcon>
                             <Typography sx={{color: `${theme.palette.text.primary}CC`, fontSize: "14px"}}>
-                                {judgeTeam?.name}
+                                {judgeTeamName}
                             </Typography>
                         </Stack>
                             <Stack direction={"row"}>
