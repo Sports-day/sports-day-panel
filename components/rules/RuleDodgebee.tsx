@@ -4,6 +4,7 @@ import {
     Stack,
     Typography,
     DialogContentText,
+    useTheme
 } from "@mui/material";
 import {RuleNumCard} from "./rule-elements/RuleNumCard";
 import ReactMarkdown from "react-markdown";
@@ -37,6 +38,7 @@ const markdown = `
 `
 
 export const RuleDodgebee = () => {
+    const theme = useTheme();
     return(
         <Stack
             direction={"column"}
@@ -46,7 +48,7 @@ export const RuleDodgebee = () => {
             py={2}
             sx={{width:"100%"}}
         >
-            <Typography color={"#E8EBF8"}>フィールド図</Typography>
+            <Typography color={theme.palette.text.primary}>フィールド図</Typography>
             <Stack
                 direction={"column"}
                 justifyContent={"center"}
@@ -56,7 +58,7 @@ export const RuleDodgebee = () => {
                 sx={{width:"100%"}}
             >
                 <Box sx={{width:"100%", maxWidth:"350px"}}>
-                    <Coat width={"98%"} fill={'#99a5d6'}/>
+                    <Coat width={"98%"} fill={theme.palette.text.primary}/>
                 </Box>
             </Stack>
             <Grid container>
@@ -79,7 +81,7 @@ export const RuleDodgebee = () => {
             <DialogContentText
                 id="scroll-dialog-description"
                 tabIndex={-1}
-                color={"#E8EBF8"}
+                color={theme.palette.text.primary}
                 lineHeight={"27px"}
             >
                 <ReactMarkdown>{markdown}</ReactMarkdown>

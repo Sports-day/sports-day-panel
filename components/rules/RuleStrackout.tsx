@@ -4,6 +4,7 @@ import {
     Stack,
     Typography,
     DialogContentText,
+    useTheme
 } from "@mui/material";
 import {RuleNumCard} from "./rule-elements/RuleNumCard";
 import ReactMarkdown from "react-markdown";
@@ -32,6 +33,7 @@ const markdown = `
 `
 
 export const RuleStrackout = () => {
+    const theme = useTheme();
     return(
         <Stack
             direction={"column"}
@@ -41,7 +43,7 @@ export const RuleStrackout = () => {
             py={2}
             sx={{width:"100%"}}
         >
-            <Typography color={"#E8EBF8"}>フィールド図はありません</Typography>
+            <Typography color={theme.palette.text.primary}>フィールド図はありません</Typography>
             <Grid container>
                 <Grid xs={12} sm={12} lg={12}>
                     <RuleNumCard title={"会場"} content={"校舎と武道場の間"} sub={"️☀️晴天時"}/>
@@ -65,7 +67,7 @@ export const RuleStrackout = () => {
             <DialogContentText
                 id="scroll-dialog-description"
                 tabIndex={-1}
-                color={"#E8EBF8"}
+                color={theme.palette.text.primary}
                 lineHeight={"27px"}
             >
                 <ReactMarkdown>{markdown}</ReactMarkdown>
