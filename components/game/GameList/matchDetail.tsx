@@ -59,6 +59,7 @@ export const MatchDetail = (props: MatchDetailProps) => {
     const maxRightScore = props.match.rightScore
     const maxScore = maxLeftScore > maxRightScore ? maxLeftScore : maxRightScore
     const barOffset = (maxScore == 0) ? 1 : (95 / maxScore)
+    const judgeTeamName = judgeTeam?.name || "ルール参照";
 
     let matchStatus;
     switch (props.match.status) {
@@ -267,7 +268,7 @@ export const MatchDetail = (props: MatchDetailProps) => {
                                 <Box sx={{overflow: "auto", pt: 1}}>
                                     <Stack sx={{width: "100%"}} direction={"row"} spacing={0.2} pl={0}>
                                         <Chip
-                                            label={`審判：${judgeTeam?.name}`}
+                                            label={`審判：${judgeTeamName}`}
                                             avatar={<Avatar><HiFlag/></Avatar>}
                                             color={"secondary"}
                                         />

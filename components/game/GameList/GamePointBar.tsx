@@ -141,7 +141,8 @@ export const GamePointBar = (props: GamePointBarProps) => {
                                 <HiFlag color={`${theme.palette.text.primary}CC`}/>
                             </SvgIcon>
                             <Typography sx={{color: `${theme.palette.text.primary}CC`, fontSize: "14px"}}>
-                                {judgeTeamName}
+                                {!judgeTeamName && "ルール参照"}
+                                {judgeTeamName && `${judgeTeamName}`}
                             </Typography>
                         </Stack>
                             <Stack direction={"row"}>

@@ -3,7 +3,7 @@ import {motion} from "framer-motion";
 import {
     Box, Button,
     Card,
-    CardContent, CardMedia,
+    CardContent, CardMedia, Chip,
     Container,
     Divider, IconButton,
     Stack,
@@ -106,6 +106,114 @@ export default function Page() {
                             </Stack>
 
                             <Grid container spacing={1.5}>
+
+                                <Grid xs={12} sm={12} lg={12}>
+                                    <motion.div
+                                        initial={{opacity: 0, y: "50px"}}
+                                        whileInView={{opacity: 1, y: "0px"}}
+                                        transition={{delay: 0.1, duration: 1, ease: [0.16, 1, 0.3, 1]}}
+                                    >
+                                        <Card>
+                                            <CardContent>
+                                                <Stack
+                                                    direction={"column"}
+                                                    justifyContent={"start"}
+                                                    alignItems={"start"}
+                                                    spacing={0}
+                                                    py={1}
+                                                    px={2}
+                                                    sx={{width:"100%", overflow:"scrollable"}}
+                                                >
+                                                    <Stack
+                                                        direction={"row"}
+                                                        justifyContent={"center"}
+                                                        alignItems={"center"}
+                                                        spacing={1}
+                                                        py={1}
+                                                        sx={{width:"100%", borderBottom:`1px solid ${theme.palette.text.disabled}`}}
+                                                    >
+                                                        <Chip label={"フロントエンド"}/>
+                                                        <SvgIcon>
+                                                            <TbBrandNextjs color="#99a5d6"/>
+                                                        </SvgIcon>
+                                                        <Typography variant={"h5"}>NextJS</Typography>
+                                                    </Stack>
+                                                    <Stack
+                                                        direction={"row"}
+                                                        justifyContent={"center"}
+                                                        alignItems={"center"}
+                                                        spacing={1}
+                                                        py={1}
+                                                        sx={{width:"100%", borderBottom:`1px solid ${theme.palette.text.disabled}`}}
+                                                    >
+                                                        <Chip label={"バックエンド"}/>
+                                                        <SvgIcon>
+                                                            <TbBrandKotlin color="#99a5d6"/>
+                                                        </SvgIcon>
+                                                        <Typography variant={"h5"}>Kotlin</Typography>
+                                                    </Stack>
+                                                    <Stack
+                                                        direction={"row"}
+                                                        justifyContent={"center"}
+                                                        alignItems={"center"}
+                                                        spacing={1}
+                                                        py={1}
+                                                        sx={{width:"100%", borderBottom:`1px solid ${theme.palette.text.disabled}`}}
+                                                    >
+                                                        <Chip label={"コンテナ管理"}/>
+                                                        <SvgIcon>
+                                                            <SiKubernetes color="#99a5d6"/>
+                                                        </SvgIcon>
+                                                        <Typography variant={"h5"}>Kubernetes</Typography>
+                                                    </Stack>
+                                                    <Stack
+                                                        direction={"row"}
+                                                        justifyContent={"center"}
+                                                        alignItems={"center"}
+                                                        spacing={1}
+                                                        py={1}
+                                                        sx={{width:"100%", borderBottom:`1px solid ${theme.palette.text.disabled}`}}
+                                                    >
+                                                        <Chip label={"GitOps"}/>
+                                                        <SvgIcon>
+                                                            <SiArgo color="#99a5d6"/>
+                                                        </SvgIcon>
+                                                        <Typography variant={"h5"}>ArgoCD</Typography>
+                                                    </Stack>
+
+                                                    <Stack
+                                                        direction={"row"}
+                                                        justifyContent={"center"}
+                                                        alignItems={"center"}
+                                                        spacing={1}
+                                                        py={1}
+                                                        sx={{width:"100%", borderBottom:`1px solid ${theme.palette.text.disabled}`}}
+                                                    >
+                                                        <Chip label={"バージョン管理"}/>
+                                                        <SvgIcon>
+                                                            <FaGithubAlt color="#99a5d6"/>
+                                                        </SvgIcon>
+                                                        <Typography variant={"h5"}>GitHub</Typography>
+                                                    </Stack>
+                                                    <Stack
+                                                        direction={"row"}
+                                                        justifyContent={"center"}
+                                                        alignItems={"center"}
+                                                        spacing={1}
+                                                        py={1}
+                                                        sx={{width:"100%"}}
+                                                    >
+                                                        <Chip label={"UIデザイン"}/>
+                                                        <SvgIcon>
+                                                            <SiAffinitydesigner color="#99a5d6"/>
+                                                        </SvgIcon>
+                                                        <Typography variant={"h5"}>Affinity Designer</Typography>
+                                                    </Stack>
+                                                </Stack>
+                                            </CardContent>
+                                        </Card>
+                                    </motion.div>
+                                </Grid>
 
                                 <Grid xs={12} sm={6} lg={6}>
                                     <motion.div
@@ -282,149 +390,6 @@ export default function Page() {
                                     </motion.div>
                                 </Grid>
 
-                                <Grid xs={12} sm={6} lg={6}>
-                                    <motion.div
-                                        initial={{opacity: 0, y: "50px"}}
-                                        whileInView={{opacity: 1, y: "0px"}}
-                                        transition={{delay: 0.1, duration: 1, ease: [0.16, 1, 0.3, 1]}}
-                                    >
-                                        <Card sx={{height:"220px"}}>
-                                            <CardContent>
-                                                <Stack
-                                                    direction={"column"}
-                                                    justifyContent={"start"}
-                                                    alignItems={"start"}
-                                                    spacing={1}
-                                                    py={2}
-                                                    px={2}
-                                                    sx={{overflow:"scrollable"}}
-                                                >
-                                                    <Stack
-                                                        direction={"row"}
-                                                        justifyContent={"center"}
-                                                        alignItems={"center"}
-                                                        spacing={1}
-                                                        py={0}
-                                                    >
-                                                        <Box py={0.4}
-                                                             px={2}
-                                                             sx={{
-                                                                 borderRadius: "15px",
-                                                                 backgroundColor: "#99a5d6"
-                                                             }}
-                                                        >
-                                                            <Typography fontSize={"16px"}
-                                                                        color={"#23398A"}>フロントエンド</Typography>
-                                                        </Box>
-                                                        <SvgIcon>
-                                                            <TbBrandNextjs color="#99a5d6"/>
-                                                        </SvgIcon>
-                                                        <Typography variant={"h5"}>NextJS</Typography>
-
-                                                        <Box py={0.4}
-                                                             px={2}
-                                                             sx={{
-                                                                 borderRadius: "15px",
-                                                                 backgroundColor: "#99a5d6"
-                                                             }}
-                                                        >
-                                                            <Typography fontSize={"16px"}
-                                                                        color={"#23398A"}>バージョン管理</Typography>
-                                                        </Box>
-                                                        <SvgIcon>
-                                                            <FaGithubAlt color="#99a5d6"/>
-                                                        </SvgIcon>
-                                                        <Typography variant={"h5"}>GitHub</Typography>
-                                                    </Stack>
-
-                                                    <Stack
-                                                        direction={"row"}
-                                                        justifyContent={"center"}
-                                                        alignItems={"center"}
-                                                        spacing={1}
-                                                        py={0}
-                                                    >
-                                                        <Box py={0.4}
-                                                             px={2}
-                                                             sx={{
-                                                                 borderRadius: "15px",
-                                                                 backgroundColor: "#99a5d6"
-                                                             }}
-                                                        >
-                                                            <Typography fontSize={"16px"}
-                                                                        color={"#23398A"}>バックエンド</Typography>
-                                                        </Box>
-                                                        <SvgIcon>
-                                                            <TbBrandKotlin color="#99a5d6"/>
-                                                        </SvgIcon>
-                                                        <Typography variant={"h5"}>Kotlin</Typography>
-
-                                                        <Box py={0.4}
-                                                             px={2}
-                                                             sx={{
-                                                                 borderRadius: "15px",
-                                                                 backgroundColor: "#99a5d6"
-                                                             }}
-                                                        >
-                                                            <Typography fontSize={"16px"}
-                                                                        color={"#23398A"}>UIデザイン</Typography>
-                                                        </Box>
-                                                        <SvgIcon>
-                                                            <SiAffinitydesigner color="#99a5d6"/>
-                                                        </SvgIcon>
-                                                        <Typography variant={"h5"}>Serif Affinity Designer</Typography>
-                                                    </Stack>
-
-                                                    <Stack
-                                                        direction={"row"}
-                                                        justifyContent={"center"}
-                                                        alignItems={"center"}
-                                                        spacing={1}
-                                                        py={0}
-                                                    >
-                                                        <Box py={0.4}
-                                                             px={2}
-                                                             sx={{
-                                                                 borderRadius: "15px",
-                                                                 backgroundColor: "#99a5d6"
-                                                             }}
-                                                        >
-                                                            <Typography fontSize={"16px"}
-                                                                        color={"#23398A"}>コンテナ管理</Typography>
-                                                        </Box>
-                                                        <SvgIcon>
-                                                            <SiKubernetes color="#99a5d6"/>
-                                                        </SvgIcon>
-                                                        <Typography variant={"h5"}>Kubernetes</Typography>
-                                                    </Stack>
-                                                    <Stack
-                                                        direction={"row"}
-                                                        justifyContent={"center"}
-                                                        alignItems={"center"}
-                                                        spacing={1}
-                                                        py={0}
-                                                    >
-                                                        <Box py={0.4}
-                                                             px={2}
-                                                             sx={{
-                                                                 borderRadius: "15px",
-                                                                 backgroundColor: "#99a5d6"
-                                                             }}
-                                                        >
-                                                            <Typography fontSize={"16px"}
-                                                                        color={"#23398A"}>GitOps</Typography>
-                                                        </Box>
-                                                        <SvgIcon>
-                                                            <SiArgo color="#99a5d6"/>
-                                                        </SvgIcon>
-                                                        <Typography variant={"h5"}>ArgoCD</Typography>
-                                                    </Stack>
-                                                </Stack>
-                                            </CardContent>
-                                        </Card>
-                                    </motion.div>
-                                </Grid>
-
                                 <Stack
                                     direction={"column"}
                                     justifyContent={"center"}
@@ -530,7 +495,7 @@ export default function Page() {
                                 sx={{width: "100%"}}
                             >
                                 <Typography fontSize={"20px"}>
-                                    SPORTSDAYの技術選択
+                                    SPORTSDAYの構造
                                 </Typography>
                             </Stack>
                             <Grid xs={12} sm={6} lg={6}>
@@ -569,7 +534,7 @@ export default function Page() {
                                         <CardContent sx={{width: "100%"}}>
                                             <Stack sx={{width: "100%", height: "100%", py:10}} alignItems={"center"}
                                                    justifyContent={"center"} spacing={1}>
-                                                <Typography fontWeight={"600"} fontSize={"20px"}>
+                                                <Typography fontWeight={"600"} fontSize={"16px"}>
                                                     SPORTSDAYの開発者になりませんか？
                                                 </Typography>
                                             </Stack>
