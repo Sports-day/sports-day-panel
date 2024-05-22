@@ -1,6 +1,5 @@
 'use client'
 import {motion} from "framer-motion";
-import {Navigation} from "@/components/layouts/navigation";
 import {
     Box,
     Card,

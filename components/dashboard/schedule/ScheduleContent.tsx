@@ -1,27 +1,20 @@
 import {
-    Avatar,
     Box,
-    Button, Card, Chip,
-    Container,
+    Button,
     Stack,
     SvgIcon,
     SwipeableDrawer,
     Typography,
 } from "@mui/material";
 import * as React from "react";
-import {Fragment, useContext} from "react";
-import {LocationsContext, TeamsContext, UsersContext} from "../../context";
+import {useContext} from "react";
+import {LocationsContext, TeamsContext} from "../../context";
 import {Match} from "@/src/models/MatchModel";
 import {
-    HiArrowRight,
     HiClock,
-    HiFlag,
     HiMapPin,
-    HiUser,
-    HiUsers,
 } from "react-icons/hi2";
 import {useTheme} from "@mui/material/styles";
-import Link from "next/link";
 import {MatchDetail} from "@/components/game/GameList/matchDetail";
 
 export type ScheduleContentProps = {
@@ -34,23 +27,14 @@ export const ScheduleContent = (props: ScheduleContentProps) => {
     //  context
     const {data: locations} = useContext(LocationsContext)
     const {data: teams} = useContext(TeamsContext)
-    const {data: users} = useContext(UsersContext)
 
     const [open, toggleDrawer] = React.useState(false);
 
     //  team is null
     if (!props.match.leftTeamId || !props.match.rightTeamId) return null;
-    // get my team
-    const myTeamModel = teams.find(team => team.id === props.myTeamId)
     //  get team
     const opponentTeamId = props.match.leftTeamId === props.myTeamId ? props.match.rightTeamId : props.match.leftTeamId
     const teamModel = teams.find(team => team.id === opponentTeamId)
-    //  get left team
-    const leftTeamModel = teams.find(team => team.id === props.match.leftTeamId);
-    // get right team
-    const rightTeamModel = teams.find(team => team.id === props.match.rightTeamId);
-    // Get judge team
-    const judgeTeam = teams.find(team => team.id === props.match.judgeTeamId);
     //  get time and location
     const formattedTime = new Date(props.match.startAt).toLocaleTimeString("ja-JP", {
         hour: '2-digit',

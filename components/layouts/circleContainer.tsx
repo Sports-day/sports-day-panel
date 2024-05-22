@@ -1,11 +1,7 @@
-import {Box, Container, Stack} from "@mui/material";
+import {Box, Container} from "@mui/material";
 import Logo from "@/public/logo/logo.svg";
 import {InformationList} from "@/components/InformationList";
-import Overview from "@/components/dashboard/Overview";
-import {OtherInfo} from "@/components/dashboard/Overview/OtherInfo";
 import * as React from "react";
-import ReactMarkdown from "react-markdown";
-import children = ReactMarkdown.propTypes.children;
 import {motion} from "framer-motion";
 import { useTheme } from '@mui/material/styles';
 

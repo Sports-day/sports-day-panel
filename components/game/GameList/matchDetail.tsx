@@ -3,7 +3,7 @@ import {
     Box,
     Button,
     Card, Chip,
-    Container, IconButton, LinearProgress, linearProgressClasses,
+    Container, LinearProgress, linearProgressClasses,
     Stack, styled, SvgIcon,
     Typography,
 } from "@mui/material";
@@ -15,7 +15,7 @@ import {
     HiClock,
     HiFlag,
     HiMapPin,
-    HiUser, HiXMark,
+    HiUser,
 } from "react-icons/hi2";
 import {ThemeProvider, useTheme} from "@mui/material/styles";
 import {useFetchUsers} from "@/src/features/users/hook";
@@ -100,294 +100,299 @@ export const MatchDetail = (props: MatchDetailProps) => {
 
     return (
         <>
-            <Box
-                sx={{
-                    width: '100%',
-                    height: 'auto',
-                    background: `${theme.palette.secondary.main}FC`,
-                    backdropFilter: 'blur(30px)',
-                    borderRadius: "15px",
-                    borderBottomLeftRadius: "0px",
-                    borderBottomRightRadius: "0px",
-                    color: '#E8EBF8',
-                    pb: 5,
-                    pt: 1.5
-                }}
-            >
-                <Container maxWidth={"xl"}>
-                    <Stack spacing={1}>
-                        <Stack direction={"column"} spacing={2} justifyContent={"center"}
-                               alignItems={"center"}>
-                            <Box sx={{
-                                width: 50,
-                                height: 6,
-                                borderRadius: 3,
-                                backgroundColor: `${theme.palette.text.primary}4D`
-                            }}></Box>
+            {isFetchingLocations || isFetchingTeams || isFetchingUsers &&
+                <LinearProgress/>
+            }
+            {!isFetchingLocations && !isFetchingTeams && !isFetchingUsers &&
+                <Box
+                    sx={{
+                        width: '100%',
+                        height: 'auto',
+                        background: `${theme.palette.secondary.main}FC`,
+                        backdropFilter: 'blur(30px)',
+                        borderRadius: "15px",
+                        borderBottomLeftRadius: "0px",
+                        borderBottomRightRadius: "0px",
+                        color: '#E8EBF8',
+                        pb: 5,
+                        pt: 1.5
+                    }}
+                >
+                    <Container maxWidth={"xl"}>
+                        <Stack spacing={1}>
+                            <Stack direction={"column"} spacing={2} justifyContent={"center"}
+                                   alignItems={"center"}>
+                                <Box sx={{
+                                    width: 50,
+                                    height: 6,
+                                    borderRadius: 3,
+                                    backgroundColor: `${theme.palette.text.primary}4D`
+                                }}></Box>
+                                <Typography
+                                    color={theme.palette.text.primary}
+                                    textAlign={"center"}
+                                >
+                                    試合の詳細
+                                </Typography>
+                            </Stack>
+                            <Box
+                                sx={{
+                                    pb: 2,
+                                    px: 2,
+                                    mx:1,
+                                    pt:0.5,
+                                    display:"flex",
+                                    borderRadius: "12px",
+                                    borderBottomLeftRadius: "0px",
+                                    borderBottomRightRadius: "0px",
+                                    border:`1px solid ${statusColor}`,
+                                    backgroundColor: statusColor,
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    position:"relative",
+                                    top:"20px",
+                                    zIndex: -1
+                                }}
+                            >
+                                <Typography color={theme.palette.text.primary} fontSize={"14px"}
+                                            fontWeight={"600"}>
+                                    状態：{matchStatus}
+                                </Typography>
+                            </Box>
+                            <Card
+                                sx={{backgroundColor: `${theme.palette.secondary.dark}FF`,
+                                    boxShadow: `0px 0px 15px ${theme.palette.info.main}4D`,
+                                    pt:1, pb:1.5, px: 1}}>
+                                <Stack
+                                    direction={"row"}
+                                    spacing={1}
+                                    sx={{width: "100%", height: "100%"}}
+                                    alignItems={"flex-start"}
+                                >
+                                    <Stack
+                                        sx={{width: "100%"}}
+                                        direction={"row"}
+                                        spacing={1}
+                                        justifyContent={"space-around"}
+                                        alignItems={"center"}
+                                    >
+                                        <Stack
+                                            direction={"row"}
+                                            justifyContent={"start"}
+                                            alignItems={"center"}
+                                            spacing={2}
+                                        >
+                                            <Typography sx={{color: theme.palette.text.primary, fontSize: "20px", fontWeight: "bold"}}>
+                                                {props.match.leftScore}
+                                            </Typography>
+                                            <Typography fontSize={"20px"} color={theme.palette.text.primary}>
+                                                {leftTeamModel?.name}
+                                            </Typography>
+                                        </Stack>
+                                        <Box
+                                            sx={{
+                                                pt: 0,
+                                                px: 0.8,
+                                                borderRadius: "5px",
+                                                backgroundColor: theme.palette.text.secondary,
+                                                display: "flex",
+                                                justifyContent: "center",
+                                                alignItems: "center"
+                                            }}
+                                        >
+                                            <Typography color={theme.palette.background.default} fontSize={"10px"}
+                                                        fontWeight={"600"}>
+                                                VS
+                                            </Typography>
+                                        </Box>
+                                        <Stack
+                                            direction={"row"}
+                                            justifyContent={"end"}
+                                            alignItems={"center"}
+                                            spacing={2}
+                                        >
+                                            <Typography fontSize={"20px"} color={theme.palette.text.primary}>
+                                                {rightTeamModel?.name}
+                                            </Typography>
+                                            <Typography sx={{color: theme.palette.text.primary, fontSize: "20px", fontWeight: "bold"}}>
+                                                {props.match.rightScore}
+                                            </Typography>
+                                        </Stack>
+                                    </Stack>
+                                </Stack>
+                                <Stack>
+                                    <Button
+                                        color={"secondary"}
+                                        sx={{
+                                            width: "100%",
+                                            border: `1px solid ${theme.palette.secondary.dark}66`,
+                                        }}
+                                    >
+                                        <Stack
+                                            direction={"column"}
+                                            justifyContent={"space-between"}
+                                            alignItems={"space-between"}
+                                            maxWidth={'xl'}
+                                            mr={0.5}
+                                            sx={{ flexGrow:1 }}
+                                            spacing={0}
+                                        >
+                                            <Box>
+                                                <ThemeProvider theme={{direction:"rtl"}}>
+                                                    <PointBar
+                                                        variant={"determinate"}
+                                                        value={props.match.leftScore * barOffset}
+                                                    />
+                                                </ThemeProvider>
+                                            </Box>
+                                        </Stack>
+                                        <Stack
+                                            direction={"column"}
+                                            justifyContent={"space-between"}
+                                            alignItems={"space-between"}
+                                            maxWidth={'xl'}
+                                            ml={0.5}
+                                            sx={{ flexGrow:1 }}
+                                            spacing={0}
+                                        >
+                                            <Box>
+                                                <PointBar
+                                                    variant={"determinate"}
+                                                    value={props.match.rightScore * barOffset}
+                                                />
+                                            </Box>
+                                        </Stack>
+                                    </Button>
+                                </Stack>
+                                <Box sx={{overflow: "auto", pt: 1}}>
+                                    <Stack sx={{width: "100%"}} direction={"row"} spacing={0.2} pl={0}>
+                                        <Chip
+                                            label={`審判：${judgeTeam?.name}`}
+                                            avatar={<Avatar><HiFlag/></Avatar>}
+                                            color={"secondary"}
+                                        />
+                                        <Chip
+                                            label={`開始：${formattedTime}`}
+                                            avatar={<Avatar><HiClock/></Avatar>}
+                                            color={"secondary"}
+                                        />
+                                        <Chip
+                                            label={`場所：${locationModel?.name}`}
+                                            avatar={<Avatar><HiMapPin/></Avatar>}
+                                            color={"secondary"}
+                                        />
+                                    </Stack>
+                                </Box>
+                            </Card>
+
                             <Typography
                                 color={theme.palette.text.primary}
                                 textAlign={"center"}
+                                pt={2}
                             >
-                                試合の詳細
+                                {leftTeamModel?.name}のメンバー
                             </Typography>
-                        </Stack>
-                        <Box
-                            sx={{
-                                pb: 2,
-                                px: 2,
-                                mx:1,
-                                pt:0.5,
-                                display:"flex",
-                                borderRadius: "12px",
-                                borderBottomLeftRadius: "0px",
-                                borderBottomRightRadius: "0px",
-                                border:`1px solid ${statusColor}`,
-                                backgroundColor: statusColor,
-                                justifyContent: "center",
-                                alignItems: "center",
-                                position:"relative",
-                                top:"20px",
-                                zIndex: -1
-                            }}
-                        >
-                            <Typography color={theme.palette.text.primary} fontSize={"14px"}
-                                        fontWeight={"600"}>
-                                状態：{matchStatus}
-                            </Typography>
-                        </Box>
-                        <Card
-                            sx={{backgroundColor: `${theme.palette.secondary.dark}FF`,
-                                boxShadow: `0px 0px 15px ${theme.palette.info.main}4D`,
-                                pt:1, pb:1.5, px: 1}}>
-                            <Stack
-                                direction={"row"}
-                                spacing={1}
-                                sx={{width: "100%", height: "100%"}}
-                                alignItems={"flex-start"}
+                            {users
+                                .filter(user => user.teamIds.includes(Number(leftTeamModel?.id)))
+                                .map(user => {
+                                    const image = `${process.env.NEXT_PUBLIC_API_URL}/images/${user?.pictureId}/file`
+                                    return (
+                                        <Fragment key={user.id}>
+                                            <Card sx={{backgroundColor: `${theme.palette.secondary.dark}80`,}}>
+                                                <Stack direction={"row"} px={2} py={1} spacing={3} ml={0.4}
+                                                       alignItems={"center"}>
+                                                    <Avatar
+                                                        alt={"unknown"}
+                                                        sx={{
+                                                            height: "1.5em",
+                                                            width: "1.5em",
+                                                            backgroundColor: theme.palette.text.secondary,
+                                                        }}
+                                                        src={image}
+                                                    >
+                                                        {user?.pictureId === null && <HiUser/>}
+                                                    </Avatar>
+                                                    <Typography color={theme.palette.text.primary}>
+                                                        {user.name}
+                                                    </Typography>
+                                                </Stack>
+                                            </Card>
+                                        </Fragment>
+                                    );
+                                })}
+                            <Typography
+                                color={theme.palette.text.primary}
+                                textAlign={"center"}
+                                pt={2}
                             >
-                                <Stack
-                                    sx={{width: "100%"}}
-                                    direction={"row"}
-                                    spacing={1}
-                                    justifyContent={"space-around"}
-                                    alignItems={"center"}
-                                >
-                                    <Stack
-                                        direction={"row"}
-                                        justifyContent={"start"}
-                                        alignItems={"center"}
-                                        spacing={2}
-                                    >
-                                        <Typography sx={{color: theme.palette.text.primary, fontSize: "20px", fontWeight: "bold"}}>
-                                            {props.match.leftScore}
-                                        </Typography>
-                                        <Typography fontSize={"20px"} color={theme.palette.text.primary}>
-                                            {leftTeamModel?.name}
-                                        </Typography>
-                                    </Stack>
-                                    <Box
-                                        sx={{
-                                            pt: 0,
-                                            px: 0.8,
-                                            borderRadius: "5px",
-                                            backgroundColor: theme.palette.text.secondary,
-                                            display: "flex",
-                                            justifyContent: "center",
-                                            alignItems: "center"
-                                        }}
-                                    >
-                                        <Typography color={theme.palette.background.default} fontSize={"10px"}
-                                                    fontWeight={"600"}>
-                                            VS
-                                        </Typography>
-                                    </Box>
-                                    <Stack
-                                        direction={"row"}
-                                        justifyContent={"end"}
-                                        alignItems={"center"}
-                                        spacing={2}
-                                    >
-                                        <Typography fontSize={"20px"} color={theme.palette.text.primary}>
-                                            {rightTeamModel?.name}
-                                        </Typography>
-                                        <Typography sx={{color: theme.palette.text.primary, fontSize: "20px", fontWeight: "bold"}}>
-                                            {props.match.rightScore}
-                                        </Typography>
-                                    </Stack>
-                                </Stack>
-                            </Stack>
-                            <Stack>
+                                {rightTeamModel?.name}のメンバー
+                            </Typography>
+                            {users
+                                .filter(user => user.teamIds.includes(Number(rightTeamModel?.id)))
+                                .map(user => {
+                                    const image = `${process.env.NEXT_PUBLIC_API_URL}/images/${user?.pictureId}/file`
+                                    return (
+                                        <Fragment key={user.id}>
+                                            <Card sx={{backgroundColor: `${theme.palette.secondary.dark}80`,}}>
+                                                <Stack direction={"row"} px={2} py={1} spacing={3} ml={0.4}
+                                                       alignItems={"center"}>
+                                                    <Avatar
+                                                        alt={"unknown"}
+                                                        sx={{
+                                                            height: "1.5em",
+                                                            width: "1.5em",
+                                                            backgroundColor: theme.palette.text.secondary,
+                                                        }}
+                                                        src={image}
+                                                    >
+                                                        {user?.pictureId === null && <HiUser/>}
+                                                    </Avatar>
+                                                    <Typography color={theme.palette.text.primary}>
+                                                        {user.name}
+                                                    </Typography>
+                                                </Stack>
+                                            </Card>
+                                        </Fragment>
+                                    );
+                                })}
+                            {props.dashboard &&
                                 <Button
                                     color={"secondary"}
-                                    sx={{
-                                        width: "100%",
-                                        border: `1px solid ${theme.palette.secondary.dark}66`,
-                                    }}
+                                    sx={{background:theme.palette.secondary.dark}}
+                                    fullWidth disableElevation
+                                    variant={"contained"}
+                                    component={Link}
+                                    href={`/sports/${props.match.sportId}`}
                                 >
                                     <Stack
-                                        direction={"column"}
-                                        justifyContent={"space-between"}
-                                        alignItems={"space-between"}
-                                        maxWidth={'xl'}
-                                        mr={0.5}
-                                        sx={{ flexGrow:1 }}
-                                        spacing={0}
+                                        direction={"row"}
+                                        justifyContent={"flex-start"}
+                                        alignItems={"center"}
+                                        spacing={2}
+                                        py={0.5}
+                                        width={"100%"}
                                     >
-                                        <Box>
-                                            <ThemeProvider theme={{direction:"rtl"}}>
-                                                <PointBar
-                                                    variant={"determinate"}
-                                                    value={props.match.leftScore * barOffset}
-                                                />
-                                            </ThemeProvider>
-                                        </Box>
-                                    </Stack>
-                                    <Stack
-                                        direction={"column"}
-                                        justifyContent={"space-between"}
-                                        alignItems={"space-between"}
-                                        maxWidth={'xl'}
-                                        ml={0.5}
-                                        sx={{ flexGrow:1 }}
-                                        spacing={0}
-                                    >
-                                        <Box>
-                                            <PointBar
-                                                variant={"determinate"}
-                                                value={props.match.rightScore * barOffset}
-                                            />
-                                        </Box>
+                                        <Avatar
+                                            sx={{
+                                                height: "2em",
+                                                width: "2em",
+                                                backgroundColor: "inherit",
+                                            }}
+                                        >
+                                            <SvgIcon>
+                                                <HiArrowRight color={`${theme.palette.text.primary}99`}/>
+                                            </SvgIcon>
+                                        </Avatar>
+                                        <Typography sx={{color: theme.palette.text.primary, fontSize: "14px"}}>
+                                            競技ページに行く
+                                        </Typography>
                                     </Stack>
                                 </Button>
-                            </Stack>
-                            <Box sx={{overflow: "auto", pt: 1}}>
-                                <Stack sx={{width: "100%"}} direction={"row"} spacing={0.2} pl={0}>
-                                    <Chip
-                                        label={`審判：${judgeTeam?.name}`}
-                                        avatar={<Avatar><HiFlag/></Avatar>}
-                                        color={"secondary"}
-                                    />
-                                    <Chip
-                                        label={`開始：${formattedTime}`}
-                                        avatar={<Avatar><HiClock/></Avatar>}
-                                        color={"secondary"}
-                                    />
-                                    <Chip
-                                        label={`場所：${locationModel?.name}`}
-                                        avatar={<Avatar><HiMapPin/></Avatar>}
-                                        color={"secondary"}
-                                    />
-                                </Stack>
-                            </Box>
-                        </Card>
-
-                        <Typography
-                            color={theme.palette.text.primary}
-                            textAlign={"center"}
-                            pt={2}
-                        >
-                            {leftTeamModel?.name}のメンバー
-                        </Typography>
-                        {users
-                            .filter(user => user.teamIds.includes(Number(leftTeamModel?.id)))
-                            .map(user => {
-                                const image = `${process.env.NEXT_PUBLIC_API_URL}/images/${user?.pictureId}/file`
-                                return (
-                                    <Fragment key={user.id}>
-                                        <Card sx={{backgroundColor: `${theme.palette.secondary.dark}80`,}}>
-                                            <Stack direction={"row"} px={2} py={1} spacing={3} ml={0.4}
-                                                   alignItems={"center"}>
-                                                <Avatar
-                                                    alt={"unknown"}
-                                                    sx={{
-                                                        height: "1.5em",
-                                                        width: "1.5em",
-                                                        backgroundColor: theme.palette.text.secondary,
-                                                    }}
-                                                    src={image}
-                                                >
-                                                    {user?.pictureId === null && <HiUser/>}
-                                                </Avatar>
-                                                <Typography color={theme.palette.text.primary}>
-                                                    {user.name}
-                                                </Typography>
-                                            </Stack>
-                                        </Card>
-                                    </Fragment>
-                                );
-                            })}
-                        <Typography
-                            color={theme.palette.text.primary}
-                            textAlign={"center"}
-                            pt={2}
-                        >
-                            {rightTeamModel?.name}のメンバー
-                        </Typography>
-                        {users
-                            .filter(user => user.teamIds.includes(Number(rightTeamModel?.id)))
-                            .map(user => {
-                                const image = `${process.env.NEXT_PUBLIC_API_URL}/images/${user?.pictureId}/file`
-                                return (
-                                    <Fragment key={user.id}>
-                                        <Card sx={{backgroundColor: `${theme.palette.secondary.dark}80`,}}>
-                                            <Stack direction={"row"} px={2} py={1} spacing={3} ml={0.4}
-                                                   alignItems={"center"}>
-                                                <Avatar
-                                                    alt={"unknown"}
-                                                    sx={{
-                                                        height: "1.5em",
-                                                        width: "1.5em",
-                                                        backgroundColor: theme.palette.text.secondary,
-                                                    }}
-                                                    src={image}
-                                                >
-                                                    {user?.pictureId === null && <HiUser/>}
-                                                </Avatar>
-                                                <Typography color={theme.palette.text.primary}>
-                                                    {user.name}
-                                                </Typography>
-                                            </Stack>
-                                        </Card>
-                                    </Fragment>
-                                );
-                            })}
-                        {props.dashboard &&
-                            <Button
-                                color={"secondary"}
-                                sx={{background:theme.palette.secondary.dark}}
-                                fullWidth disableElevation
-                                variant={"contained"}
-                                component={Link}
-                                href={`/sports/${props.match.sportId}`}
-                            >
-                                <Stack
-                                    direction={"row"}
-                                    justifyContent={"flex-start"}
-                                    alignItems={"center"}
-                                    spacing={2}
-                                    py={0.5}
-                                    width={"100%"}
-                                >
-                                    <Avatar
-                                        sx={{
-                                            height: "2em",
-                                            width: "2em",
-                                            backgroundColor: "inherit",
-                                        }}
-                                    >
-                                        <SvgIcon>
-                                            <HiArrowRight color={`${theme.palette.text.primary}99`}/>
-                                        </SvgIcon>
-                                    </Avatar>
-                                    <Typography sx={{color: theme.palette.text.primary, fontSize: "14px"}}>
-                                        競技ページに行く
-                                    </Typography>
-                                </Stack>
-                            </Button>
-                        }
-                    </Stack>
-                </Container>
-            </Box>
+                            }
+                        </Stack>
+                    </Container>
+                </Box>
+            }
         </>
     )
 }
