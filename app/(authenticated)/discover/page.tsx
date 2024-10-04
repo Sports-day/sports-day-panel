@@ -178,7 +178,7 @@ export default function DiscoverPage() {
                                             color: `${theme.palette.text.primary}FF`,
                                             border: `1px solid ${theme.palette.text.primary}4D`,
                                             borderRadius: "15px"
-                                        }} label={"名前で検索"} {...a11yProps(1)} />
+                                        }} label={"学籍番号で検索"} {...a11yProps(1)} />
                                         <Tab sx={{
                                             zIndex: 1,
                                             mr: 1,
@@ -210,7 +210,7 @@ export default function DiscoverPage() {
                                                 fullWidth
                                                 value={searchText}
                                                 onChange={event => setSearchText(event.target.value)}
-                                                placeholder="名前を入力"
+                                                placeholder="学籍番号を入力"
                                             />
                                         </Box>
 
