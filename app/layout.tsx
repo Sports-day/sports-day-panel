@@ -5,8 +5,6 @@ import {CssBaseline} from "@mui/material";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import ColorModeProvider from "@/components/theme/colorModeProvider";
 import Head from "next/head";
-import ClientColorModeSwitcher from "@/components/theme/clientModeSwitcher";
-import ClientThemeProvider from "@/components/theme/clientThemeProvider";
 
 
 const inter = Inter({subsets: ['latin']})
