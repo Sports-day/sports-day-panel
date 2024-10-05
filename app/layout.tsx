@@ -5,6 +5,8 @@ import {CssBaseline} from "@mui/material";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import ColorModeProvider from "@/components/theme/colorModeProvider";
 import Head from "next/head";
+import ClientColorModeSwitcher from "@/components/theme/clientModeSwitcher";
+import ClientThemeProvider from "@/components/theme/clientThemeProvider";
 
 
 const inter = Inter({subsets: ['latin']})
@@ -16,6 +18,9 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({children,}: { children: React.ReactNode }) {
+    const initialMode = typeof window !== 'undefined' && localStorage.getItem('color-mode') === 'dark' ? 'dark' : 'light';
+
+
     return (
         <html lang="en">
         <Head>
