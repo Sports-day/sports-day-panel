@@ -3,7 +3,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import {
     HiArrowRightOnRectangle, HiClipboard,
-    HiHome, HiMagnifyingGlass, HiNewspaper, HiSparkles, HiXMark
+    HiHome, HiMagnifyingGlass, HiNewspaper, HiSparkles, HiUser, HiXMark
 } from "react-icons/hi2";
 import {
     FaGithubAlt
@@ -107,8 +107,9 @@ export const Navigation = () => {
                                             width: "1.5em",
                                             backgroundColor: "#5664e3",
                                         }}
-                                        src={`${process.env.NEXT_PUBLIC_API_URL}/images/${user?.pictureId}/file`}
+                                        // src={`${process.env.NEXT_PUBLIC_API_URL}/images/${user?.pictureId}/file`}
                                     >
+                                        <HiUser/>
                                     </Avatar>
                                     <Typography sx={{color: theme.palette.text.secondary, fontSize: "16px"}}>
                                         {user?.name ?? "unknown"} さん
@@ -384,8 +385,9 @@ export const Navigation = () => {
                                             backgroundColor: "#5664e3",
                                             boxShadow: "0px 0px 4px #7f8cd6"
                                         }}
-                                        src={`${process.env.NEXT_PUBLIC_API_URL}/images/${user?.pictureId}/file`}
+                                        // src={`${process.env.NEXT_PUBLIC_API_URL}/images/${user?.pictureId}/file`}
                                     >
+                                        <HiUser/>
                                     </Avatar>
                                 </Button>
                                 <SwipeableDrawer
