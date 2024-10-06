@@ -122,9 +122,10 @@ export const DiscoverUser = (props: DiscoverUserProps) => {
                                                 width: "1.5em",
                                                 backgroundColor: theme.palette.text.secondary,
                                             }}
-                                            src={`${process.env.NEXT_PUBLIC_API_URL}/images/${props.user?.pictureId}/file`}
+                                            // src={`${process.env.NEXT_PUBLIC_API_URL}/images/${props.user?.pictureId}/file`}
                                         >
-                                            {props.user?.pictureId === null && <HiUser/>}
+                                            {/*{props.user?.pictureId === null && <HiUser/>}*/}
+                                            <HiUser/>
                                         </Avatar>
                                         <Typography color={theme.palette.text.primary}>
                                             {props.user.name} さん
