@@ -13,7 +13,13 @@ export function middleware(request: NextRequest) {
 
         //  check if next path starts with any of the protected paths or root
         if (protectedPaths.some(path => request.nextUrl.pathname.startsWith(path)) || request.nextUrl.pathname === '/') {
-            return NextResponse.redirect(new URL('/login', request.url));
+            const subDirectory = process.env.SUB_DIRECTORY
+            if (subDirectory) {
+                return NextResponse.redirect(new URL(subDirectory + '/login', request.url));
+            }
+            else {
+                return NextResponse.redirect(new URL('/login', request.url));
+            }
         }
     }
 

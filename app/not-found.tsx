@@ -4,6 +4,7 @@ import {Box, Button, Container, Stack, Typography, SvgIcon} from "@mui/material"
 import Mark from "@/public/mark.svg"
 import {BiErrorAlt} from "react-icons/bi"
 import * as React from "react";
+import NextLink from "next/link";
 
 export const metadata: Metadata = {
     title: 'SPORTSDAY : 404'
@@ -84,6 +85,7 @@ export default function NotFound() {
                         </Stack>
                         <Button
                             href={"/"}
+                            component={NextLink}
                             sx={{
                                 width: "100%",
                                 height: "fit-content",
