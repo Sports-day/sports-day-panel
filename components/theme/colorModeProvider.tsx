@@ -10,7 +10,7 @@ export type ColorModeProviderProps = {
 const baseTheme = {
     breakpoints: {
         values: {
-            xs: 600,
+            xs: 0,
             sm: 790,
             md: 1000,
             lg: 1200,

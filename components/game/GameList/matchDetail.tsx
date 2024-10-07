@@ -116,7 +116,8 @@ export const MatchDetail = (props: MatchDetailProps) => {
                         borderBottomRightRadius: "0px",
                         color: '#E8EBF8',
                         pb: 5,
-                        pt: 1.5
+                        pt: 1.5,
+                        mt:3
                     }}
                 >
                     <Container maxWidth={"xl"}>
@@ -309,9 +310,10 @@ export const MatchDetail = (props: MatchDetailProps) => {
                                                             width: "1.5em",
                                                             backgroundColor: theme.palette.text.secondary,
                                                         }}
-                                                        src={image}
+                                                        // src={image}
                                                     >
-                                                        {user?.pictureId === null && <HiUser/>}
+                                                        <HiUser/>
+                                                        {/*{user?.pictureId === null && <HiUser/>}*/}
                                                     </Avatar>
                                                     <Typography color={theme.palette.text.primary}>
                                                         {user.name}
@@ -344,9 +346,10 @@ export const MatchDetail = (props: MatchDetailProps) => {
                                                             width: "1.5em",
                                                             backgroundColor: theme.palette.text.secondary,
                                                         }}
-                                                        src={image}
+                                                        // src={image}
                                                     >
-                                                        {user?.pictureId === null && <HiUser/>}
+                                                        <HiUser/>
+                                                        {/*{user?.pictureId === null && <HiUser/>}*/}
                                                     </Avatar>
                                                     <Typography color={theme.palette.text.primary}>
                                                         {user.name}

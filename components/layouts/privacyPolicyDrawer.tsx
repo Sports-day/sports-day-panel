@@ -42,7 +42,8 @@ export default function PrivacyPolicyDrawer(props: PrivacyPolicyDrawerProps) {
             </AppBar>
             <Box
                 sx={{
-                    width: '100vw', height: 'auto', overflow: 'scrollable', mt: 10, mb: 4
+                    width: '100vw', height: 'auto', overflow: 'scrollable', mt: 10, mb: 4,
+                    background: theme.palette.background.paper
                 }}
                 role="presentation"
                 onClick={toggleDrawer(false)}

@@ -302,7 +302,8 @@ export const Navigation = () => {
                         "& .MuiDialog-container": {
                             "& .MuiPaper-root": {
                                 width: "100vw",
-                                maxWidth: "lg"
+                                maxWidth: "lg",
+                                background: theme.palette.background.paper
                             },
                         },
                     }}
