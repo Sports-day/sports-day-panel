@@ -1,4 +1,7 @@
 /** @type {import('next').NextConfig} */
+
+const subDirectory = process.env.SUB_DIRECTORY
+
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
@@ -13,6 +16,11 @@ const nextConfig = {
   experimental: {
     missingSuspenseWithCSRBailout: false,
   },
+  basePath: subDirectory ? subDirectory : "",
+  publicRuntimeConfig: {
+    basePath: subDirectory ? subDirectory : "",
+  },
+  assetPrefix: subDirectory ? subDirectory : "",
 }
 
 const withPWA = require('next-pwa')({
