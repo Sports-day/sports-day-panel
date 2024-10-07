@@ -5,6 +5,7 @@ import {BiErrorAlt} from "react-icons/bi"
 import * as React from "react";
 import {useEffect} from "react";
 import {Metadata} from "next";
+import NextLink from "next/link";
 
 export const metadata: Metadata = {
     title: 'SPORTSDAY : Error',
@@ -90,6 +91,7 @@ export default function Error({
                         </Stack>
                         <Button
                             href={"/"}
+                            component={NextLink}
                             sx={{
                                 width: "100%",
                                 height: "fit-content",

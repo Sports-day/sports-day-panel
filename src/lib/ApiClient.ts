@@ -1,4 +1,5 @@
 const ApiUrl = process.env.NEXT_PUBLIC_API_URL;
+const ApiInternalUrl = process.env.NEXT_PUBLIC_API_INTERNAL_URL ? process.env.NEXT_PUBLIC_API_INTERNAL_URL : ApiUrl;
 
 const headers = {
     "Content-Type": "application/json",
@@ -24,7 +25,7 @@ async function fetchWithToken(url: string, options: RequestInit | undefined = {}
     }
 
     try {
-        const fullUrl = `${ApiUrl}${url}`
+        const fullUrl = typeof window === 'undefined' ? `${ApiInternalUrl}${url}` : `${ApiUrl}${url}`
         const response = await fetch(fullUrl, mergedOptions);
 
         // Check if the response was ok (status in the range 200-299)

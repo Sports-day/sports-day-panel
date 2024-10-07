@@ -7,7 +7,8 @@ export async function POST(request: NextRequest) {
     const code = form.get('code')
 
     //  pass code to the backend
-    const loginEndpoint = process.env.NEXT_PUBLIC_API_URL + '/login'
+    const backendURL = process.env.NEXT_PUBLIC_API_INTERNAL_URL ? process.env.NEXT_PUBLIC_API_INTERNAL_URL : process.env.NEXT_PUBLIC_API_URL
+    const loginEndpoint = backendURL + '/login'
 
     //  redirect uri
     const redirectUri = process.env.NEXT_PUBLIC_OIDC_REDIRECT_URL
@@ -26,13 +27,13 @@ export async function POST(request: NextRequest) {
 
     //  get cookie from response
     const cookie = response.headers.get('set-cookie')
-
+    const subDirectory = process.env.SUB_DIRECTORY ? process.env.SUB_DIRECTORY : "/"
     if (cookie) {
         // redirect to root page
         return new Response(null, {
             status: 301,
             headers: {
-                "Location": '/',
+                "Location": subDirectory,
                 "Set-Cookie": cookie,
             },
         })
@@ -42,7 +43,7 @@ export async function POST(request: NextRequest) {
     return new Response(null, {
         status: 301,
         headers: {
-            "Location": '/',
+            "Location": subDirectory,
         },
     })
 }
