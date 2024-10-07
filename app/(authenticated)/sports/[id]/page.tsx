@@ -314,6 +314,7 @@ export default function Page({ params }: { params: { id: string } }) {
                                 </CircleContainer>
 
                                 <Dialog
+                                    fullScreen
                                     open={open}
                                     onClose={handleClose}
                                     scroll={scroll}
@@ -323,7 +324,8 @@ export default function Page({ params }: { params: { id: string } }) {
                                         "& .MuiDialog-container": {
                                             "& .MuiPaper-root": {
                                                 width: "100vw",
-                                                maxWidth: "lg"
+                                                maxWidth: "lg",
+                                                background: theme.palette.background.paper,
                                             },
                                         },
                                     }}
@@ -333,15 +335,15 @@ export default function Page({ params }: { params: { id: string } }) {
                                     <DialogContent dividers={scroll === 'paper'}>
                                         <Rules ruleId={sport.ruleId}/>
                                     </DialogContent>
-                                    <DialogActions>
+                                    <DialogActions sx={{mb:3}}>
                                         <Stack
                                             direction={"row"}
                                             justifyContent={"center"}
                                             alignItems={"center"}
                                             spacing={2}
-                                            sx={{width: "100%"}}
+                                            sx={{width: "100%", height:"40px"}}
                                         >
-                                            <Button sx={{width: "100%", height: "100%"}}
+                                            <Button sx={{width: "100%"}}
                                                     onClick={handleClose}>
                                                 <SvgIcon sx={{mr: 1}}>
                                                     <HiXMark color={theme.palette.text.primary}/>
