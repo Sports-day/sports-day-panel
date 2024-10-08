@@ -225,6 +225,11 @@ export default function DiscoverPage() {
                                                     backgroundColor: `${theme.palette.secondary.dark}FF`,
                                                     border: `1px solid ${theme.palette.text.primary}1A`,
                                                 }}>
+                                                { isFetching &&
+                                                    <>
+                                                        <Loading/>
+                                                    </>
+                                                }
                                                 {/* List the names of the filtered users */}
                                                 {filteredUsers.map(user => (
                                                     <DiscoverUser
