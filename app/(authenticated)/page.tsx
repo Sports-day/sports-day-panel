@@ -132,29 +132,44 @@ export default function Page() {
                                                     spacing={3}
                                                 >
                                                     <Grid container spacing={1}>
+                                                        <Grid xs={12} sm={gridValue} lg={gridValue}>
+                                                            <Typography pl={2} pt={2}>
+                                                                あなたが参加する試合
+                                                            </Typography>
 
-                                                        {mySport && myGame && myTeam &&
-                                                            <>
-                                                                <Grid xs={12} sm={gridValue} lg={gridValue}>
+                                                            {mySport && myGame && myTeam &&　
+                                                                <>
                                                                     <Schedule
                                                                         sportId={mySport.id}
                                                                         gameId={myGame.id}
                                                                         matches={myTeamMatches}
                                                                         myTeamId={myTeam.id}
                                                                     />
-                                                                </Grid>
-                                                            </>
-                                                        }
-                                                        {mySport && myGame && myTeam && myJudgeMatches.length > 0 &&
-                                                            <Grid xs={12} sm={gridValue} lg={gridValue}>
+                                                                </>
+                                                            }
+
+                                                            {!mySport && !myGame && !myTeam &&
+                                                                <>
+                                                                    <OtherInfo infoContent={"あなたが参加する試合はありません"} />
+                                                                </>
+                                                            }
+                                                        </Grid>
+                                                        <Grid xs={12} sm={gridValue} lg={gridValue}>
+                                                            <Typography pl={2} pt={2}>
+                                                                あなたが審判する試合
+                                                            </Typography>
+                                                            {mySport && myGame && myTeam && myJudgeMatches.length > 0 &&
                                                                 <JudgeSchedule
                                                                     sportId={mySport.id}
                                                                     gameId={myGame.id}
                                                                     matches={myJudgeMatches}
                                                                     myTeamId={myTeam.id}
                                                                 />
-                                                            </Grid>
-                                                        }
+                                                            }
+                                                            {!mySport && !myGame && !myTeam && myJudgeMatches.length === 0 &&
+                                                                <OtherInfo infoContent={"競技のルールに従ってください"} infoSubContent={"あなたのチームが審判として登録された試合はありませんが、ルールによってはあなたが審判である可能性があります。"}/>
+                                                            }
+                                                        </Grid>
                                                         <Typography pl={2} pt={2}>
                                                             すべての競技
                                                         </Typography>

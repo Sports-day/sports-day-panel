@@ -9,8 +9,8 @@ import {
 } from "react-icons/hi"
 
 export type OtherInfoProps = {
-    infoName: string;
-    infoContent: string;
+    infoName?: string;
+    infoContent?: string;
     infoSubContent?: string;
 }
 
