@@ -4,6 +4,7 @@ import {
     Container, LinearProgress,
     Stack, Typography,
     Unstable_Grid2 as Grid,
+    Button, Avatar,
 } from "@mui/material";
 import * as React from "react";
 import Overview from "@/components/dashboard/Overview";
@@ -15,6 +16,8 @@ import {motion} from "framer-motion";
 import {OtherInfo} from "@/components/dashboard/Overview/OtherInfo";
 import CircleContainer from "@/components/layouts/circleContainer";
 import JudgeSchedule from "@/components/dashboard/schedule/judgeSchedule";
+import Link from "next/link";
+import {HiArrowTopRightOnSquare, HiOutlineExclamationTriangle} from "react-icons/hi2";
 
 // export const metadata: Metadata = {
 //     title: 'SPORTSDAY : Dashboard',
@@ -131,6 +134,38 @@ export default function Page() {
                                                     justifyContent={"space-between"}
                                                     spacing={3}
                                                 >
+                                                    <Button
+                                                        variant={"contained"}
+                                                        color={"secondary"}
+                                                        scroll={false}
+                                                        component={Link}
+                                                        href={`https://00m.in/htguC`}
+                                                        target={"_blank"}
+                                                        sx={{
+                                                            width:"100%",
+                                                            border: `1px solid secondary.dark`,
+                                                        }}
+                                                    >
+                                                        <Stack
+                                                            direction={"row"}
+                                                            width={"100%"}
+                                                            justifyContent={"flex-start"}
+                                                            alignItems={"center"}
+                                                            spacing={2}
+                                                            py={1}
+                                                        >
+                                                            <Avatar
+                                                                sx={{height: "2em", width: "2em",
+                                                                    backgroundColor: "text.secondary",
+                                                                }}
+                                                            >
+                                                                <HiArrowTopRightOnSquare fontSize={"20px"}/>
+                                                            </Avatar>
+                                                            <Typography>
+                                                                最新版タイムスケジュール
+                                                            </Typography>
+                                                        </Stack>
+                                                    </Button>
                                                     <Grid container spacing={1}>
                                                         <Grid xs={12} sm={gridValue} lg={gridValue}>
                                                             <Typography pl={2} pt={2}>
