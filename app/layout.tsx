@@ -25,19 +25,19 @@ export default function RootLayout({children,}: { children: React.ReactNode }) {
             {/* windows */}
             <meta
                 name="msapplication-square70x70logo"
-                content="/site-tile-70x70.png"
+                content="@/public/site-tile-70x70.png"
             />
             <meta
                 name="msapplication-square150x150logo"
-                content="/site-tile-150x150.png"
+                content="@/public/site-tile-150x150.png"
             />
             <meta
                 name="msapplication-wide310x150logo"
-                content="/site-tile-310x150.png"
+                content="@/public/site-tile-310x150.png"
             />
             <meta
                 name="msapplication-square310x310logo"
-                content="/site-tile-310x310.png"
+                content="@/public/site-tile-310x310.png"
             />
             <meta name="msapplication-TileColor" content="#000"/>
             {/* safari */}
@@ -49,14 +49,14 @@ export default function RootLayout({children,}: { children: React.ReactNode }) {
             <link
                 rel="apple-touch-icon"
                 sizes="192x192"
-                href="/icon-192x192.png"
+                href="@/public/icon-192x192.png"
             />
             {/* 一般 */}
             <meta name="application-name" content="myapp"/>
             <meta name="description" content="this is myapp"/>
-            <link rel="icon" sizes="192x192" href="/icon-192x192.png"/>
-            <link rel="icon" href="/favicon.ico"/>
-            <link rel="manifest" href="/manifest.json"/>
+            <link rel="icon" sizes="192x192" href="@/public/icon-192x192.png"/>
+            <link rel="icon" href="@/public/favicon.ico"/>
+            <link rel="manifest" href="@/public/manifest.json"/>
         </Head>
         <body className={inter.className}>
         <AppRouterCacheProvider>
