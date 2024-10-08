@@ -52,7 +52,7 @@ export const OtherInfo = (props: OtherInfoProps) => {
                 </Typography>
                 <Typography
                     color={theme.palette.text.primary}
-                    sx={{fontSize: "14px"}}
+                    sx={{fontSize: "14px", fontWeight: "bold"}}
                     lineHeight={"1.2em"}
                 >
                     {props.infoContent}
