@@ -13,7 +13,7 @@ const PrivacyPolicy = () => {
                     <Stack spacing={1}>
                         <Typography fontWeight={"600"}>基本的なアカウント情報</Typography>
                         <Divider/>
-                        <Typography>当サイトを利用するためには、Microsoftアカウントの基本的な情報（名前・アイコン）を取得します。また、参加する競技やチーム・リーグ・トーナメント・得点状況といった大会進行にしたがって必要な情報は、SPORTSDAY Adminを用いて登録されます。これらの情報は他のSPORTSDAYユーザーに公開されます。</Typography>
+                        <Typography>当サイトを利用するためには、Microsoftアカウントの基本的な情報（名前・メールアドレス）を取得します。また、参加する競技やチーム・リーグ・トーナメント・得点状況といった大会進行にしたがって必要な情報は、SPORTSDAY Adminを用いて登録されます。これらの情報は他のSPORTSDAYユーザーに公開されます。</Typography>
                     </Stack>
                 </Card>
                 <Card variant={"outlined"} sx={{p:2}}>
@@ -56,7 +56,7 @@ const PrivacyPolicy = () => {
                 </Card>
                 <Divider/>
                 <Typography variant={"h6"}>情報をどのように保護しますか？</Typography>
-                <Typography>SPORTSDAY開発者は、ユーザーが入力・送信する際や自身の情報にアクセスする際に個人情報を安全に保つため、さまざまなセキュリティ上の対策を実施しています。アプリケーションとユーザーの間の通信はSSL/TLSによって保護されます。また、ログイン処理はOIDCを用いており、SPORTSDAY開発者はパスワードなどの情報を一切収集することができません。</Typography>
+                <Typography>SPORTSDAY開発者は、ユーザーが入力・送信する際や自身の情報にアクセスする際に個人情報を安全に保つため、さまざまなセキュリティ上の対策を実施しています。アプリケーションとユーザーの間の通信はSSL/TLSによって保護されます。また、ログイン処理はMicrosoft Entra IDが提供するOpenID Connectを用いており、SPORTSDAY開発者はパスワードなどの情報を一切収集することができません。</Typography>
                 <Divider/>
                 <Typography variant={"h6"}>データの保持はどのように行われますか？</Typography>
                 <Typography>SPORTSDAY開発者は誠意を持って次のように努めます：大会を通して収集されたアンケート結果以外のデータは、大会期間（大会当日の前後約1ヶ月）のみサーバーに保持されます。大会期間を過ぎると直ちに削除され、サーバーのストレージを完全にクリーンな状態にして安全に処理します。</Typography>
@@ -66,7 +66,7 @@ const PrivacyPolicy = () => {
                 <Divider/>
                 <Typography variant={"h6"}>プライバシーポリシーの変更について</Typography>
                 <Typography>プライバシーポリシーの変更があった場合、このページに変更を掲載します。</Typography>
-                <Typography>最終更新：2024年4月17日</Typography>
+                <Typography>最終更新：2024年10月8日</Typography>
                 <Stack direction={"row"} spacing={0.5}>
                     <Typography fontWeight={"600"} color={"#99a5d6"}>(C)2024</Typography>
                     <WiderLogo/>
