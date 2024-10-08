@@ -111,20 +111,13 @@ export default function Page() {
                                                     </Box>
                                                 }
                                                 {!mySport && !myTeam &&
-                                                    <Stack
-                                                        direction={"column"}
-                                                        justifyContent={"center"}
-                                                        alignItems={"center"}
-                                                        spacing={1}
-                                                        py={3}
-                                                        px={2}
-                                                        width={"100%"}
+                                                    <Container
                                                         maxWidth={"xl"}
                                                     >
                                                         <OtherInfo infoName={""}
                                                                    infoContent={"どの競技にも参加していません。"}
                                                                    infoSubContent={"競技に参加しない方でも、各競技の進行状況を見ることができます。競技に参加する予定にも関わらずこのメッセージが表示されている場合は、お近くのスタッフにお伝えください。"}/>
-                                                    </Stack>
+                                                    </Container>
                                                 }
                                             </CircleContainer>
 

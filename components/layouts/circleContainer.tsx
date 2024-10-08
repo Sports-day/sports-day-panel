@@ -43,7 +43,9 @@ export default function CircleContainer(props: CircleContainerProps) {
                 <Container
                     maxWidth={"xl"}
                 >
-                    <InformationList/>
+                    <Box mb={1} mt={0}>
+                        <InformationList/>
+                    </Box>
                 </Container>
                 {props.children}
             </Container>
