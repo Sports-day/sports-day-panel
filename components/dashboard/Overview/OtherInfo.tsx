@@ -9,9 +9,9 @@ import {
 } from "react-icons/hi"
 
 export type OtherInfoProps = {
-    infoName: string;
-    infoContent: string;
-    infoSubContent: string;
+    infoName?: string;
+    infoContent?: string;
+    infoSubContent?: string;
 }
 
 export const OtherInfo = (props: OtherInfoProps) => {
@@ -25,7 +25,7 @@ export const OtherInfo = (props: OtherInfoProps) => {
             px={2}
             pb={3}
             pt={2}
-            mt={1.5}
+            mt={1}
             sx={{
                 backgroundColor: theme.palette.background.paper,
                 borderRadius: "12px",
@@ -52,7 +52,7 @@ export const OtherInfo = (props: OtherInfoProps) => {
                 </Typography>
                 <Typography
                     color={theme.palette.text.primary}
-                    sx={{fontSize: "14px", fontWeight:"600"}}
+                    sx={{fontSize: "14px", fontWeight: "bold"}}
                     lineHeight={"1.2em"}
                 >
                     {props.infoContent}

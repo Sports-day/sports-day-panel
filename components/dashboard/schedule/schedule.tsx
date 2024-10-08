@@ -1,6 +1,5 @@
 import {
     Stack,
-    Typography,
 } from "@mui/material";
 import * as React from "react";
 import {ScheduleContent} from "./ScheduleContent";
@@ -18,11 +17,7 @@ export const Schedule = (props: ScheduleProps) => {
     return (
                 <Stack
                     spacing={1}
-                    pb={2}
                 >
-                    <Typography pl={2}>
-                        あなたが参加する試合
-                    </Typography>
 
                         {props.matches
                             .sort((a, b) => a.startAt.localeCompare(b.startAt))

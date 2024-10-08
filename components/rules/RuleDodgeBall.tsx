@@ -52,7 +52,7 @@ export const RuleDodgeBall = () => {
             py={2}
             sx={{width:"100%"}}
         >
-            <RuleNumCard title={"会場"} content={"野球場"}/>
+            <RuleNumCard title={"会場"} content={"グラウンド"} sub={"芝生 奥側"}/>
             <RuleNumCard title={"試合時間"} content={"4分"}/>
             <RuleNumCard title={`女子ハンデ`} content={`2回のヒットでアウト`} sub={"女子 1人につき、1枚ビブスを譲渡する。（1チーム３人まで）着用している者は 2 回のヒットでアウト となる。（1 回目のヒットでビブスを脱いで内野にとどまり、2 回目のヒットで外野へ移動する。）" +
                 "外野はアウトラインからのみ攻撃する。 ただし、女子のみサイドラインからの攻撃を認める。\n" +

@@ -44,7 +44,7 @@ export const RuleSoccer = () => {
                 py={2}
                 sx={{maxWidth:"100%"}}
             >
-                <RuleNumCard title={"会場"} content={"グラウンド"} sub={"芝生一面"}/>
+                <RuleNumCard title={"会場"} content={"グラウンド"} sub={"芝生 学校側"}/>
                 <RuleNumCard title={"試合時間"} content={"12分"}/>
                 <RuleNumCard title={"チーム人数"} content={"9〜11人"}/>
                 <RuleNumCard title={"女子ハンデ"} content={"女子得点　３点"}/>

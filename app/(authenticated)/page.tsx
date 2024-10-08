@@ -4,6 +4,7 @@ import {
     Container, LinearProgress,
     Stack, Typography,
     Unstable_Grid2 as Grid,
+    Button, Avatar,
 } from "@mui/material";
 import * as React from "react";
 import Overview from "@/components/dashboard/Overview";
@@ -15,6 +16,8 @@ import {motion} from "framer-motion";
 import {OtherInfo} from "@/components/dashboard/Overview/OtherInfo";
 import CircleContainer from "@/components/layouts/circleContainer";
 import JudgeSchedule from "@/components/dashboard/schedule/judgeSchedule";
+import Link from "next/link";
+import {HiArrowTopRightOnSquare, HiOutlineExclamationTriangle} from "react-icons/hi2";
 
 // export const metadata: Metadata = {
 //     title: 'SPORTSDAY : Dashboard',
@@ -111,20 +114,13 @@ export default function Page() {
                                                     </Box>
                                                 }
                                                 {!mySport && !myTeam &&
-                                                    <Stack
-                                                        direction={"column"}
-                                                        justifyContent={"center"}
-                                                        alignItems={"center"}
-                                                        spacing={1}
-                                                        py={3}
-                                                        px={2}
-                                                        width={"100%"}
+                                                    <Container
                                                         maxWidth={"xl"}
                                                     >
                                                         <OtherInfo infoName={""}
                                                                    infoContent={"どの競技にも参加していません。"}
                                                                    infoSubContent={"競技に参加しない方でも、各競技の進行状況を見ることができます。競技に参加する予定にも関わらずこのメッセージが表示されている場合は、お近くのスタッフにお伝えください。"}/>
-                                                    </Stack>
+                                                    </Container>
                                                 }
                                             </CircleContainer>
 
@@ -138,30 +134,77 @@ export default function Page() {
                                                     justifyContent={"space-between"}
                                                     spacing={3}
                                                 >
+                                                    <Button
+                                                        variant={"contained"}
+                                                        color={"secondary"}
+                                                        scroll={false}
+                                                        component={Link}
+                                                        href={`https://00m.in/htguC`}
+                                                        target={"_blank"}
+                                                        sx={{
+                                                            width:"100%",
+                                                            border: `1px solid secondary.dark`,
+                                                        }}
+                                                    >
+                                                        <Stack
+                                                            direction={"row"}
+                                                            width={"100%"}
+                                                            justifyContent={"flex-start"}
+                                                            alignItems={"center"}
+                                                            spacing={2}
+                                                            py={1}
+                                                        >
+                                                            <Avatar
+                                                                sx={{height: "2em", width: "2em",
+                                                                    backgroundColor: "text.secondary",
+                                                                }}
+                                                            >
+                                                                <HiArrowTopRightOnSquare fontSize={"20px"}/>
+                                                            </Avatar>
+                                                            <Typography>
+                                                                最新版タイムスケジュール
+                                                            </Typography>
+                                                        </Stack>
+                                                    </Button>
                                                     <Grid container spacing={1}>
+                                                        <Grid xs={12} sm={gridValue} lg={gridValue}>
+                                                            <Typography pl={2} pt={2}>
+                                                                あなたが参加する試合
+                                                            </Typography>
 
-                                                        {mySport && myGame && myTeam &&
-                                                            <>
-                                                                <Grid xs={12} sm={gridValue} lg={gridValue}>
+                                                            {mySport && myGame && myTeam &&　
+                                                                <>
                                                                     <Schedule
                                                                         sportId={mySport.id}
                                                                         gameId={myGame.id}
                                                                         matches={myTeamMatches}
                                                                         myTeamId={myTeam.id}
                                                                     />
-                                                                </Grid>
-                                                            </>
-                                                        }
-                                                        {mySport && myGame && myTeam && myJudgeMatches.length > 0 &&
-                                                            <Grid xs={12} sm={gridValue} lg={gridValue}>
+                                                                </>
+                                                            }
+
+                                                            {!mySport && !myGame && !myTeam &&
+                                                                <>
+                                                                    <OtherInfo infoContent={"あなたが参加する試合はありません"} />
+                                                                </>
+                                                            }
+                                                        </Grid>
+                                                        <Grid xs={12} sm={gridValue} lg={gridValue}>
+                                                            <Typography pl={2} pt={2}>
+                                                                あなたが審判する試合
+                                                            </Typography>
+                                                            {mySport && myGame && myTeam && myJudgeMatches.length > 0 &&
                                                                 <JudgeSchedule
                                                                     sportId={mySport.id}
                                                                     gameId={myGame.id}
                                                                     matches={myJudgeMatches}
                                                                     myTeamId={myTeam.id}
                                                                 />
-                                                            </Grid>
-                                                        }
+                                                            }
+                                                            {!mySport && !myGame && !myTeam && myJudgeMatches.length === 0 &&
+                                                                <OtherInfo infoContent={"競技のルールに従ってください"} infoSubContent={"あなたのチームが審判として登録された試合はありませんが、ルールによってはあなたが審判である可能性があります。"}/>
+                                                            }
+                                                        </Grid>
                                                         <Typography pl={2} pt={2}>
                                                             すべての競技
                                                         </Typography>

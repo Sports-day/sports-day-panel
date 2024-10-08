@@ -242,41 +242,41 @@ export const Navigation = () => {
                                 </Typography>
                             </Stack>
                         </Button>
-                        <Button
-                            color={"secondary"}
-                            sx={{
-                                background:theme.palette.secondary.dark,
-                                border:`1px solid ${theme.palette.warning.main}`
-                        }}
-                            fullWidth disableElevation
-                            variant={"contained"}
-                            component={Link}
-                            href={"https://forms.office.com/Pages/ResponsePage.aspx?id=XYP-cpVeEkWK4KezivJfyNfX7_ygdxFHiwRmiJgWek1URUZOQ1JYTkpHWThPQVlQT1JBWFhWQllKVC4u"}
-                        >
-                            <Stack
-                                direction={"row"}
-                                justifyContent={"flex-start"}
-                                alignItems={"center"}
-                                spacing={2}
-                                py={0.5}
-                                width={"100%"}
-                            >
-                                <Avatar
-                                    sx={{
-                                        height: "2em",
-                                        width: "2em",
-                                        backgroundColor: "inherit",
-                                    }}
-                                >
-                                    <SvgIcon>
-                                        <HiClipboard color={`${theme.palette.text.primary}99`}/>
-                                    </SvgIcon>
-                                </Avatar>
-                                <Typography sx={{color: theme.palette.text.primary, fontSize: "14px"}}>
-                                    SPORTSDAY使用感アンケート
-                                </Typography>
-                            </Stack>
-                        </Button>
+                        {/*<Button*/}
+                        {/*    color={"secondary"}*/}
+                        {/*    sx={{*/}
+                        {/*        background:theme.palette.secondary.dark,*/}
+                        {/*        border:`1px solid ${theme.palette.warning.main}`*/}
+                        {/*}}*/}
+                        {/*    fullWidth disableElevation*/}
+                        {/*    variant={"contained"}*/}
+                        {/*    component={Link}*/}
+                        {/*    href={"https://forms.office.com/Pages/ResponsePage.aspx?id=XYP-cpVeEkWK4KezivJfyNfX7_ygdxFHiwRmiJgWek1URUZOQ1JYTkpHWThPQVlQT1JBWFhWQllKVC4u"}*/}
+                        {/*>*/}
+                        {/*    <Stack*/}
+                        {/*        direction={"row"}*/}
+                        {/*        justifyContent={"flex-start"}*/}
+                        {/*        alignItems={"center"}*/}
+                        {/*        spacing={2}*/}
+                        {/*        py={0.5}*/}
+                        {/*        width={"100%"}*/}
+                        {/*    >*/}
+                        {/*        <Avatar*/}
+                        {/*            sx={{*/}
+                        {/*                height: "2em",*/}
+                        {/*                width: "2em",*/}
+                        {/*                backgroundColor: "inherit",*/}
+                        {/*            }}*/}
+                        {/*        >*/}
+                        {/*            <SvgIcon>*/}
+                        {/*                <HiClipboard color={`${theme.palette.text.primary}99`}/>*/}
+                        {/*            </SvgIcon>*/}
+                        {/*        </Avatar>*/}
+                        {/*        <Typography sx={{color: theme.palette.text.primary, fontSize: "14px"}}>*/}
+                        {/*            SPORTSDAY使用感アンケート*/}
+                        {/*        </Typography>*/}
+                        {/*    </Stack>*/}
+                        {/*</Button>*/}
                     </Stack>
                 </Container>
             </Box>
