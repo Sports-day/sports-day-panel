@@ -403,6 +403,31 @@ export default function Page() {
                                         SPORTSDAYは、球技大会をDXするWebプラットフォーム。
                                     </Typography>
                                 </Stack>
+                                <Grid xs={12} sm={12} lg={12}>
+                                    <motion.div
+                                        style={{width: "100%"}}
+                                        initial={{opacity: 0, scale: 0.8}}
+                                        whileInView={{opacity: 1, scale: 1}}
+                                        transition={{delay: 0.2, duration: 1, ease: [0.16, 1, 0.3, 1]}}
+                                    >
+                                        <Card sx={{width: "100%", mt:1}}>
+                                            <CardMedia
+                                                component="img"
+                                                width={"100%"}
+                                                image="https://github.com/Sports-day/.github/assets/58895178/bb300f4c-2d56-4c7a-8e3b-d9b35427991d"
+                                                alt="管理画面"
+                                            />
+                                            <CardContent sx={{width: "100%"}}>
+                                                <Stack sx={{width: "100%", height: "100%"}} alignItems={"center"}
+                                                       justifyContent={"center"} spacing={1}>
+                                                    <Typography>
+                                                        SPORTSDAY導入前後のワークフロー
+                                                    </Typography>
+                                                </Stack>
+                                            </CardContent>
+                                        </Card>
+                                    </motion.div>
+                                </Grid>
                                 <Grid xs={12} sm={6} lg={6}>
                                     <motion.div
                                         style={{width: "100%"}}
@@ -414,14 +439,16 @@ export default function Page() {
                                             <CardMedia
                                                 component="img"
                                                 width={"100%"}
-                                                image="/images/form.png"
+                                                image="https://github.com/Sports-day/.github/assets/58895178/f2904013-ed1f-45de-adec-311bd5d0b4d3"
                                                 alt="Form"
                                             />
                                             <CardContent sx={{width: "100%"}}>
                                                 <Stack sx={{width: "100%", height: "100%"}} alignItems={"center"}
                                                        justifyContent={"center"} spacing={1}>
-                                                    <Image src={"/logo/logo_form.png"} height={"24"} width={"302"}
-                                                           alt={"SPORTSDAY Form"}/>
+                                                    <Stack direction={"row"} spacing={1} pb={2} justifyContent={"center"} alignItems={"center"}>
+                                                        <Logo width={16 * 8.45} height={16} fill={theme.palette.text.primary}/>
+                                                        <Typography fontWeight={"600"}>Form</Typography>
+                                                    </Stack>
                                                     <Typography>
                                                         チーム編成を行うアプリケーション
                                                     </Typography>
@@ -441,14 +468,16 @@ export default function Page() {
                                             <CardMedia
                                                 component="img"
                                                 width={"100%"}
-                                                image="/images/admin.png"
+                                                image="https://github.com/user-attachments/assets/68c9d6c4-770c-4094-b976-db0a75cf18d5"
                                                 alt="管理画面"
                                             />
                                             <CardContent sx={{width: "100%"}}>
                                                 <Stack sx={{width: "100%", height: "100%"}} alignItems={"center"}
                                                        justifyContent={"center"} spacing={1}>
-                                                    <Image src={"/logo/logo_admin.png"} height={"24"} width={"302"}
-                                                           alt={"SPORTSDAY Admin"}/>
+                                                    <Stack direction={"row"} spacing={1} pb={2} justifyContent={"center"} alignItems={"center"}>
+                                                        <Logo width={16 * 8.45} height={16} fill={theme.palette.text.primary}/>
+                                                        <Typography fontWeight={"600"}>Admin</Typography>
+                                                    </Stack>
                                                     <Typography>
                                                         リーグの編成や競技の結果登録を行う進行管理アプリケーション
                                                     </Typography>
@@ -457,6 +486,32 @@ export default function Page() {
                                         </Card>
                                     </motion.div>
                                 </Grid>
+                            </Grid>
+
+                            <Grid xs={12} sm={6} lg={6}>
+                                <motion.div
+                                    style={{width: "100%"}}
+                                    initial={{opacity: 0, scale: 0.8}}
+                                    whileInView={{opacity: 1, scale: 1}}
+                                    transition={{delay: 0.2, duration: 1, ease: [0.16, 1, 0.3, 1]}}
+                                >
+                                    <Card sx={{width: "100%", mb:10, mt:1}}>
+                                        <CardMedia
+                                            component="img"
+                                            width={"100%"}
+                                            image="https://github.com/Sports-day/.github/assets/58895178/387d1734-6f1a-4860-b2f7-dae1ae01d724"
+                                            alt="管理画面"
+                                        />
+                                        <CardContent sx={{width: "100%"}}>
+                                            <Stack sx={{width: "100%", height: "100%"}} alignItems={"center"}
+                                                   justifyContent={"center"} spacing={1}>
+                                                <Typography>
+                                                    SPORTSDAYの各アプリケーション関係
+                                                </Typography>
+                                            </Stack>
+                                        </CardContent>
+                                    </Card>
+                                </motion.div>
                             </Grid>
 
                             <Grid xs={12} sm={6} lg={6}>
@@ -495,34 +550,9 @@ export default function Page() {
                                 sx={{width: "100%"}}
                             >
                                 <Typography fontSize={"20px"}>
-                                    SPORTSDAYの構造
+
                                 </Typography>
                             </Stack>
-                            <Grid xs={12} sm={6} lg={6}>
-                                <motion.div
-                                    style={{width: "100%"}}
-                                    initial={{opacity: 0, scale: 0.8}}
-                                    whileInView={{opacity: 1, scale: 1}}
-                                    transition={{delay: 0.2, duration: 1, ease: [0.16, 1, 0.3, 1]}}
-                                >
-                                    <Card sx={{width: "100%", mb:10}}>
-                                        <CardMedia
-                                            component="img"
-                                            width={"100%"}
-                                            image="/images/flow.png"
-                                            alt="管理画面"
-                                        />
-                                        <CardContent sx={{width: "100%"}}>
-                                            <Stack sx={{width: "100%", height: "100%"}} alignItems={"center"}
-                                                   justifyContent={"center"} spacing={1}>
-                                                <Typography>
-                                                    SPORTSDAYの各アプリケーション関係
-                                                </Typography>
-                                            </Stack>
-                                        </CardContent>
-                                    </Card>
-                                </motion.div>
-                            </Grid>
                             <Grid xs={12} sm={6} lg={6}>
                                 <motion.div
                                     style={{width: "100%"}}
@@ -539,13 +569,23 @@ export default function Page() {
                                                 </Typography>
                                             </Stack>
                                             <Button
-                                                sx={{width:"100%"}}
+                                                sx={{width:"100%", mb:2}}
                                                 variant={"contained"}
                                                 color={"info"}
                                                 href={"https://forms.office.com/Pages/ResponsePage.aspx?id=XYP-cpVeEkWK4KezivJfyNfX7_ygdxFHiwRmiJgWek1URUZOQ1JYTkpHWThPQVlQT1JBWFhWQllKVC4u"}
                                             >
                                                 <Typography sx={{py:2}}>
                                                     フォームに答える
+                                                </Typography>
+                                            </Button>
+                                            <Button
+                                                sx={{width:"100%", textTransform:"none"}}
+                                                variant={"contained"}
+                                                color={"primary"}
+                                                href={"https://github.com/Sports-day"}
+                                            >
+                                                <Typography sx={{py:2}}>
+                                                    SPORTSDAYのGitHubを見る
                                                 </Typography>
                                             </Button>
                                         </CardContent>
