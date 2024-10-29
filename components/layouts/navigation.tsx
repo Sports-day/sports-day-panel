@@ -293,6 +293,7 @@ export const Navigation = () => {
                 spacing={2}
             >
                 <Dialog
+                    fullScreen
                     open={open}
                     onClose={handleClose}
                     scroll={scroll}
@@ -312,13 +313,13 @@ export const Navigation = () => {
                     <DialogContent dividers={scroll === 'paper'}>
                         <DocsOverall/>
                     </DialogContent>
-                    <DialogActions>
+                    <DialogActions sx={{mb:3}}>
                         <Stack
                             direction={"row"}
                             justifyContent={"center"}
                             alignItems={"center"}
                             spacing={2}
-                            sx={{width: "100%"}}
+                            sx={{width: "100%", height:"40px"}}
                         >
                             <Button sx={{width: "100%", height: "100%"}} onClick={handleClose}>
                                 <SvgIcon sx={{mr: 1}}>
