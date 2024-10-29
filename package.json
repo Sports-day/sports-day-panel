@@ -44,7 +44,7 @@
     "@types/react-dom": "18.0.10",
     "eslint": "8.31.0",
     "eslint-config-next": "^13.3.0",
-    "next-export-optimize-images": "^2.0.1",
+    "next-export-optimize-images": "^4.5.1",
     "typescript": "4.9.4"
   }
 }
