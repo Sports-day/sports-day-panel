@@ -134,38 +134,6 @@ export default function Page() {
                                                     justifyContent={"space-between"}
                                                     spacing={3}
                                                 >
-                                                    <Button
-                                                        variant={"contained"}
-                                                        color={"secondary"}
-                                                        scroll={false}
-                                                        component={Link}
-                                                        href={`https://00m.in/htguC`}
-                                                        target={"_blank"}
-                                                        sx={{
-                                                            width:"100%",
-                                                            border: `1px solid secondary.dark`,
-                                                        }}
-                                                    >
-                                                        <Stack
-                                                            direction={"row"}
-                                                            width={"100%"}
-                                                            justifyContent={"flex-start"}
-                                                            alignItems={"center"}
-                                                            spacing={2}
-                                                            py={1}
-                                                        >
-                                                            <Avatar
-                                                                sx={{height: "2em", width: "2em",
-                                                                    backgroundColor: "text.secondary",
-                                                                }}
-                                                            >
-                                                                <HiArrowTopRightOnSquare fontSize={"20px"}/>
-                                                            </Avatar>
-                                                            <Typography>
-                                                                最新版タイムスケジュール
-                                                            </Typography>
-                                                        </Stack>
-                                                    </Button>
                                                     <Grid container spacing={1}>
                                                         <Grid xs={12} sm={gridValue} lg={gridValue}>
                                                             <Typography pl={2} pt={2}>
@@ -201,7 +169,7 @@ export default function Page() {
                                                                     myTeamId={myTeam.id}
                                                                 />
                                                             }
-                                                            {!mySport && !myGame && !myTeam && myJudgeMatches.length === 0 &&
+                                                            {myJudgeMatches.length === 0 &&
                                                                 <OtherInfo infoContent={"競技のルールに従ってください"} infoSubContent={"あなたのチームが審判として登録された試合はありませんが、ルールによってはあなたが審判である可能性があります。"}/>
                                                             }
                                                         </Grid>

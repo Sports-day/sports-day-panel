@@ -78,14 +78,14 @@ export const GameList = (props: GameListProps) => {
 
     return (
         <Stack
-            spacing={2}
             pb={2}
         >
-            <Typography pl={2}>
-                この競技の試合
+            <Typography pl={2} pb={1}>
+                この競技のリーグ
             </Typography>
             <Box sx={{
                 position: "relative",
+                pb:3,
             }}>
                 <Tabs
                     value={value}
@@ -124,6 +124,9 @@ export const GameList = (props: GameListProps) => {
                             animate={{opacity: 1}}
                             transition={{duration: 1, ease: [0.16, 1, 0.3, 1]}}
                         >
+                            <Typography pl={2} pb={1}>
+                                このリーグの試合
+                            </Typography>
                             <GameListContent game={game} myTeamId={props.myTeamId}/>
                         </motion.div>
                     </TabPanel>
