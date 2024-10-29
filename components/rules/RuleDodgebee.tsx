@@ -1,6 +1,5 @@
 import {
     Box,
-    Grid,
     Stack,
     Typography,
     DialogContentText,
