@@ -5,7 +5,7 @@ import {
     Card,
     CardContent, CardMedia, Chip,
     Container,
-    Divider, IconButton,
+    IconButton,
     Stack,
     SvgIcon,
     Typography,
@@ -14,16 +14,13 @@ import {
 } from "@mui/material";
 import * as React from "react";
 import {
-    FaQuoteLeft,
     FaTwitter,
     FaGithubAlt
 } from "react-icons/fa";
 import {
-    HiCheckCircle, HiChevronDown,
-    HiPaintBrush
+    HiChevronDown,
 } from "react-icons/hi2";
 import Link from "next/link";
-import Image from "next/image";
 import CircleContainer from "@/components/layouts/circleContainer";
 import Logo from "@/public/logo/logo.svg";
 import {TbBrandKotlin, TbBrandNextjs} from "react-icons/tb";
@@ -93,19 +90,172 @@ export default function Page() {
                             disableGutters
                             sx={{px: 2, pb: 0, mt: "-50px"}}
                         >
-                            <Stack
-                                direction={"row"}
-                                justifyContent={"center"}
-                                alignItems={"center"}
-                                spacing={5}
-                                py={3}
-                            >
-                                <Typography fontSize={"20px"}>
-                                    SPORTSDAYの開発
-                                </Typography>
-                            </Stack>
 
                             <Grid container spacing={1.5}>
+
+                                <Grid xs={12} sm={6} lg={6}>
+                                    <motion.div
+                                        initial={{opacity: 0, y: "50px"}}
+                                        whileInView={{opacity: 1, y: "0px"}}
+                                        transition={{delay: 0.1, duration: 1, ease: [0.16, 1, 0.3, 1]}}
+                                    >
+                                        <Card
+                                            sx={{
+                                                height:"220px",
+                                                background:`linear-gradient(${theme.palette.warning.main}30, ${theme.palette.secondary.dark})`
+                                        }}
+                                        >
+                                            <CardContent  sx={{height:"100%"}}>
+                                                <Stack
+                                                    sx={{height:"100%"}}
+                                                    direction={"column"}
+                                                    justifyContent={"center"}
+                                                    alignItems={"center"}
+                                                    spacing={1}
+                                                    py={2}
+                                                >
+                                                    <Typography
+                                                        align={"center"}
+                                                        fontSize={"16px"}>第35回 全国高専プログラミングコンテスト</Typography>
+                                                    <Stack
+                                                        direction={"row"}
+                                                        justifyContent={"center"}
+                                                        alignItems={"center"}
+                                                        spacing={1}
+                                                        py={0}
+                                                    >
+                                                        <Typography align={"center"} variant={"h5"}>自由部門 優秀賞</Typography>
+                                                        <Box py={0.4}
+                                                             px={2}
+                                                             sx={{
+                                                                 borderRadius: "15px",
+                                                                 backgroundColor: theme.palette.warning.main,
+                                                                 minWidth: "65px",
+                                                             }}
+                                                        >
+                                                            <Typography fontSize={"16px"}
+                                                                        color={"#fff"}>受賞</Typography>
+                                                        </Box>
+                                                    </Stack>
+                                                </Stack>
+                                            </CardContent>
+                                        </Card>
+                                    </motion.div>
+                                </Grid>
+
+                                <Grid xs={12} sm={6} lg={6}>
+                                    <motion.div
+                                        initial={{opacity: 0, y: "50px"}}
+                                        whileInView={{opacity: 1, y: "0px"}}
+                                        transition={{delay: 0.1, duration: 1, ease: [0.16, 1, 0.3, 1]}}
+                                    >
+                                        <Card
+                                            sx={{
+                                                height:"220px",
+                                                background:`linear-gradient(${theme.palette.warning.main}30, ${theme.palette.secondary.dark})`
+                                            }}
+                                        >
+                                            <CardContent  sx={{height:"100%"}}>
+                                                <Stack
+                                                    sx={{height:"100%"}}
+                                                    direction={"column"}
+                                                    justifyContent={"center"}
+                                                    alignItems={"center"}
+                                                    spacing={1}
+                                                    py={2}
+                                                >
+                                                    <Typography
+                                                        align={"center"}
+                                                        fontSize={"16px"}>The 16th NAPROCK INTERNATIONAL PROGRAMMING CONTEST</Typography>
+                                                    <Stack
+                                                        direction={"row"}
+                                                        justifyContent={"center"}
+                                                        alignItems={"center"}
+                                                        spacing={1}
+                                                        py={0}
+                                                    >
+                                                        <Typography align={"center"} variant={"h5"}>Original Section Second Prize</Typography>
+                                                        <Box py={0.4}
+                                                             px={2}
+                                                             sx={{
+                                                                 borderRadius: "15px",
+                                                                 backgroundColor: theme.palette.warning.main,
+                                                                 minWidth: "65px",
+                                                             }}
+                                                        >
+                                                            <Typography fontSize={"16px"}
+                                                                        color={"#fff"}>受賞</Typography>
+                                                        </Box>
+                                                    </Stack>
+                                                </Stack>
+                                            </CardContent>
+                                        </Card>
+                                    </motion.div>
+                                </Grid>
+
+                                <Grid xs={12} sm={6} lg={6}>
+                                    <motion.div
+                                        initial={{opacity: 0, y: "50px"}}
+                                        whileInView={{opacity: 1, y: "0px"}}
+                                        transition={{delay: 0.1, duration: 1, ease: [0.16, 1, 0.3, 1]}}
+                                    >
+                                        <Card
+                                            sx={{
+                                                height:"220px",
+                                                background:`linear-gradient(${theme.palette.warning.main}30, ${theme.palette.secondary.dark})`
+                                            }}
+                                        >
+                                            <CardContent  sx={{height:"100%"}}>
+                                                <Stack
+                                                    sx={{height:"100%"}}
+                                                    direction={"column"}
+                                                    justifyContent={"center"}
+                                                    alignItems={"center"}
+                                                    spacing={1}
+                                                    py={2}
+                                                >
+                                                    <Typography
+                                                        align={"center"}
+                                                        fontSize={"16px"}>第35回 全国高専プログラミングコンテスト</Typography>
+                                                    <Stack
+                                                        direction={"row"}
+                                                        justifyContent={"center"}
+                                                        alignItems={"center"}
+                                                        spacing={1}
+                                                        py={0}
+                                                    >
+                                                        <Typography align={"center"} variant={"h5"}>NSD企業賞</Typography>
+                                                        <Box py={0.4}
+                                                             px={2}
+                                                             sx={{
+                                                                 borderRadius: "15px",
+                                                                 backgroundColor: theme.palette.warning.main,
+                                                                 minWidth: "65px",
+                                                             }}
+                                                        >
+                                                            <Typography fontSize={"16px"}
+                                                                        color={"#fff"}>受賞</Typography>
+                                                        </Box>
+                                                    </Stack>
+                                                </Stack>
+                                            </CardContent>
+                                        </Card>
+                                    </motion.div>
+                                </Grid>
+
+                                <Stack
+                                    direction={"column"}
+                                    justifyContent={"center"}
+                                    alignItems={"center"}
+                                    spacing={5}
+                                    pt={10}
+                                    pb={3}
+                                    sx={{width: "100%"}}
+                                >
+                                    <Typography fontSize={"20px"}>
+                                        SPORTSDAYの開発
+                                    </Typography>
+                                </Stack>
 
                                 <Grid xs={12} sm={12} lg={12}>
                                     <motion.div
@@ -378,6 +528,62 @@ export default function Page() {
                                                     >
                                                         <IconButton component={Link}
                                                                     href={"https://github.com/Takkun0310"}
+                                                                    target={"_blank"}>
+                                                            <SvgIcon>
+                                                                <FaGithubAlt color="#99a5d6"/>
+                                                            </SvgIcon>
+                                                        </IconButton>
+                                                    </Stack>
+                                                </Stack>
+                                            </CardContent>
+                                        </Card>
+                                    </motion.div>
+                                </Grid>
+
+                                <Grid xs={12} sm={6} lg={6}>
+                                    <motion.div
+                                        initial={{opacity: 0, y: "50px"}}
+                                        whileInView={{opacity: 1, y: "0px"}}
+                                        transition={{delay: 0.1, duration: 1, ease: [0.16, 1, 0.3, 1]}}
+                                    >
+                                        <Card sx={{height:"220px"}}>
+                                            <CardContent sx={{height:"100%"}}>
+                                                <Stack
+                                                    sx={{height:"100%"}}
+                                                    direction={"column"}
+                                                    justifyContent={"center"}
+                                                    alignItems={"center"}
+                                                    spacing={1}
+                                                    py={2}
+                                                >
+                                                    <Typography
+                                                        fontSize={"16px"}>フロントエンド開発者</Typography>
+                                                    <Stack
+                                                        direction={"row"}
+                                                        justifyContent={"center"}
+                                                        alignItems={"center"}
+                                                        spacing={1}
+                                                        py={0}
+                                                    >
+                                                        <Box py={0.4}
+                                                             px={2}
+                                                             sx={{
+                                                                 borderRadius: "15px",
+                                                                 backgroundColor: "#99a5d6"
+                                                             }}
+                                                        >
+                                                            <Typography fontSize={"16px"}
+                                                                        color={"#23398A"}>E1</Typography>
+                                                        </Box>
+                                                        <Typography variant={"h5"}>川崎 優弥</Typography>
+                                                    </Stack>
+                                                    <Stack
+                                                        direction={"row"}
+                                                        justifyContent={"center"}
+                                                        alignItems={"center"}
+                                                        spacing={1}
+                                                    >
+                                                        <IconButton component={Link} href={"https://github.com/hakase61912"}
                                                                     target={"_blank"}>
                                                             <SvgIcon>
                                                                 <FaGithubAlt color="#99a5d6"/>
