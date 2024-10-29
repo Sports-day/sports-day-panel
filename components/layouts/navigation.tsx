@@ -2,7 +2,7 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import {
-    HiArrowRightOnRectangle, HiClipboard,
+    HiArrowRightOnRectangle,
     HiHome, HiMagnifyingGlass, HiNewspaper, HiSparkles, HiUser, HiXMark
 } from "react-icons/hi2";
 import {
