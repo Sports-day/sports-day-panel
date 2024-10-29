@@ -5,7 +5,7 @@ import {
     Card,
     CardContent, CardMedia, Chip,
     Container,
-    Divider, IconButton,
+    IconButton,
     Stack,
     SvgIcon,
     Typography,
@@ -14,16 +14,13 @@ import {
 } from "@mui/material";
 import * as React from "react";
 import {
-    FaQuoteLeft,
     FaTwitter,
     FaGithubAlt
 } from "react-icons/fa";
 import {
-    HiCheckCircle, HiChevronDown,
-    HiPaintBrush
+    HiChevronDown,
 } from "react-icons/hi2";
 import Link from "next/link";
-import Image from "next/image";
 import CircleContainer from "@/components/layouts/circleContainer";
 import Logo from "@/public/logo/logo.svg";
 import {TbBrandKotlin, TbBrandNextjs} from "react-icons/tb";
