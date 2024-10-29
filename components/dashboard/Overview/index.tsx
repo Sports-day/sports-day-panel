@@ -33,10 +33,16 @@ export type OverviewProps = {
 export const Overview = (props: OverviewProps) => {
     const theme = useTheme();
 
-    const [open, setOpen] = useState(false);
-    const toggleDrawer = (newOpen: boolean) => () => {
-        setOpen(newOpen);
+    //teamDrawer
+    const [teamDrawerOpen, setTeamDrawerOpen] = useState(false);
+    const toggleTeamDrawer = (newOpen: boolean) => () => {
+        setTeamDrawerOpen(newOpen);
     };
+    //rankDrawer
+    const [rankDrawerOpen, setRankDrawerOpen] = useState(false);
+    const toggleRankDrawer = (newOpen: boolean) => () => {
+        setRankDrawerOpen(newOpen);
+    }
 
     return (
         <Container
@@ -91,18 +97,19 @@ export const Overview = (props: OverviewProps) => {
                     </Button>
                 </Grid>
                 <Grid xs={5.5} sm={5.5} lg={5.5}>
-                    <Box
-                        px={2}
-                        py={1.5}
-                        mb={"8px"}
-                        pr={2}
+                    <Button
+                        disableElevation
+                        color={"secondary"}
+                        variant={"contained"}
+                        onClick={toggleRankDrawer(true)}
                         sx={{
-                            width: "100%",
-                            height: "86px",
-                            borderRadius: "12px",
-                            backgroundColor: `${theme.palette.secondary.light}33`,
+                            width: "100%", height: "86px",
+                            backgroundColor: `${theme.palette.secondary.light}66`,
                             border: `1px solid ${theme.palette.secondary.dark}66`,
-                        }}>
+                            boxShadow: `0px 0px 5px ${theme.palette.primary.dark}33`,
+                            mb:"8px"
+                        }}
+                    >
                         <Stack
                             direction={"row"}
                             justifyContent={"space-between"}
@@ -114,7 +121,7 @@ export const Overview = (props: OverviewProps) => {
                                 justifyContent={"center"}
                                 alignItems={"flex-start"}
                             >
-                                <Typography sx={{fontSize: "14px"}}>
+                                <Typography sx={{fontSize: "14px", color: theme.palette.text.primary}}>
                                     リーグ内順位
                                 </Typography>
                                 <Rank rank={props.myTeamRank}/>
@@ -123,12 +130,12 @@ export const Overview = (props: OverviewProps) => {
                                 <HiChartBar color="#99a5d6"/>
                             </SvgIcon>
                         </Stack>
-                    </Box>
+                    </Button>
                     <Button
                         disableElevation
                         color={"secondary"}
                         variant={"contained"}
-                        onClick={toggleDrawer(true)}
+                        onClick={toggleTeamDrawer(true)}
                         sx={{
                             width: "100%", height: "86px",
                             backgroundColor: `${theme.palette.secondary.light}66`,
@@ -158,11 +165,12 @@ export const Overview = (props: OverviewProps) => {
                     </Button>
                 </Grid>
             </Grid>
+            {/*teamDrawer*/}
             <SwipeableDrawer
                 anchor="bottom"
-                open={open}
-                onClose={toggleDrawer(false)}
-                onOpen={toggleDrawer(true)}
+                open={teamDrawerOpen}
+                onClose={toggleTeamDrawer(false)}
+                onOpen={toggleTeamDrawer(true)}
                 swipeAreaWidth={5}
                 disableSwipeToOpen={true}
                 ModalProps={{
@@ -230,6 +238,59 @@ export const Overview = (props: OverviewProps) => {
                                     </Fragment>
                                 );
                             })}
+                        </Stack>
+                    </Container>
+                </Box>
+            </SwipeableDrawer>
+
+            {/*rankDrawer*/}
+            <SwipeableDrawer
+                anchor="bottom"
+                open={rankDrawerOpen}
+                onClose={toggleRankDrawer(false)}
+                onOpen={toggleRankDrawer(true)}
+                swipeAreaWidth={5}
+                disableSwipeToOpen={true}
+                ModalProps={{
+                    keepMounted: true,
+                }}
+                PaperProps={{elevation: 0, style: {backgroundColor: "transparent"}}}
+            >
+                <Box
+                    sx={{
+                        width: '100vw',
+                        height: 'auto',
+                        overflow: 'scrollable',
+                        background: `${theme.palette.secondary.main}FC`,
+                        backdropFilter: 'blur(30px)',
+                        borderRadius: "15px",
+                        borderBottomLeftRadius: "0px",
+                        borderBottomRightRadius: "0px",
+                        color: '#E8EBF8',
+                        pb: 5,
+                        pt: 1.5
+                    }}
+                    role="Navigation"
+                >
+                    <Container maxWidth={"xl"}>
+                        <Stack spacing={1}>
+                            <Stack direction={"column"} spacing={2} pb={2} justifyContent={"center"}
+                                   alignItems={"center"}>
+                                <Box sx={{
+                                    width: 50,
+                                    height: 6,
+                                    borderRadius: 3,
+                                    backgroundColor: `${theme.palette.text.primary}4D`
+                                }}></Box>
+                                <Typography
+                                    color={theme.palette.text.primary}
+                                    textAlign={"center"}
+                                >
+                                    リーグ内順位
+                                </Typography>
+                            </Stack>
+
+
                         </Stack>
                     </Container>
                 </Box>
