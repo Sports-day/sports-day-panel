@@ -17,6 +17,8 @@ import { TeamsContext } from "@/components/context";
 type Props = {
     chartSeries: number[]
 }
+import {Box, Container} from "@mui/material";
+import LeftCircleContainer from "@/components/layouts/leftCircleContainer";
 
 const Game = (props: Props) => {
     const theme = useTheme();
@@ -67,14 +69,41 @@ const Game = (props: Props) => {
     );
 };
 
-const Page = ({ params }: { params: { id: string } }) => {
+export default function Page({params}: { params: { id: string } })  {
     return (
-        <Container maxWidth="lg">
-            <Box display="flex" flexDirection="row" justifyContent="center" alignItems="flex-start" gap={4}>
-                {/* First Component */}
-                <Box flex={1}>
-                    <Box>Component 1</Box>
-                </Box>
+        <div style={{position: 'relative'}}>
+            <Box
+                sx={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    zIndex: 0
+                }}
+            >
+                <LeftCircleContainer/>
+            </Box>
+
+
+            <Container
+                maxWidth="lg"
+                sx={{
+                    position: 'relative',
+                    zIndex: 1
+                }}
+            >
+                <Box
+                    display="flex"
+                    flexDirection="row"
+                    justifyContent="center"
+                    alignItems="flex-start"
+                    gap={4}
+                >
+                    {/* First Component */}
+                    <Box flex={1}>
+                        <Box>Component 1</Box>
+                    </Box>
 
                 {/* Second Component */}
                 <Box flex={1}>
@@ -147,13 +176,9 @@ const Page = ({ params }: { params: { id: string } }) => {
                             </Card>
                         </Box>
                     </Box>
-
-                    <Box>Component 2</Box>
                 </Box>
             </Box>
         </Container>
+        </div>
     );
 };
-
-export default Page;
-
