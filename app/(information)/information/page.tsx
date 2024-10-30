@@ -1,7 +1,7 @@
 import {Box, Stack, Typography} from "@mui/material";
 import SportsList from "@/components/sports/sportsList";
 import {sportFactory} from "@/src/models/SportModel";
-import InfoCircleContainer from "@/components/layouts/infoCircleContainer";
+import InfoCircleContainer from "@/components/information/layout/infoCircleContainer";
 
 export default async function Page() {
     const sports = await sportFactory().index()
