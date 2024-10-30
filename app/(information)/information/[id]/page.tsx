@@ -17,7 +17,6 @@ import { TeamsContext } from "@/components/context";
 type Props = {
     chartSeries: number[]
 }
-import {Box, Container} from "@mui/material";
 import LeftCircleContainer from "@/components/layouts/leftCircleContainer";
 
 const Game = (props: Props) => {
