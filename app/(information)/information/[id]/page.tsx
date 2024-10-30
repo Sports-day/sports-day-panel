@@ -1,183 +1,116 @@
 'use client'
-import {
-    Box,
-    Stack,
-    styled,
-    LinearProgress,
-    Typography,
-    useTheme,
-    Container,
-    Card,
-    CardContent
-} from "@mui/material";
-import { linearProgressClasses } from "@mui/material";
-import { useContext } from "react";
-import { TeamsContext } from "@/components/context";
+import {Box, Card, CardContent, Container} from "@mui/material";
+import LeftCircleContainer from "@/components/information/layout/leftCircleContainer";
+import {GameProgressChart} from "@/components/game/game-progress/GameProgressChart";
+import MatchList from "@/components/information/matchList"
+import {sportFactory} from "@/src/models/SportModel";
+import {gameFactory} from "@/src/models/GameModel";
+import {Match} from "@/src/models/MatchModel";
 
-type Props = {
-    chartSeries: number[]
-}
-import LeftCircleContainer from "@/components/layouts/leftCircleContainer";
+export default async function Page({params}: { params: { id: string } }) {
 
-const Game = (props: Props) => {
-    const theme = useTheme();
-    const { data: teams } = useContext(TeamsContext);
+    const sportId = parseInt(params.id, 10)
+    const sport = await sportFactory().show(sportId)
+    const games = await gameFactory().index()
+    const filteredGames = games.filter((game) => game.sportId == sport.id)
 
-    const PointBar = styled(LinearProgress)(({}) => ({
-        height: 15,
-        borderRadius: 15,
-        [`&.${linearProgressClasses.colorPrimary}`]: {
-            backgroundColor: theme.palette.secondary.dark,
-        },
-        [`& .${linearProgressClasses.bar}`]: {
-            borderRadius: 2,
-            backgroundColor: theme.palette.text.primary,
-        },
-    }));
+    const matchList: Match[] = []
+    for (const game of filteredGames) {
+        //  get all matches
+        const matches = await gameFactory().getGameMatches(game.id)
+        //  filter matches that are not finished
+        const inProgressMatches = matches.filter((match) => match.status == "standby" || match.status == "in_progress")
+
+        //  sort by start time
+        inProgressMatches.sort((a, b) => {
+            return new Date(a.startAt).getTime() - new Date(b.startAt).getTime()
+        })
+
+        //  pick the first match
+        if (inProgressMatches[0]) {
+            matchList.push(inProgressMatches[0])
+        }
+    }
 
     return (
-        <Stack
-            direction={"column"}
-            justifyContent={"space-between"}
-            alignItems={"space-between"}
-            maxWidth={'xl'}
-            sx={{ width: '100%', height: "100%" }}
-            spacing={1}
-        >
-            <Stack
-                direction={"row"}
-                justifyContent={"space-between"}
-                alignItems={"flex-start"}
-                spacing={0}
-                sx={{ width: '100%' }}
-            >
-                <Typography fontSize={"14px"}>
-                    進行状況
-                </Typography>
-                <Typography fontSize={"18px"} fontWeight={"600"}>
-                    {props.chartSeries[0]} %
-                </Typography>
-            </Stack>
-            <Box>
-                <PointBar
-                    variant={"determinate"}
-                    value={props.chartSeries[0]}
-                />
-            </Box>
-        </Stack>
-    );
-};
-
-export default function Page({params}: { params: { id: string } })  {
-    return (
-        <div style={{position: 'relative'}}>
-            <Box
-                sx={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    zIndex: 0
-                }}
-            >
-                <LeftCircleContainer/>
-            </Box>
-
-
+        <div style={{position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden'}}>
             <Container
-                maxWidth="lg"
+                maxWidth={false}
+                disableGutters // パディングを取り除く
                 sx={{
-                    position: 'relative',
-                    zIndex: 1
+                    width: '100vw',
+                    height: '100vh',
+                    padding: 0,
+                    margin: 0,
                 }}
             >
                 <Box
-                    display="flex"
-                    flexDirection="row"
-                    justifyContent="center"
-                    alignItems="flex-start"
-                    gap={4}
+                    sx={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        zIndex: 0,
+                        padding: 0,
+                        margin: 0,
+                        justifyContent: 'space-evenly'
+                    }}
                 >
-                    {/* First Component */}
-                    <Box flex={1}>
-                        <Box>Component 1</Box>
-                    </Box>
+                    <LeftCircleContainer/>
+                </Box>
 
-                {/* Second Component */}
-                <Box flex={1}>
+                <Container
+                    maxWidth="lg"
+                    sx={{
+                        position: 'relative',
+                        zIndex: 1,
+                        width: '100vw',
+                        height: '100%',
+                    }}
+                >
                     <Box
                         display="flex"
-                        flexDirection="column"
-                        justifyContent="flex-start"
-                        alignItems="center"
-                        height="100vh"
-                        position="relative"
+                        flexDirection="row"
+                        justifyContent="center"
+                        alignItems="flex-start"
+                        gap={4}
+                        sx={{width: '100%', height: '100%'}}
                     >
-                        {/* 進行状況カード */}
-                        <Box sx={{ width: '100%', maxWidth: 600, mb: 10, marginTop: 8 }}>
-                            <Card sx={{ width: '100%', height: 90 }}>
-                                <CardContent>
-                                    <Game chartSeries={[50]} /> {/* 進行状況を50%で表示 */}
-                                </CardContent>
-                            </Card>
+                        {/* First Component */}
+                        <Box flex={1} sx={{width: '100%'}}>
+                            {/* コンテンツ */}
                         </Box>
-                        <Box sx={{ position: 'relative', width: '100%', maxWidth: 600 }}>
-                            {/* 後ろのカード */}
-                            <Card variant="outlined" sx={{
-                                height: 90,
-                                width: '100%',
-                                position: 'absolute',
-                                top: 6,
-                                right:-6,
-                                zIndex: 1 // メインカードの下に置く
-                            }} />
-                        </Box>
-                        {/* メインカード */}
-                        <Box sx={{ width: '100%', maxWidth: 600 }}>
-                            <Card variant="outlined" sx={{
-                                height: 90,
-                                width: '100%',
-                                position: 'relative', // 前面に表示
-                                zIndex: 2
-                            }}>
-                                <CardContent
-                                    sx={{
-                                        display: 'flex',
-                                        flexDirection: 'row',
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                        height: '75px',
-                                    }}>
-                                    <Typography variant="subtitle1" component="div" sx={{ mr: 5,mb: -2,lineHeight: '10'}}>
-                                        Aリーグ
-                                    </Typography>
-                                    <Typography variant="h4" component="div" sx={{ ml: 5 ,mb: -2,lineHeight: '10'}}>
-                                        E2-A
-                                    </Typography>
-                                    <Box sx={{ mx: 2 ,mb: -2,lineHeight: '10'}}>
-                                        <Typography variant="subtitle1" color="text.secondary">
-                                            vs
-                                        </Typography>
-                                    </Box>
-                                    <Typography variant="h4" component="div"sx={{ mb: -2,lineHeight: '10'}}>
-                                        E5-B
-                                    </Typography>
-                                    <Box display="flex" flexDirection="column" alignItems="flex-end">
-                                        <Typography variant="subtitle1" component="div" sx={{ ml: 9}}>
-                                            16:00～16:30
-                                        </Typography>
-                                        <Typography variant="subtitle1" component="div" sx={{ ml: 7 ,mb: -2}}>
-                                            第一体育館
-                                        </Typography>
-                                    </Box>
-                                </CardContent>
-                            </Card>
+
+                        {/* Second Component */}
+                        <Box flex={1} sx={{width: '100%'}}>
+                            <Box
+                                display="flex"
+                                flexDirection="column"
+                                justifyContent="flex-start"
+                                alignItems="center"
+                                height="100%"
+                                width="100%"
+                                position="relative"
+                            >
+                                {/* 進行状況カード */}
+                                <Box sx={{width: '100%', maxWidth: 600, mb: 10, marginTop: 8}}>
+                                    <Card sx={{width: '100%', height: 90}}>
+                                        <CardContent>
+                                            <GameProgressChart chartSeries={[10]}/>
+                                        </CardContent>
+                                    </Card>
+                                </Box>
+                                {/* @ts-expect-error Server Component */}
+
+                                <MatchList matches={matchList}/>
+
+
+                            </Box>
                         </Box>
                     </Box>
-                </Box>
-            </Box>
-        </Container>
+                </Container>
+            </Container>
         </div>
     );
 };
