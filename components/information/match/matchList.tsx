@@ -1,6 +1,6 @@
 import Grid from "@mui/material/Grid";
 import {Match} from "@/src/models/MatchModel";
-import MatchCard from "@/components/information/matchCard";
+import MatchCard from "@/components/information/match/matchCard";
 
 export type MatchListProps = {
     matches: Match[]
@@ -24,6 +24,8 @@ export default async function MatchList(props: MatchListProps) {
         <Grid
             container
             spacing={1}
+            justifyContent="center"
+            alignItems="center"
         >
             {components}
         </Grid>
