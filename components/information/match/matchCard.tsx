@@ -17,7 +17,6 @@ export default async function MatchCard(props: MatchCardProps) {
     const location = props.match.locationId == null ? undefined : await locationFactory().show(props.match.locationId)
     const leftTeam = props.match.leftTeamId == null ? undefined : await teamFactory().show(props.match.leftTeamId)
     const rightTeam = props.match.rightTeamId == null ? undefined : await teamFactory().show(props.match.rightTeamId)
-    const judgeTeam = props.match.judgeTeamId == null ? undefined : await teamFactory().show(props.match.judgeTeamId)
 
     const formattedTime = new Date(props.match.startAt).toLocaleTimeString("ja-JP", {
         hour: '2-digit',
