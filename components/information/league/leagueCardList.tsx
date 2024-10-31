@@ -48,7 +48,7 @@ export default function LeagueCardList(props: LeagueCardListProps) {
 
         //  sort
         extendedLeagueResults.sort((a, b) =>
-            a.teamResult.score - b.teamResult.score
+            b.teamResult.score - a.teamResult.score
         )
 
         setResults(extendedLeagueResults.slice(3, 10))

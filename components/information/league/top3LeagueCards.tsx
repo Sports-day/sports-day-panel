@@ -50,7 +50,7 @@ export default function Top3LeagueCards(props: Top3LeagueCardsProps) {
 
         //  sort
         extendedLeagueResults.sort((a, b) =>
-            a.teamResult.score - b.teamResult.score
+            b.teamResult.score - a.teamResult.score
         )
 
         setResults(extendedLeagueResults.slice(0, 3))
