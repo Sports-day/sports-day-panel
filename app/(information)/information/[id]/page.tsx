@@ -210,8 +210,7 @@ export default async function Page({params}: { params: { id: string } }) {
                         </Box>
                         <Box sx={{flexGrow: 1}}>
                             <Grid2 container alignItems="flex-end" justifyContent="center" spacing={3} columns={12}>
-                                <LeagueCardList/>
-
+                                <LeagueCardList games={filteredGames}/>
                             </Grid2>
                         </Box>
 
@@ -254,9 +253,17 @@ export default async function Page({params}: { params: { id: string } }) {
                                             </CardContent>
                                         </Card>
                                     </Box>
-                                    {/* @ts-expect-error Server Component */}
+                                    <Box alignItems="left" sx={{width: '100%', maxWidth: 600}}>
+                                        <Typography variant="h5" fontWeight={"600"} align={"left"} paddingBottom={5}>
+                                            現在進行中の試合
+                                        </Typography>
+                                    </Box>
 
-                                    <MatchList matches={matchList}/>
+
+                                    <Box>
+                                        {/* @ts-expect-error Server Component */}
+                                        <MatchList matches={matchList}/>
+                                    </Box>
 
 
                                 </Box>

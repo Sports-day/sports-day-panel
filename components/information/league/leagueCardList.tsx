@@ -57,8 +57,8 @@ export default function LeagueCardList(props: LeagueCardListProps) {
 
     return (
         <Grid2 container spacing={2} columns={12} margin={2}>
-            {cardData.map((card, index) => (
-                <Grid2 xs={6} key={index}>
+            {results.map((value, index) => (
+                <Grid2 xs={6} key={index} direction="row">
                     <LeagueCard
                         league={value.game.name}
                         team={value.team.name}
