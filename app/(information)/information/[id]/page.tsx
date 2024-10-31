@@ -1,4 +1,4 @@
-import {Box, Card, CardContent, Grid, Stack, SvgIcon, Typography} from "@mui/material";
+import {Box, Card, CardContent, Grid, Stack, Typography} from "@mui/material";
 import LeftCircleContainer from "@/components/information/layout/leftCircleContainer";
 import MatchList from "@/components/information/match/matchList"
 import {sportFactory} from "@/src/models/SportModel";
@@ -7,8 +7,8 @@ import {Match} from "@/src/models/MatchModel";
 import {InfoGameProgressChart} from "@/components/information/infoGameProgressChart";
 import Grid2 from "@mui/material/Unstable_Grid2";
 import * as React from "react";
-import {HiChartBar} from "react-icons/hi2";
 import LeagueCardList from "@/components/information/league/leagueCardList";
+import Top3LeagueCards from "@/components/information/league/top3LeagueCards";
 
 export default async function Page({params}: { params: { id: string } }) {
 
@@ -73,138 +73,7 @@ export default async function Page({params}: { params: { id: string } }) {
                             <Grid2 container alignItems="flex-end" justifyContent="center" columnSpacing={3}
                                    columns={12}
                                    margin={0}>
-                                <Grid2 xs={3.8}>
-                                    <Card
-                                        variant="outlined"
-                                        sx={{
-                                            height: 300,
-                                            width: '100%', // 幅を100%に設定
-                                            position: 'relative',
-                                            justifyContent: 'center',
-                                            alignItems: 'center',
-                                            margin: 0,
-                                            padding: 1,
-                                            zIndex: 2,
-                                        }}
-                                    >
-                                        <Stack spacing={2} direction="column" alignItems={"center"}
-                                               justifyContent="center">
-                                            <Stack direction="row" alignItems="flex-end" justifyContent="center"
-                                                   spacing={0.4} paddingTop={2}>
-                                                <Typography variant="h4" component="div" textAlign="center">
-                                                    2
-                                                </Typography>
-                                                <Typography variant="subtitle1" component="div" textAlign="center">
-                                                    位
-                                                </Typography>
-
-                                            </Stack>
-
-                                            <Stack direction="row" alignItems="center" justifyContent="center"
-                                                   spacing={0.4}>
-                                                <SvgIcon>
-                                                    <HiChartBar color="#99a5d6"/>
-                                                </SvgIcon>
-                                                <Typography variant="subtitle1" component="div">
-                                                    Eリーグ
-                                                </Typography>
-
-                                            </Stack>
-                                            <Typography variant="h3" component="div" textAlign="center">
-                                                C3-N
-                                            </Typography>
-
-                                        </Stack>
-                                    </Card>
-                                </Grid2>
-                                <Grid2 xs={3.8}>
-                                    <Card
-                                        variant="outlined"
-                                        sx={{
-                                            height: 350,
-                                            width: '100%', // 幅を100%に設定
-                                            position: 'relative',
-                                            justifyContent: 'center',
-                                            alignItems: 'center',
-                                            margin: 0,
-                                            padding: 1,
-                                            zIndex: 2,
-                                        }}
-                                    >
-                                        <Stack spacing={2} direction="column" alignItems={"center"}
-                                               justifyContent="center">
-                                            <Stack direction="row" alignItems="flex-end" justifyContent="center"
-                                                   spacing={0} paddingTop={2}>
-                                                <Typography variant="h4" component="div" textAlign="center">
-                                                    1
-                                                </Typography>
-                                                <Typography variant="subtitle1" component="div" textAlign="center">
-                                                    位
-                                                </Typography>
-
-                                            </Stack>
-
-                                            <Stack direction="row" alignItems="center" justifyContent="center"
-                                                   spacing={0.4}>
-                                                <SvgIcon>
-                                                    <HiChartBar color="#99a5d6"/>
-                                                </SvgIcon>
-                                                <Typography variant="subtitle1" component="div" textAlign="center">
-                                                    Cリーグ
-                                                </Typography>
-
-                                            </Stack>
-                                            <Typography variant="h3" component="div" textAlign="center">
-                                                C3-N
-                                            </Typography>
-
-                                        </Stack>
-                                    </Card>
-                                </Grid2>
-                                <Grid2 xs={3.8}>
-                                    <Card
-                                        variant="outlined"
-                                        sx={{
-                                            height: 250,
-                                            width: '100%', // 幅を100%に設定
-                                            position: 'relative',
-                                            justifyContent: 'center',
-                                            alignItems: 'center',
-                                            margin: 0,
-                                            padding: 1,
-                                            zIndex: 2,
-                                        }}
-                                    >
-                                        <Stack spacing={2} direction="column" alignItems={"center"}
-                                               justifyContent="center">
-                                            <Stack direction="row" alignItems="flex-end" justifyContent="center"
-                                                   spacing={0.4} paddingTop={2}>
-                                                <Typography variant="h4" component="div" textAlign="center">
-                                                    3
-                                                </Typography>
-                                                <Typography variant="subtitle1" component="div" textAlign="center">
-                                                    位
-                                                </Typography>
-
-                                            </Stack>
-
-                                            <Stack direction="row" alignItems="center" justifyContent="center"
-                                                   spacing={0.4}>
-                                                <SvgIcon>
-                                                    <HiChartBar color="#99a5d6"/>
-                                                </SvgIcon>
-                                                <Typography variant="subtitle1" component="div" textAlign="center">
-                                                    Aリーグ
-                                                </Typography>
-
-                                            </Stack>
-                                            <Typography variant="h3" component="div" textAlign="center">
-                                                C3-N
-                                            </Typography>
-
-                                        </Stack>
-                                    </Card>
-                                </Grid2>
+                                <Top3LeagueCards games={filteredGames}/>
                             </Grid2>
 
                         </Box>
