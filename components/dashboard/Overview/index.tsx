@@ -21,6 +21,7 @@ import * as React from "react";
 import Link from "next/link";
 import Rank from "./Rank"
 import {useTheme} from "@mui/material/styles";
+import {LeagueRankList} from "@/components/game/LeagueRankList";
 
 
 export type OverviewProps = {
@@ -288,6 +289,10 @@ export const Overview = (props: OverviewProps) => {
                                 >
                                     リーグ内順位
                                 </Typography>
+
+                                <LeagueRankList></LeagueRankList>
+
+
                             </Stack>
 
 
