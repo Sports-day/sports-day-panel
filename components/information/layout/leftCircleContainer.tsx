@@ -2,7 +2,7 @@
 import * as React from "react";
 import {useTheme} from '@mui/material/styles';
 import Logo from "@/public/logo/logo.svg";
-import {Box, Container} from "@mui/material";
+import {Box, Container, Stack, Typography} from "@mui/material";
 
 
 export type LeftCircleContainerProps = {
@@ -39,11 +39,15 @@ export default function LeftCircleContainer(props: LeftCircleContainerProps) {
                         sx={{
                             position: "absolute",
                             top: "38.5%",
-                            left: "77%",
+                            left: "78.5%",
                             transform: "translate(-50%, -50%)",
                         }}
                     >
-                        <Logo width={18 * 8.45} height={18} fill={theme.palette.text.primary}/>
+                        <Stack direction={"row"} spacing={1} pb={2} justifyContent={"center"} alignItems={"center"}>
+                            <Logo width={20 * 8.45} height={20} fill={theme.palette.text.primary}/>
+                            <Typography fontWeight={"600"} fontSize="20px">Information</Typography>
+                        </Stack>
+
                     </Box>
                 }
 
