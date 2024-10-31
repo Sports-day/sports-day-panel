@@ -21,10 +21,13 @@ import * as React from "react";
 import Link from "next/link";
 import Rank from "./Rank"
 import {useTheme} from "@mui/material/styles";
+import {LeagueRankList} from "@/components/game/RankList/LeagueRankList";
+import {Game} from "@/src/models/GameModel";
 
 
 export type OverviewProps = {
     mySport: Sport;
+    myGame: Game;
     myTeam: Team;
     myTeamUsers: User[];
     myTeamRank: number;
@@ -286,8 +289,14 @@ export const Overview = (props: OverviewProps) => {
                                     color={theme.palette.text.primary}
                                     textAlign={"center"}
                                 >
-                                    リーグ内順位
+                                    あなたのリーグ内順位
                                 </Typography>
+                                <LeagueRankList
+                                    dashboard={true}
+                                    myTeamRank={props.myTeamRank}
+                                    myTeam={props.myTeam}
+                                    gameId={props.myGame.id}
+                                />
                             </Stack>
 
 
