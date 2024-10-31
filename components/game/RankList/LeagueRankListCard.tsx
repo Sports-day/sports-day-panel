@@ -3,15 +3,18 @@ import * as React from "react";
 import {Fragment} from "react";
 import {useState} from "react";
 import {HiUser} from "react-icons/hi2";
+import {useFetchUsers} from "@/src/features/users/hook";
 
 export type LeagueRankListCardProps = {
     teamName: string
+    teamId: number
     rank: number
     winRate: number
 }
 
 export const LeagueRankListCard = (props: LeagueRankListCardProps) => {
     const theme = useTheme();
+    const {users, isFetching: isFetchingUsers} = useFetchUsers()
     //teamDrawer
     const [teamDrawerOpen, setTeamDrawerOpen] = useState(false);
     const toggleTeamDrawer = (newOpen: boolean) => () => {
@@ -151,30 +154,34 @@ export const LeagueRankListCard = (props: LeagueRankListCardProps) => {
                                 </Typography>
                             </Stack>
 
-                            {/*{props.teamUsers.map(user => {*/}
-                            {/*    return (*/}
-                                    <Fragment>
-                                        <Card sx={{backgroundColor: `${theme.palette.secondary.dark}80`,}}>
-                                            <Stack direction={"row"} px={2} py={1} spacing={3} ml={0.4}
-                                                   alignItems={"center"}>
-                                                <Avatar
-                                                    alt={"unknown"}
-                                                    sx={{
-                                                        height: "1.5em",
-                                                        width: "1.5em",
-                                                        backgroundColor: theme.palette.text.secondary,
-                                                    }}
-                                                >
-                                                    <HiUser/>
-                                                </Avatar>
-                                                <Typography color={theme.palette.text.primary}>
-                                                    name
-                                                </Typography>
-                                            </Stack>
-                                        </Card>
-                                    </Fragment>
-                            {/*    );*/}
-                            {/*})}*/}
+                            {users
+                                .filter(user => user.teamIds.includes(Number(props.teamId)))
+                                .map(user => {
+                                    // const image = `${process.env.NEXT_PUBLIC_API_URL}/images/${user?.pictureId}/file`
+                                    return (
+                                        <Fragment key={user.id}>
+                                            <Card sx={{backgroundColor: `${theme.palette.secondary.dark}80`,}}>
+                                                <Stack direction={"row"} px={2} py={1} spacing={3} ml={0.4}
+                                                       alignItems={"center"}>
+                                                    <Avatar
+                                                        alt={"unknown"}
+                                                        sx={{
+                                                            height: "1.5em",
+                                                            width: "1.5em",
+                                                            backgroundColor: theme.palette.text.secondary,
+                                                        }}
+                                                    >
+                                                        <HiUser/>
+                                                    </Avatar>
+                                                    <Typography color={theme.palette.text.primary}>
+                                                        {user.name}
+                                                    </Typography>
+                                                </Stack>
+                                            </Card>
+                                        </Fragment>
+                                    );
+                                })
+                            }
                         </Stack>
                     </Container>
                 </Box>
