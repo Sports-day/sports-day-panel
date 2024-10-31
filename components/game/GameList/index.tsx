@@ -4,6 +4,7 @@ import {GameListContent} from "./GameListContent";
 import {useEffect} from "react";
 import {motion} from "framer-motion";
 import {Game} from "@/src/models/GameModel";
+import {LeagueRankList} from "@/components/game/RankList/LeagueRankList";
 
 export type GameListProps = {
     games: Game[]
@@ -125,6 +126,10 @@ export const GameList = (props: GameListProps) => {
                             transition={{duration: 1, ease: [0.16, 1, 0.3, 1]}}
                         >
                             <Typography pl={2} pb={1}>
+                                このリーグ内のランキング
+                            </Typography>
+                            <LeagueRankList/>
+                            <Typography pl={2} pb={1} pt={3}>
                                 このリーグの試合
                             </Typography>
                             <GameListContent game={game} myTeamId={props.myTeamId}/>
