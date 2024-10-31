@@ -16,11 +16,12 @@ export default function LeftCircleContainer(props: LeftCircleContainerProps) {
         <>
             <Container
                 maxWidth={false}
+                disableGutters
                 sx={{
                     width: "200vw",  // より大きなサイズに
                     height: "400vh", // より大きなサイズに
                     position: "fixed",
-                    left: "-150vw",  // 左側に大きくずらす
+                    left: "-147vw",  // 左側に大きくずらす
                     top: "50%",
                     transform: "translateY(-50%)",
                     zIndex: 0,
@@ -37,8 +38,8 @@ export default function LeftCircleContainer(props: LeftCircleContainerProps) {
                     <Box
                         sx={{
                             position: "absolute",
-                            top: "39%",
-                            left: "78%",
+                            top: "38.5%",
+                            left: "77%",
                             transform: "translate(-50%, -50%)",
                         }}
                     >
