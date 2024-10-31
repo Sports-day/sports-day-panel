@@ -8,7 +8,6 @@ export type LeagueRankListCardProps = {
     teamName: string
     rank: number
     winRate: number
-    totalRate: number
 }
 
 export const LeagueRankListCard = (props: LeagueRankListCardProps) => {
@@ -77,29 +76,29 @@ export const LeagueRankListCard = (props: LeagueRankListCardProps) => {
                                 {props.winRate.toFixed(3)}
                             </Typography>
                         </Stack>
-                        <Stack
-                            direction={"row"}
-                            spacing={1}
-                            alignItems={"center"}
-                        >
-                            <Box
-                                sx={{
-                                    px: 0.8,
-                                    height:"16px",
-                                    borderRadius: "5px",
-                                    backgroundColor: theme.palette.text.secondary,
-                                    justifyContent: "center",
-                                    alignItems: "center"
-                                }}
-                            >
-                                <Typography color={theme.palette.background.default} fontSize={"10px"} fontWeight={"600"}>
-                                    総得点率
-                                </Typography>
-                            </Box>
-                            <Typography fontSize={"14px"} color={theme.palette.text.primary}>
-                                {props.totalRate.toFixed(3)}
-                            </Typography>
-                        </Stack>
+                        {/*<Stack*/}
+                        {/*    direction={"row"}*/}
+                        {/*    spacing={1}*/}
+                        {/*    alignItems={"center"}*/}
+                        {/*>*/}
+                        {/*    <Box*/}
+                        {/*        sx={{*/}
+                        {/*            px: 0.8,*/}
+                        {/*            height:"16px",*/}
+                        {/*            borderRadius: "5px",*/}
+                        {/*            backgroundColor: theme.palette.text.secondary,*/}
+                        {/*            justifyContent: "center",*/}
+                        {/*            alignItems: "center"*/}
+                        {/*        }}*/}
+                        {/*    >*/}
+                        {/*        <Typography color={theme.palette.background.default} fontSize={"10px"} fontWeight={"600"}>*/}
+                        {/*            総得点率*/}
+                        {/*        </Typography>*/}
+                        {/*    </Box>*/}
+                        {/*    <Typography fontSize={"14px"} color={theme.palette.text.primary}>*/}
+                        {/*        {props.totalRate.toFixed(3)}*/}
+                        {/*    </Typography>*/}
+                        {/*</Stack>*/}
                     </Stack>
 
                 </Button>

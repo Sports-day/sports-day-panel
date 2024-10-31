@@ -4,7 +4,6 @@ import {
     Container, LinearProgress,
     Stack, Typography,
     Unstable_Grid2 as Grid,
-    Button, Avatar,
 } from "@mui/material";
 import * as React from "react";
 import Overview from "@/components/dashboard/Overview";
@@ -16,12 +15,6 @@ import {motion} from "framer-motion";
 import {OtherInfo} from "@/components/dashboard/Overview/OtherInfo";
 import CircleContainer from "@/components/layouts/circleContainer";
 import JudgeSchedule from "@/components/dashboard/schedule/judgeSchedule";
-import Link from "next/link";
-import {HiArrowTopRightOnSquare, HiOutlineExclamationTriangle} from "react-icons/hi2";
-
-// export const metadata: Metadata = {
-//     title: 'SPORTSDAY : Dashboard',
-// }
 
 export default function Page() {
     //  Unit Hook
@@ -103,13 +96,14 @@ export default function Page() {
                                         }}
                                     >
                                             <CircleContainer>
-                                                {mySport && myTeam &&
+                                                {mySport && myTeam && myGame &&
                                                     <Box>
                                                         <Overview
                                                             mySport={mySport}
                                                             myTeam={myTeam}
                                                             myTeamUsers={myTeamUsers}
                                                             myTeamRank={myTeamRank}
+                                                            myGame={myGame}
                                                         />
                                                     </Box>
                                                 }

@@ -1,16 +1,37 @@
+'use client'
 import {LeagueRankListCard} from "@/components/game/RankList/LeagueRankListCard";
 import {useTheme, Box, Card, Stack, Typography} from "@mui/material";
 import {Team} from "@/src/models/TeamModel";
 import * as React from "react";
+import {useState} from "react";
+import {useAsync} from "react-use";
+import {gameFactory, LeagueResult} from "@/src/models/GameModel";
 
 export type LeagueRankListProps = {
     dashboard?: boolean,
     myTeamRank?: number,
-    myTeam?: Team
+    myTeam?: Team,
+    gameId?: number,
 }
 
 export const LeagueRankList = (props: LeagueRankListProps) => {
     const theme = useTheme();
+
+    const [teams, setTeams] = useState<Team[]>([]);
+    const [leagueResult, setLeagueResult] = useState<LeagueResult>({teams: [], createdAt: "", finished: false, gameId: 0});
+    useAsync(async () => {
+        if (!props.gameId) {
+            return;
+        }
+
+        try {
+            setTeams(await gameFactory().getGameEntries(props.gameId))
+            setLeagueResult(await gameFactory().getLeagueResult(props.gameId))
+        } catch (e) {
+            setLeagueResult({teams: [], createdAt: "", finished: false, gameId: 0});
+            setTeams([])
+        }
+    })
 
     return (
         <>
@@ -111,18 +132,19 @@ export const LeagueRankList = (props: LeagueRankListProps) => {
             >
                 <Stack sx={{width: "100%"}} direction={"row"} spacing={1}>
                     {/*Ranking List*/}
-                    <LeagueRankListCard
-                        rank={1}
-                        teamName={"Team1"}
-                        winRate={100.00}
-                        totalRate={100.00}
-                    />
-                    <LeagueRankListCard
-                        rank={2}
-                        teamName={"Team2"}
-                        winRate={99.00}
-                        totalRate={99.00}
-                    />
+                    {
+                        leagueResult.teams.map((teamResult) => {
+                            const team = teams.find(value => value.id === teamResult.teamId)
+                            return (
+                                <LeagueRankListCard
+                                    key={teamResult.teamId}
+                                    rank={teamResult.rank}
+                                    teamName={team?.name ?? "不明"}
+                                    winRate={teamResult.score}
+                                />
+                            )
+                        })
+                    }
                 </Stack>
             </Box>
         </>

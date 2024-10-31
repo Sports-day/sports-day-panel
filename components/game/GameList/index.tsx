@@ -128,7 +128,9 @@ export const GameList = (props: GameListProps) => {
                             <Typography pl={2} pb={1}>
                                 このリーグ内のランキング
                             </Typography>
-                            <LeagueRankList/>
+                            <LeagueRankList
+                                gameId={game.id}
+                            />
                             <Typography pl={2} pb={1} pt={3}>
                                 このリーグの試合
                             </Typography>
