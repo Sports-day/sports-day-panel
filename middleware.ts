@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import {NextRequest, NextResponse} from "next/server";
 
 export function middleware(request: NextRequest) {
     const accessToken = request.cookies.get('access_token')
@@ -9,6 +9,7 @@ export function middleware(request: NextRequest) {
             '/discover',
             '/privacy',
             '/sports',
+            '/information',
         ]
 
         //  check if next path starts with any of the protected paths or root
@@ -16,8 +17,7 @@ export function middleware(request: NextRequest) {
             const subDirectory = process.env.SUB_DIRECTORY
             if (subDirectory) {
                 return NextResponse.redirect(new URL(subDirectory + '/login', request.url));
-            }
-            else {
+            } else {
                 return NextResponse.redirect(new URL('/login', request.url));
             }
         }
