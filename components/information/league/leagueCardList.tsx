@@ -1,32 +1,68 @@
-import React from 'react';
-import LeagueCard from "@/components/information/league/leagueCard";
+'use client'
+import React, {useState} from 'react';
 import Grid2 from "@mui/material/Unstable_Grid2";
+import {Game, gameFactory, LeagueResult, LeagueTeamResult} from "@/src/models/GameModel";
+import {Team, teamFactory} from "@/src/models/TeamModel";
+import {useAsync} from "react-use";
+import LeagueCard from "@/components/information/league/leagueCard";
 
-type LeagueCardData = {
-    league: string;
-    team: string;
-    index: number;
-};
+export type LeagueCardListProps = {
+    games: Game[]
+}
 
-const LeagueCardList: React.FC = () => {
-    // カードのデータを配列で管理
-    const cardData: LeagueCardData[] = [
-        {league: 'Aリーグ', team: 'E3-A', index: 4},
-        {league: 'Bリーグ', team: 'E3-B', index: 5},
-        {league: 'Cリーグ', team: 'E3-C', index: 6},
-        {league: 'Dリーグ', team: 'E3-D', index: 7},
-        {league: 'Eリーグ', team: 'E3-E', index: 8},
-        {league: 'Fリーグ', team: 'E3-F', index: 9},
-    ];
+type ExtendedLeagueTeamResult = {
+    game: Game,
+    team: Team
+    teamResult: LeagueTeamResult
+}
+
+export default function LeagueCardList(props: LeagueCardListProps) {
+    const [results, setResults] = useState<ExtendedLeagueTeamResult[]>([])
+
+    useAsync(async () => {
+        const teams = await teamFactory().index()
+
+        const leagueResults: LeagueResult[] = []
+        for (const game of props.games) {
+            const leagueResult = await gameFactory().getLeagueResult(game.id)
+            leagueResults.push(leagueResult)
+        }
+
+        const extendedLeagueResults: ExtendedLeagueTeamResult[] = []
+        for (const leagueResult of leagueResults) {
+            leagueResult.teams.forEach((value) => {
+                const team = teams.find(v => v.id == value.teamId)
+                const game = props.games.find(v => v.id == leagueResult.gameId)
+
+                if (!team || !game) {
+                    return
+                }
+
+                extendedLeagueResults.push({
+                    game: game,
+                    team: team,
+                    teamResult: value
+                })
+            })
+        }
+
+        //  sort
+        extendedLeagueResults.sort((a, b) =>
+            a.teamResult.score - b.teamResult.score
+        )
+
+        setResults(extendedLeagueResults.slice(3, 10))
+    })
+
 
     return (
         <Grid2 container spacing={2} columns={12} margin={2}>
             {cardData.map((card, index) => (
                 <Grid2 xs={6} key={index}>
                     <LeagueCard
-                        league={card.league}
-                        team={card.team}
-                        index={index}
+                        league={value.game.name}
+                        team={value.team.name}
+                        rank={index + 4}
                     />
                 </Grid2>
             ))}
@@ -34,4 +70,3 @@ const LeagueCardList: React.FC = () => {
     );
 };
 
-export default LeagueCardList;
