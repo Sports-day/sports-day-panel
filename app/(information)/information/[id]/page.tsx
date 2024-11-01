@@ -9,9 +9,9 @@ import Grid2 from "@mui/material/Unstable_Grid2";
 import * as React from "react";
 import LeagueCardList from "@/components/information/league/leagueCardList";
 import Top3LeagueCards from "@/components/information/league/top3LeagueCards";
+import AutoRefresh from "@/components/AutoRefresh";
 
 export default async function Page({params}: { params: { id: string } }) {
-
     const sportId = parseInt(params.id, 10)
     const sport = await sportFactory().show(sportId)
     const games = await gameFactory().index()
@@ -42,6 +42,7 @@ export default async function Page({params}: { params: { id: string } }) {
     }
     return (
         <div style={{position: 'relative'}}>
+            <AutoRefresh/>
             <Box
                 sx={{
                     position: 'absolute',
