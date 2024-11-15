@@ -1,11 +1,12 @@
 'use client'
 import {LeagueRankListCard} from "@/components/game/RankList/LeagueRankListCard";
-import {useTheme, Box, Card, Stack, Typography} from "@mui/material";
+import {useTheme, Box, Card, Stack, Typography, LinearProgress} from "@mui/material";
 import {Team} from "@/src/models/TeamModel";
 import * as React from "react";
 import {useState} from "react";
 import {useAsync} from "react-use";
 import {gameFactory, LeagueResult} from "@/src/models/GameModel";
+import {motion} from "framer-motion";
 
 export type LeagueRankListProps = {
     dashboard?: boolean,
@@ -19,8 +20,11 @@ export const LeagueRankList = (props: LeagueRankListProps) => {
 
     const [teams, setTeams] = useState<Team[]>([]);
     const [leagueResult, setLeagueResult] = useState<LeagueResult>({teams: [], createdAt: "", finished: false, gameId: 0});
+    const [loading, setLoading] = useState(true);
+
     useAsync(async () => {
         if (!props.gameId) {
+            setLoading(false);
             return;
         }
 
@@ -30,8 +34,20 @@ export const LeagueRankList = (props: LeagueRankListProps) => {
         } catch (e) {
             setLeagueResult({teams: [], createdAt: "", finished: false, gameId: 0});
             setTeams([])
+        } finally {
+            setLoading(false);
         }
     })
+
+    if (loading) {
+        return (
+            <>
+                <Stack height={142} justifyContent={"center"}>
+                    <LinearProgress />
+                </Stack>
+            </>
+        )
+    }
 
     return (
         <>
@@ -75,14 +91,15 @@ export const LeagueRankList = (props: LeagueRankListProps) => {
                                     <Box
                                         sx={{
                                             px: 0.8,
-                                            height:"16px",
+                                            height: "16px",
                                             borderRadius: "5px",
                                             backgroundColor: theme.palette.text.secondary,
                                             justifyContent: "center",
                                             alignItems: "center"
                                         }}
                                     >
-                                        <Typography color={theme.palette.background.default} fontSize={"10px"} fontWeight={"600"}>
+                                        <Typography color={theme.palette.background.default} fontSize={"10px"}
+                                                    fontWeight={"600"}>
                                             勝ち点率
                                         </Typography>
                                     </Box>
@@ -96,37 +113,42 @@ export const LeagueRankList = (props: LeagueRankListProps) => {
                 </Stack>
             }
 
-            <Box
-                width={"100%"}
-                sx={{
-                    overflow: "auto",
-                    scrollbarWidth: "none",
-                    msOverflowStyle: "none",
-                    "&::-webkit-scrollbar": {
-                        display: "none"
-                    }
-                }}
+            <motion.div
+                key={"overview-content"}
+                initial={{opacity: 0}}
+                animate={{opacity: 1}}
+                transition={{duration: 1, ease: [0.16, 1, 0.3, 1]}}
             >
-                <Stack sx={{width: "100%"}} direction={"row"} spacing={0.5}>
-                    {/*Ranking List*/}
-                    {
-                        leagueResult.teams.map((teamResult) => {
-                            const team = teams.find(value => value.id === teamResult.teamId)
-                            return (
-                                <LeagueRankListCard
-                                    key={teamResult.teamId}
-                                    rank={teamResult.rank}
-                                    teamName={team?.name ?? "不明"}
-                                    teamId={teamResult.teamId}
-                                    winRate={teamResult.score}
-                                />
-                            )
-                        })
-                    }
-                </Stack>
-            </Box>
+                <Box
+                    width={"100%"}
+                    sx={{
+                        overflow: "auto",
+                        scrollbarWidth: "none",
+                        msOverflowStyle: "none",
+                        "&::-webkit-scrollbar": {
+                            display: "none"
+                        }
+                    }}
+                >
+                    <Stack sx={{width: "100%"}} direction={"row"} spacing={0.5}>
+                        {/*Ranking List*/}
+                        {
+                            leagueResult.teams.map((teamResult) => {
+                                const team = teams.find(value => value.id === teamResult.teamId)
+                                return (
+                                    <LeagueRankListCard
+                                        key={teamResult.teamId}
+                                        rank={teamResult.rank}
+                                        teamName={team?.name ?? "不明"}
+                                        teamId={teamResult.teamId}
+                                        winRate={teamResult.score}
+                                    />
+                                )
+                            })
+                        }
+                    </Stack>
+                </Box>
+            </motion.div>
         </>
-
     )
-
 }
