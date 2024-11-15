@@ -1,6 +1,4 @@
-import {alpha} from "@mui/material/styles";
-import {Box, Stack, LinearProgress} from "@mui/material";
-// import Logo from "public/mark.svg"
+import {Box, Stack} from "@mui/material";
 import * as React from "react";
 
 export const Loading = () => {
