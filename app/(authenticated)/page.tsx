@@ -42,7 +42,7 @@ export default function Page() {
                 <motion.div
                     key={"loading"}
                     initial={{opacity: 0, y:-150}}
-                    animate={{opacity: 0.5, y:0}}
+                    animate={{opacity: 0.2, y:0}}
                     exit={{opacity: 0}}
                     transition={{duration: 1, ease: [0, 0.5, 0, 1]}}
                 >

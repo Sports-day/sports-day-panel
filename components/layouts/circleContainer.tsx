@@ -17,7 +17,7 @@ export default function CircleContainer(props: CircleContainerProps) {
         <>
             <motion.div
                 key={"overview-background"}
-                initial={{opacity:1, y: "-30px"}}
+                initial={{opacity:0, y: "-30px"}}
                 animate={{opacity:1, y: "0px"}}
                 transition={{duration: 1, ease: [0.16, 1, 0.3, 1]}}
             >
