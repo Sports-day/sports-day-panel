@@ -4,16 +4,15 @@
 球技大会の進行に使用する、運営・学生向けアプリケーション「SPORTSDAY」のフロントエンド用リポジトリです。Affinity Designerを使用してUIデザインを行い、NextJSとMUI, FramerMotionを用いて実装されています。
 
 <p align="center">
-  <img src="https://github.com/Sports-day/sports-day-panel/assets/58895178/19bf3c6f-7cad-4f3f-94a5-95bea81dde5e" width="800"> </br>
-  SPORTSDAY Panel (2023年10月)
+  <img src="https://github.com/user-attachments/assets/51849764-b51b-432c-88a7-3913de04619d" width="800"> </br>
+  SPORTSDAY Panel (2024年10月)
 </p>
 
 Sports-day-panelは、Microsoftアカウントによりログインした学生のデータをSportsDayAPIから取得し、各競技の進行状況の他、次の試合のスケジュールやチームメンバー、自分のチームの順位などを表示します。
 特定の運営ユーザーは管理画面を使用し、試合結果の入力などの大会進行に必要なデータを入力することができます。
 
 <p align="center">
-  <img src="https://github.com/Sports-day/sports-day-panel/assets/58895178/fd4fe6d6-42c3-482e-89d2-a0609ec70e89" width="800"> </br>
-  SPORTSDAY Formは2024年5月末の球技大会に向けて開発中です。
+  <img src="https://github.com/user-attachments/assets/7942e644-da8b-4a85-be67-d8a77bf3a4a8" width="800"> </br>
 </p>
 
 
